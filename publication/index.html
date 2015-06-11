@@ -14,34 +14,11 @@ category: publication
 </p>-->
 
  <h1>Paper</h1>
-
-{% for publication in site.data.publication %}
-<!--   <section>
-   <a href="{{ publication.url }}">
-      <img class="inline pull-right" src="/images/publication/{{ publication.image }}"
-           alt="{{ publication.name }} Screenshot" width="280">
-    </a>
-    <h2><a href="{{ publication.url }}">{{ publication.name }}</a></h2>
-    <h3>{{ publication.oneliner }}</h3>
-    <p><strong>My role:</strong> {{ publication.role }}</p>
-    <p>{{ publication.description}}</p>
-    <p>
-      <strong>Technologies:</strong> {{ publication.technologies | join: ", " }}
-    </p>
-  </section>-->
-  <div>
-<!--    <a href="{{ publication.url }}">
-      <img class="inline pull-right" src="/images/publication/{{ publication.image }}"
-           alt="{{ publication.name }} Screenshot" width="280">
-    </a>-->
-    <p>{{ publication.author }}. {{ publication.title }}. {{ publication.publisher }}, {{ publication.year }}.<a href="{{ publication.url }}">[Slide]</strong></a></p>
-    <p>{{ publication.abstract}}</p>
-  </div>
-<!--  <div class="spacer"></div>-->
-{% endfor %}
-
+ <div>
+    <p>Yong Yuan, Xiaoqiang Lu, and Xuelong Li, Learning Hash Functions Using Sparse Reconstruction.<a href="{{ publication.url }}">[Slide]</strong></a></p>
+</div>
+  
 <h1>Book</h1>
-
 <div>
     <a href="{{ publication.url }}">
       <img class="inline pull-left" src="/images/pcv.png"
