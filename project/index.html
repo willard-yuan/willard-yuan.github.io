@@ -1,0 +1,77 @@
+---
+layout: project
+title: Yong Yuan - Projects
+description: Yong Yuan's projects. Some of them are my academy research, some are just my interest.
+category: project
+---
+
+<p class="fancy">
+  Here are my projects. Some of them are my academy research, some are just my interest.
+  <!--<abbr title="User Experience">UX</abbr>?
+  <a href="/contact/">Ping me</a> and let's build awesome and useful stuff!-->
+</p>
+
+{% for product in site.data.products %}
+  <section>
+    <a href="{{ product.url }}">
+      <img class="inline pull-right" src="/images/project/{{ product.image }}"
+           alt="{{ product.name }} Screenshot" width="280">
+    </a>
+    <h2>PicSearch</h2>
+    <h3>URL: <a href="http://search.yongyuan.name">CNN for CBIR</a></h3>
+    <p><strong>My role:</strong> Project Owner</p>
+    <p>After researching CBIR one year, I determined to develop a image retrieval engine demo just for interest. The convolutional neural networks in the comuter vision community develop so fast in recent  years and show great performance with various tasks. So in my spare time I dive to read papers of CNN and program. The dataset of PicSearch engine is Caltech256, which contains 29780 images, and until now it supports query in the dataset only. You can find the <a href="http://v.youku.com/v_show/id_XOTM4MzgxODY4.html?f=23766923&from=y1.7-1.3">video</a> in YouKu.</p>
+    <h2><a href="{{ product.url }}">{{ product.name }}</a></h2>
+    <h3>{{ product.oneliner }}</h3>
+    <p><strong>My role:</strong> {{ product.role }}</p>
+    <p>{{ product.description}}</p>
+    <p>
+      <strong>Technologies:</strong> {{ product.technologies | join: ", " }}
+    </p>
+</section>
+<div class="spacer"></div>
+
+<section>
+    <a href="http://search.yongyuan.name">
+      <img class="inline pull-right" src="/images/project/HABIRH_with_shadow.png"
+           alt="HABIR Screenshot" width="280">
+    </a>
+    <h2>HABIR</h2>
+    <h3>URL: <a href="http://yongyuan.name/habir">Hashing Baseline for Image Retrieval</a></h3>
+    <p><strong>My role:</strong> Project Owner</p>
+    <p>I do the image retrieval research in early 2013. My mission is to design efficient hashing algorithm to map the semantic similar images to the similar codes. There are two main advantages using hashing method for image retrieval, i.e. storage and computation efficience. To let more researchers focus on design hashing algorithm, I have built a hashing baseline, hoping this project can do some help for some researchers.</p>
+    <p>
+      <strong>Technologies:</strong> Matlab, Hashing, Image Retrieval
+    </p>
+</section>
+<div class="spacer"></div>
+
+<section>
+    <a href="http://search.yongyuan.name">
+      <img class="inline pull-right" src="/images/project/PCVH_with_shadow.png"
+           alt="PCVwithPython Screenshot" width="280">
+    </a>
+    <h2>PCVwithPython</h2>
+    <h3>URL: <a href="http://yongyuan.name/pcvwithpython">Programming Computer Vision with Python(Translate to Chinese)</a></h3>
+    <p><strong>My role:</strong> Main trainslator</p>
+    <p>I'm a big fun of Python. I think Python is one of the most elegant programming language I have known. It's a great power tool which can be used everywhere, such as write scripts, using Django for web developmentand do science computation. When I first meet the book <Programming Computer Vision with Python>, I was attracted by the book. The content in this book is quite rich and diverse and I can't bear to share the book to more people. So in my free time, I dived into the book and translate it into Chinese. Morover, I organized and supply the codes.</p>
+    <p>
+      <strong>Technologies:</strong> Python, Jekyll, Markdown
+    </p>
+</section>
+<div class="spacer"></div>
+  </section>
+  <div class="spacer"></div>
+{% endfor %}
+    <p>
+      <strong>Technologies:</strong> {{ product.technologies | join: ", " }}
+    </p>
+  </section>
+  <div class="spacer"></div>
+{% endfor %}
+    <p>
+      <strong>Technologies:</strong> {{ product.technologies | join: ", " }}
+    </p>
+  </section>
+  <div class="spacer"></div>
+{% endfor %}

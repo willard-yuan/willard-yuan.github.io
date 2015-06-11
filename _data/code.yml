@@ -1,0 +1,80 @@
+- name: Dotfiles
+  github: ssaunier/dotfiles
+  technology: zsh
+  description: >
+    My dotfiles for my Macbook Pro Retina.
+
+- name: Headsha.re
+  github: ssaunier/headsha.re
+  technology: Ruby
+  description: >
+    I built <a href="http://www.headsha.re">Headsha.re</a> to help people drive traffic to their website through
+    the links they share on social networks. It has been acquired by <a href="http://snip.ly">Snip.ly</a> in June 2014.
+
+- name: Ogone gem
+  github: applidget/ogone
+  technology: Ruby
+  description: >
+    This gem helps you to quickly get a form that can be submitted and redirect your users to the ogone ecommerce form where they can pay. This gem is flexible as it does not rely on a hard-coded configuration to be used. Therefore you can dynamically handle several PSPIDs
+
+- name: Got Fixed gem
+  github: ssaunier/got_fixed
+  technology: Ruby
+  description: >
+    Ruby gem I put together in Fall 2013 when I was interviewing for a job
+    at <a href="https://www.sqwiggle.com">Sqwiggle</a>. This gem provides an engine to
+    help communicate to your users when issues they report get fixed, given that your issue tracker is private. It extend your web application with a public dashboard of your issue tracker.
+
+- name: GitHub Webhooks gem
+  github: ssaunier/github_webhook
+  technology: Ruby
+  description: This gem will help you to quickly setup a route in your Rails application which listens to a GitHub webhook
+
+- name: Examiner gem
+  github: ssaunier/examiner
+  technology: Ruby
+  description: >
+    Grade a student's exercise solution, assuming the exercise uses minitest to be checked and there is a Rakefile in the folder.
+
+- name: Colissimo gem
+  github: ssaunier/colissimo
+  technology: Ruby
+  description: Ruby gem to retrieve Colissimo shipping status for a parcel (image only)
+
+- name: Track Outbound links
+  github: ssaunier/track-outbound-links
+  technology: JavaScript
+  description: Track outbound links clicked in Google Analytics as events
+
+
+- name: Rspec lab
+  github: ssaunier/lab
+  technology: Ruby
+  description: >
+    A boilerplate project to quickly test an algorithm, for instance during a phone interview, this project is a great place to start.
+
+- name: Minesweeper
+  github: ssaunier/minesweeper
+  technology: JavaScript
+  description: >
+    This is an exercise we give to students of Le Wagon - Premiere Classe, a 9 week-long bootcamp for entrepreneurs.
+
+- name: Secret Santa
+  github: ssaunier/secret-santa
+  technology: AngularJS
+  description: >
+    A quick & dirty secret-santa with constraints (couples, do not gift the one you gifted last year, etc.)
+
+- name: ColorTimer
+  github: ssaunier/colortimer
+  technology: JavaScript
+  description: >
+    Visual color timer implements the Pomodoro Technique in which you work by batches
+    of 25 minutes and rest for 5 minutes.
+
+- name: Redis Monitor
+  github: ssaunier/node-redis-monitor
+  technology: NodeJS
+  description: >
+    a small web application to monitor your redis server.
+    It plots the number of commands per seconds and the memory usage.

@@ -1,0 +1,31 @@
+---
+layout: portfolio
+category: portfolio
+title: Sébastien Saunier - Code
+description: Look at Sébastien Saunier's code, including released Ruby gems and JavaScript hacks.
+---
+
+<p class="fancy">
+  Here is all the code I share on <a href="http://github.com/ssaunier">GitHub</a>.
+  It's mainly side projects or
+  examples for Le Wagon students, hope you enjoy browsing it!
+</p>
+
+{% for code in site.data.code %}
+  <section>
+    <div class="pull-right">
+      {% if code.technology == 'Ruby' %}
+        <img src="/images/portfolio/ruby.gif" height="10" />
+      {% endif %}
+      {{ code.technology }}
+    </div>
+    <h3>
+      <a href="https://github.com/{{ code.github }}">
+        {{ code.name }}
+      </a>
+    </h3>
+    <p>
+      {{ code.description }}
+    </p>
+  </section>
+{% endfor %}

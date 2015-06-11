@@ -1,0 +1,149 @@
+- name: Weroom
+  image: weroom.png
+  url: https://www.weroom.com/en
+  oneliner: Roommates Social Network
+  role: Technical Coach / Product Owner
+  description: >
+    I worked 9 weeks with the Weroom team in early 2014. My mission was to write
+    a technical roadmap, implement an agile & continuous deployment process and ramp
+    up the design team. I worked closely with two of the designers who managed to
+    become front-end developer (from Illustrator to Sublime + Terminal), which is IMHO the best
+    way to grow your technical team.
+  technologies:
+    - Rails 4
+    - PostgreSQL
+    - Foundation 5
+    - Heroku
+
+- name: Kitt - Le Wagon
+  image: lewagon-kitt.png
+  url: http://www.lewagon.org
+  oneliner: Pedagogic Platform for Dev Bootcamp
+  role: Freelance Web Engineer
+  description: >
+    <a href="http://www.lewagon.org">Le Wagon</a> is a startup school hosting a
+    <a href="http://www.lewagon.org/premiere">9 week-long bootcamp for entrepreneurs</a>
+    where they learn Ruby, <abbr title="Object Oriented Programming">OOP</abbr>,
+    HTML, CSS, JS & jQuery, database modeling and Ruby on Rails. I built a platform
+    for these students, where they can read the exercises, see if their solution is correct
+    and how their classmates are doing. I wrote an
+    <a href="/blog/2014/04/21/practical-example-of-using-git-in-a-school.html">article</a>
+    on how we use git and GitHub if you want details.
+  technologies:
+    - Rails 4
+    - PostgreSQL
+    - Bootstrap 3
+    - Heroku
+    - GitHub webhooks
+
+- name: MobiCheckin
+  image: mobicheckin.png
+  url: http://www.mobicheckin.com/en
+  oneliner: SaaS application for event organiser
+  role: Full-stack / Lead developer
+  technologies:
+    - Rails 3.2
+    - RSpec
+    - MongoDB (Mongoid 2)
+    - Resque
+    - Bootstrap 2
+    - NodeJS
+  description: >
+    Built from day one with <a href="https://app.mobicheckin.com/api/">a strong API</a>, dogfooded
+    by the guest list <a href="https://itunes.apple.com/en/app/mobicheckin/id510125877?mt=8">iOS application</a>.
+    Well integrated with other SaaS platforms such as
+    <a href="http://www.wufoo.com/2013/01/08/event-registration-made-easy-with-mobicheckin-wufoo/">Wufoo (Forms)</a>,
+    <a href="http://news.mobicheckin.com/post/50416271927/zoho-invoice-integration-for-registration-fees">Zoho (Invoicing)</a>,
+    Mandrill (SMTP), Highrise (CRM), Esendex (SMS) and AWS S3 (File storage).
+
+- name: Shopboard (Shopify app)
+  image: shopboard.png
+  url: http://apps.shopify.com/shopboard
+  oneliner: Turn your prospects into customer!
+  role: Solo Founder (side-project)
+  technologies:
+    - Rails 3.2
+    - MongoDB
+    - Redis
+    - NodeJS
+  description: >
+    Shopboard is a simple yet powerful application which unveils your web traffic in real time.
+    With it you get to see who is browsing a Shopify shop right now. I rencently
+    <a href="https://github.com/shopboard/tracker">open sourced the tracker module</a>, a NodeJS process
+    receiving all incoming calls from Javascript Shopboard tracking code. Will be releasing the client-side
+    javascript tracking code soon.
+
+- name: Sogedis Ecommerce
+  image: sogedis-ecommerce.png
+  url: http://www.sogedis.fr
+  oneliner: Household appliances spare parts store
+  role: Freelance Web Engineer
+  technologies:
+    - PHP 5.4
+    - MySQL
+    - "Paypal IPN & Mercanet"
+  description: >
+    Released in 2007, this website built from scratch has been growing ever since to reach more than 250k&euro; in monthly revenues.
+    I setup the Customer Service processes and tools (<a href="http://sogedis.zendesk.com/">Zendesk</a>),
+    and am still in charge of the third party application management (code recently migrated to PHP 5.4). I wrote a simple <a href="https://gist.github.com/ssaunier/5277085">git deployment</a>
+    to replicate Heroku behavior!
+
+- name: Livestats
+  image: livestats.png
+  url: https://github.com/ssaunier/livestats
+  oneliner: Open source website activity tracker
+  role: Developer and maintainer
+  technologies:
+    - JavaScript
+    - PHP
+  description: >
+    I wanted to build and share basic features of realtime tracking services.
+    I started this project after using <a href="https://www.gosquared.com/">GoSquared</a>
+    and <a href="https://chartbeat.com/">Chartbeat</a>.
+    These are really cool web applications which let you dive in the details of who's doing what right now.
+
+- name: Sogedis Intranet
+  image: sogedis-intranet.png
+  url: http://www.sogedis.fr
+  oneliner: Tailored ERP web application
+  role: "Freelance Web & Software Engineer"
+  technologies:
+    - ASP.NET MVC
+    - MySQL
+    - Windows Service
+  description: >
+    The database referencing all household appliances for which <a href="http://www.sogedis.fr">Sogedis</a>
+    sells spare parts was a big
+    Excel file. I had to develop an internal web application to replace this non-scaling system, and
+    plug it into <a href="http://www.divalto.fr/">Divalto</a> and the ecommerce website.
+
+- name: Nina - Voice of the Customer
+  image: virtuoz-nuance-voice-of-the-customer.png
+  url: http://www.nuance.com/landing-pages/products/nina-web
+  oneliner: Semantic Dashboard for Virtual Assistant
+  role: Software engineer, technical owner
+  technologies:
+    - ASP.NET MVC
+    - MySQL
+    - JQuery
+  description: >
+    During my time at <a href="http://www.virtuoz.com">VirtuOz</a> (acquired by Nuance), I worked with our data scientist to
+    exctract cluster of sentences from our Virtual Assistant chat logs. Then we built a dashboard which provides
+    real-time insight into the voice of the customer to determine which customer requests are most topical and
+    which are rising or falling in frequency.
+
+- name: Lock your Screen
+  image: lockyourscreen.png
+  url: http://lockyourscreen.com
+  oneliner: Prank your coworkers!
+  role: one-hour hack
+  technologies:
+    - HTML
+  description: >
+    Security at work is important. So when someone leaves his desk without locking his screen, you can
+    put his browser on this page (and then lock the screen yourself). You can also play a prank with
+    a custom CSS file and <code>-webkit-transform: rotate(180deg)</code>, your choice!
+
+
+
+

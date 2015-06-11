@@ -1,0 +1,53 @@
+---
+layout: publication
+title: Yong Yuan - Publication
+description: Yong Yuan's publication
+category: publication
+---
+
+<!--<p class="fancy">
+  Here are some of the products I worked on. In need of
+  a web software engineer with an eye for design and a dedication to great
+  <abbr title="User Experience">UX</abbr>?
+
+  <a href="/contact/">Ping me</a> and let's build awesome and useful stuff!
+</p>-->
+
+ <h1>Paper</h1>
+
+{% for publication in site.data.publication %}
+<!--   <section>
+   <a href="{{ publication.url }}">
+      <img class="inline pull-right" src="/images/publication/{{ publication.image }}"
+           alt="{{ publication.name }} Screenshot" width="280">
+    </a>
+    <h2><a href="{{ publication.url }}">{{ publication.name }}</a></h2>
+    <h3>{{ publication.oneliner }}</h3>
+    <p><strong>My role:</strong> {{ publication.role }}</p>
+    <p>{{ publication.description}}</p>
+    <p>
+      <strong>Technologies:</strong> {{ publication.technologies | join: ", " }}
+    </p>
+  </section>-->
+  <div>
+<!--    <a href="{{ publication.url }}">
+      <img class="inline pull-right" src="/images/publication/{{ publication.image }}"
+           alt="{{ publication.name }} Screenshot" width="280">
+    </a>-->
+    <p>{{ publication.author }}. {{ publication.title }}. {{ publication.publisher }}, {{ publication.year }}.<a href="{{ publication.url }}">[Slide]</strong></a></p>
+    <p>{{ publication.abstract}}</p>
+  </div>
+<!--  <div class="spacer"></div>-->
+{% endfor %}
+
+<h1>Book</h1>
+
+<div>
+    <a href="{{ publication.url }}">
+      <img class="inline pull-left" src="/images/pcv.png"
+           alt="Programming Computer Vision with Python" width="280">
+    </a>
+<p>Zhuwen Tao, <strong>Yong Yuan</strong>. <a href="http://www.ituring.com.cn/book/1349">Python计算机视觉编程.</a></p>
+<p><a href="http://yongyuan.name/pcvwithpython/">Project Page</p>
+</div>
+<!--<div class="spacer"></div>-->

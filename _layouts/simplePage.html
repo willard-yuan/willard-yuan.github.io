@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="{% if page.language == nil %}en{% else %}{{ page.language }}{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    {{ page.title }}
+    {% if page.category == 'blog' and page.url != '/blog/index.html' %}
+    - Yong Yuan
+    {% endif %}
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  {% if page.description %}<meta name="description" content="{{page.description}}" />{% endif %}
+  <link rel="alternate" type="application/atom+xml" title="RSS Feed for Yong Yuan's blog" href="/feed.xml" />
+
+  {% if page.url == '/index.html' %}
+    <link rel="alternate" hreflang="ch" href="/cn/" />
+  {% elsif page.url == '/cn/index.html' %}
+    <link rel="alternate" hreflang="en" href="/" />
+  {% endif %}
+
+  {{ page.extra_head }}
+
+  {% if page.category == 'blog' %}
+    {% if page.photo %}
+      <meta property="og:image" content="/images/posts/{{ page.photo }}" />
+    {% endif %}
+  {% endif %}
+</head>
+<body>
+  <div class="top-bar">
+  </div>
+  <div class="header-container">
+    <header class="inner">
+      {% if page.url == '/cn/index.html' %}
+      <nav>
+        <a class="{% if page.category == 'about' %} selected {% endif %}" href="/cn/">关于</a>
+        <a class="{% if page.category == 'project' %} selected {% endif %}" href="/project/">项目</a>
+        <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
+        <a href="/resume/">简历</a>
+        <a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">出版</a>
+        <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">博客</a>
+        <!--<a class="{% if page.category == 'contact' %} selected {% endif %} contact" href="/contact/">Contact</a>-->
+		<a href="https://jinshuju.net/f/b3L2Be">雇佣</a>
+        <a href="https://github.com/willard-yuan">Github</a>
+      </nav>
+      {% else %}
+      <nav>
+        <a class="{% if page.category == 'about' %} selected {% endif %}" href="/">About</a>
+        <a class="{% if page.category == 'project' %} selected {% endif %}" href="/project/">Project</a>
+        <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
+		    <a href="/resume/">Resume</a>
+        <a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">Publication</a>
+        <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
+		<a href="/books/">Book</a>
+        <!--<a class="{% if page.category == 'contact' %} selected {% endif %} contact" href="/contact/">Contact</a>-->
+        <a href="https://github.com/willard-yuan">Github</a>
+      </nav>
+      {% endif %}
+      
+      <div class="pull-right right logo">
+        <div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              {% if page.url == '/cn/index.html' %}
+                <a href="/cn">开发者</a>
+              {% else %}
+                <a href="/">developer</a>
+              {% endif %}
+            </em>
+          </small>
+        </div>
+        <img class="avatar" src="/images/YongYuan.png" alt="My profile picture" />
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  {{ content }}
+  <div class="separator"></div>
+
+<!--<div  style="border-bottom: 1px solid #ddd"></div>
+    <footer>
+    <ul class="links">
+      <li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>	  
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li>
+    </ul>
+  </footer>-->
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-40867989-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    /*!
+     * http://github.com/ssaunier/track-outbound-links
+     * Copyright 2013 Sébastien Saunier
+     * @license MIT
+     */
+    !function(e,t){function n(){for(var n=t.getElementsByTagName("a"),a=[],r=0;r<n.length;++r){var o=n[r];o.host!=e.location.host&&a.push(o)}return a}function a(n){for(var a=n.srcElement||n.target;a&&("undefined"==typeof a.tagName||"a"!=a.tagName.toLowerCase()||!a.href);)a=a.parentNode;a&&a.href&&(e._gaq&&_gaq.push(["_trackEvent","Outbound link","Click",a.href]),(!a.target||a.target.match(/^_(self|parent|top)$/i))&&(setTimeout(function(){t.location.href=a.href},150),n.preventDefault?n.preventDefault():n.returnValue=!1))}e.addEventListener("load",function(){var e=n();for(var t in e)e[t].addEventListener("click",a)})}(window,document);
+    var links = document.links;
+    for (var i = 0, linksLength = links.length; i < linksLength; i++) {
+       if (links[i].hostname != window.location.hostname) { links[i].target = '_blank'; }
+    }
+
+    /*
+     * Detect if we are included in an iframe => move.
+     */
+    if (window.top !== window.self
+        && !window.self.location.href.match(/headsha\.re/))
+    {
+      window.top.location.replace(window.self.location.href);
+    }
+  </script>
+
+</body>
+</html>

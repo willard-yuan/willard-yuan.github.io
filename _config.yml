@@ -1,0 +1,20 @@
+title: Yong Yuan
+
+# 自定义post url
+permalink: /blog/:title.html
+timezone: Asia/Chongqing
+
+# Overriden by GitHub Pages: https://help.github.com/articles/using-jekyll-with-pages#configuring-jekyll
+safe: true
+lsi: false
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+
+# Keybase
+include:
+  - .well-known
+
+# White-listed plugins
+gems:
+  - jekyll-sitemap

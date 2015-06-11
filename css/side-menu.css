@@ -1,0 +1,127 @@
+.side-menu {
+	width: 200px;
+	height: 300px;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 19px;
+	position: fixed;
+}
+.side-menu .side-bar {
+	top: 0;
+	width: 0;
+	height: 100%;
+	border-left: 2px solid #eaeaea;
+	position: absolute;
+	left: 5px;
+}
+.side-menu .sidebar-top, .side-menu .sidebar-bottom {
+	position: absolute;
+	left: -5px;
+	width: 10px;
+	height: 10px;
+	background: transparent url(../images/side-menu.png) 0 -199px no-repeat;
+	overflow: hidden;
+	cursor: pointer;
+}
+.side-menu .sidebar-top {
+	top: 0;
+}
+.side-menu .sidebar-bottom {
+	bottom: 0;
+}
+.side-menu .side-scroll {
+	display: none;
+	position: absolute;
+	width: 25px;
+	height: 50px;
+	margin-top: -25px;
+	right: 0px;
+	top: 50%;
+	z-index: 100;
+}
+.side-menu .side-scroll-up, .side-menu .side-scroll-down {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+.side-menu .side-scroll-up {
+	background: transparent url(side-menu.png) -246px -83px no-repeat;
+}
+.side-menu .side-scroll-down {
+	background: transparent url(side-menu.png) -246px -108px no-repeat;
+}
+.side-menu .side-scroll-up.disabled {
+	background: transparent url(side-menu.png) -273px -83px no-repeat;
+}
+.side-menu .side-scroll-down.disabled {
+	background: transparent url(side-menu.png) -273px -108px no-repeat;
+}
+.side-menu .side-catalog {
+	overflow: hidden;
+	top: 20px;
+	bottom: 20px;
+	width: 100%;
+	position: absolute;
+}
+.side-menu dl {
+	position: absolute;
+	padding: 0;
+	margin: 0;
+}
+.side-menu dd {
+	padding: 0;
+	margin: 0 20px;
+}
+.side-menu dd:hover {
+	background: #f5f5f5;
+	border-radius: 2px;
+	box-shadow: 0 1px 0 #eaeaea;
+}
+.side-menu .side-catalog-item1 {
+	position: relative;
+	font-weight: bold;
+}
+.side-menu .side-catalog-item2 {
+	padding-left: 16px;
+}
+.side-menu .side-catalog-item3 {
+	padding-left: 32px;
+}
+.side-menu .side-catalog-item4 {
+	padding-left: 48px;
+}
+.side-menu .side-catalog-item5 {
+	padding-left: 60px;
+}
+.side-menu .side-catalog-index {
+	color: #999;
+	font-family: Arail;
+	font-size: 14px;
+	padding-right: 5px;
+}
+.side-menu a {
+	color: #555;
+	text-decoration: none;
+}
+.side-menu .side-catalog-dot {
+	position: absolute;
+	height: 10px;
+	width: 6px;
+	font-size: 12px;
+	line-height: 12px;
+	background: transparent url(side-menu.png) 0 -222px no-repeat;
+	left: -17px;
+	top: 4px;
+	cursor: pointer;
+	overflow: hidden;
+}
+.side-menu .active {
+	position: relative;
+}
+.side-menu .active .side-catalog-dot {
+	height: 13px;
+	width: 18px;
+	left: -20px;
+	top: 1px;
+	background-position: -271px -37px;
+}
