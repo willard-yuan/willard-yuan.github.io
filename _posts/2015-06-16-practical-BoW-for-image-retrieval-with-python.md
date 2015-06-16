@@ -195,7 +195,10 @@ show()
 ```sh
 #python search.py -i dataset/train/ukbench00000.jpg(查询图像的路径)
 ```
-上面的代码中，你可以看到rootSIFT注释掉了，你也可以去掉注释，采用rootSIFT，但这里实验中我发觉rootSIFT并没有SIFT的效果好。最后看看检索的效果：
-![clustering]({{ site.url }}/images/posts/2015-06-16/ukbench00000.jpg)
-![clustering]({{ site.url }}/images/posts/2015-06-16/ukbench00055.jpg)
-整个实战的代码可以在这里下载：[下载地址](https://github.com/willard-yuan/image-retrieval/tree/master/BoF)。
+上面的代码中，你可以看到rootSIFT注释掉了，你也可以去掉注释，采用rootSIFT，但这里实验中我发觉rootSIFT并没有SIFT的效果好。最后看看检索的效果，最上面一张是查询图像，后面的是搜索到的图像：
+
+![ukbench00000]({{ site.url }}/images/posts/2015-06-16/ukbench00000.jpg)
+
+![ukbench00055]({{ site.url }}/images/posts/2015-06-16/ukbench00055.jpg)
+
+**整个实战的代码可以在这里下载：[下载地址](https://github.com/willard-yuan/image-retrieval/tree/master/BoF)**。
