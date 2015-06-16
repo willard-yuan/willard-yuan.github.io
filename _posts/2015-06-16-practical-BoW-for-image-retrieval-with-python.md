@@ -191,7 +191,8 @@ for i, ID in enumerate(rank_ID[0][0:16]):
 show()  
 ```
 将上面的代码保存为`search.py`,对某幅图像进行查询时，只需在命令行里输入：
-```
+
+```sh
 #python search.py -i dataset/train/ukbench00000.jpg(查询图像的路径)
 ```
 上面的代码中，你可以看到rootSIFT注释掉了，你也可以去掉注释，采用rootSIFT，但这里实验中我发觉rootSIFT并没有SIFT的效果好。最后看看检索的效果：
