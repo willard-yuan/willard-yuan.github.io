@@ -4,7 +4,7 @@ title: BoW图像检索Python实战
 categories: [image retrieval]
 ---
 
-既前几天把[HABI哈希图像检索工具包](http://yongyuan.name/habir/)更新到V2.0版本后，小白菜又重新回头来用Python搞BoW词袋模型，一方面主要是练练Python，另一方面也是为了CBIR群开讲的关于图像检索群活动第二期而准备的一些素材。关于BoW，网上堆资料讲得挺好挺全的了，小白菜自己在曾留下过一篇讲解BoW词袋构建过程的博文[Bag of Words模型](http://yongyuan.name/blog/bag-of-word-model.html)，所以这里主要讲讲BoW的实战。不过在实战前，小白菜还想在结合自己这两年多BoW的思考和沉淀重新以更直白的方式对BoW做一下总结。
+前几天把[HABI哈希图像检索工具包](http://yongyuan.name/habir/)更新到V2.0版本后，小白菜又重新回头来用Python搞BoW词袋模型，一方面主要是练练Python，另一方面也是为了CBIR群开讲的关于图像检索群活动第二期而准备的一些素材。关于BoW，网上堆资料讲得挺好挺全的了，小白菜自己在曾留下过一篇讲解BoW词袋构建过程的博文[Bag of Words模型](http://yongyuan.name/blog/bag-of-word-model.html)，所以这里主要讲讲BoW的实战。不过在实战前，小白菜还想在结合自己这两年多BoW的思考和沉淀重新以更直白的方式对BoW做一下总结。
 
 举两个例子来说明BoW词袋模型。第一个例子在介绍BoW词袋模型时一般资料里会经常使用到，就是将图像类比成文档，即一幅图像类比成一个文档，将图像中提取的诸如SIFT特征点类比成文档中的单词，然后把从图像库中所有提取的所有SIFT特征点弄在一块进行聚类，从中得到具有代表性的聚类中心(单词)，再对每一幅图像中的SIFT特征点找距离它最近的聚类中心(单词)，做词频(TF)统计，图解如下：
 ![clustering]({{ site.url }}/images/posts/2015-06-16/clustering.png)
