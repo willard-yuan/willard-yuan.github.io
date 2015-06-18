@@ -110,11 +110,11 @@ a {
 }
 
 a:active {
-  color: #e0115f;
+  /*color: #e0115f;*/
 }
 
 a:visited {
-  color: #e0115f;
+  /*color: #e0115f;*/
 }
 
 a:hover {
@@ -397,6 +397,9 @@ ul.posts li {
 .listing-seperator {
     font-weight: bold;
 }
+#tag_cloud{margin-bottom: 1em;}
+#tag_cloud a:hover{color:#333333 !important;text-decoration:none;}
+
 /*添加博客首页为谢一挥的模板样式——结束*/
 
 ul.posts .date {
@@ -693,76 +696,3 @@ img {
     margin-top: 1em;
   }
 }
-
-
-/* button   
----------------------------------------------- 
-.button {  
-  padding: 15px 135px;
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 1.4;
-  border: none;
-  border-radius: 4px;
-  -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
-          transition: border .25s linear, color .25s linear, background-color .25s linear;
-
-  -webkit-font-smoothing: subpixel-antialiased;
-  -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
-          transition: border .25s linear, color .25s linear, background-color .25s linear;
-
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-
-.row{
-	margin-bottom: 2em;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1abc9c;
-  }
-.btn-primary:hover,
-.btn-primary.hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #48c9b0;
-  border-color: #48c9b0;
-  }
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  background: #16a085;
-  border-color: #16a085;
-  }
-.btn-primary.disabled,
-.btn-primary[disabled],
-fieldset[disabled] .btn-primary,
-.btn-primary.disabled:hover,
-.btn-primary[disabled]:hover,
-fieldset[disabled] .btn-primary:hover,
-.btn-primary.disabled.hover,
-.btn-primary[disabled].hover,
-fieldset[disabled] .btn-primary.hover,
-.btn-primary.disabled:focus,
-.btn-primary[disabled]:focus,
-fieldset[disabled] .btn-primary:focus,
-.btn-primary.disabled:active,
-.btn-primary[disabled]:active,
-fieldset[disabled] .btn-primary:active,
-.btn-primary.disabled.active,
-.btn-primary[disabled].active,
-fieldset[disabled] .btn-primary.active {
-  background-color: #bdc3c7;
-  border-color: #1abc9c;
-  }  */
-
-#tag_cloud{margin-bottom: 1em;}
-#tag_cloud a:hover{color:#333333 !important;text-decoration:none;}
-.listing-item,.listing-seperator{list-style-type:none;}
-.listing-item a{padding:.2em 1em;}
-.listing-item time{color:#999999;}
-.listing-seperator{font-weight:bold;}
