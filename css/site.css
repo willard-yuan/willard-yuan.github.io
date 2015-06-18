@@ -105,16 +105,19 @@ table td, table th {
 /* Common */
 
 a {
-  color: #e0115f;
+  color: #255b96;
+  /*color: #e0115f;*/
   text-decoration: none;
 }
 
 a:active {
-  color: #e0115f;
+  color: #255b96;
+  /*color: #e0115f;*/
 }
 
 a:visited {
-  color: #e0115f;
+  color: #255b96;
+  /*color: #e0115f;*/
 }
 
 a:hover {
