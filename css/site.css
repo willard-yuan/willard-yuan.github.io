@@ -122,7 +122,7 @@ a:hover {
 }
 
 a.discreet {
-  color: #222;
+  /*color: #222;*/
 }
 
 .fancy, section, article {
@@ -138,7 +138,7 @@ a.discreet {
 }
 
 /*article {
-  /*定义article字号和字体颜色*/
+  /*定义article字号和字体颜色
   font-size: 18px;
   color:#424b50;
 }*/
