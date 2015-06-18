@@ -612,7 +612,8 @@ img {
   }
 }
 
-/* From http://designmodo.github.io/Flat-UI/
+/*按钮开始*/
+/* From http://designmodo.github.io/Flat-UI/*/
 .btn {
   border: none;
   font-size: 15px;
@@ -650,9 +651,9 @@ img {
 .form-control {
   -moz-box-sizing: padding-box;
   box-sizing: padding-box;
-}*/
+}
 
-/* Register
+/* Register*/
 .post-footer-self-promotion input {
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
@@ -695,4 +696,5 @@ img {
     width: 210px;
     margin-top: 1em;
   }
-}*/
+}
+/*按钮结束*/
