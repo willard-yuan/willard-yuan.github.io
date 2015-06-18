@@ -1,0 +1,41 @@
+---
+layout: default
+title: Yong Yuan - Blog
+category: blog
+---
+
+<div class="nav">
+<a class="button btn-primary" href="/blog/index.html">By year</a>
+<a class="button btn-primary" href="/blog/categories.html">By categories</a>
+</div>
+</div>
+<section class="inner">
+<!-- <h1>Blog Posts</h1>-->
+<!--  <p>My thoughts on Technology, Software Engineering, Lean Startup, Tools and Freelancing.</p>-->
+<!--  <ul class="posts">
+    {% for post in site.posts %}
+      <li>
+        <span class="date">{{ post.date | date_to_string }}</span>
+        <strong><a href="{{ post.url }}">{{ post.title }}</a></strong>
+        {% if post.french %}
+          <img src="/images/french.png" alt="French post" class="french-flag" title="This post is in french" />
+        {% endif %}
+        <br />
+        <span class="description">{{ post.description }}</span>
+      </li>
+    {% endfor %}
+  </ul>-->
+  <ul class="posts">
+    {% for post in site.posts %}
+	  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
+	  {% if year != y %}
+		{% assign year = y %}
+		<li class="listing-seperator">{{ y }}</li>
+	  {% endif %}
+	  <li class="listing-item">
+		<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+		<a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+	  </li>
+    {% endfor %}
+  </ul>
+</section>
