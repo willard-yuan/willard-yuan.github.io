@@ -105,16 +105,16 @@ table td, table th {
 /* Common */
 
 a {
-  /*color: #e0115f;*/
+  color: #e0115f;
   text-decoration: none;
 }
 
 a:active {
-  /*color: #e0115f;*/
+  color: #e0115f;
 }
 
 a:visited {
-  /*color: #e0115f;*/
+  color: #e0115f;
 }
 
 a:hover {
@@ -122,7 +122,7 @@ a:hover {
 }
 
 a.discreet {
-  /*color: #222;*/
+  color: #222;
 }
 
 .fancy, section, article {
