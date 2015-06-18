@@ -5,6 +5,7 @@
   gray: #c6c1bc
   black: #2a1e28
   red: #901a12
+  green: #1BAF69
 */
 
 @import url('syntax.css');
@@ -105,18 +106,18 @@ table td, table th {
 /* Common */
 
 a {
-  color: #255b96;
+  color: #1BAF69;
   /*color: #e0115f;*/
   text-decoration: none;
 }
 
 a:active {
-  color: #255b96;
+  color: #1BAF69;
   /*color: #e0115f;*/
 }
 
 a:visited {
-  color: #255b96;
+  color: #1BAF69;
   /*color: #e0115f;*/
 }
 
