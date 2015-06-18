@@ -216,6 +216,11 @@ header nav {
   margin-bottom: 1.5em;
 }
 
+/*添加post部分的颜色*/
+#container{
+	background-color:#fafafa;
+}
+
 @media(max-width: 400px) {
   .header-container .contact {
     display: none;
