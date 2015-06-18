@@ -132,9 +132,8 @@ a.discreet {
 .fancy, section, article {
   /*font-family: "proxima-nova", Helvetica, Arial, sans-serif;*/
   /*定义article字体
-  font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;
-  font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
-  font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+  font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
+  font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;
   line-height: 170%;
 }
 
