@@ -696,7 +696,7 @@ img {
 
 
 /* button   
----------------------------------------------- */  
+---------------------------------------------- 
 .button {  
   padding: 15px 135px;
   font-size: 15px;
@@ -758,7 +758,7 @@ fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
   background-color: #bdc3c7;
   border-color: #1abc9c;
-  }  
+  }  */
 
 #tag_cloud{margin-bottom: 1em;}
 #tag_cloud a:hover{color:#333333 !important;text-decoration:none;}
