@@ -67,26 +67,25 @@ gist\_320d\_CIFAR-10\_yunchao下载地址：[gist_320d_CIFAR-10_yunchao.mat](htt
 V2.0版本演示结果如下，左边为Precision-Recall曲线，中间为Recall-The number of retrieved samples曲线，右边为Precision-The number of retrieved samples曲线：
 ![precision-recall-128bits]({{ site.url }}/habir/doc/together_png/128bits.png)
 <p align="center">图3: 128位编码</p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/together_png/64bits.png" alt="precision-recall-64bits"/></p>
+![precision-recall-64bits]({{ site.url }}/habir/doc/together_png/64bits.png)
 <p align="center">图4: 64位编码</p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/together_png/32bits.png" alt="precision-recall-64bits"/></p>
+![precision-recall-32bits]({{ site.url }}/habir/doc/together_png/32bits.png)
 <p align="center">图5：32位编码</p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/together_png/16bits.png" alt="precision-recall-64bits"/></p>
+![precision-recall-16bits]({{ site.url }}/habir/doc/together_png/16bits.png)
 <p align="center">图6：16位编码</p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/together_png/8bits.png" alt="precision-recall-64bits"/></p>
+![precision-recall-8bits]({{ site.url }}/habir/doc/together_png/8bits.png)
 <p align="center">图7：8位编码</p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/together_png/mAP.png" alt="precision-recall-64bits"/></p>
+![mAP]({{ site.url }}/habir/doc/together_png/mAP.png)
 <p align="center">图8：不同编码位下mAP曲线(run times = 1)</p>
 
 **Tips**：为了对图片进行润色，推荐你用Adobe Illustrator对其进行处理使得其更加美观。
 
 ###V1.x版本结果演示
 检索实例
-
-<p align="center"><img src="http://yongyuan.name/habir/doc/v1/horse_ID8_128_1.png" alt="horse"/></p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/v1/horse_ID8_128_2.png" alt="horse"/></p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/v1/car_ID13_128_1.png" alt="horse"/></p>
-<p align="center"><img src="http://yongyuan.name/habir/doc/v1/car_ID13_128_2.png" alt="horse"/></p>
+![horse_ID8_128_1.png]({{ site.url }}/habir/doc/together_png/horse_ID8_128_1.png)
+![horse_ID8_128_2.png]({{ site.url }}/habir/doc/together_png/horse_ID8_128_2.png)
+![car_ID13_128_1.png]({{ site.url }}/habir/doc/together_png/car_ID13_128_1.png)
+![car_ID13_128_2.png]({{ site.url }}/habir/doc/together_png/car_ID13_128_2.png)
 
 ###运行环境
 
