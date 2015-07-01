@@ -13,6 +13,8 @@ categories: [image retrieval]
 <embed src="http://player.youku.com/player.php/sid/XNTc3NzQ0NTQw/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 </object>
 
+**2015/06/29更新**：添加对[MatConvNet](http://www.vlfeat.org/matconvnet/)最新版version 1.0-beta12的支持，最新更新的代码请移步[CNN-for-Image-Retrieval](https://github.com/willard-yuan/CNN-for-Image-Retrieval)。
+
 **Note**：如果你只是想要特征提取及检索可视化代码，请直接跳到最后。
 
 >MatConvNet is a MATLAB toolbox implementing Convolutional Neural Networks (CNNs) for computer vision applications. It is simple, efficient, and can run and learn state-of-the-art CNNs. Several example CNNs are included to classify and encode images.
