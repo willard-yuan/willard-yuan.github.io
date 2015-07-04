@@ -10,13 +10,13 @@ categories: [Cpp]
 
 上面每次都需要找到k个整数中的最大数，并且在比对的数小于最大数添加进来之前要移除最大数，所以可以采用最大堆。同时还可以用红黑树来实现上述容器，在STL中set,map,multiset,multimap都是基于红黑树(RB-tree)实现的(顺便补充：hashmap,hashset,hashmultiset,hashmultimap是基于hash table)。所以可以采用STL中的multiset来作为该数据容器。
 
-关于set和multiset的区别及用法，[][1]这篇文章总结得很不错。下面这张图很清楚的给出了set和multiset的区别：
-![][2]
+关于set和multiset的区别及用法，[STL之五：set/multiset用法详解](http://blog.csdn.net/longshengguoji/article/details/8546286)这篇文章总结得很不错。下面这张图很清楚的给出了set和multiset的区别：
+![](http://img.my.csdn.net/uploads/201301/27/1359267085_6365.png)
 > set、multiset都是集合类，差别在与set中不允许有重复元素，multiset中允许有重复元素。
 了解了这些，便可以按照按照书上的写出如下解法：
 
 ```c++
-`//
+//
 //  main.cpp
 //  getLeastNumbers
 //
@@ -24,49 +24,47 @@ categories: [Cpp]
 //  Copyright (c) 2015年 wilard. All rights reserved.
 //
 
-# include \<iostream\>
-# include \<set\>
-# include \<vector\>
+#include <iostream>
+#include <set>
+#include <vector>
 using namespace std;
 
-typedef multiset\<int, greater\<int\> \> itSet;
-typedef multiset\<int, greater\<int\> \>::iterator setIterator;
+typedef multiset<int, greater<int> > itSet;
+typedef multiset<int, greater<int> >::iterator setIterator;
 
-void getLeastNumbers(const vector\<int\> &data, itSet &leastNumbers, int k){
-leastNumbers.clear();
-if(k \< 1 || data.size() \< k) return;
-for(vector\<int\>::const_iterator iter = data.begin(); iter != data.end(); iter++){
-if(leastNumbers.size() \< k){
-leastNumbers.insert(*iter);
-}else{
-setIterator iterGreatest = leastNumbers.begin();
-if(*iter \< *iterGreatest){
-leastNumbers.erase(iterGreatest);
-leastNumbers.insert(*iter);
+void getLeastNumbers(const vector<int> &data, itSet &leastNumbers, int k){
+    leastNumbers.clear();
+    if(k < 1 || data.size() < k) return;
+    for(vector<int>::const_iterator iter = data.begin(); iter != data.end(); iter++){
+        if(leastNumbers.size() < k){
+            leastNumbers.insert(*iter);
+        }else{
+            setIterator iterGreatest = leastNumbers.begin();
+            if(*iter < *iterGreatest){
+                leastNumbers.erase(iterGreatest);
+                leastNumbers.insert(*iter);
+            }
+        }
+    }
 }
+
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    std::cout << "Hello, World!\n";
+    
+    int A[] = {2, 1, 4, 2, 5, 1, 6, 9, 3, 4};
+    vector<int> dataset(A, A+10);
+    itSet leastNumbersSet;
+    int k = 5;
+    
+    getLeastNumbers(dataset, leastNumbersSet, k);
+    
+    for(setIterator i = leastNumbersSet.begin(); i != leastNumbersSet.end(); ++i)
+        cout<< *i << " ";
+    cout << endl;
+    
+    return 0;
 }
-}
-}
 
-int main(int argc, const char * argv[]()) {
-// insert code here...
-std::cout \<\< "Hello, World!\n";
-
-int A[]() = {2, 1, 4, 2, 5, 1, 6, 9, 3, 4};
-vector\<int\> dataset(A, A+10);
-itSet leastNumbersSet;
-int k = 5;
-
-getLeastNumbers(dataset, leastNumbersSet, k);
-
-for(setIterator i = leastNumbersSet.begin(); i != leastNumbersSet.end(); ++i)
-cout\<\< *i \<\< " ";
-cout \<\< endl;
-
-return 0;
-}
 ```
-`上面在定义multiset是采用的是`greater`，也就是容器的数据是从大到小排列的，默认是less从小到大排列的。所以在数据容器中寻找最大迭代对象时用的是`leastNumbersSet.begin()`。其余部分的都极好理解，就酱紫。
-
-[1]:	http://blog.csdn.net/longshengguoji/article/details/8546286 "STL之五：set/multiset用法详解"
-[2]:	http://img.my.csdn.net/uploads/201301/27/1359267085_6365.png "set和multiset的区别"
+上面在定义multiset是采用的是`greater`，也就是容器的数据是从大到小排列的，默认是less从小到大排列的。所以在数据容器中寻找最大迭代对象时用的是`leastNumbersSet.begin()`。其余部分的都极好理解，就酱紫。
