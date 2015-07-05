@@ -25,7 +25,6 @@ def ransac(data,model,n,k,t,d,debug=False,return_all=False):
 This implementation written from pseudocode found at
 http://en.wikipedia.org/w/index.php?title=RANSAC&oldid=116358182
 
-{{{
 Given:
     data - a set of observed data points # 可观测数据点集
     model - a model that can be fitted to data points # 
