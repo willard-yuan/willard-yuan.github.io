@@ -180,9 +180,10 @@ if __name__=='__main__':
 ![line]({{ site.url }}/images/posts/2015-07-05/line.png)
 然后添加高斯平稳高斯噪声：
 ![line]({{ site.url }}/images/posts/2015-07-05/line-with-noise.png)
-最后将其中的某些点变为outliers:
+将其中的某些点变为outliers:
 ![line]({{ site.url }}/images/posts/2015-07-05/line-with-outliers.png)
-
+最后用RANSAC拟合出来的结果如下：
+![line]({{ site.url }}/images/posts/2015-07-05/ransac.png)
 整个过程就酱紫，后面有时间继续前面在[BoW图像检索Python实战](http://yongyuan.name/blog/practical-BoW-for-image-retrieval-with-python.html)用RANSAC做一个重排过程。
 
 
