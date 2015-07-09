@@ -264,6 +264,9 @@
 		<array>
 			<string>2015-07-04-find-the-smallest-k-numbers.md</string>
 		</array>
+		<array>
+			<string>2015-07-05-fitting-line-with-ransac.md</string>
+		</array>
 	</array>
 </dict>
 </plist>
