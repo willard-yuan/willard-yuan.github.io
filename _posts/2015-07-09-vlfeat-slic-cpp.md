@@ -125,6 +125,7 @@ Mac下的配置，哈哈，其实这才是我要说的重点。因为现在我�
 
 试了很多次都没有成功，后来干脆不这么玩了，编译完后，在出现下面错误的时候：
 ![xcode](http://www.vlfeat.org/images/using-xcode-err.png)
+
 把libvl.dylib(注意是64位的，因为Mac OS从某个版本后就全部都是64位系统了)拷贝到Debug目录下面就可以了。
 
 下面是一些超像素分割结果，保持`region = 30`和`minRegion = 10`，变化`regularization`。
