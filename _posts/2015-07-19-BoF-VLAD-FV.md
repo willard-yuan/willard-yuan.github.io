@@ -4,7 +4,7 @@ title: 图像检索(CBIR)三剑客之BoF、VLAD、FV
 categories: [image Retrieval]
 ---
 
-一份图像检索实验的清单，包含的都是自己实验的结果，随时保持在github上的[]image-retrieval](https://github.com/willard-yuan/image-retrieval/blob/master/README.md)同步更新。
+一份图像检索实验的清单，包含的都是自己实验的结果，随时保持在github上的[image-retrieval](https://github.com/willard-yuan/image-retrieval/blob/master/README.md)同步更新。
 
 ## 图像检索
 
