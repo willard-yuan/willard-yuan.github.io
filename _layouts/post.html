@@ -52,6 +52,38 @@ $(function () {
   </div>
 </article>
 
+{% comment %} 利用split 来形成一个空数组, 这里主要是我不知道liquid如何直接写array... {% endcomment %} 
+{% assign postsAfterFilter = '-' | split: "-" %}
+{% for post in site.related_posts %}
+  {% assign commonTagCount = 0 %}
+  {% if post.title != page.title and post.series != page.series %}
+    {% for tag in post.tags %} 
+      {% if page.tags contains tag %}
+
+        {% comment %} 统计共同的tag的数目, 用来后面的筛选以及排序用 {% endcomment %} 
+        {% assign commonTagCount = commonTagCount | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+    {% if commonTagCount > 0 %}
+
+      {% comment %} 将符合条件的post放入一个新的数组之中 {% endcomment %} 
+      {% assign postsAfterFilter = postsAfterFilter | push: post %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} 容错判断, 确保有相关文章的时候再展示相关文章 {% endcomment %} 
+{% if postsAfterFilter.size > 0 %}
+<div class="relatedposts">
+  <h2>Related Posts:</h2>
+  <ul class="article-list">
+  {% for post in postsAfterFilter limit: 5 %}
+    <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
 <section class="comments inner">
 <!-- JiaThis Button BEGIN -->
 <div class="jiathis_custom">
