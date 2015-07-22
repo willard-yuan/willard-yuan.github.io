@@ -52,6 +52,12 @@ $(function () {
   </div>
 </article>
 
+{% for post in site.categories.bestof limit:3 %}
+  <li>
+  	<span>{{ post.date | date_to_string }} &raquo;</span> <a href="{{ post.url }}">{{ post.title }}</a>
+  </li>
+{% endfor %}
+
 <section class="comments inner">
 <!-- JiaThis Button BEGIN -->
 <div class="jiathis_custom">
