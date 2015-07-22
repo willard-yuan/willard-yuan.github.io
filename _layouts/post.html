@@ -52,8 +52,8 @@ $(function () {
   </div>
 </article>
 
-<div id="related">
-  <h3>More Posts</h3>
+<section class="inner">
+  <h3>更多相关文章</h3>
   <ul class="posts">
     {% for post in site.related_posts limit:3 %}
     <li>
@@ -61,7 +61,7 @@ $(function () {
     </li>
     {% endfor %}
   </ul>
-</div>
+</section>
 
 <section class="comments inner">
 <!-- JiaThis Button BEGIN -->
