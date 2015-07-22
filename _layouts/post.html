@@ -52,18 +52,10 @@ $(function () {
   </div>
 </article>
 
-<section>
 <h1>Related Posts</h1>
-<table>
 {% for post in site.related_posts limit:3 %}
-  <tr>
-    <th><a href="{{ post.url }}">{{ post.title }}</a></th>
-    <td>{{ post.date | date: "%F" }}</td>
-    <td><a href="{{ post.url }}#disqus_thread">Comments</a></td>
-  </tr>
+    {{ post.date | date: "%F" }} <a href="{{ post.url }}">{{ post.title }}</a></th>
 {% endfor %}
-</table>
-</section>
 
 <section class="comments inner">
 <!-- JiaThis Button BEGIN -->
