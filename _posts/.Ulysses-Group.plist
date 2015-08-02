@@ -267,6 +267,15 @@
 		<array>
 			<string>2015-07-05-fitting-line-with-ransac.md</string>
 		</array>
+		<array>
+			<string>2015-07-09-vlfeat-slic-cpp.md</string>
+		</array>
+		<array>
+			<string>2015-07-19-BoF-VLAD-FV.md</string>
+		</array>
+		<array>
+			<string>2015-07-19-you-drive-the-car.md</string>
+		</array>
 	</array>
 </dict>
 </plist>
