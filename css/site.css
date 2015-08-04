@@ -26,7 +26,7 @@ body {
   font-family:"Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;
   text-rendering: optimizeLegibility;
   /*自定义背景颜色*/
-  background-color:#ffffff;
+  background-color: #EFEFEF;
   margin-bottom: 5px;  /*自定义段落与段落之间的间距*/
   line-height: 170%; /*自定义body对象行与行的间距*/
   font-size: 100%;
