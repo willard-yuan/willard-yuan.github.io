@@ -26,7 +26,6 @@ categories: [image retrieval]
 
 import argparse as ap
 import cv2
-import imutils 
 import numpy as np
 import os
 from sklearn.externals import joblib
@@ -106,6 +105,7 @@ im_features = preprocessing.normalize(im_features, norm='l2')
 joblib.dump((im_features, image_paths, idf, numWords, voc), "bof.pkl", compress=3)  
 ```
 将上面的文件保存为`findFeatures.py`，前面主要是一些通过parse使得可以在敲命令行的时候可以向里面传递参数，后面就是提取SIFT特征，然后聚类，计算TF和IDF，得到单词直方图后再做一下L2归一化。一般在一幅图像中提取的到SIFT特征点是非常多的，而如果图像库很大的话，SIFT特征点会非常非常的多，直接聚类是非常困难的(内存不够，计算速度非常慢)，所以，为了解决这个问题，可以以牺牲检索精度为代价，在聚类的时候先对SIFT做降采样处理。最后对一些在在线查询时会用到的变量保存下来。对于某个图像库，可以在命令行里通过下面命令生成BoF：
+
 ```sh
 python findFeatures.py -t dataset/train/
 ```
