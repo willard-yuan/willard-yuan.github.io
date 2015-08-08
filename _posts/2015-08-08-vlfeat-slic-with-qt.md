@@ -1,3 +1,4 @@
+---
 layout: post
 title: Qt之VLFeat SLIC超像素分割(Cpp版)
 categories: [computer vision]
