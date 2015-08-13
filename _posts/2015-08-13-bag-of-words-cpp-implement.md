@@ -12,54 +12,67 @@ categories: [image retrieval]
 
 ## 使用
 
-1. 编译
+###编译
 
 修改`Makefile`文件，如果你的系统支持多线程技术，将
+
 ```sh
 CFLAGS = -std=c++11
 ```
+
 修改为
+
 ```sh
 CFLAGS = -std=c++11 -fopenMP # if openMP accesses, using this
 ```
+
 修改完上面后，再修改编译所需的OpenCV和cppsugar，即
+
 ```sh
 INCPATH = -I/usr/local/include -I/Users/willard/codes/cpp/opencv-computer-vision/cpp/BoVW/cppsugar
 LIBPATH = -L/usr/local/lib
 ```
+
 `/usr/local/include`和`/usr/local/lib`分别是OpenCV所在的包含头文件目录路径和库目录路径，修改为你本机所在的目录即可。后面的cppsugar目录同样换成你本机的目录。
 修改。这些修改完成后，执行下面命令进行编译：
 
 ```sh
 make
 ```
+
 编译后即可在所在目录生成可执行文件。
 
-2. 生成图库列表文件
+###生成图库列表文件
 
 对于待检索的图像库imagesDataSet，执行下面命令
+
 ```sh
 python imgNamesToTXT.py -t /Users/willard/Pictures/imagesDataSet
 ```
+
 上面执行后生成一个`imageNamesList.txt`的文件，该文件中包含的是每幅图像的路径及其图像文件名。
 
-3. 建立索引
+###建立索引
 
 执行下面命令，会完成特征提取、生成词典、量化生成bag of word向量：
+
 ```sh
 ./index imageNamesList.txt
 ```
+
 上面命令执行玩，会生成两个文件`bows.dat`和`dict.dat`，分别存放的是图像库每幅图像的bag of word向量以及词典。
 
-4. 查询图像
+###查询图像
 
 按下面命令进行查询
+
 ```sh
 ./search /Users/willard/Pictures/first1000/ukbench00499.jpg imageNamesList.txt
 ```
+
 其中`/Users/willard/Pictures/first1000/ukbench00499.jpg`是查询图像，执行完后，会生成一个`result.html`的文件，应为要显示检索结果，所以这里采用的是用html页面的方式显示检索结果的，用浏览器打开即可。
 
-5. 批量测试
+###批量测试
 
 为了评价检索的效果，可以使用`ukbenchScores.cpp`计算在ukbench图像库上的NS score(NS分数)，下面是在ukbench1000张图像上计算的NS score:
 
