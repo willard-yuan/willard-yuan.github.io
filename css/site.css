@@ -483,7 +483,7 @@ article h1 {
     background-color: #F5F5F5;
 }
 
-.post pre, .post code{
+.post pre{
   	font-size:.8rem;  /*设置代码字体大小*/
   	font-family: Consolas,"Liberation Mono",Courier,monospace;/*设置代码字体类型*/
 }
@@ -491,6 +491,8 @@ article h1 {
 .post pre code{
     font-size:.8rem;  /*设置代码字体大小*/
     font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    border: none;
+    line-height: 170%;
 }
 
 .post code {
@@ -505,11 +507,6 @@ article h1 {
 
 .post ul, .post ol {
   padding-left: 2.5em;
-}
-
-.post pre code {
-  border: none;
-  line-height: 170%;
 }
 
 /* terminal */
