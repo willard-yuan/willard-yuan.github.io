@@ -51,20 +51,20 @@ h1, h2, h3 {
   	color:#3d4657;
 }
 
-h1 { 
-	font-size: 1.7em; 
-	line-height: 1.7em; 
-	font-weight: 700; 
+h1 {
+	font-size: 1.7em;
+	line-height: 1.7em;
+	font-weight: 700;
 	margin-top: 0;
 }
 
-h1 small { 
-	font-weight: 400; 
-	font-size: 50%; 
-	color: #999; 
+h1 small {
+	font-weight: 400;
+	font-size: 50%;
+	color: #999;
 }
 
-h2 { 
+h2 {
 	font-size:1.5em;
 	/*margin:.83em 0;*/
 	margin: 30px 0px 0.3em;
@@ -82,7 +82,7 @@ hr {
     margin: 0.7em 0;
 }
 
-p { 
+p {
     padding:0.5em 0;
     /*使左右两边对齐*/
     word-break:break-all;
@@ -483,9 +483,14 @@ article h1 {
 	background-color:#F9F9F7;/*设置代码背景色*/
 }
 
-.post pre, .post code, .post pre code {
+.post pre, .post code{
   	font-size:.8rem;  /*设置代码字体大小*/
   	font-family: Consolas,"Liberation Mono",Courier,monospace;/*设置代码字体类型*/
+}
+
+.post pre code{
+    font-size:.8rem;  /*设置代码字体大小*/
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
 .post code {
