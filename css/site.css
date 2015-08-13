@@ -470,17 +470,17 @@ article h1 {
 
 /* 文章代码格式 */
 .post pre {
-	/*margin:1em 0;*/
-	padding:7px;
-	border:0;
-	border-left:3px solid #dadada;
-	padding-left:10px;
-	overflow:auto;
-	line-height:1.5;
-	font-size:.96em;
-	font-family:Menlo,Monaco,Consolas,"Courier New",monospace;
-	color:#4c4c4c;
-	background-color:#F9F9F7;/*设置代码背景色*/
+    display: block;
+    padding: 9.5px;
+    margin: 0px 0px 10px;
+    font-size: 13px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #F5F5F5;
 }
 
 .post pre, .post code{
