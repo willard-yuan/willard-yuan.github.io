@@ -44,6 +44,14 @@ body {
   border-bottom: 5px solid #ed5252 ;;
 }
 
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    line-height: 1.1;
+}
+
 h1, h2, h3 {
 	/*定义标题,字标题字体大小*/
   	font-family: font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;
@@ -55,7 +63,6 @@ h1 {
 	font-size: 1.7em;
 	line-height: 1.7em;
 	font-weight: 700;
-	margin-top: 0;
 }
 
 h1 small {
@@ -66,13 +73,10 @@ h1 small {
 
 h2 {
 	font-size:1.5em;
-	/*margin:.83em 0;*/
-	margin: 30px 0px 0.3em;
 }
 
 h3 {
 	font-size:1.17em;
-	margin:1em 0;
 }
 
 /*添加段与段之间的分割线样式*/
