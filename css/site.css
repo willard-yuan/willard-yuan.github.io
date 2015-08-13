@@ -495,10 +495,12 @@ article h1 {
 
 .post code {
   /*font-size: 18px;原主题定义的代码字体大小*/
-  font-size:.98rem;
+  font-size: 90%;
+  background-color: #F4F4F4;
   border: 1px solid #eee;
   padding: 0 .2em;
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  border-radius: 4px;
 }
 
 .post ul, .post ol {
