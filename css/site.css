@@ -83,7 +83,7 @@ hr {
 }
 
 p {
-    padding:0.5em 0;
+    margin: 0px 0px 10px;
     /*使左右两边对齐*/
     word-break:break-all;
     text-align:justify;
