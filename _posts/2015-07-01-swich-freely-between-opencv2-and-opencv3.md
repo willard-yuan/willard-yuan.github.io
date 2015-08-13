@@ -23,9 +23,9 @@ categories: [Python]
 ### 安装OpenCV2.x
 OpenCV2.x的安装跟OpenCV3.0的安装一下，同样用Homebrew安装，网上流传的关于Homebrew是Mac OS缺失的管理包一点也不为过。执行下面命令几个完成Opencv2.x的安装：
 
-\`\`\`sh
+```sh
 brew install opencv
-\`\`\`
+```
 
 在安装OpenCV3.0的时候，用的命令是`brew install Opencv3`，在这里安装的时候，我停留了一下在想这样安装下来的OpenCV版本是不是1.x的版本的，按照完后面测试查看时发现按照的应该是OpenCV2.x的最后一个最新的版本。
 
@@ -34,23 +34,23 @@ brew install opencv
 ### 在OpenCV2.x和OpenCV3.0间版本自由切换
 上面安装了OpenCV2.x后，要让Python调用OpenCV2.x的接口，只需执行下面命令即可：
 
-\`\`\`sh
-echo /usr/local/opt/opencv/lib/python2.7/site-packages \>\> /Users/willard/anaconda/lib/python2.7/site-packages/homebrew.pth # choose opencv2
-\`\`\`
+```sh
+echo /usr/local/opt/opencv/lib/python2.7/site-packages >> /Users/willard/anaconda/lib/python2.7/site-packages/homebrew.pth # choose opencv2
+```
 
 这条命令跟安装OpenCV3.0时为了使Python也能调用OpenCV3.0所使用的命令极像。执行完上面命令后，会在`/Users/willard/anaconda/lib/python2.7/site-packages/`目录下生成`homebrew.pth`文件，用cat命令查看homebrew文件中的内容其实就是`/usr/local/opt/opencv/lib/python2.7/site-packages`，`echo`是打印输出命令，`>>`重定向。现在便可以在Python中调用OpenCV2.x了，我们可以对其进行验证：
 
-\`\`\`sh
-➜  \~  python
+```sh
+➜  ~  python
 Python 2.7.9 |Anaconda 2.2.0 (x86\_64)| (default, Dec 15 2014, 10:37:34)
 [GCC 4.2.1 (Apple Inc. build 5577)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
 Anaconda is brought to you by Continuum Analytics.
 Please check out: http://continuum.io/thanks and https://binstar.org
 > > > import cv2
-> > > cv2.\_\_version\_\_
+> > > cv2.__version__
 '2.4.11'
-\`\`\`
+```
 
 可以看到，目前我使用的OpenCV版本是2.4.11版本的。好了，现在既然OpenCV2.x可以用了，那如果我们想用OpenCV3.0版本怎么办？这个就更简单了，直接把上面在`/Users/willard/anaconda/lib/python2.7/site-packages/`生成的`homebrew.pth`删掉就行，删掉后再在Pyton中调用OpenCV时，调用的就是OpenCV3.0的接口了。
 

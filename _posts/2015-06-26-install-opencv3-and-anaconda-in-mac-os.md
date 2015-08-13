@@ -17,7 +17,7 @@ Anaconda安装非常的简单，下载好对应的Mac版本，点击安装就可
 
 安装好Anaconda后，打开bash shell，输入`python`看输出的版本信息，我输出的版本信息如下：
 
-```bash
+```sh
 ython 2.7.9 |Anaconda 2.2.0 (x86_64)| (default, Dec 15 2014, 10:37:34)
 [GCC 4.2.1 (Apple Inc. build 5577)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
@@ -27,14 +27,14 @@ Please check out: http://continuum.io/thanks and https://binstar.org
 
 可以看到使用的是Anaconda中自带的Python，而且版本号是2.7.9。Anaconda安装好后，我们可以看看`bash_profile`中Anaconda在里面添加的环境变量：
 
-```bash
+```sh
 # added by Anaconda 2.2.0 installer
 export PATH="/Users/wilard/anaconda/bin:$PATH"
 ```
 
 我们可以把上面稍微修改一下，改成下面的内容：
 
-```bash
+```sh
  # added by Anaconda 2.2.0 installer
 export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin    :$PATH"
 ```
@@ -46,16 +46,13 @@ export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin    
 ###安装OpenCV3.0
 OpenCV3.0采用Homebrew安装非常的简单，直接执行下面命令：
 
-```bash
+```sh
 brew install opencv3.0
 ```
 
-如果没有OpenCV3.0的话，它会提示你执行一个什么包含`tap`字眼的命令，你就按照它给的提示执行来就行，下载按照比较慢，这时你可以去喝杯茶。安装好后，在最后它会提示你如果想要Python也能调用OpenCV接口的话，需要执行下面命令：
+如果没有OpenCV3.0的话，它会提示你执行一个什么包含`tap`字眼的命令，你就按照它给的提示执行来就行，下载按照比较慢，这时你可以去喝杯茶。安装好后，在最后它会提示你如果想要Python也能调用OpenCV接口的话，需要执行下面命令：If you need Python to find bindings for this keg-only formula, run:
 
-```bash
-If you need Python to find bindings for this keg-only formula, run:
-
-```bash
+```sh
 echo /usr/local/opt/opencv3/lib/python2.7/site-packages >> /usr/local/lib/python2.7/site-packages/opencv3.pth
 ```
 
@@ -67,7 +64,7 @@ echo /usr/local/opt/opencv3/lib/python2.7/site-packages >> /Users/willard/anacon
 
 执行完上面命令，打开shell，验证一下OpenCV的版本是不是3.0:
 
-```bash
+```sh
 ➜  ~  python
 Python 2.7.9 |Anaconda 2.2.0 (x86_64)| (default, Dec 15 2014, 10:37:34)
 [GCC 4.2.1 (Apple Inc. build 5577)] on darwin
@@ -83,10 +80,10 @@ Please check out: http://continuum.io/thanks and https://binstar.org
 
 另外，如果你不想用Anaconda的Python，你可以通过Homebrew安装最新的2.7.x版本：
 
-```bash
+```sh
 brew install python
 ```
+
 安装完后，记得注释掉`.bash_profile`和`.zshrc`中Anaconda的环境变量，自此，便可以在各个不同的Python版本间自由穿梭了。
 
 关于OpenCV3.0在Xcode中的调用我可能会在后面博文中给出，就酱紫。
-

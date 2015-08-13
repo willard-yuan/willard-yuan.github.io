@@ -43,7 +43,3 @@ LIBS += -L/Users/willard/Public/vlfeat-0.9.20/bin/maci64 -lvl
 上面加了`QMAKE_MACOSX_DEPLOYMENT_TARGET`，这个地方加这条主要是我的OS X升级了，在编译的时候出现错误，便找到了CSDN的一篇博文，然后按照博文的方法解决了。上面界面还有很多改进的地方，比如添加参数设置，不过这个只是个玩具，所以也没想过要继续投入精力去优化。后面会忙着用c++实现BoW，会在那个上面投入很多精力。
 
 总体来说，Qt非常好用的，MFC给我的印象很糟糕，代码可读性太差，以后做界面就用Qt了。最后，附上这个小玩意的代码链接：[qt-learning/projects](https://github.com/willard-yuan/qt-learning/tree/master/projects)。
-
-
-
-
