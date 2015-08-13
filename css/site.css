@@ -496,15 +496,13 @@ article h1 {
 .post code {
   /*font-size: 18px;原主题定义的代码字体大小*/
   font-size:.98rem;
+  border: 1px solid #eee;
+  padding: 0 .2em;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
 .post ul, .post ol {
   padding-left: 2.5em;
-}
-
-.post code {
-  border: 1px solid #eee;
-  padding: 0 .2em;
 }
 
 .post pre code {
