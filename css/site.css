@@ -24,6 +24,7 @@ body {
   /*自定义的字体
   font-family:Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
   font-family:"Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;
+  text-shadow: 0px 0px 1px rgba(165, 165, 165, 0.53);
   text-rendering: optimizeLegibility;
   /*自定义背景颜色*/
   background-color: #FFFFFF;
