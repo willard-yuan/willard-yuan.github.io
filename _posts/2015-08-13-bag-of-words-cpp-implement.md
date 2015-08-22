@@ -10,6 +10,8 @@ categories: [image retrieval]
 
 ## 使用
 
+代码下载地址：[bag-of-words-stable-version](https://github.com/willard-yuan/image-retrieval/tree/master/bag-of-words-stable-version)，这个是稳定版，上层目录里的开发版不要下载，那是我添加测试新模块所用的。
+
 ###编译
 
 修改`Makefile`文件，如果你的系统支持多线程技术，将
