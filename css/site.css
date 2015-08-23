@@ -137,7 +137,8 @@ a.discreet {
   /*font-family: "proxima-nova", Helvetica, Arial, sans-serif;*/
   /*定义article字体
   font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
-  font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;
+  /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
+  font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;;
   line-height: 170%;
 }
 
@@ -206,8 +207,9 @@ a.discreet {
 /* Header and navigation */
 header {
   /*font-family: 'Asap', Helvetica, Arial, sans-serif;*/
-  font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial; /*导航条字体*/
-  font-weight: bold;
+  /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/ /*导航条字体*/
+  font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif; /*导航条字体*/
+  /*font-weight: bold;*/
 }
 
 header nav {
