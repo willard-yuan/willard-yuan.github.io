@@ -4,7 +4,7 @@ title: SIFT(ASIFT) Matching with RANSAC
 categories: [image retrieval]
 ---
 
-十来天没上来写东西了，在实践试错的过程中，有太多东西没来得急总结，是真忙，忙着填BoW的坑，忙着投简历(工作碗里来)。尽管这样，还是抽了点空把这十来天自己在完善[Bag of Words cpp实现(stable version 0.01)](http://yongyuan.name/blog/bag-of-words-cpp-implement.html)重排过程中做的一些东西总结一下，希望也能对后来者有些许帮助，好了进入正题。
+十来天没上来写东西了，在实践试错的过程中，有太多东西没来得及总结，忙着填BoW的坑，忙着投简历(工作碗里来)。尽管这样，还是抽了点空把这十来天自己在完善[Bag of Words cpp实现(stable version 0.01)](http://yongyuan.name/blog/bag-of-words-cpp-implement.html)重排过程中做的一些东西总结一下，希望也能对后来者有些许帮助，好了进入正题。
 
 ---
 
