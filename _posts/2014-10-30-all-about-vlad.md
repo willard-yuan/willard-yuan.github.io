@@ -28,7 +28,11 @@ BOW做的是描述子的0阶统计分布，而FV则是扩展了的BOW的高阶�
 
 上面VLAD生成过程用文字描述起来不够简洁，直接把论文里计算VLAD的算法流图扒过来了，算法流图如下：
 
+<center>
+
 ![VLAD01]({{ site.url }}/images/posts/VLAD02.png)
+
+</center>
 
 ##提取VLAD
 
