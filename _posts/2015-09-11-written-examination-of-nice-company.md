@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2015年nice西安z站笔试题回忆及答案
+title: 2015年nice西安站笔试题回忆及答案
 categories: [面试]
 ---
 
