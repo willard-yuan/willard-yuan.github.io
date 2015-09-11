@@ -14,9 +14,9 @@
 
 >In the OSI model it's less defined because encryption is in Layer 6 and session control is in Layer 5. HTTPS (layer 7) uses SSL and SSL (Layers 5/6) uses TCP (Layer 4). SSL negotiation actually starts in Layer 5 and the encrypted tunneling kicks in after the SSL handshake is successful, so I would call SSL an OSI Layer 5 protocol.
 
-According to the AIO, 6th edition (p. 531), SSL and TLS work at the transport layer of the OSI model. 
+>According to the AIO, 6th edition (p. 531), SSL and TLS work at the transport layer of the OSI model. 
 
-According to CISSP for Dummies (p. 259), "SSL operates at the Transport Layer (Layer 4) of the OSI model..."
+>According to CISSP for Dummies (p. 259), "SSL operates at the Transport Layer (Layer 4) of the OSI model..."
 
 上面讨论的内容可以阅读[SSL is on a Transport Layer or Application Layer](http://www.techexams.net/forums/isc-sscp-cissp/101590-ssl-transport-layer-application-layer.html)。
 
