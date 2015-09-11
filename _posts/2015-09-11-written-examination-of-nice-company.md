@@ -29,6 +29,7 @@ categories: [面试]
 上面讨论的内容可以阅读[SSL is on a Transport Layer or Application Layer](http://www.techexams.net/forums/isc-sscp-cissp/101590-ssl-transport-layer-application-layer.html)。
 
 4). 代码正误判断题，有a,b,c三个代码片段，a,b两个很简单，我觉得是没有错误的，c片段中有一个函数，是用char指针为字符串分配空间的，如下：
+
 ```c++
 char* p = (char*)malloc(100);
 ```
