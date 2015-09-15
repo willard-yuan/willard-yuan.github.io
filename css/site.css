@@ -332,6 +332,57 @@ nav a.selected:hover {
   max-width: 50px;
   vertical-align: -9px;
   margin-left: 12px;
+  box-shadow: 0px 0px 0px 4px #FFF, 0px 0px 4px 4px #4D4D4D;
+}
+
+/*图像旋转*/
+.avatar:hover {
+		    -webkit-animation: spin 2s linear infinite;
+		    -moz-animation: spin 2s linear infinite;
+		    -ms-animation: spin 2s linear infinite;
+		    -o-animation: spin 2s linear infinite;
+		    animation: spin 2s linear infinite; }	    
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(359deg); } }
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg); }
+
+  to {
+    -moz-transform: rotate(359deg); } }
+
+@-o-keyframes spin {
+  from {
+    -o-transform: rotate(0deg); }
+
+  to {
+    -o-transform: rotate(359deg); } }
+
+@-ms-keyframes spin {
+  from {
+    -ms-transform: rotate(0deg); }
+
+  to {
+    -ms-transform: rotate(359deg); } }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+
+  to {
+    transform: rotate(359deg); } }
+
+.links {
+  border-top: 1px solid #E6E6E6;
+  margin: 1em 0;
+  list-style-type: none;
+  font-size: 1.4em;
 }
 
 .links {
