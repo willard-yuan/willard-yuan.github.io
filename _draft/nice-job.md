@@ -167,3 +167,74 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 ```
+```c++
+//  小V今年有n门课，每门都课都有考试。为了拿到奖学金，小V必须让自己的平均年成绩至少为avg，每门课的最终成绩由平时成绩和考试成绩组成，满分为r，现在
+//  他知道每门课的平时成绩为ai，如果想要让自己这门课的成绩多拿一分的话，小V必须花bi小时复习，不花时间意味着这门课的考试成绩只能拿0分，平时成绩加
+//  考试成绩超过r这么课最终成绩也只能按r计算。
+//  为了拿到奖学金，请问小V至少需要花多少时间复习功课？
+//  输入：
+//  输入两行数据，第一行是两个整数：路灯数目n(1<=n<=1000)，街道长度(1<=l<=pow(10, 9))。第二行有n个整数ai(0<=ai<=l)，表示路灯
+//  坐标，多个路灯可以在同一个地方，也可以安放在终止点位置。
+//
+//  样例输入：
+//  5 5 4
+//  5 2
+//  4 7
+//  3 1
+//  3 2
+//  2 5
+//  结果：4
+//  Hint
+//  花两个小时复习第三门考试拿两分，两个小时复习第四门考试拿一分，这样总平均成绩为(5+4+5+4+2)/4 = 4
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+int main(int argc, const char * argv[]) {
+    
+    int n, r, avg;
+    cin >> n >> r >> avg;
+    
+    vector<int> A(n);
+    vector<int> B(n);
+    
+    for(int i = 0; i < n; i++){
+        int tmpAi, tmpBi;
+        cin >> tmpAi >> tmpBi;
+        A[i] = tmpAi;
+        B[i] = tmpBi;
+    }
+    
+    vector<size_t> indexes(n);
+    size_t nn(0);
+    generate(begin(indexes), end(indexes), [&]{return nn++;});
+    sort(begin(indexes), end(indexes), [&](int i1, int i2){return B[i1] < B[i2];});
+    vector<int> sortedA(n);
+    vector<int> sortedB(n);
+    for(int i = 0; i < n; i++){
+        sortedB[i] = B[indexes[i]];
+        sortedA[i] = A[indexes[i]];
+    }
+    //A.clear();
+    //B.clear();
+    
+    int sum = accumulate(sortedA.begin(), sortedA.end(), 0);
+    int time = 0;
+    int i = 0;
+    while((sum < avg*n) && (i < n)){
+        if(sortedA[i] < 5){
+            sum = sum + (5 - sortedA[i]);
+            time = (5 - sortedA[i])*sortedB[i];
+        }
+        ++i;
+    }
+    
+    cout << time << endl;
+    
+    return 0;
+}
+```
