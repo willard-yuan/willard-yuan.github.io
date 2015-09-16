@@ -121,3 +121,49 @@ listNode* reverseList(listNode* pHead){
 从上面的7道题可以看出，出题者非常的注重基础，其中又非常的注重考查链表方面的知识，这些链表的题目都可以在《剑指offer》上找得到原题或者是身影，对于基本的，比如从尾到头打印链表、链表中的倒数第k个节点、反转链表、合并有序链表、查找两链表的公共节点这几个，个人觉得后面一定还会再出现。不过，整个题里面，完全没见到二叉树的身影，蜻蜓点水的点到了栈结构。
 
 笔试的人实在太多了，1000多来人参加笔试，招聘的人数大概70来左右吧。这几天凡是来西安宣讲的，场场爆满，去得稍微晚了点，进都进不去了。我承认我是去试水的，但笔试下来确实发现了很多的问题，其中最主要的一个是，敲得太少，对这样笔试没有进行过专门的练习。
+
+```c++
+//  V先生有一天工作得很晚，回家的时候要穿过一条长度为l的笔直街道，这条街道上有n个路灯。假设这条街起点为0，终点为l，第i个路灯的坐标
+//  为ai。路灯发光能力以正数d来衡量，其中d表示路灯能够照亮的街道上的点与路灯的最远距离，所有路灯发光能力相同。为了让V先生看清回家的
+//  路，路灯必须照亮整天街道，又为了节省电力希望找到最小的d是多少？
+//
+//  输入：
+//  输入两行数据，第一行是两个整数：路灯数目n(1<=n<=1000)，街道长度(1<=l<=pow(10, 9))。第二行有n个整数ai(0<=ai<=l)，表示路灯
+//  坐标，多个路灯可以在同一个地方，也可以安放在终止点位置。
+//
+//  样例输入：
+//  7 15
+//  15 5 3 7 9 14 0
+//  结果：2.5
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main(int argc, const char * argv[]) {
+    
+    int numBulb, distance;
+    cin >> numBulb >> distance;
+    
+    vector<int> looc(numBulb);
+    
+    for(int i = 0; i < numBulb; i++){
+        int tmp;
+        cin >> tmp;
+        looc[i] = tmp;
+    }
+    
+    sort(looc.begin(), looc.end(), less<int>());
+    int maxDis = 0;
+    for(int i = 0; i < numBulb; i++){
+        int tmp = looc[i+1]-looc[i];
+        if(tmp > maxDis)
+            maxDis = tmp;
+    }
+    
+    cout << maxDis/2.0 << endl;
+    
+    return 0;
+}
+```
