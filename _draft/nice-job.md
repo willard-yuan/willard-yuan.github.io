@@ -226,9 +226,11 @@ int main(int argc, const char * argv[]) {
     int time = 0;
     int i = 0;
     while((sum < avg*n) && (i < n)){
-        if(sortedA[i] < 5){
-            sum = sum + (5 - sortedA[i]);
-            time = (5 - sortedA[i])*sortedB[i];
+        int addScores = 0;
+        while((sortedA[i] + addScores) < 5 && sum < avg*n){
+            sum = sum + 1;
+            time = time + sortedB[i];
+            ++addScores;
         }
         ++i;
     }
