@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: 2015年部分互联网公司笔试综合题及答案
 categories: [找工作]
