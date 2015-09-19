@@ -400,26 +400,6 @@ nav a.selected:hover {
   line-height: 3.8em;
 }
 
-/*评论中头像旋转*/
-.comments {
-	margin:9px 0 20px 0;
-}
-.ds-powered-by {
-	font-size:0px !important;
-}
-#ds-reset .ds-avatar img {
-	transition:transform 0.7s ease-out;
-	-webkit-transition:-webkit-transform 0.7s ease-out;
-	-moz-transition:-moz-transform 0.7s ease-out;
-	-o-transition:-moz-transform 0.7s ease-out;
-}
-#ds-reset .ds-avatar img:hover {
-	transform:rotateZ(360deg);
-	-webkit-transform:rotateZ(360deg);
-	-moz-transform:rotateZ(360deg);
-	-o-transform:rotateZ(360deg);
-}
-
 /* Footer */
 footer {
   font-size: small;
