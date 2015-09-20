@@ -449,6 +449,9 @@ ul.posts li {
   /*自定义的间距*/
   padding: 0.8em 0 0.8em;
 }
+ul.posts li:hover {
+    background-color: #D3D3D3;
+}
 
 /*添加博客首页为谢一挥的模板样式——开始*/
 .listing-item, .listing-seperator {
@@ -462,6 +465,7 @@ ul.posts li {
 }
 .listing-item a {
     padding: 0.2em 1em;
+    text-decoration: none;
 }
 .listing-item time {
     color: #999999;
