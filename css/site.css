@@ -445,7 +445,7 @@ ul.posts {
 
 /*添加博客首页为谢一挥的模板样式——开始*/
 .subheader-container {
-  margin-bottom: 2.5em;
+  margin-bottom: 3.5em;
 }
 
 .sub-nav {
@@ -463,10 +463,12 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
 .listing-seperator {
     list-style-type: none;
     display: block;
-    padding: 8px 30px 10px 30px;
+    padding: 8px 30px 10px 0px;
     text-decoration: none;
     border-bottom: 1px solid #ddd;
     color: #005;
+    font-weight: bold;
+
 }
 .listing-item {
     list-style-type: none;
@@ -486,10 +488,7 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
     float: right;
     color: #999999;
 }
-.listing-seperator {
-    font-weight: bold;
-}
-#tag_cloud{margin-bottom: 1em;}
+#tag_cloud{margin-top: 4em;margin-bottom: 1em;}
 #tag_cloud a:hover{color:#333333 !important;text-decoration:none;}
 
 /*添加博客首页为谢一挥的模板样式——结束*/

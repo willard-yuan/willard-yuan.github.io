@@ -1,13 +1,16 @@
 ---
 layout: default
 title: Categories - Blog
-category: blog
+category: categories
 ---
 
-<div class="row">
-<div>
-<a class="button btn-primary" href="/blog/index.html">By year</a>
-<a class="button btn-primary" href="/blog/categories.html">By categories</a>
+<div class="subheader-container">
+<div class = "inner">
+<nav class = "sub-nav">
+    <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">时间线</a>
+    <a class="{% if page.category == 'categories' %} selected {% endif %}" href="/blog/categories.html">归档</a>
+    <a class="{% if page.category == 'project' %} selected {% endif %}" href="/cn/project">维基</a>
+</nav>
 </div>
 </div>
 <section class="inner">
@@ -17,14 +20,11 @@ category: blog
 {% endfor %}
 </div>
 
-<ul class="listing">
+<section class="inner">
 {% for cat in site.categories %}
   <li class="listing-seperator" id="{{ cat[0] }}">{{ cat[0] }}</li>
 {% for post in cat[1] %}
-  <li class="listing-item">
-  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-  <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-  </li>
+<a  class="listing-item" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></a>
 {% endfor %}
 {% endfor %}
 </ul>
