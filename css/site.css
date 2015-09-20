@@ -122,8 +122,8 @@ a:active {
 }
 
 a:visited {
-  color: #255b96;
-  /*color: #e0115f;*/
+  /*color: #255b96;
+  color: #e0115f;*/
 }
 
 a:hover {
@@ -443,18 +443,16 @@ ul.posts {
   padding-left: 0;
 }
 
-ul.posts li {
-  /*原主题自定义的博客首页标题与标题的间距*/
-  /*margin-bottom: 1.0em;*/
-  /*自定义的间距*/
-  padding: 0.8em 0 0.8em;
-}
-ul.posts li:hover {
-    background-color: #D3D3D3;
+/*添加博客首页为谢一挥的模板样式——开始*/
+ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
+  /*margin-bottom: 1.0em;*//*自定义的间距*/
+  padding: 0em 0 1em -4em;
+  text-align:center;
+
 }
 
 /*添加博客首页为谢一挥的模板样式——开始*/
-.listing-item, .listing-seperator {
+.listing-seperator {
     list-style-type: none;
     display: block;
     padding: 8px 30px 10px 30px;
@@ -462,8 +460,19 @@ ul.posts li:hover {
     border-bottom: 1px solid #ddd;
     color: #005;
 }
+.listing-item {
+    list-style-type: none;
+    display: block;
+    padding: 0.8em 0px 0.8em 0px;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    color: #005;
+}
 .listing-item a {
     text-decoration: none;
+}
+.listing-item a:hover {
+    background-color: #D3D3D3;
 }
 .listing-item time {
     float: right;
