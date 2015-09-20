@@ -258,5 +258,55 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 ```
+- 问题描述：
 
-就这样子，睡了。
+> 小东和三个小朋友在一起玩小球，他们是一种新玩法。他们站在楼房的不同层，假设小东站在的楼层距离地面N米，球从小东的手里自由落下，每次落地后跳回返回原地面的一半；再落回地下，再反跳回原高度的一半。小东和三个小朋友站在不同的楼层，同时放下手中不同的小球，当小球全部落下地面不跳事，求4个小球一共经过了多少米？（数字都为整数）。
+
+输入：
+
+```text
+输入4个数字，分别表示四个小球距离地面的高度，所有输入的数字都为整数，范围不能超过整数所能表示的最大值。
+```
+
+输出：
+
+```text
+输出为4个小球经过的总长度
+```
+
+样例输入：
+
+```text
+100 90 80 70
+```
+
+样例输出：
+
+```text
+996
+```
+
+**解题思路**：这道题只要不是等比数列取极限定势思维先入为主，并且注意到了**数字都为整数**这条信息，就非常非常容易做了，当时做的时候真坑，没注意到**数字都为整数**，然后陷入等比数列取极限的坑。下面是自己写的参考代码：
+
+```c++
+int ballDistance(int h){
+    int sumH = h;
+    int halfH = (int)h/2.0;
+    while(halfH != 0){
+        sumH = sumH + 2*halfH;
+        halfH = (int)halfH/2.0;
+    }
+    return sumH;
+}
+
+int main(int argc, const char * argv[]) {
+    
+    
+    int t1, t2, t3, t4;
+    cin >> t1 >> t2 >> t3 >> t4;
+    int sum = ballDistance(t1) + ballDistance(t2)  + ballDistance(t3) + ballDistance(t4);
+    cout << sum << endl;
+    return 0;
+    }
+```
+
