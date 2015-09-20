@@ -444,14 +444,22 @@ ul.posts {
 }
 
 /*添加博客首页为谢一挥的模板样式——开始*/
+.subheader-container {
+  margin-bottom: 2.5em;
+}
+
+.sub-nav {
+  float: right;
+}
+.inner .sub-inner{
+  text-align: right;
+}
 ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
   /*margin-bottom: 1.0em;*//*自定义的间距*/
   padding: 0em 0 1em -4em;
   text-align:center;
 
 }
-
-/*添加博客首页为谢一挥的模板样式——开始*/
 .listing-seperator {
     list-style-type: none;
     display: block;
