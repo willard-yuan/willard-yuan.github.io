@@ -458,16 +458,15 @@ ul.posts li:hover {
     list-style-type: none;
     display: block;
     padding: 8px 30px 10px 30px;
-
     text-decoration: none;
     border-bottom: 1px solid #ddd;
     color: #005;
 }
 .listing-item a {
-    padding: 0.2em 1em;
     text-decoration: none;
 }
 .listing-item time {
+    float: right;
     color: #999999;
 }
 .listing-seperator {
