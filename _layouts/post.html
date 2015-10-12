@@ -2,6 +2,9 @@
 layout: default
 ---
 
+<link rel="stylesheet" href="css/normalize.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/themes/green.css">
 <!--添加侧边菜单-->
 <!--<link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
  <style>
@@ -27,14 +30,16 @@ $(function () {
 </div>
 {% endif %}
 
+<div id="container">
 <article>
-  <h1 class="inner">
+<div class="inner">
+  <h1>
     {{ page.title }}
   </h1>
 
   <!--<p class="meta">{{ page.date | date: "%A %-d %B %Y" }}</p>-->
   <p class="meta">{{ page.date | date_to_string }}</p>
-
+</div>
   {% if page.french %}
   <div class="suggest-translate">
     This post is in French. You can try to
@@ -43,14 +48,12 @@ $(function () {
   </div>
   {% endif %}
   
-  <div id="container">
   	<div id="menu"></div>
   	<div id="main" class="span9">
   		<div class="post">
   			{{ content }}
   		</div>
   	</div>
-  </div>
 </article>
 
 <section class="inner">
@@ -120,3 +123,4 @@ var duoshuoQuery = {short_name:"yuanyong"};
 <!-- Disqus Comment END -->
 
 </section>
+  </div>
