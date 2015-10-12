@@ -14,7 +14,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Montserrat'}
 ::selection{background:#2ecc71;color:white}
 ::-moz-selection{background:#2ecc71;color:white}
 ul{margin:0;padding:0;list-style:none}
-.container{position:relative;width:96%;max-width:940px;margin:0 auto;margin-top:60px}
+.container{position:relative;width:96%;max-width:940px;margin:0 auto;}
 .nav{font-size:0;background:black}.nav li{display:inline-block;vertical-align:top;width:20%;text-align:center}
 .nav li:first-child{font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:2px;color:white}
 .nav li:first-child img{padding-top:64px}
