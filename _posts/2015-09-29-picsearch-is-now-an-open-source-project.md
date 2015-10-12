@@ -69,5 +69,3 @@ python searchEnginePython.py
 Then open your browse and put the site: [127.0.0.1](http://127.0.0.1/).
 
 That's all. Enjoy yourself! If you have problem, you can open an issue on [CNN-Web-Demo-for-Image-Retrieval](https://github.com/willard-yuan/CNN-Web-Demo-for-Image-Retrieval/issues/new).
-
-{% gist c827db48b9c414716b90 %}
