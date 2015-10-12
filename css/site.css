@@ -147,51 +147,6 @@ a.discreet {
   margin-bottom: 25px;
 }
 
-/*article {
-  /*定义article字号和字体颜色
-  font-size: 18px;
-  color:#424b50;
-}*/
-
-/*可以删除，无用*/
-/*.portfolio-nav {
-  text-align: center;
-  list-style-type: none;
-  margin: 3em 0 2em 0;
-}
-
-.portfolio-nav li {
-  display: inline-block;
-  border: 1px solid #255b96;
-  border-right-width: 0;
-}
-
-.portfolio-nav .active {
-  background-color: #3073b3;
-}
-
-.portfolio-nav .active a {
-  color: white;
-}
-
-.portfolio-nav li a {
-  width: 5em;
-  padding: 0.7em 0.4em;
-  display: inline-block;
-  text-decoration: none;
-}
-
-.portfolio-nav li:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.portfolio-nav li:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-right-width: 1px;
-}*/
-
 .pull-right { float: right; }
 .pull-left { float: left; }
 .clear { clear: both; }
@@ -414,7 +369,7 @@ footer p {
 }
 
 footer .linkings {
-  max-width: 680px;
+  max-width: 760px;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
