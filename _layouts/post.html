@@ -33,12 +33,14 @@ $(function () {
 <div id="container">
 <article>
 <div class="inner">
+<div class = "post-header">
   <h1>
     {{ page.title }}
   </h1>
 
   <!--<p class="meta">{{ page.date | date: "%A %-d %B %Y" }}</p>-->
   <p class="meta">{{ page.date | date_to_string }}</p>
+</div>
 </div>
   {% if page.french %}
   <div class="suggest-translate">
