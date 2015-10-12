@@ -197,7 +197,7 @@ header .logo a, header .logo a:hover {
 
 
 header {
-  padding: 1em 0;
+  padding: 0.6em 0;
 }
 
 header a {
@@ -226,10 +226,10 @@ header h1.title a:hover {
 
 
 .inner, pre code, .post > * {
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    width: 100%;
-    display: block;
+  max-width: 760px; /*680*/
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  width: 100%;
+  display: block;
 }
