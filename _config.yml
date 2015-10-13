@@ -8,6 +8,8 @@ timezone: Asia/Chongqing
 safe: true
 lsi: false
 markdown: kramdown
+kramdown:
+  math_engine: mathjax
 #markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data", "strikethrough", "underline"]
