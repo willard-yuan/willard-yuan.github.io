@@ -91,4 +91,6 @@ python imgNamesToTXT.py -t /Users/willard/Pictures/imagesDataSet
 <div class="equation" data-expr="\displaystyle P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}"></div>
 {% endraw %}
 
-katex.render("c = \\pm\\sqrt{a^2 + b^2}", element, { displayMode: true });
+$$
+c = \\pm\\sqrt{a^2 + b^2}
+$$
