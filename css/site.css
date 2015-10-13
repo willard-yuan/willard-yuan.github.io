@@ -84,8 +84,10 @@ h3 {
 /*添加段与段之间的分割线样式*/
 hr {
     border-bottom: 1px dashed #f9f9f9;
-    border-top: 1px dashed #d0d0d0;
-    margin: 0.7em 0;
+    border-top: 2px dashed #22c3aa;
+    margin-top:2em;
+    margin-bottom: 2em;
+}
 }
 
 p {
