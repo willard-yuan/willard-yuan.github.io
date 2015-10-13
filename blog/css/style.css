@@ -264,3 +264,15 @@ header h1.title a:hover {
     height: auto;
     margin: 1.5em auto 1.6em auto;
 }
+
+/*
+ * Equations with KaTeX
+ *
+ * Center the equation content.
+ */
+.equation {
+  padding-bottom:  1rem;
+  padding-top:     1rem;
+  text-align:      center;
+  font-size:       1.5em;
+}

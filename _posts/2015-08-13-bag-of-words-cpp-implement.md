@@ -85,3 +85,8 @@ python imgNamesToTXT.py -t /Users/willard/Pictures/imagesDataSet
 关于bag of words的原理，可以查阅我的博文[BoW图像检索Python实战](http://yongyuan.name/blog/practical-BoW-for-image-retrieval-with-python.html)和[Bag of Words模型](http://yongyuan.name/blog/bag-of-word-model.html)。**注意**，该框架中采用的相似性度量方式是直方图相交(histogram intersection kernel)的方法，测试发现直方图相交的方法要比用余弦距离度量的方式效果更好，但计算速度较慢。
 
 开发版本[bag-of-words-dev-version](https://github.com/willard-yuan/image-retrieval/tree/master/bag-of-words-dev-version)中加入了逆文档词频以及RANSAC重排，待效果达到预期后，会添加到稳定版中。
+
+{% raw %}
+<!-- The Normal Distribution -->
+<div class="equation" data-expr="\displaystyle P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}"></div>
+{% endraw }
