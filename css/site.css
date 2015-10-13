@@ -369,6 +369,7 @@ footer {
 footer p {
   text-align: center;
   font-size: 0.8rem;
+  margin: 1em 0;
 }
 
 footer .linkings {
