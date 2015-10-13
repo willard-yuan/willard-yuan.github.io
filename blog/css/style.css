@@ -26,7 +26,7 @@ p{
 }
 a{text-decoration:none}
 a:focus{outline:0}
-h1,h2,h3,h4,h5,h6{h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif, 'Montserrat'}
+h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif, 'Montserrat'}
 ::selection{background:#2ecc71;color:white}
 ::-moz-selection{background:#2ecc71;color:white}
 ul{margin:0;padding:0;list-style:none}
