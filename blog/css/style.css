@@ -257,3 +257,10 @@ header h1.title a:hover {
   width: 100%;
   display: block;
 }
+
+.post img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.5em auto 1.6em auto;
+}
