@@ -94,3 +94,5 @@ python imgNamesToTXT.py -t /Users/willard/Pictures/imagesDataSet
 $$
 c = \\pm\\sqrt{a^2 + b^2}
 $$
+
+$$e^x = \lim_{n\rightarrow \infty} \sum_{t=0}^{n} ( \frac{1}{t!}\cdot x^t )= \sum_{t=0}^{\infty} (1 + x + \frac{1}{2!}x^2+\frac{1}{3!}x^3+ ... + \frac{1}{t!}\cdot x^t)$$
