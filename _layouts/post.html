@@ -108,7 +108,7 @@ var duoshuoQuery = {short_name:"yuanyong"};
 		(document.getElementsByTagName('head')[0] 
 		|| document.getElementsByTagName('body')[0]).appendChild(ds);
 	})();
-	</script>
+</script>
 <!-- Duoshuo Comment END -->
 
 <!-- Disqus Comment BEGIN -->
@@ -127,6 +127,18 @@ var duoshuoQuery = {short_name:"yuanyong"};
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
 <!-- Disqus Comment END -->
+
+<script type="text/javascript">
+
+    // grab all elements in DOM with the class 'equation'
+    var tex = document.getElementsByClassName("equation");
+
+    // for each element, render the expression attribute
+    Array.prototype.forEach.call(tex, function(el) {
+        katex.render(el.getAttribute("data-expr"), el);
+    });
+
+</script>
 
 </section>
 </div>
