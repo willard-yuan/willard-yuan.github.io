@@ -276,3 +276,11 @@ header h1.title a:hover {
   text-align:      center;
   font-size:       1.5em;
 }
+
+blockquote {
+    margin: 1em 0 1em 0em;
+    color: #666;
+    border-left: 0.4em solid #3073b3;
+    padding-left: 0.6em;
+    font-style: italic;
+}
