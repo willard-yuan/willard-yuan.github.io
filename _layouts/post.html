@@ -8,7 +8,6 @@ layout: default
 <link rel="stylesheet" href="../css/katex.min.css">
 <script src="../js/katex.min.js"></script>
 <script src="../js/auto-render.min.js"></script>
-<script src="../js/katex_render.js"></script>
 <!--添加侧边菜单-->
 <!--<link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
  <style>
@@ -36,7 +35,6 @@ $(function () {
 
 <div id="container">
 <article>
-<!--<section id="content">-->
 <div class="inner">
 <div class = "post-header">
   <h1>
@@ -64,7 +62,6 @@ $(function () {
 		</div>
   	</div>
 </article>
-<!--</section>-->
 
 <hr>
 
@@ -133,18 +130,6 @@ var duoshuoQuery = {short_name:"yuanyong"};
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
 <!-- Disqus Comment END -->
-
-<script type="text/javascript">
-
-    // grab all elements in DOM with the class 'equation'
-    var tex = document.getElementsByClassName("equation");
-
-    // for each element, render the expression attribute
-    Array.prototype.forEach.call(tex, function(el) {
-        katex.render(el.getAttribute("data-expr"), el);
-    });
-
-</script>
 
 <script>
   renderMathInElement(
