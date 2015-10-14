@@ -539,7 +539,7 @@ header h1.title a:hover {
 }
 
 .post ul, .post ol {
-  padding-left: 2.5em;
+  /*padding-left: 2.5em;*/
 }
 
 /* terminal */
