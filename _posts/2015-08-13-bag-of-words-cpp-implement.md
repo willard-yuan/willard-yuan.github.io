@@ -86,6 +86,9 @@ python imgNamesToTXT.py -t /Users/willard/Pictures/imagesDataSet
 
 开发版本[bag-of-words-dev-version](https://github.com/willard-yuan/image-retrieval/tree/master/bag-of-words-dev-version)中加入了逆文档词频以及RANSAC重排，待效果达到预期后，会添加到稳定版中。
 
+This is a test for $\KaTeX$, $a^2 + b^2 = c^2$, if you want it in display style, try: $$\text{e} = \lim_{n\to\infty} \left(1+\frac{1}{n}\right)^n,$$ and
+\\[ \pi = \lim_{k=0}^\infty \, \frac{1}{16^k} \left( \frac{4}{8k+1} - \frac{2}{8k+4} - \frac{1}{8k+5} - \frac{1}{8k+6} \right).\\]
+
 {% raw %}
 <!-- The Normal Distribution -->
 <div class="equation" data-expr="\displaystyle P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}"></div>
