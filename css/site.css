@@ -46,6 +46,10 @@ body {
   border-bottom: 5px solid #ed5252 ;;
 }
 
+p{
+  margin: 1em 0;
+  }
+
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 20px;
     margin-bottom: 10px;
