@@ -41,8 +41,9 @@ $(function () {
     {{ page.title }}
   </h1>
 
-  <!--<p class="meta">{{ page.date | date: "%A %-d %B %Y" }}</p>-->
-  <p class="meta">{{ page.date | date_to_string }}</p>
+  <!--<p class="meta">{{ page.date | date: "%A %-d %B %Y" }}</p>
+  <p class="meta">{{ page.date | date_to_string }}</p>-->
+  <p class="meta">{{ page.date | date: "%Y年%m月%d日"}}</p>
 </div>
 </div>
   {% if page.french %}
