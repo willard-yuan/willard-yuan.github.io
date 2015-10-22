@@ -100,6 +100,7 @@
   </div>
 
   {{ content }}
+  <div class="returnTop" id="returnTop"></div>
   <div class="separator"></div>
 
   <div  style="border-bottom: 1px solid #eee"></div>
@@ -185,6 +186,23 @@
       window.top.location.replace(window.self.location.href);
     }
   </script>
+  
+  <script type="text/javascript">
+    $("#returnTop").hide();
+    $(function () {
+        $(window).scroll(function(){
+            if ($(window).scrollTop()>100){
+                $(".returnTop").fadeIn(500);
+            }else{
+                $(".returnTop").fadeOut(500);
+            }
+        });
+        $(".returnTop").click(function(){
+            $('body,html').animate({scrollTop:0},20);
+            return false;
+        });
+    });
+</script>
 
   <!--
   <script id="_webengage_script_tag" type="text/javascript">
