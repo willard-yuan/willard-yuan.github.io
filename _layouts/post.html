@@ -40,24 +40,20 @@ $(function () {
   <h1>
     {{ page.title }}
   </h1>
-
-  <!--<p class="meta">{{ page.date | date: "%A %-d %B %Y" }}</p>
-  <p class="meta">{{ page.date | date_to_string }}</p>-->
-  <p class="meta">{{ page.date | date: "%Y年%m月%d日"}}</p>
-                <ul class="meta">
-                    <i class="fa fa-calendar"></i>
-                    {{ page.date | date: "%Y" }}年{{ page.date | date: "%m" }}月{{ page.date | date: "%d" }}日
-                    <i class="space"></i>
-                    <i class="fa fa-archive"></i>
-                    <a class="tag" href="{{ site.url }}/category/#{{ page.categories }}">{{ page.categories }}</a> 
-                    <i class="space"></i>
-                    <i class="fa fa-tags"></i>
-                    {% for tag in page.tags %}
-                        <a class="tag" href="{{ site.url }}/tag/#{{ tag }}">{{ tag }}</a>
-                        <i class="space"></i>
-                    {% endfor %}
-                    <i class="space"></i> 字数:{{page.content | size |divided_by:2}}
-                </ul>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	{{ page.date | date: "%Y" }}年{{ page.date | date: "%m" }}月{{ page.date | date: "%d" }}日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="{{ site.url }}/category/#{{ page.categories }}">{{ page.categories }}</a> 
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	{% for tag in page.tags %}
+  	    <a class="tag" href="{{ site.url }}/tag/#{{ tag }}">{{ tag }}</a>
+  	    <i class="space"></i>
+  	{% endfor %}
+  	<i class="space"></i> 字数:{{page.content | size |divided_by:2}}
+  </ul>
 </div>
 </div>
   {% if page.french %}
