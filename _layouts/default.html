@@ -15,6 +15,18 @@
   <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
   {% if page.description %}<meta name="description" content="{{page.description}}" />{% endif %}
   <link rel="alternate" type="application/atom+xml" title="RSS Feed for Yong Yuan's blog" href="/feed.xml" />
+    <style type="text/css">
+    .returnTop {
+        cursor: pointer; 
+        position: fixed; 
+        bottom: 50px; 
+        right: 30px;
+        width: 36px;
+        height: 36px;
+        z-index: 10;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCMDk0NUUxRjU0M0ExMUU0OTg4RUVGRDg4NzUzN0U3OSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCMDk0NUUyMDU0M0ExMUU0OTg4RUVGRDg4NzUzN0U3OSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkIwOTQ1RTFENTQzQTExRTQ5ODhFRUZEODg3NTM3RTc5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkIwOTQ1RTFFNTQzQTExRTQ5ODhFRUZEODg3NTM3RTc5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/S3ciwAAApxJREFUeNrMmM9PE0EUx99sPQCJXkxjOSCpHKhyUWKDimA0RPRgNNFogkdJJYqG/4G/QMVEmggnMDF6MB4MwZO/CAduktILRnqgUi9qgh5q1u8rb5tNbelMh3Z5ySdtttM3n8zuzswbNXJnjAwjCgbBaXAYtIO98tsv8BWkwAcwB76YJN+j2S4EroNRcBKoCu32C93gJnDBApgAz8Hfah05GjID4DOYBae2kSkXSv4zKzkGbISawCSYBzGyj5jkmpTcRkJh8A4kaOcjIbnDukLc8D2IU/0iLn2Eqwm1gNegk+ofndJXy3ZCD0APNS56pM+yQvwGDFPjY9j/9jm+z4cUXDySua4odENm3aAiJhNvUeguBR+jnlBUZtOaQylVwDJ4STrEQhcMl4P/ZK5dvVzAUor/PMiLa6+tzLmzZ4rXXrx8Ra7r1pqyl4W6bGXy+a1F3BOzkDrCQm22Mk+STwvXRxK3bKXaQ8fjJ8a9OaBWmeXlFOVy32ktk6HuY0epoyNKzc1NlEqlTYVCju3IsIwX/J2v8W/cppYHnUdorHSBqyxzpaKMF5Yj9YNHKKPb2nEUZPIVZcqNlFJGN2FNYZM/gy9DurcsEjlA6+tZreytrRHKZr+ZPNwzjlQHWsGJdWU4uK3hm/bRkVLFpeCDHeZYaBV82gVCXC6tek/c410gNOHffnARtxKgzIo4FIV4MboXoNB9r6r1TxJvwXQAMlNSQJatOnjXtthAmcXSO1MqtAkugXQDZNLS12a1yjUH+sFSHWWWpI+cbm2/AfpAsg4ySTlb2jA9/fgNboPzO3QL05KLc/6xOR+al23ukMympsvMghxedfnfJtsTNJ4jnglcNl2UYecC7yDYJ+1+8hZCJjpetN+Q4ZHePwEGAH791rfKs3GSAAAAAElFTkSuQmCC);
+    }
+    </style>
 
   {% if page.url == '/index.html' %}
     <link rel="alternate" hreflang="ch" href="/cn/" />
