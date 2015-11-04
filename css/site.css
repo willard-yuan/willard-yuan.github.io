@@ -265,8 +265,7 @@ nav a {
   display: inline-block;
   margin-right: 1.2em;
   padding-bottom: 0.2em;
-  /*font-weight: normal;*/
-  font-weight: thick;
+  font-weight: 700;
   border-bottom: 3px solid transparent;
   font-size: 100%;
 }
