@@ -6,6 +6,8 @@ categories: [image Retrieval]
 
 开始整理这两三年自己在image retrieval的一些资料，方便来年的毕业设计。下面是一份图像检索实验的清单，包含的都是自己实验的结果，随时保持在github上的[image-retrieval](https://github.com/willard-yuan/image-retrieval/blob/master/README.md)同步更新。
 
+---
+
 ## 基于SIFT局部特征的图像检索
 
 基于SIFT局部特征的BOF模型非常适合于做Object retrieval, 下面是自己在[oxford building](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)数据库(5063张图片)上进行的一些实验。表格中单词数目为聚类时设定的聚类数目，以及是否采用SIFT或者rootSIFT，rootSIFT怎么计算的可以阅读[Object retrieval with large vocabularies and fast spatial matching](http://www.robots.ox.ac.uk/~vgg/publications/papers/philbin07.pdf)这篇文章，空间校正即在重排的时候，对错配的SIFT点对进行剔除，剔除的方法可以采用RANSAC或者类RANSAC方法，详细介绍可以阅读[SIFT(ASIFT) Matching with RANSAC](http://yongyuan.name/blog/SIFT(ASIFT)-Matching-with-RANSAC.html)，检索精度采用平均检索精度（mean Average Precision, mAP），其计算过程可以阅读[信息检索评价指标](http://yongyuan.name/blog/evaluation-of-information-retrieval.html)这篇文章。下面需要注意的是**查询时间**单次查询的结果，并没有进行多次查询进行平均，此外查询时间是查询和计算mAP时间的总和。
@@ -87,6 +89,8 @@ categories: [image Retrieval]
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/searchTime_zpsndzm24mt.jpg)
 
 上图显示统计的查询时间很怪异，因为随着单词数目的增加，其查询时间应该会越来越长的，但是这里得出的确实越来越短，这里可能的原因是服务器很多人在用，并不满足单一条件在变化的环境，所以所以这里的时间只是作为一个对查询时间的参考，并不能反映理论上的时间变化趋势。
+
+---
 
 ## 具体场景应用
 
