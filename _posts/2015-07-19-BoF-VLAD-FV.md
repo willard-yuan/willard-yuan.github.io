@@ -6,7 +6,7 @@ categories: [image Retrieval]
 
 开始整理这两三年自己在image retrieval的一些资料，方便来年的毕业设计。下面是一份图像检索实验的清单，包含的都是自己实验的结果，随时保持在github上的[image-retrieval](https://github.com/willard-yuan/image-retrieval/blob/master/README.md)同步更新。
 
-### 基于SIFT局部特征的图像检索
+## 基于SIFT局部特征的图像检索
 
 基于SIFT局部特征的BOF模型非常适合于做Object retrieval, 下面是自己在[oxford building](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)数据库(5063张图片)上进行的一些实验。表格中单词数目为聚类时设定的聚类数目，以及是否采用SIFT或者rootSIFT，rootSIFT怎么计算的可以阅读[Object retrieval with large vocabularies and fast spatial matching](http://www.robots.ox.ac.uk/~vgg/publications/papers/philbin07.pdf)这篇文章，空间校正即在重排的时候，对错配的SIFT点对进行剔除，剔除的方法可以采用RANSAC或者类RANSAC方法，详细介绍可以阅读[SIFT(ASIFT) Matching with RANSAC](http://yongyuan.name/blog/SIFT(ASIFT)-Matching-with-RANSAC.html)，检索精度采用平均检索精度（mean Average Precision, mAP），其计算过程可以阅读[信息检索评价指标](http://yongyuan.name/blog/evaluation-of-information-retrieval.html)这篇文章。下面需要注意的是**查询时间**单次查询的结果，并没有进行多次查询进行平均，此外查询时间是查询和计算mAP时间的总和。
 
@@ -88,15 +88,41 @@ categories: [image Retrieval]
 
 上图显示统计的查询时间很怪异，因为随着单词数目的增加，其查询时间应该会越来越长的，但是这里得出的确实越来越短，这里可能的原因是服务器很多人在用，并不满足单一条件在变化的环境，所以所以这里的时间只是作为一个对查询时间的参考，并不能反映理论上的时间变化趋势。
 
-#### MSER
+## 具体场景应用
+
+上面的分析选得过于理论，实际上，我也很希望做的这些东西能够在实际的场景进行测试，下面对自己遇到的实际场景（这些应用主要还是帮别人做的测试）做尽可能多的总结，虽然有些做的东西已经被我删掉了，但本小子还是希望有机会能够一一把它们补全。
+
+### 应用场景1：影院拍摄图像搜索
+
+这个项目主要是针对在影院中拍摄的图像进行的搜索，规模大概十万来张，整个系统要做成嵌入式的。图像检索算法设计方面，考虑到在电影院里面拍摄的图片，会有较大的旋转、角度、光照强大（光线比较暗）变化，选用基于SIFT局部特征的方法比较适合，于是对合作方发过来的图像库用上面的方法做了相应的测试，搜索的效果比较理想，能够获得合作方对检索精度的要求。在合作方发来的图像库上做测试，检索效果比较理想。
+
+目前存在的难点是：1. 转成C++过程各模块基本成型，但其中某些核心模块还需要耗费很多的时间去调试；2. 嵌入到硬件里过程中出现的很多不需要在服务器上考虑的问题，比较搜索时间，存储空间，怎么转成纯C方面烧写到硬件上。
+
+### 应用场景2：APP图标去重
+
+这个是有客官碰到了这么一个问题，然后邮件问本小子，大概是把APP图标去重转成了图像搜索的问题，具体的任务我也不是很清楚，然后我就给他做了测试。在看了他发过来的APP图标库后，我想这个应该用最基本的特征应该就能解决得比较好，比如颜色，因为同款的APP图标要么就是分辨率存在差异，要么是APP图标有的加了字。
+
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/appIcons_zpsfmmcljcj.png)
+
+总体而言，差异应该是很小的，用颜色就能够解决得很好，不过这个方案我没测试，直接用的是我上面的现成方案。之所以这么直接用，是因为这个也是做的同款任务的搜索，SIFT很适合而且很擅长做这个，只不过有可能碰到的问题是，由于APP图像分辨率太小，可能导致检测的SIFT特征点很少，会对检索的精度造成较大的影响，实验中在提取SIFT特征的时候，也确实是这样的，有的APP提取到的SIFT只有几个，不过最后做出来的效果还是比较好的。我在猜测，用颜色特征做的话，可能比这个的效果会差点。下面是部分检索可视化结果（只放两张，是在太多了，就不一一放出来了）:
+
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/1214207_20942719_zpsf2ycq3my.png)
+
+对于上图，如果图库比较大的话，用颜色特征可能对第二行要找的同款可能稍微有点吃力，我们再来看看下面这种情况：
+
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/11229619_20892037_zpst3cbltef.png)
+
+对于这种情况，用颜色特征，就非常吃力了，因为后边绿色的“爸爸去哪儿”跟前面查询图像的颜色直方图会相差很大，如果从这一点看，在APP图标搜索上，颜色似乎也不是一个很好的特征，不过还是要做一下全部的查询，然后看看平均检索精度如何。
+
+### MSER
 
 MSER得到椭圆区域后，再结合SIFT，可以剔除掉很多没用的点，VLFeat中的MESR例子见[这里](http://www.vlfeat.org/overview/mser.html)。此外MSER还可以用于文本区域筛选中，具体可以看这个[Robust Text Detection in Natural Scenes and Web Images](http://prir.ustb.edu.cn/TexStar/scene-text-detection/)。概念与作用相关词：漫水填充法、显著性。
 
-#### 基于SIFT特征点匹配
+### 基于SIFT特征点匹配
 
 [SIFT on GPU (SiftGPU)](http://ccwu.me/), works for nVidia, ATI and Intel cards.
 
-#### Fisher Vector
+### Fisher Vector
 
 <center>
 
