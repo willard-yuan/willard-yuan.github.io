@@ -35,6 +35,14 @@ p{
 a{text-decoration:none}
 a:focus{outline:0}
 h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif, 'Montserrat'}
+h2 {
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: transparent linear-gradient(to right, #7BBFEA, rgba(255, 255, 255, 0)) repeat scroll 0% 0%;
+    color: #FFF;
+}
 ::selection{background:#2ecc71;color:white}
 ::-moz-selection{background:#2ecc71;color:white}
 ul{margin:0;padding:0;list-style:none}
