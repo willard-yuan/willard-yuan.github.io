@@ -40,7 +40,7 @@ h2 {
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    background: transparent linear-gradient(to right, #7BBFEA, rgba(255, 255, 255, 0)) repeat scroll 0% 0%;
+    background: transparent linear-gradient(to right, #3073b3, rgba(255, 255, 255, 0)) repeat scroll 0% 0%;
     color: #FFF;
 }
 ::selection{background:#2ecc71;color:white}
