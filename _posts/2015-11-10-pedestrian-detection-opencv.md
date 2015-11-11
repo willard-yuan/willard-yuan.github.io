@@ -10,7 +10,8 @@ categories: [计算机视觉]
 
 如果你已经熟悉了这个过程，或者你仅仅只是想看看OpenCV行人检测的代码，那么现在就打开一个新文件，并将它命名为`detect.py`，开始我们的编程之旅吧：
 
-```python
+<div class="preserve-original-format">
+{% highlight python linenos %}
 # import the necessary packages
 from __future__ import print_function
 from imutils.object_detection import non_max_suppression
@@ -28,7 +29,9 @@ args = vars(ap.parse_args())
 # initialize the HOG descriptor/person detector
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-```
+{% endhighlight %}
+</div>
+
 
 **第2-8行**导入一些我们必要的包，我们导入`print_function`确保我们的代码同时在Python2.7和Python3上兼容，这样可以使得我们的代码能够在OpenCV2.4.X和OPenCV3上都能够工作，然后，从我的[imutils](https://github.com/jrosebr1/imutils)包中我们导入`non_max_suppression`函数。
 
@@ -57,7 +60,8 @@ $ pip install --upgrade imutils
 
 到了这里，我们的OpenCV行人检测器已经完全载入了，我们只需要把它应用到一些图像上：
 
-```python
+<div class="preserve-original-format">
+{% highlight python linenos %}
 # import the necessary packages
 from __future__ import print_function
 from imutils.object_detection import non_max_suppression
@@ -111,7 +115,8 @@ for imagePath in paths.list_images(args["images"]):
 	cv2.imshow("Before NMS", orig)
 	cv2.imshow("After NMS", image)
 	cv2.waitKey(0)
-```
+{% endhighlight %}
+</div>
 
 在**第20行**我们对我们的`--images`目录下的图像进行循环，这篇博文中使用的例子样本是从[INRIA Person Dataset](http://pascal.inrialpes.fr/data/human/)这个很流行的人物库上抽取的，更具体的说，是从GRAZ-01子集中抽取出来的，这些图片存放在源码目录下面了。
 
