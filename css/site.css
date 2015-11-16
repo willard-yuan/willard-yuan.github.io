@@ -46,6 +46,10 @@ body {
   border-bottom: 5px solid #ed5252 ;;
 }
 
+p{
+  margin: 1em 0;
+  }
+
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 20px;
     margin-bottom: 10px;
@@ -84,8 +88,10 @@ h3 {
 /*添加段与段之间的分割线样式*/
 hr {
     border-bottom: 1px dashed #f9f9f9;
-    border-top: 1px dashed #d0d0d0;
-    margin: 0.7em 0;
+    border-top: 2px dashed #22c3aa;
+    margin-top:2em;
+    margin-bottom: 2em;
+}
 }
 
 p {
@@ -111,8 +117,8 @@ table td, table th {
 /* Common */
 
 a {
-  color: #255b96;
-  /*color: #e0115f;*/
+  /*color: #255b96;*/
+  color: #e0115f;
   text-decoration: none;
 }
 
@@ -139,7 +145,7 @@ a.discreet {
   /*定义article字体
   font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
   /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
-  font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;;
+  font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   line-height: 170%;
 }
 
@@ -174,7 +180,7 @@ header nav {
 }
 
 .header-container {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
   margin-bottom: 1.5em;
 }
 
@@ -366,6 +372,8 @@ footer {
 
 footer p {
   text-align: center;
+  font-size: 0.8rem;
+  margin: 1em 0;
 }
 
 footer .linkings {
@@ -431,7 +439,7 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
     padding: 0.8em 0px 0.8em 0px;
     text-decoration: none;
     border-bottom: 1px solid #ddd;
-    color: #005;
+    color: #a00;
 }
 .listing-item a {
     text-decoration: none;
@@ -535,7 +543,7 @@ header h1.title a:hover {
 }
 
 .post ul, .post ol {
-  padding-left: 2.5em;
+  /*padding-left: 2.5em;*/
 }
 
 /* terminal */

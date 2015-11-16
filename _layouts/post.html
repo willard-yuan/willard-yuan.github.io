@@ -5,6 +5,9 @@ layout: default
 <link rel="stylesheet" href="css/normalize.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/themes/green.css">
+<link rel="stylesheet" href="../css/katex.min.css">
+<script src="../js/katex.min.js"></script>
+<script src="../js/auto-render.min.js"></script>
 <!--添加侧边菜单-->
 <!--<link rel="stylesheet" href="{{site.url}}/css/side-menu.css" />
  <style>
@@ -37,9 +40,20 @@ $(function () {
   <h1>
     {{ page.title }}
   </h1>
-
-  <!--<p class="meta">{{ page.date | date: "%A %-d %B %Y" }}</p>-->
-  <p class="meta">{{ page.date | date_to_string }}</p>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	{{ page.date | date: "%Y" }}年{{ page.date | date: "%m" }}月{{ page.date | date: "%d" }}日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="{{ site.url }}/category/#{{ page.categories }}">{{ page.categories }}</a> 
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	{% for tag in page.tags %}
+  	    <a class="tag" href="{{ site.url }}/tag/#{{ tag }}">{{ tag }}</a>
+  	    <i class="space"></i>
+  	{% endfor %}
+  	<i class="space"></i> 字数:{{page.content | size |divided_by:2}}
+  </ul>
 </div>
 </div>
   {% if page.french %}
@@ -53,10 +67,14 @@ $(function () {
   	<div id="menu"></div>
   	<div id="main" class="span9">
   		<div class="post">
+		<div id="content">
   			{{ content }}
   		</div>
+		</div>
   	</div>
 </article>
+
+<hr>
 
 <section class="inner">
 
@@ -104,7 +122,7 @@ var duoshuoQuery = {short_name:"yuanyong"};
 		(document.getElementsByTagName('head')[0] 
 		|| document.getElementsByTagName('body')[0]).appendChild(ds);
 	})();
-	</script>
+</script>
 <!-- Duoshuo Comment END -->
 
 <!-- Disqus Comment BEGIN -->
@@ -124,5 +142,19 @@ var duoshuoQuery = {short_name:"yuanyong"};
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
 <!-- Disqus Comment END -->
 
+<script>
+  renderMathInElement(
+    document.getElementById("content"),
+    {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\[", right: "\\]", display: true},
+        {left: "$", right: "$", display: false},
+        {left: "\\(", right: "\\)", display: false}
+      ]
+    }
+  );
+</script>
+
 </section>
-  </div>
+</div>

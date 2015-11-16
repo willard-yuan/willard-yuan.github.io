@@ -1,242 +1,240 @@
----
+﻿---
 layout: post
-title: 2015年nice西安z站笔试题回忆及答案
-categories: [面试]
+title: 数据分类浅谈：决策数
+categories: [机器学习]
 ---
 
->炮灰之下，且笔试且总结
+## 背景
+决策树（decision tree）是一种基本的分类和**回归**（后面补充一个回归的例子？）方法，它呈现的是一种树形结构，可以认为是if-then规则的集合。其其主要优点是模型具有很好的**可读性**，且**分类速度快**；缺点是可能会产生过度匹配的问题（所以一般都会有决策树的剪枝过程）。决策树在学习时，利用训练数据，根据损失函数最小化原则建立决策树模型，其学习过程包括3个步骤：特征选择、决策树生成和决策树修剪。决策树学习的思想来源主要有Quinlan在1986年提出的ID3算法和1993年提出的C4.5算法，以及由Breiman等人在1986年提出的CART算法。
 
-9月10号晚nice在西电宣讲，随后进行了笔试，时间1个小时，下面是当晚回来后做的笔试回忆及总结。
+决策树在现实生活中，已得到了很广泛的应用，举两个很常见的例子：
 
-1). 32位unix系统的时间戳在那一年用完？
+1. 猜测人物，游戏的规则很简单：参与游戏的一方在脑海里想某个人，然后游戏页面一次一个选择选项陆续让你回答，比如，“这个人是在现代还是古代？”，一般问题的答案只能回答是还是不是，最后根据你一系列的回答便可以对你所想的某个人做出推断，比如你所想的这个人是你老爸。
 
-答：在2038年用完，具体可以参阅[UNIX时间](https://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4)，这个计算有点复杂。
+2. 投资指导或贷款申请。比如炒股，通过app新开账户后，有的会给出一个投资建议的指导，在生成这份指导建议前，会让你对某些问题（一般几个）进行回答，然后根据你的回答，生成一份对你投资类型的判断，开过这类账户的用户应该都有这个体验。另外一个就是贷款申请，会根据你的年龄、有无工作、是否有房子、信贷情况指标来决定是否给你贷款。
 
-2). 算术表达式中，对于括号配对，采用哪种数据结构比较合理，并解释一下原因。
+实际上，近来的调查研究表明决策树也是**最经常**使用的数据挖掘算法。接下来，按决策树的学习步骤先介绍决策树模型定义，然后介绍特征选择、决策树生成以及决策树的剪枝，最后编码测试一个实际的例子。
 
-答：采用栈结构比较合理，在顺序遍历括号的时候，每遇到一个左括号，将其压入栈空间中，在遇到右括号的时候，弹出栈顶元素，即为与该右括号配对的括号。
+## 决策树模型定义
 
-3). http属于OSI网络模型中的哪一层？SSL属于OSI网络模型中的哪一层？
+决策树模型是一种描述对实例进行分类的树形结构，它有结点（node）和有向边（directed edge）组成，结点有两种类型：内部结点（internal node）和叶结点（leaf node）。内部结点表示一个特征或者属性，叶结点表示一个类别。
 
-答：http属于OSI网络模型中的应用层，可以阅读[TCP/IP协议族](https://zh.wikipedia.org/wiki/TCP/IP%E5%8D%8F%E8%AE%AE%E6%97%8F)、[HTTP协议详解](http://blog.csdn.net/gueter/article/details/1524447)、[TCP/IP详解学习笔记（13）-- TCP连接的建立与终止](http://www.cnblogs.com/newwy/p/3234536.html)、[TCP/IP 相关知识点与面试题集](http://www.cnblogs.com/obama/p/3292335.html)这几个相关知识。SSL有认为属于OSI模型传输层和应用层之间的，比如[ssl工作在OSI的哪一层 ](http://blog.chinaunix.net/uid-14488638-id-2802670.html)，也有认为是属于传输层的：
+在用决策树进行预测时，对于输入的某个样本$x_{test}$，从根结点开始，对$x_{test}$的某一个特征进行测试，根据测试的结果，将$x_{test}$分配分配到其子结点；然后递归的进行下一个规则的判断，直到到达叶结点，最后将$x_{test}$分配到叶结点的类中。
 
->In the OSI model it's less defined because encryption is in Layer 6 and session control is in Layer 5. HTTPS (layer 7) uses SSL and SSL (Layers 5/6) uses TCP (Layer 4). SSL negotiation actually starts in Layer 5 and the encrypted tunneling kicks in after the SSL handshake is successful, so I would call SSL an OSI Layer 5 protocol.
+下图是决策树的示意图，图中的方框表示内部结点，圆型表示叶结点，即所属的类别。
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202015-10-23%20at%2023.55.27_zps5youxktx.png)
+再举个具体的例子：
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202015-10-24%20at%2000.06.52_zpscvm4idpn.png)
+上面，将邮件按重要性分成了3类：即无聊时阅读的邮件、需要即使处理的邮件以及无需阅读的垃圾邮件。
 
->According to the AIO, 6th edition (p. 531), SSL and TLS work at the transport layer of the OSI model. 
+在前面**背景**中讲到，可以认为决策树是if-then规则的集合。从上面给出的两个图示也可以很明显的得到这样的结论。决策树转换成if-then规则的过程是这样的：由决策树的根结点的每一条路径构建一条规则，路径上内部结点的特征对应着规则的条件，叶结点对应的是规则的结论。由于决策树在对测试样本进行类别判定时，经过的判别路径（规则）只有一条，且判定的结果一定是属于叶结点中的某个，所以可以得出一个重要的性质：决策树的路径是**完备且互斥**的。也就是每一个实例都只能被一条路径（对应的规则子集）所覆盖（或满足）。
 
->According to CISSP for Dummies (p. 259), "SSL operates at the Transport Layer (Layer 4) of the OSI model..."
+## 决策树学习
 
-上面讨论的内容可以阅读[SSL is on a Transport Layer or Application Layer](http://www.techexams.net/forums/isc-sscp-cissp/101590-ssl-transport-layer-application-layer.html)。
+对于给定的数据集
+$$
+D={\{(x_1, y_1),(x_2, y_2),...,(x_N, y_N) \}}
+$$
+N个样本，$x_i=(x_i^{(1)},x_i^{(2)},...,x_i^{(n)})^T$为样本$i$对应的$n$个特征，比如前面所举的贷款的例子，年龄、有无工作、是否有房子、信贷情况4个特征，$y\in{\{1,2,...,K\}}$为类标记，决策树学习的目标就是要根据给定的训练集构造一个决策树模型，是它能对未知样本进行正确的分类。
 
-4). 代码正误判断题，有a,b,c三个代码片段，a,b两个很简单，我觉得是没有错误的，c片段中有一个函数，是用char指针为字符串分配空间的，如下：
-```c++
-char* p = (char*)malloc(100);
+决策树从本质上来说，是从训练数据中归纳出一组分类规则，与训练数据集不相矛盾的决策树（即能对训练数据进行正确分类的决策树）可能有多个，也可能没有，我们需要的是一个与训练数据矛盾最小的决策树，同时又具备很好的泛化能力。决策树学习用损失函数表示这一目标，其损失函数通常是正则化的极大似然函数，学习的策略是使损失函数最小化。由于从所有可能的决策树中选取最优决策树是一个NP问题（？），所以一般采用启发式方法，近似去求解这一问题，不过这样得到的决策树是次优解。
+
+具体地，先开始构建根结点，将所有的训练数据都放在根结点，选择一个最优特征（这个最优特征按照什么标准进行选择？），按照这一特征将训练数据集分割成子集，使得各个子集有一个在当前条件下分类是最好的（数据经过分类后更有序，信息熵最小），如果这些子集基本已经能够被准确分类，那么就可以构建叶结点了，并将这些子集分到对应的叶结点中去，如果还有子集不能被正确分类，那么就继续对这些子集选择新的最优特征，继续对其进行分割，如此递归的进行下去，直到所有训练数据的子集基本被准确分类，或者没有合适的特征为止。
+
+前面我们提到，决策树有可能出现过度匹配的问题，即决策树在训练数据集上有很好的分类精度，但是在测试数据上可能表现得很糟糕，这种情况就是所谓的过度匹配（过拟合）现象。为了削减这种现象，需要对已生成的树进行剪枝，将树变得更简单，从而使它具有更好的泛化能力。具体地，**就是去掉过于细节的叶结点，使其回退到父结点，甚至是更高的结点，然后将父结点或更高的结点改为新的叶结点**。
+
+如果特征数目很多，可以先进行特征选择，去除部分冗余特征，只留下对训练数据有较好的分类能力的特征。
+
+需要注意的是，决策树的生成对应于模型的局部选择，决策树的剪枝对应于模型的全局选择，即生成时只考虑了局部最优，而剪枝则考虑了全局最优。
+
+在上面进行最优特征选择的时候，我们引出了这样一个问题，即“这个最优特征是按照什么标准选择出来的？”，为了回答这个问题，我们对这个问题进行详细的论述。
+
+## 特征选择问题
+
+特征选择是决定用哪个特征来决定划分特征空间。每次划分的时候，我们只选取一个特征属性，如果选取的训练集$D$中有$n$个特征，第一次选择哪个特征作为划分数据集的参考属性呢？
+
+比如下表包含了5个海洋动物，特征包括：不浮出水面是否可以生存，是否有脚蹼。这5个海洋动物可以分成两类：鱼类和非鱼类。现在在构建根结点时，我们是选择第一个特征属性呢还是选择第二个特征属性划分数据。为了对这个问题的标准进行定量度量，我们选取信息增益或信息增益比作为我们选取特征的准则。
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202015-10-24%20at%2010.39.57_zps3iqdbwe9.png)
+划分数据数据集的大原则是：将无序的数据变得更加有序。度量数据杂乱无章程度的一种方法就是使用信息论中的信息熵，在划分数据之前和之后信息发生的变化称为信息增益，通过计算每个特征划分数据集获得的信息增益，获得信息增益最大的特征就是当前数据集下最好的用于划分数据最好的特征。
+
+###信息增益
+
+在信息论和概率统计中，熵是表示随机变量不确定性的度量，熵越大，表示数据越杂乱无章，反之，则说明数据越有序。设$X$是一个取有限个值的离散随机变量，其概率分布为：
+$$
+P(X = x_i) = p_i, i = 1, 2, ...,n
+$$
+则随机变量$X$的熵定义为：
+$$
+\begin{aligned}
+H(X) = - \sum_{i=1}^{n}p_ilogp_i
+\end{aligned}
+$$
+若$p_i=0$，则定义$0log0=0$，上式中的对数底数通常以2为底或以e为底，这是熵的单位分别称为比特（bit）或纳特（nat）。由上式熵的定义式可知，熵只依赖于$X$的分布，而与$X$的取值无关，所以也可将$X$的熵$H(X)$记为$H(p)$。同时，从定义可以验证，$0<=H(p)<=logn$。当随机变量只取两个值，比如0、1时，即$X$服从0-1分布时，熵为：
+$$
+\begin{aligned}
+H(p)=-plog_2p-(1-p)log_2(1-p)
+\end{aligned}
+$$
+我们可以用pyhon画出熵$H(x)$随概率$p$变化的曲线：
+
+```python
+import numpy as np
+
+p = np.linspace(0.,1.,11)
+print p
+
+Hp = -p*np.log2(p)-(1-p)*np.log2(1-p)
+Hp[0] = Hp[-1] = 0
+print Hp
+
+%matplotlib inline
+import matplotlib
+from pylab import *
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+ax = fig.gca()
+ax.set_xticks(p)
+plt.plot(p,Hp)
+grid(True)
+plt.xlabel('$p$')
+plt.ylabel('$H(p)$')
+
+plt.show()
 ```
-我一般都很少这么用，习惯的用法都是`char* p = (char*)malloc(100*sizeof(char))`，然后认为这里错了，回来查了一下，这样分配是可以的，char类型占一个字节，所以两者的结果一样，都是为其分配100个字节的空间，所以估计是c代码片段里面其他地方有问题。
+运行上面代码，可以得到下图：
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/download_zps9lv2ptzd.png)
+可以看到，但$p=1-p=0.5$时，即取0或1的概率都是0.5时，熵最大，随机变量不确定性最大。
 
-5). 代码补充填空题，对两个有序链表进行合并。
-```c++
-struct listNode{
-    int value;
-    listNode* next;
-};
+在了解了信息熵的定义后，我们半手工计算一下前面海洋生物数据集上的信息熵：
 
-listNode* merge(listNode* L1, listNode* L2){
-    if(L1 == NULL || L2 == NULL)
-        return ____? _____:______
-}
-......(后面还很多）
+```python
+marineEnt = -0.4*np.log2(0.4)-0.6*np.log2(0.6)
+print "the entropy of the marine organism: %.20f" % marineEnt
+# the entropy of the marine organism: 0.97095059445466858072
 ```
-看到第一个填空就有点懵，我明白只要其中有一个链表是空的，则放回另外一个链表头结点即可，这里突然把这两个合到一起写，弄了个`__?__:__`这样的判断，没整明白该怎么填。一般我都习惯把它们拆开来写，即：
+上面显示在海洋生物数据集上的信息熵为0.97095059445466858072。下面对于对计算信息熵进行完整的编码，使得其能够更方便计算某个数据集的信息熵，具体如下：
 
-```c++
-listNode* merge(listNode* L1, listNode* L2){
-    if(L1 == NULL)
-      return L2;
-    else if(L2 == NULL)
-      return L1;
-}
 ```
-在《剑指offer》中，两个有序链表的合并，采用的是如下递归的方式完成的，即：
+def creatData():
+    dataSet = [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'no'], [0, 1, 'no'], [0, 1, 'no']]
+    labels = ['no surfacing', 'flippers']
+    return dataSet, labels
 
-```c++
-listNode* merge(listNode* pHead1, listNode* pHead2){
-    if(pHead1 == NULL)
-        return pHead2;
-    else if (pHead2 == NULL)
-        return pHead1;
-    listNode* pMergedHead = NULL;
-    if(pHead1->value < pHead2->value){
-        pMergedHead = pHead1;
-        pMergedHead->next = merge(pHead1->next, pHead2);
-    }else{
-        pMergedHead = pHead2;
-        pMergedHead->next = merge(pHead1, pHead2->next);
-    }
-    return pMergedHead;
-}
+myData, labels = creatData()
+print myData
+# [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'no'], [0, 1, 'no'], [0, 1, 'no']]
+
+from math import log
+
+def calShannonEnt(dataSet):
+    dataSet = myData
+    numEntries = len(dataSet)
+    print "the number of marine organism: %d" % numEntries
+    labelCounts = {}
+    for featVec in dataSet:
+        currentLabel = featVec[-1]  #获取当前样本的类别标签，即"yes"或“no”
+        if currentLabel not in labelCounts.keys():
+            labelCounts[currentLabel] = 0  #如果当前样本的类别在labelCounts没有记录，则常见该类别的记录
+        labelCounts[currentLabel] += 1
+    print "label counts:"
+    print labelCounts
+    shannonEnt = 0.0
+    for key in labelCounts:
+        prob = float(labelCounts[key])/numEntries
+        shannonEnt -= prob*math.log(prob, 2.0)
+    return shannonEnt
+    
+print "the entropy of the marine organism: %.20f" % calShannonEnt(myData)
+
+#the number of marine organism: 5
+#label counts:
+#{'yes': 2, 'no': 3}
+#the entropy of the marine organism: 0.97095059445466858072
 ```
-上面采用这种递归的方式代码比较简洁，很容易理解，递归方式的一个比较大的缺点是有可能导致重复的计算，比如斐波那契书的计算，采用递归的方式，会导致很多有些值在重复计算。所以考虑速度方面的优化时，可以把它改成循环的方式。
+从上面给出的结果可以看到，计算出来的信息熵跟我们半手工计算出来的结果是一致的。
 
-6). 给出一段代码，让你给出输出的结果，并且会出现什么问题，为什么？
+决策树学习应用信息增益准则来选择特征，上面我们对信息熵有了比较好的理解后，我们进一步来看看信息增益。
 
-```c++
-void test(){
-    long i;
-    long a[16];
-    for (i = 0; i <= 17, ++1){
-      a[i] = 0;
-      fprint("%d", a[i]);
-    }
-}
+###信息增益
+
+特征$A$对训练数据集$D$的信息增益$g(D,A)$，定义为集合$D$的经验熵$H(D)$与特征$A$给定条件下$D$的经验条件熵$H(D|A)$之差，即：
+$$
+\begin{aligned}
+g(D,A) = H(D) - H(D|A)
+\end{aligned}
+$$
+一般地，熵$H(Y)$与条件熵$H(Y|X)$之差称为互信息（mutual information）。决策树学习中的互信息增益等价于训练数据集中**类与特征的互信息**。
+
+给定训练数据集$D$和特征$A$，经验熵$H(D)$表示数据集$D$进行分类的不确定性，而经验条件熵$H(D|A)$表示在特征$A$给定的条件下对数据集$D$进行分类的不确定性，它们的差，即信息增益，表示**由于特征$A$而使得对数据集$D$的分类的不确定性减少的程度**。显然，对于数据集$D$而言，信息增益依赖于特征，不同的特征往往具有不同的信息增益，信息增益大的特征具有更强的分类能力。
+
+根据信息增益准则的特征选择方法是：对训练数据集（或子集）$D$，计算其每个特征的信息增益，并比较它们的大小，选择信息增益最大的特征。
+
+回到上面海洋生物的数据集，我们先手工分别来算一下按“不浮出水面是否可以生存”（将该特征用$A_1$来表示）和按“是否是脚蹼”（将该特征用$A_2$来表示）的信息增益：
+
+\begin{aligned}
+g(D, A_1) & = H(D) - H(D|A) \\
+& = H(D) - \left(\frac{3}{5}H(D_1) + \frac{2}{5}H(D_2)\right) \\
+& = H(D) - \left[\frac{3}{5}\left((-\frac{2}{3})log_2\frac{2}{3} + (-\frac{1}{3})log_2\frac{1}{3}\right) + \frac{2}{5}(-1)log_21\right] \\
+& = H(D) + \frac{2}{5}log_2\frac{2}{3} + \frac{1}{5}log_2\frac{1}{3}
+\end{aligned}
+
+同样，可以算得$g(D,A_2)$:
+
+\begin{aligned}
+g(D,A_2) & = H(D) - \left(\frac{4}{5}H(D_1) + \frac{1}{5}H(D_1)\right) \\
+& = H(D) - \left(\frac{4}{5}(-\frac{2}{4}log\frac{2}{4}  -\frac{2}{4}log\frac{2}{4})\right)\\
+& = H(D) + \frac{4}{5}log_2\frac{1}{2}\\
+& = H(D) - 0.8
+\end{aligned}
+
+接下来，我们用python计算具体的值：
+
+```python
+gA1 = HD+0.4*np.log2(2.0/3.0)+0.2*np.log2(1.0/3.0)
+print "g(D, A1): %f" %gA1
+gA2 = HD-0.8 
+print "g(D, A2): %f" %gA2
+#g(D, A1): 0.419973
+#g(D, A2): 0.170951
 ```
-上面代码只是个大概，具体记得不是很清楚了，这里考察的是数据的越界访问，关于数据的越界访问，从我自己分别在Windows VS里面和OS X Xcode里面写过的程序来看，VS里面数据越界访问通常会在运行的时候，到越界那里后会直接报错了，而在Xcode里面一般给出的都是随机数，这两个平台下的编译器不同，VS里面用的是intel的编译器，而Xcode或者说OS X下，默认是Clang编译器。所以我在数组越界访问的时候，具体会出现什么结果，这个还应该看你有那个的什么编译器。
-7). 链表反转题，对一个链表进行翻转，语言任意，数据结构自己定义。
+由于以特征A1划分数据集的信息增益$g(D,A_1)$大于以特征A2划分数据集的信息增益$g(D,A_2)$，所以，在初始划分数据集的时候，我们选择“不浮出水面是否可以生存”这个规则来划分训练数据。
 
-C++参考答案：
+下面，我们用python来计算信息增益，并验证一下其结果跟我们手算的结果是否一致，以及跟我们手工计算得出来应该选择“不浮出水面是否可以生存”的结论是否一致。
 
-```c++
-struct listNode{
-    int value;
-    listNode* Next;
-}
+为了后续程序的理解，我们重新把上面海洋生物的表放这里，并把“是”用“1”代替，“否”用“0”代替，后面类别的“是”用“yes”代替，“否”用“0”代替：
 
-listNode* reverseList(listNode* pHead){
-    listNode* reverseHead = NULL;  //用于保存反转后的链表头结点
-    listNode* pNode = pHead;  //当前结点
-    listNode* preNode = NULL;  //前一个结点
-    while(pNode != NULL){
-        listNode* pNext = pNode->Next;  //下一个结点
-        while(pNext == NULL)
-            reverseHead = pNode;
-        pNext->Next = preNode;
-        preNode = pNode;
-        pNode = pNext;
-    }
-    return  reverseHead;
-}
+<center>
+
+| 单词数目 | SIFT or rootSIFT | 空间校正与否 | 重排数目 | 检索精度mAP | 查询时间(55张)(s) |
+| ---------|:----------------:| :-----------:|:--------:|:-----------:|:-----------------:|
+|   100k   |    rootSIFT      |      否      |     -    |    62.46%   |       5.429707    |
+|   100k   |    rootSIFT      |      是      |    20    |    66.42%   |      20.853832    |
+|   100k   |    rootSIFT      |      是      |    30    |    68.25%   |      21.673585    |
+|   100k   |    rootSIFT      |      是      |    40    |    69.27%   |      23.300404    |
+
+</center>
+
+下面是按照给定特征划分数据集的代码：
+
+```python
+def splitDataSet(dataSet, axis, value):
+    retDataSet = []
+    for featVec in dataSet:
+        if featVec[axis] == value:
+            reducedFeatVec = featVec[:axis]
+            reducedFeatVec.extend(featVec[axis+1:])
+            retDataSet.append(reducedFeatVec)
+    return retDataSet
+
+dataSet = myData
+axis = 0
+value = 1
+myDat = splitDataSet(dataSet, axis, value)
+print myDat
+#myDat的输出：[[1, 'yes'], [1, 'yes'], [0, 'no']]
 ```
-此外还考察了http中post和get的作用，测试岗位还有用linux命令对数组进行排序的。
 
-从上面的7道题可以看出，出题者非常的注重基础，其中又非常的注重考查链表方面的知识，这些链表的题目都可以在《剑指offer》上找得到原题或者是身影，对于基本的，比如从尾到头打印链表、链表中的倒数第k个节点、反转链表、合并有序链表、查找两链表的公共节点这几个，个人觉得后面一定还会再出现。不过，整个题里面，完全没见到二叉树的身影，蜻蜓点水的点到了栈结构。
 
-笔试的人实在太多了，1000多来人参加笔试，招聘的人数大概70来左右吧。这几天凡是来西安宣讲的，场场爆满，去得稍微晚了点，进都进不去了。我承认我是去试水的，但笔试下来确实发现了很多的问题，其中最主要的一个是，敲得太少，对这样笔试没有进行过专门的练习。
 
-```c++
-//  V先生有一天工作得很晚，回家的时候要穿过一条长度为l的笔直街道，这条街道上有n个路灯。假设这条街起点为0，终点为l，第i个路灯的坐标
-//  为ai。路灯发光能力以正数d来衡量，其中d表示路灯能够照亮的街道上的点与路灯的最远距离，所有路灯发光能力相同。为了让V先生看清回家的
-//  路，路灯必须照亮整天街道，又为了节省电力希望找到最小的d是多少？
-//
-//  输入：
-//  输入两行数据，第一行是两个整数：路灯数目n(1<=n<=1000)，街道长度(1<=l<=pow(10, 9))。第二行有n个整数ai(0<=ai<=l)，表示路灯
-//  坐标，多个路灯可以在同一个地方，也可以安放在终止点位置。
-//
-//  样例输入：
-//  7 15
-//  15 5 3 7 9 14 0
-//  结果：2.5
 
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-int main(int argc, const char * argv[]) {
-    
-    int numBulb, distance;
-    cin >> numBulb >> distance;
-    
-    vector<int> looc(numBulb);
-    
-    for(int i = 0; i < numBulb; i++){
-        int tmp;
-        cin >> tmp;
-        looc[i] = tmp;
-    }
-    
-    sort(looc.begin(), looc.end(), less<int>());
-    int maxDis = 0;
-    for(int i = 0; i < numBulb; i++){
-        int tmp = looc[i+1]-looc[i];
-        if(tmp > maxDis)
-            maxDis = tmp;
-    }
-    
-    cout << maxDis/2.0 << endl;
-    
-    return 0;
-}
-```
-```c++
-//  小V今年有n门课，每门都课都有考试。为了拿到奖学金，小V必须让自己的平均年成绩至少为avg，每门课的最终成绩由平时成绩和考试成绩组成，满分为r，现在
-//  他知道每门课的平时成绩为ai，如果想要让自己这门课的成绩多拿一分的话，小V必须花bi小时复习，不花时间意味着这门课的考试成绩只能拿0分，平时成绩加
-//  考试成绩超过r这么课最终成绩也只能按r计算。
-//  为了拿到奖学金，请问小V至少需要花多少时间复习功课？
-//  输入：
-//  输入两行数据，第一行是两个整数：路灯数目n(1<=n<=1000)，街道长度(1<=l<=pow(10, 9))。第二行有n个整数ai(0<=ai<=l)，表示路灯
-//  坐标，多个路灯可以在同一个地方，也可以安放在终止点位置。
-//
-//  样例输入：
-//  5 5 4
-//  5 2
-//  4 7
-//  3 1
-//  3 2
-//  2 5
-//  结果：4
-//  Hint
-//  花两个小时复习第三门考试拿两分，两个小时复习第四门考试拿一分，这样总平均成绩为(5+4+5+4+2)/4 = 4
-
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <numeric>
-
-using namespace std;
-
-int main(int argc, const char * argv[]) {
-    
-    int n, r, avg;
-    cin >> n >> r >> avg;
-    
-    vector<int> A(n);
-    vector<int> B(n);
-    
-    for(int i = 0; i < n; i++){
-        int tmpAi, tmpBi;
-        cin >> tmpAi >> tmpBi;
-        A[i] = tmpAi;
-        B[i] = tmpBi;
-    }
-    
-    vector<size_t> indexes(n);
-    size_t nn(0);
-    generate(begin(indexes), end(indexes), [&]{return nn++;});
-    sort(begin(indexes), end(indexes), [&](int i1, int i2){return B[i1] < B[i2];});
-    vector<int> sortedA(n);
-    vector<int> sortedB(n);
-    for(int i = 0; i < n; i++){
-        sortedB[i] = B[indexes[i]];
-        sortedA[i] = A[indexes[i]];
-    }
-    //A.clear();
-    //B.clear();
-    
-    int sum = accumulate(sortedA.begin(), sortedA.end(), 0);
-    int time = 0;
-    int i = 0;
-    while((sum < avg*n) && (i < n)){
-        int addScores = 0;
-        while((sortedA[i] + addScores) < 5 && sum < avg*n){
-            sum = sum + 1;
-            time = time + sortedB[i];
-            ++addScores;
-        }
-        ++i;
-    }
-    
-    cout << time << endl;
-    
-    return 0;
-}
-```
