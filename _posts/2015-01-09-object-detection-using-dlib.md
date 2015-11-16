@@ -47,7 +47,9 @@ cmake --build . --config Release
 
 在build目录下，找到Reasese目录，进入所在目录，可以看到生成的exe可执行文件。官网[编译说明](http://dlib.net/compile.html)。
 
----
+## OS X配置
+
+转到了OS X下，所以对OS X下安装配置做一些补充。在**Dlib**的github的issue里发现别人遇到了类似的问题，所以自己尝试着回答了一下，主要把自己配置以及使用的过程说明了一下，这里不单独再列出来了，安装过程中记得先安装XQuartz后在编译，具体详细的细节可以参考我的回答[Can't run example code in Xcode using webcam_face_pose_ex.cpp?](https://github.com/davisking/dlib/issues/57)。
 
 #检测物体
 
