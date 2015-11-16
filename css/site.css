@@ -23,9 +23,9 @@ body {
   text-align: center;
   /*自定义的字体
   font-family:Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
-  /*font-family:"Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;
-  font-family:"Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;*/
-  font-family:"FontAwesome","Microsoft YaHei",Arial,sans-serif;
+  /*font-family:"Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
+  font-family:"Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
+  /*font-family:"FontAwesome","Microsoft YaHei",Arial,sans-serif;*/
   text-rendering: optimizeLegibility;
   /*自定义背景颜色*/
   background-color: #FFFFFF;
@@ -43,7 +43,7 @@ body {
   background-color: lightyellow;
   line-height: 32px;
   color: #666;
-  border-bottom: 5px solid #ed5252 ;;
+  border-bottom: 5px solid #E0115F;
 }
 
 p{
@@ -265,8 +265,7 @@ nav a {
   display: inline-block;
   margin-right: 1.2em;
   padding-bottom: 0.2em;
-  /*font-weight: normal;*/
-  font-weight: thick;
+  font-weight: 700;
   border-bottom: 3px solid transparent;
   font-size: 100%;
 }

@@ -90,7 +90,7 @@ DoubanApi.prototype.all_url = function(type,status,begin,end) {
 			}
 			if ($("#" + type + status).length === 0) {
 				var title = this.defaults[type + status + "title"];
-				$('<h4 class="douban-title">' + title + '</h4>').appendTo(mainplace);
+				$('<h2 class="douban-title">' + title + '</h2>').appendTo(mainplace);
 				$('<div id="' + type + status + '" class="douban-list"><ul></ul></div>').appendTo(mainplace);
 				$('<div class="clear"></div>').appendTo(mainplace);
 			}
