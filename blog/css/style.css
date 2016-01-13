@@ -8,7 +8,7 @@ body{
   /*定义article字体
   font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
   /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
-  font-family: "Comic Sans MS","Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;
+  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;
   line-height: 170%;
 }
 article h1 {
@@ -34,7 +34,7 @@ p{
 }
 a{text-decoration:none}
 a:focus{outline:0}
-h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif, 'Montserrat'}
+h1,h2,h3,h4,h5,h6{  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;}
 h2 {
     border-radius: 5px;
     padding-left: 10px;
