@@ -4,14 +4,14 @@ title: Image retrieval using MatconvNet and pre-trained imageNet
 categories: [image retrieval]
 ---
 
-<object width="526" height="374">
+<!--<object width="526" height="374">
 <param name="movie" value="http://player.youku.com/player.php/Type/Folder/Fid/23766923/Ob/1/sid/XOTM4MzgxODY4/v.swf"></param>
 <param name="allowFullScreen" value="true" />
 <param name="allowScriptAccess" value="always"/>
 <param name="wmode" value="transparent"></param>
 <param name="bgColor" value="#ffffff"></param>
 <embed src="http://player.youku.com/player.php/Type/Folder/Fid/23766923/Ob/1/sid/XOTM4MzgxODY4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
-</object>
+</object>-->
 
 **2015/09/24更新**：添加对[MatConvNet](http://www.vlfeat.org/matconvnet/)最新版version 1.0-beta14的支持
 
