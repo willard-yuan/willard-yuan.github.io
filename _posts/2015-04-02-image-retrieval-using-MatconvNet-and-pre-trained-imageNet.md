@@ -4,20 +4,26 @@ title: Image retrieval using MatconvNet and pre-trained imageNet
 categories: [image retrieval]
 ---
 
-<object width="526" height="374">
+<!--<object width="526" height="374">
 <param name="movie" value="http://player.youku.com/player.php/Type/Folder/Fid/23766923/Ob/1/sid/XOTM4MzgxODY4/v.swf"></param>
 <param name="allowFullScreen" value="true" />
 <param name="allowScriptAccess" value="always"/>
 <param name="wmode" value="transparent"></param>
 <param name="bgColor" value="#ffffff"></param>
 <embed src="http://player.youku.com/player.php/Type/Folder/Fid/23766923/Ob/1/sid/XOTM4MzgxODY4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
-</object>
+</object>-->
 
-**2015/09/24更新**：添加对[MatConvNet](http://www.vlfeat.org/matconvnet/)最新版version 1.0-beta14的支持
+代码：[CNN-for-Image-Retrieval](https://github.com/willard-yuan/CNN-for-Image-Retrieval)。
 
-**2015/06/29更新**：添加对[MatConvNet](http://www.vlfeat.org/matconvnet/)最新版version 1.0-beta12的支持，最新更新的代码请移步[CNN-for-Image-Retrieval](https://github.com/willard-yuan/CNN-for-Image-Retrieval)。
+**2015/12/31更新**：添加对MatConvNet最新版version 1.0-beta17的支持，预训练的模型请到Matconvnet官网下载最新的模型。
 
-**Note**：如果你只是想要特征提取及检索可视化代码，请直接跳到最后。
+**2015/10/20更新**：Web演示部分代码公开[CNN-Web-Demo-for-Image-Retrieval](https://github.com/willard-yuan/CNN-Web-Demo-for-Image-Retrieval)。
+
+**2015/09/24更新**：添加对MatConvNet最新版version 1.0-beta14的支持。
+
+**2015/06/29更新**：添加对[MatConvNet](http://www.vlfeat.org/matconvnet/)最新版version 1.0-beta12的支持。
+
+**注意**：其中文件夹matconvnet-1.0-beta17是已经编译好了的，鉴于MatConvNet只能在**Matlab 2014**及其以上以及系统必须是**64位**，所以在使用此工具箱之前得满足这两个条件。如果是Pythoner，推荐使用[flask-keras-cnn-image-retrieval](https://github.com/willard-yuan/flask-keras-cnn-image-retrieval)，纯Python，非常易于写成在线图像搜索应用。
 
 >MatConvNet is a MATLAB toolbox implementing Convolutional Neural Networks (CNNs) for computer vision applications. It is simple, efficient, and can run and learn state-of-the-art CNNs. Several example CNNs are included to classify and encode images.
 
@@ -43,19 +49,27 @@ vl_compilenn
 上面这一步完成了，基本就配置完了，下面就测试一下MatConvNet吧。测试的脚本见[http://www.vlfeat.org/matconvnet/pretrained/](http://www.vlfeat.org/matconvnet/pretrained/)给出的脚本例子，即：
 
 ```matlab
-% setup MtConvNet in MATLAB
-run matlab/vl_setupnn
+% install and compile MatConvNet (needed once)
+untar('http://www.vlfeat.org/matconvnet/download/matconvnet-1.0-beta17.tar.gz') ;
+cd matconvnet-1.0-beta17
+run matlab/vl_compilenn
 
-% download a pre-trained CNN from the web
-urlwrite('http://www.vlfeat.org/sandbox-matconvnet/models/imagenet-vgg-f.mat', ...
+% download a pre-trained CNN from the web (needed once)
+urlwrite(...
+  'http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', ...
   'imagenet-vgg-f.mat') ;
+
+% setup MatConvNet
+run  matlab/vl_setupnn
+
+% load the pre-trained CNN
 net = load('imagenet-vgg-f.mat') ;
 
-% obtain and preprocess an image
+% load and preprocess an image
 im = imread('peppers.png') ;
-im_ = single(im) ; % note: 255 range
-im_ = imresize(im_, net.normalization.imageSize(1:2)) ;
-im_ = im_ - net.normalization.averageImage ;
+im_ = single(im) ; % note: 0-255 range
+im_ = imresize(im_, net.meta.normalization.imageSize(1:2)) ;
+im_ = im_ - net.meta.normalization.averageImage ;
 
 % run the CNN
 res = vl_simplenn(net, im_) ;
@@ -65,7 +79,7 @@ scores = squeeze(gather(res(end).x)) ;
 [bestScore, best] = max(scores) ;
 figure(1) ; clf ; imagesc(im) ;
 title(sprintf('%s (%d), score %.3f',...
-net.classes.description{best}, best, bestScore)) ;
+net.meta.classes.description{best}, best, bestScore)) ;
 ```
 
 上面用的是`urlwrite`来下载`imagenet-vgg-f.mat`的，这里强烈推荐你单独下载，然后把`urlwrite`下载的那一行去掉，`load`时指向你放置的`imagenet-vgg-f.mat`具体位置即可。测试如果顺利的话，就可以进入下一节我们真正关心的图像减速话题了。
@@ -83,15 +97,18 @@ net.classes.description{best}, best, bestScore)) ;
 
 clear all;close all;clc;
 
-run D:/matlabTools/matconvnet-1.0-beta10/matlab/vl_setupnn %换成你的vl_setupnn.m具体路径
+% version: matconvnet-1.0-beta17
+%run ./matconvnet-1.0-beta17/matlab/vl_compilenn
+run ./matconvnet-1.0-beta17/matlab/vl_setupnn
 
 %% Step 1 lOADING PATHS
 path_imgDB = './database/';
 addpath(path_imgDB);
 addpath tools;
 
-net = load('imagenet-vgg-f.mat') ; %换成你下载的imagenet-vgg-f.mat具体路径
- 
+% viesion: matconvnet-1.0-beta17
+net = load('imagenet-vgg-f.mat') ;
+
 %% Step 2 LOADING IMAGE AND EXTRACTING FEATURE
 imgFiles = dir(path_imgDB);
 imgNamList = {imgFiles(~[imgFiles.isdir]).name};
@@ -100,43 +117,42 @@ imgNamList = imgNamList';
 
 numImg = length(imgNamList);
 feat = [];
-k = 0;
 rgbImgList = {};
 
+%parpool;
+
+%parfor i = 1:numImg
 for i = 1:numImg
    oriImg = imread(imgNamList{i, 1}); 
-   tmpNam = imgNamList{i, 1};
    if size(oriImg, 3) == 3
-       k = k+1;
        im_ = single(oriImg) ; % note: 255 range
-       im_ = imresize(im_, net.normalization.imageSize(1:2)) ;
-       im_ = im_ - net.normalization.averageImage ;
+       im_ = imresize(im_, net.meta.normalization.imageSize(1:2)) ;
+       im_ = im_ - net.meta.normalization.averageImage ;
        res = vl_simplenn(net, im_) ;
-       featVec = res(19).x;
+       
+       % viesion: matconvnet-1.0-beta17
+       featVec = res(20).x;
+       
        featVec = featVec(:);
        feat = [feat; featVec'];
        fprintf('extract %d image\n\n', i);
-       rgbImgList{k,1} = tmpNam;
    else
-       rgbImg(:,:,1) = oriImg;
-       rgbImg(:,:,2) = oriImg;
-       rgbImg(:,:,3) = oriImg;
-       k = k+1;
-       im_ = single(rgbImg) ; % note: 255 range
-       im_ = imresize(im_, net.normalization.imageSize(1:2)) ;
-       im_ = im_ - net.normalization.averageImage ;
+       im_ = single(repmat(oriImg,[1 1 3])) ; % note: 255 range
+       im_ = imresize(im_, net.meta.normalization.imageSize(1:2)) ;
+       im_ = im_ - net.meta.normalization.averageImage ;
        res = vl_simplenn(net, im_) ;
-       featVec = res(19).x;
+       
+       % viesion: matconvnet-1.0-beta17
+       featVec = res(20).x;
+       
        featVec = featVec(:);
        feat = [feat; featVec'];
        fprintf('extract %d image\n\n', i);
-       rgbImgList{k,1} = tmpNam;
-       clear rgbImg;
    end
 end
 
-feat = normalize1(feat);
-save('Feat4096Norml.mat','feat', 'rgbImgList', '-v7.3');
+feat_norm = normalize1(feat);
+save('feat4096Norml.mat','feat_norm', 'imgNamList', '-v7.3');
 ```
 
 在倒数第二行，对特征进行了L2归一化，方便后面用余弦距离度量，L2归一化方法如下：
@@ -156,6 +172,9 @@ end
 
 上面便是特征抽取的代码，特征抽取完后，我们便可以采用进行检索了。匹配时采用的是余弦距离度量方式，至于后面的检索部分的代码，相比于前面特征抽取的过程，更显灵活，怎么处理可以随自己的喜欢了，所以这里就不再对代码进行列举了。下面是我在**corel1k**外加上Caltech256抽取几类构成1333张图像库做的一个飞机检索结果，时间所限，就不测大的图像库了。
 
+示例：Caltech-256图像数据库
+<p align="center"><img src="http://www.vision.caltech.edu/VisionWiki/images/thumb/2/23/Caltech256a_crop.png/537px-Caltech256a_crop.png" alt="caltech256"/></p>
+Caltech-256图像数据库上搜索结果
 ![airplane-image-retrieval]({{ site.url }}/images/posts/2015-04-02/airplane-image-retrieval.jpg)
 
 最后，整个图像检索的代码已放在github上了，感兴趣的同学可以去[**CNN-for-Image-Retrieval**](https://github.com/willard-yuan/CNN-for-Image-Retrieval)，有github的同学不要吝啬你的star哦，这个代码我会随时完善更新，比如添加计算mAP的代码。
