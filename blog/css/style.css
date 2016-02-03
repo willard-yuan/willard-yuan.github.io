@@ -27,7 +27,8 @@ article h1 {
 }
 
 p{
-  font-size:30px;
+  font-size:1rem;
+  margin: 30px 0;
 }
 .header-container {
   background:#ffffff;
