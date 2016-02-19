@@ -102,12 +102,6 @@ a.expandAll:hover {
     cursor: pointer;
 }
 
-.timelineEvent div.media {
-    float: right;
-    padding: 0 0 12px;
-    width: 200px;
-}
-
 div.timelineMajor {
     clear: left;
     float: left;
@@ -226,7 +220,7 @@ dl.timelineMinor {
 .timelineEvent div.media {
     float: right;
     padding: 0 0 12px;
-    width: 300px;
+    width: 200px;
 }
 
 .timelineEvent .media img {
