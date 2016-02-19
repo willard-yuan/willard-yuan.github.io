@@ -9,7 +9,6 @@ safe: true
 lsi: false
 markdown: kramdown
 kramdown:
-  math_engine: mathjax
   input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
     extensions:
     - autolink
