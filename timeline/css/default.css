@@ -1,7 +1,7 @@
 body{margin:0;padding:0;background:#1ABC9C;font-size:12px;overflow:auto}
 #mainDiv{width:100%;height:100%}
 #content {margin-left: 20px}
-#subtitle{text-align:center}
+#subtitle{text-align:right}
 #loveHeart{float:left;width:670px;height:625px}
 #garden{width:100%;height:100%}
 #elapseClock{text-align:right;font-size:18px;margin-top:10px;margin-bottom:10px}
