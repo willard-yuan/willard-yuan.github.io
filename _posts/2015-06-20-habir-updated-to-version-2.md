@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HABIR哈希图像检索工具包更新至v2.0
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 上上周的事了，还是记录一下吧。HABIR工具包顺应做基于哈希技术的图像检索这方面研究的小伙伴们的强烈要求，提前一个星期对原来在v1.x上陆陆续续做的修改进行整理修改后，就有了现在的v2.0版本。v2.0版本相比于v1.x版本，评价指标更加丰富，代码结构更加有层次感，添加了14年几种新的方法，实验跑出来的结果更加逼近论文中的结果。当然，其中还有一个未来得及整理的检索可视化脚本，这个脚本有待日后整理好后再push上去。代码整理完后重新对v1.x版本的文档做了大刀阔斧的整改，下面是对v2.0版本文档做的部分摘取，HABIR v2.0版本的文档详细可以参阅其文档说明[HABIR](http://yongyuan.name/habir/)。
@@ -48,7 +48,7 @@ gist\_320d\_CIFAR-10\_yunchao下载地址：[gist_320d_CIFAR-10_yunchao.mat](htt
 >Jae-Pil Heo, Youngwoon Lee, Junfeng He, Shih-Fu Chang, and Sung-eui Yoon. Spherical Hashing. CVPR, 2012.
 
 - **LSH**: Local Sensentive Hashing，经典方法。
-- **SKLSH**: Maxim Raginsky and Svetlana Lazebnik. 
+- **SKLSH**: Maxim Raginsky and Svetlana Lazebnik.
 >Locality-sensitive binary codes from shift-invariant kernels. Advances in Neural Information Processing 22, pp. 1509-1517, 2009.
 
 - **PCAH**: PCA Hashing.

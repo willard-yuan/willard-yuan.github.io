@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bag of Words cpp实现(stable version 0.01)
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 **致谢**：基础框架来源[BoW](https://github.com/grapeot/BoW)，开发版本在此基础上进行，已在Ubuntu、OS X上测试通过，Windows需要支持c++11的编译器(VS2012及其以上)。

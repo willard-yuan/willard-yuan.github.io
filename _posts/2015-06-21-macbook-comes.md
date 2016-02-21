@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MBP T2到货啦
-categories: [image retrieval]
+categories: [Life]
 ---
 
 一直和[老汤](http://peqiu.com/)唠叨着要买台MBP，没想到这货比我早入手，在基友忍不住三天两头说MBP好用的轰炸下，观望15寸的更新差不多一个月后，19号终于入手MBP T2，买完“一夜回到解放前”。

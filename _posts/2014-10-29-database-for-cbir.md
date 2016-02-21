@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Database for Content-Based Image Retrieval
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 研究图像检索一年多了，接触到了很多图像检索库，为了方便查阅，现对这些图像检索库进行一下汇总（欢迎留言补充）。

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Image retrieval using MatconvNet and pre-trained imageNet
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 <!--<object width="526" height="374">
@@ -123,16 +123,16 @@ rgbImgList = {};
 
 %parfor i = 1:numImg
 for i = 1:numImg
-   oriImg = imread(imgNamList{i, 1}); 
+   oriImg = imread(imgNamList{i, 1});
    if size(oriImg, 3) == 3
        im_ = single(oriImg) ; % note: 255 range
        im_ = imresize(im_, net.meta.normalization.imageSize(1:2)) ;
        im_ = im_ - net.meta.normalization.averageImage ;
        res = vl_simplenn(net, im_) ;
-       
+
        % viesion: matconvnet-1.0-beta17
        featVec = res(20).x;
-       
+
        featVec = featVec(:);
        feat = [feat; featVec'];
        fprintf('extract %d image\n\n', i);
@@ -141,10 +141,10 @@ for i = 1:numImg
        im_ = imresize(im_, net.meta.normalization.imageSize(1:2)) ;
        im_ = im_ - net.meta.normalization.averageImage ;
        res = vl_simplenn(net, im_) ;
-       
+
        % viesion: matconvnet-1.0-beta17
        featVec = res(20).x;
-       
+
        featVec = featVec(:);
        feat = [feat; featVec'];
        fprintf('extract %d image\n\n', i);
@@ -163,7 +163,7 @@ function [X] = normalize1(X)
 
 for i=1:size(X,1)
     if(norm(X(i,:))==0)
-        
+
     else
         X(i,:) = X(i,:)./norm(X(i,:));
     end

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GMM、fisher vector、SIFT与HOG特征资料
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 ###GMM与fisher vector理解

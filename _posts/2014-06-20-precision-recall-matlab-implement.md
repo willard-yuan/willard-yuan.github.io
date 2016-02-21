@@ -1,7 +1,7 @@
 ---
 layout: post
 title: precision recall曲线Matlab实现
-categories: [Image retrieval]
+categories: [Image Retrieval]
 ---
 
 在用哈希进行检索时，常会用到precision recall曲线对其性能进行定量评价。precision recall的定义在[信息检索评价指标](http://yuanyong.org/blog/evaluation-of-information-retrieval.html)中已做了详细说明，这里再记录一下precision recall的具体实现。
@@ -23,7 +23,7 @@ function [recall, precision, rate] = recall_precision(Wtrue, Dhat)
 %
 %               exp. # of good pairs inside hamming ball of radius <= (n-1)
 %  recall(n) = --------------------------------------------------------------
-%                          exp. # of total good pairs 
+%                          exp. # of total good pairs
 
 max_hamm = max(Dhat(:))
 hamm_thresh = min(3,max_hamm);
@@ -38,10 +38,10 @@ rate = zeros(max_hamm,1);
 
 for n = 1:length(precision)
     j = (Dhat<=((n-1)+0.00001));
-    
+
     %exp. # of good pairs that have exactly the same code
     retrieved_good_pairs = sum(Wtrue(j));
-    
+
     % exp. # of total pairs that have exactly the same code
     retrieved_pairs = sum(j(:));
 
@@ -54,38 +54,38 @@ end
 %
 %    * RET is the set of all items the system has retrieved for a specific inquiry;
 %    * REL is the set of relevant items for a specific inquiry;
-%    * RETREL is the set of the retrieved relevant items 
+%    * RETREL is the set of the retrieved relevant items
 %
 % then precision and recall measures are obtained as follows:
 %
 %    precision = RETREL / RET
-%    recall = RETREL / REL 
+%    recall = RETREL / REL
 
 % if nargout == 0 || nargin > 3
 %     if isempty(fig);
 %         fig = figure;
 %     end
 %     figure(fig)
-%     
+%
 %     subplot(311)
 %     plot(0:hamm_thresh-1, precision(1:hamm_thresh), varargin{:})
 %     hold on
 %     xlabel('hamming radius')
 %     ylabel('precision')
-%     
+%
 %     subplot(312)
 %     plot(0:hamm_thresh-1, recall(1:hamm_thresh), varargin{:})
 %     hold on
 %     xlabel('hamming radius');
 %     ylabel('recall');
-%         
+%
 %    subplot(313);
 %     plot(recall, precision, varargin{:});
 %     hold on;
 %     axis([0 1 0 1]);
 %     xlabel('recall');
 %     ylabel('precision');
-% 
+%
 %     drawnow;
 % end
 ```
@@ -109,7 +109,7 @@ function [score, recall] = evaluation(Wtrue, Dhat, fig, varargin)
 %
 %               exp. # of good pairs inside hamming ball of radius <= (n-1)
 %  recall(n) = --------------------------------------------------------------
-%                          exp. # of total good pairs 
+%                          exp. # of total good pairs
 
 [Ntest, Ntrain] = size(Wtrue);
 total_good_pairs = sum(Wtrue(:));
@@ -118,10 +118,10 @@ total_good_pairs = sum(Wtrue(:));
 score = zeros(20,1);
 for n = 1:length(score)
     j = find(Dhat<=((n-1)+0.00001));
-    
+
     %exp. # of good pairs that have exactly the same code
     retrieved_good_pairs = sum(Wtrue(j));
-    
+
     % exp. # of total pairs that have exactly the same code
     retrieved_pairs = length(j);
 
@@ -133,12 +133,12 @@ end
 %
 %    * RET is the set of all items the system has retrieved for a specific inquiry;
 %    * REL is the set of relevant items for a specific inquiry;
-%    * RETREL is the set of the retrieved relevant items 
+%    * RETREL is the set of the retrieved relevant items
 %
 % then precision and recall measures are obtained as follows:
 %
 %    precision = RETREL / RET
-%    recall = RETREL / REL 
+%    recall = RETREL / REL
 
 if nargout == 0 || nargin > 3
     if isempty(fig);

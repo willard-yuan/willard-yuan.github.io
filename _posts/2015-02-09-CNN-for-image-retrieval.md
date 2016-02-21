@@ -1,7 +1,7 @@
 ---
 layout: post
 title: CNN for image retrieval
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 ## 背景

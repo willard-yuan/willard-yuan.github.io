@@ -1,7 +1,7 @@
 ---
 layout: post
 title: BoW图像检索Python实战
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 前几天把[HABI哈希图像检索工具包](http://yongyuan.name/habir/)更新到V2.0版本后，小白菜又重新回头来用Python搞BoW词袋模型，一方面主要是练练Python，另一方面也是为了CBIR群开讲的关于图像检索群活动第二期而准备的一些素材。关于BoW，网上堆资料讲得挺好挺全的了，小白菜自己在曾留下过一篇讲解BoW词袋构建过程的博文[Bag of Words模型](http://yongyuan.name/blog/bag-of-word-model.html)，所以这里主要讲讲BoW的实战。不过在实战前，小白菜还想在结合自己这两年多BoW的思考和沉淀重新以更直白的方式对BoW做一下总结。
@@ -70,8 +70,8 @@ for i, image_path in enumerate(image_paths):
     # rootsift
     #rs = RootSIFT()
     #des = rs.compute(kpts, des)
-    des_list.append((image_path, des))   
-    
+    des_list.append((image_path, des))
+
 # Stack all the descriptors vertically in a numpy array
 #downsampling = 1
 #descriptors = des_list[0][1][::downsampling,:]
@@ -81,11 +81,11 @@ for i, image_path in enumerate(image_paths):
 # Stack all the descriptors vertically in a numpy array
 descriptors = des_list[0][1]
 for image_path, descriptor in des_list[1:]:
-    descriptors = np.vstack((descriptors, descriptor))  
+    descriptors = np.vstack((descriptors, descriptor))
 
 # Perform k-means clustering
 print "Start k-means: %d words, %d key points" %(numWords, descriptors.shape[0])
-voc, variance = kmeans(descriptors, numWords, 1) 
+voc, variance = kmeans(descriptors, numWords, 1)
 
 # Calculate the histogram of features
 im_features = np.zeros((len(image_paths), numWords), "float32")
@@ -102,7 +102,7 @@ idf = np.array(np.log((1.0*len(image_paths)+1) / (1.0*nbr_occurences + 1)), 'flo
 im_features = im_features*idf
 im_features = preprocessing.normalize(im_features, norm='l2')
 
-joblib.dump((im_features, image_paths, idf, numWords, voc), "bof.pkl", compress=3)  
+joblib.dump((im_features, image_paths, idf, numWords, voc), "bof.pkl", compress=3)
 ```
 将上面的文件保存为`findFeatures.py`，前面主要是一些通过parse使得可以在敲命令行的时候可以向里面传递参数，后面就是提取SIFT特征，然后聚类，计算TF和IDF，得到单词直方图后再做一下L2归一化。一般在一幅图像中提取的到SIFT特征点是非常多的，而如果图像库很大的话，SIFT特征点会非常非常的多，直接聚类是非常困难的(内存不够，计算速度非常慢)，所以，为了解决这个问题，可以以牺牲检索精度为代价，在聚类的时候先对SIFT做降采样处理。最后对一些在在线查询时会用到的变量保存下来。对于某个图像库，可以在命令行里通过下面命令生成BoF：
 
@@ -118,7 +118,7 @@ python findFeatures.py -t dataset/train/
 
 import argparse as ap
 import cv2
-import imutils 
+import imutils
 import numpy as np
 import os
 from sklearn.externals import joblib
@@ -139,9 +139,9 @@ args = vars(parser.parse_args())
 # Get query image path
 image_path = args["image"]
 
-# Load the classifier, class names, scaler, number of clusters and vocabulary 
+# Load the classifier, class names, scaler, number of clusters and vocabulary
 im_features, image_paths, idf, numWords, voc = joblib.load("bof.pkl")
-    
+
 # Create feature extraction and keypoint detector objects
 fea_det = cv2.FeatureDetector_create("SIFT")
 des_ext = cv2.DescriptorExtractor_create("SIFT")
@@ -157,12 +157,12 @@ kpts, des = des_ext.compute(im, kpts)
 #rs = RootSIFT()
 #des = rs.compute(kpts, des)
 
-des_list.append((image_path, des))   
-    
+des_list.append((image_path, des))
+
 # Stack all the descriptors vertically in a numpy array
 descriptors = des_list[0][1]
 
-# 
+#
 test_features = np.zeros((1, numWords), "float32")
 words, distance = vq(descriptors,voc)
 for w in words:
@@ -188,7 +188,7 @@ for i, ID in enumerate(rank_ID[0][0:16]):
 	imshow(img)
 	axis('off')
 
-show()  
+show()
 ```
 将上面的代码保存为`search.py`,对某幅图像进行查询时，只需在命令行里输入：
 
