@@ -403,6 +403,7 @@ ul.posts {
   list-style-type: none;
   margin-bottom: 2em;
   padding-left: 0;
+  border-left: 3px solid #E0115F;
 }
 
 /*添加博客首页为谢一挥的模板样式——开始*/
@@ -439,6 +440,7 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
     text-decoration: none;
     border-bottom: 1px solid #ddd;
     color: #a00;
+    padding-left: 20px;
 }
 .listing-item a {
     text-decoration: none;
