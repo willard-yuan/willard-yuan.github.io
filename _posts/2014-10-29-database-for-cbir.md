@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Database for Content-Based Image Retrieval
+title: 图像检索常用图像库整理
 categories: [Image Retrieval]
 ---
 
