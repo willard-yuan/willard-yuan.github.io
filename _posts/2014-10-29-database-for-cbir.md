@@ -38,7 +38,7 @@ categories: [Image Retrieval]
 
 ![](https://pic2.zhimg.com/c3e25beadb60d1a4da0817208f155b55_b.png)
 
-- [**MIR-FLICKR**]，MIR-FLICKR-1M，2010，1M张Flickr上的图片，也提供25K子集下载，[链接](https://link.zhihu.com/?target=http%3A//blackhole1.stanford.edu/ivms/Datasets.htm)。
+- **MIR-FLICKR**，MIR-FLICKR-1M，2010，1M张Flickr上的图片，也提供25K子集下载，[链接](https://link.zhihu.com/?target=http%3A//blackhole1.stanford.edu/ivms/Datasets.htm)。
 
 ![](https://pic3.zhimg.com/edb34079eb14a8dd9e29dbb14c52d12a_b.jpg)
 
