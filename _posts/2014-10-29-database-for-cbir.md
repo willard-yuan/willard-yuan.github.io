@@ -16,31 +16,31 @@ categories: [Image Retrieval]
 
 - [**INRIA Holidays**](http://lear.inrialpes.fr/people/jegou/data.php#holidays)，也是一个在做CBIR时用的很多的数据库，图像检索的论文里很多都会用这个数据库。该数据集是Herve Jegou研究所经常度假时拍的图片（风景为主），一共1491张图，500张query（一张图一个group）和对应着991张相关图像，已提取了128维的SIFT点4455091个，visual dictionaries来自Flickr60K，[链接](http://lear.inrialpes.fr/~jegou/data.php)。
 
-![](https://pic2.zhimg.com/48e6a9ca67631ba5c8f6acd53d08c229_b.jpg)
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/INRIA-Holidays_zpsef2lrwoe.jpg)
 
 - [**Oxford Buildings Dataset**](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)，5k Dataset images，有5062张图片，是牛津大学VGG小组公布的，在基于词汇树做检索的论文里面，这个数据库出现的频率极高，[下载链接](https://link.zhihu.com/?target=http%3A//www.robots.ox.ac.uk/%7Evgg/data/oxbuildings/)。
 
-![](https://pic2.zhimg.com/62eabc4c1e4a86b4642a8edb19295671_b.jpg)
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Oxford%20Buildings_zpslow1f56k.jpg)
 
 - [**Oxford Paris**](http://www.robots.ox.ac.uk/~vgg/data/parisbuildings/)，The Paris Dataset，oxford的VGG组从Flickr搜集了6412张巴黎旅游图片，包括Eiffel Tower等。
 
-![](https://pic2.zhimg.com/739a8f6986aa61c24cccb29091571955_b.jpg)
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Oxford-Paris_zpsbo8rjzux.jpg)
 
 - [**201Books and CTurin180**](http://pacific.tilab.com/www/datasets/)，The CTurin180 and 201Books Data Sets，2011.5，Telecom Italia提供于Compact Descriptors for Visual Search，该数据集包括：Nokia E7拍摄的201本书的封面图片（多视角拍摄，各6张），共1.3GB； Turin市180个建筑的视频图像，拍摄的camera有Galaxy S、iPhone 3、Canon A410、Canon S5 IS，共2.7GB。
 
-![](https://pic2.zhimg.com/2ef44eb8d73583885f5ec74c70289bfd_b.jpg)
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/201Books-CTurin180_zpszobkezdb.jpg)
 
 - **Stanford Mobile Visual Search**，Stanford Mobile Visual Search Dataset，2011.2，stanford提供，包括8种场景，如CD封面、油画等，每组相关图片都是采自不同相机（手机），所有场景共500张图，[链接](https://purl.stanford.edu/rb470rw0983)；随后又发布了一个[patch数据集](https://link.zhihu.com/?target=http%3A//blackhole1.stanford.edu/ivms/Datasets.htm)，Compact Descriptors for Visual Search Patches Dataset，校对了相同patch。 
 
-![](https://pic3.zhimg.com/5b6a84ada03551c5d16143b590812692_b.jpg)
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Stanford-Mobile_zpscktap7us.jpg)
 
 - **UKBench，UKBench database**，2006.7，Henrik Stewénius在他CVPR06文章中提供的数据集，图像都为640*480，每个group有4张图，文件接近2GB，提供visual words，[链接](http://www.vis.uky.edu/~stewe/ukbench/)。
 
-![](https://pic2.zhimg.com/c3e25beadb60d1a4da0817208f155b55_b.png)
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/UKBench.jpg_zpsxavgwhhl.png)
 
 - **MIR-FLICKR**，MIR-FLICKR-1M，2010，1M张Flickr上的图片，也提供25K子集下载，[链接](https://link.zhihu.com/?target=http%3A//blackhole1.stanford.edu/ivms/Datasets.htm)。
 
-![](https://pic3.zhimg.com/edb34079eb14a8dd9e29dbb14c52d12a_b.jpg)
+![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/MIR-FLICKR_zpsqqmqwqdt.jpg)
 
 此外，还有COREL，NUS-WIDE等。一般做图像检索验证算法，前面给出的四个数据库应该是足够了的。
 
