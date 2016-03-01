@@ -414,7 +414,7 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
   /*margin-bottom: 1.0em;*//*自定义的间距*/
   padding: 0em 0 1em -4em;
   text-align:center;
-
+  padding-left: 20px;
 }
 .listing-seperator {
     list-style-type: none;
