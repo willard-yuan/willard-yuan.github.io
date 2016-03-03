@@ -11,8 +11,8 @@ categories: [Computer Vision]
 
 - **人脸检测（Face detection）**：对图像中的人脸进行检测，并将结果用矩形框框出来。
 - **人脸校正（Face alignment）**：对检测到的人脸进行姿态的校正，使其人脸尽可能的"正"，通过校正可以提高人脸识别的精度。校正的方法有2D校正、3D校正的方法，3D校正的方法可以使侧脸得到较好的识别。目前校正在处理过程中完全可以达到实时性的要求，具体可以阅读Face Alignment at 3000 FPS via Regressing Local Binary Features这篇文章（[论文笔记](http://blog.csdn.net/boosting1/article/details/26085223)）。在进行人脸校正的时候，会有检测特征点的位置这一步，这些特征点位置主要是诸如鼻子左侧，鼻孔下侧，瞳孔位置，上嘴唇下侧等等位置，知道了这些特征点的位置后，做一下位置驱动的变形，脸即可被校"正"了。下面两幅图像分别显示了原来的人脸和经过校正后了的人脸。
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/f3_zpswxvtrty0.jpg)
-![](http://vgg.fiit.stuba.sk/wp-uploads/2015/02/Face.jpg)
+![drawing](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/f3_zpswxvtrty0.jpg)
+![drawing](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Face_zpsxvrwiwan.jpg)
 - **人脸校验（Face verification)**：人脸校验是基于pair matching的方式，所以它得到的答案是“是”或者“不是”。在具体操作的时候，给定一张测试图片，然后挨个进行pair matching，matching上了则说明测试图像与该张匹配上的人脸为同一个人的人脸。一般在**小型**办公室人脸刷脸打卡系统中采用的（应该）是这种方法，具体操作方法大致是这样一个流程：离线逐个录入员工的人脸照片（一个员工录入的人脸一般不止一张），员工在刷脸打卡的时候相机捕获到图像后，通过前面所讲的先进行人脸检测，然后进行人脸校正，再进行人脸校验，一旦match结果为“是”，说明该名刷脸的人员是属于本办公室的，人脸校验到这一步就完成了。在离线录入员工人脸的时候，我们可以将人脸与人名对应，这样一旦在人脸校验成功后，就可以知道这个人是谁了。上面所说的这样一种系统优点是开发费用低廉，适合小型办公场所，缺点是在捕获时不能有遮挡，而且还要求人脸姿态比较正（这种系统我们所有，不过没体验过）。下图给出了示意说明，不过那个“Am I SW?”应该改一下，改成“Am I the same to the seleted face image?”。
 ![drawing](http://mind.kaist.ac.kr/images/amisw.png)
 - **人脸识别（Face identification或Face recognization)**：人脸识别正如下图所示的，它要回答的是“我是谁？”，相比于人脸校验采用的pair matching，它在识别阶段更多的是采用分类的手段（。它实际上是对进行了前面两步即人脸检测、人脸校正后做的图像（人脸）分类。
