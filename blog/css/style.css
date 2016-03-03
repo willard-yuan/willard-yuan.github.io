@@ -305,4 +305,4 @@ blockquote {
     font-style: italic;
 }
 
-img[alt=drawing] { width: 480px; }
+img[alt=drawing] { width: 50%; }
