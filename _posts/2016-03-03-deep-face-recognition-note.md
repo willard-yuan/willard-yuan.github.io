@@ -76,7 +76,7 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 $$E({{\bf{W}}^'}) = \sum\limits_{(a,p,n) \in T} {\max \{ 0,\alpha  - ||{{\bf{x}}_a} - {{\bf{x}}_n}||_2^2 + ||{{\bf{x}}_a} - {{\bf{x}}_p}||_2^2\} }$$
 
 其中$
-{{\bf{x}}_i} = {\bf{W}}'\frac{{\phi ({l_i})}}{{||\phi ({l_i})|{|_2}}}$
+{{\bf{x}}_i} = {\bf{W}}'\frac{{\phi ({l_i})}}{{||\phi ({l_i})|{|_2}}}}}$
 
 上式中p是正样本，n是负样本，通过对该式进行优化，即可得到投影矩阵$W$。下表显示了在YFW人脸数据库上不进行特征再学习和进行特征在学习后的识别结果(特征再学习在下表中为Embedding learning):
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/lfwVGG_zpsedragzcr.png)
