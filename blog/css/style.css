@@ -46,7 +46,10 @@ h1,h2,h3,h4,h5,h6{  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino San
 }**/
 ::selection{background:#2ecc71;color:white}
 ::-moz-selection{background:#2ecc71;color:white}
-ul{margin:0;padding:0;list-style:none}
+ul{margin:0;padding:0}
+.post ul, .post ol {
+    padding-left: 1em;
+}
 #container{background-color:#ffffff;position:relative;width:96%;max-width:940px;margin:0 auto;border: 1px solid #eaecee;border-top: 1px solid #eaecee;
     border-bottom: 1px solid #eaecee;}
 .post-header {
