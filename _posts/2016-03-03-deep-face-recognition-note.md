@@ -66,10 +66,10 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 
 ###使用triplet loss进行特征再学习)
 
-对于上面网络的输出分数向量$\phi(l_t) \in R^D$，对其进行$l_2$归一化，然后使用affine投影将其投影为$x_t=W'\phi(l_t)/||\phi(l_t)||_2,W'\in R^L \times D$，$W'$即为要求解的投影矩阵，$W'$通过triplet loss损失进行求解(也称作嵌入学习，Embedding learing)：
+对于上面网络的输出分数向量$\phi(l_t) \in R^D$，对其进行$l_2$归一化，然后使用affine投影将其投影为$x_t=W'\phi(l_t)/\|\|\phi(l_t)\|\|_2,W'\in R^L\timesD$，$W'$即为要求解的投影矩阵，$W'$通过triplet loss损失进行求解(也称作嵌入学习，Embedding learing)：
 
 $$
-E(W')=\sum\limits_{(a,b,c \in T)}{\max\{0, \alpha-||x_a-x_n||_2^2+||x_a-x_p||_2^2\}},x_i=W'\frac{\phi(x_i)}{||\phi(x_i)||_2}
+E(W')=\sum\lim_{(a,b,c \in T)}{\max\{0, \alpha-||x_a-x_n||_2^2+||x_a-x_p||_2^2\}},x_i=W'\frac{\phi(x_i)}{||\phi(x_i)||_2}
 $$
 
 上式中p是相对于a而言的正样本，n是相对于a而言的负样本，通过对该式进行优化，即可得到投影矩阵$W$，这样在求得这个投影矩阵后，对上面网络输出的分数向量进行L2归一化，再跟该投影矩阵$W$相乘即可得到特征的最终表示。下表显示了在YFW人脸数据库上不进行特征再学习和进行特征在学习后的识别结果(特征再学习在下表中为Embedding learning):
