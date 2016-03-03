@@ -36,17 +36,20 @@ p{
 a{text-decoration:none}
 a:focus{outline:0}
 h1,h2,h3,h4,h5,h6{  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;}
-h2 {
+/**h2 {
     border-radius: 5px;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     background: transparent linear-gradient(to right, #3073b3, rgba(255, 255, 255, 0)) repeat scroll 0% 0%;
     color: #FFF;
-}
+}**/
 ::selection{background:#2ecc71;color:white}
 ::-moz-selection{background:#2ecc71;color:white}
-ul{margin:0;padding:0;list-style:none}
+ul{margin:0;padding:0}
+.post ul, .post ol {
+    padding-left: 1em;
+}
 #container{background-color:#ffffff;position:relative;width:96%;max-width:940px;margin:0 auto;border: 1px solid #eaecee;border-top: 1px solid #eaecee;
     border-bottom: 1px solid #eaecee;}
 .post-header {
@@ -297,7 +300,9 @@ header h1.title a:hover {
 blockquote {
     margin: 1em 0 1em 0em;
     color: #666;
-    border-left: 0.4em solid #3073b3;
+    border-left: 0.4em solid #48C9B0;
     padding-left: 0.6em;
     font-style: italic;
 }
+
+img[alt=drawing] { width: 60%; }

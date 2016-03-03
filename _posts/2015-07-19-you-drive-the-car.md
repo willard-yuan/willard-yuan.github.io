@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 君乘车，我戴笠
-categories: [image Retrieval]
+categories: [Life]
 ---
 
 夜很深了，窗外雷声滚滚，细雨刷刷的拍打着窗门。晚上刷朋友圈的时候，看到了下面一首诗：

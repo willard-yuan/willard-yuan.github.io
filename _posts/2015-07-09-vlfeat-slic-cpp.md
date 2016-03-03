@@ -1,7 +1,7 @@
 ---
 layout: post
 title: VLFeat SLIC超像素分割(Cpp版)
-categories: [Machine Learning]
+categories: [Computer Vision]
 ---
 
 ![lenna]({{ site.url }}/images/posts/2015-07-09/regularization10000.png)

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: All about VLAD
+title: All about VLAD笔记
 categories: [Image Retrieval]
 ---
 
