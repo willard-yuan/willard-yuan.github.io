@@ -73,7 +73,10 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 
 对于网络的输出分数向量$\phi ({l_t}) \in {R^D}$，对其进行$l_2$归一化，然后使用affine投影将其投影为${{\bf{x}}_t} = W'\phi ({l_t})/||\phi ({l_t})|{|_2},W' \in {R^{L \times D}}$，$W'$通过triplet loss损失进行求解：
 
-$$E({{\bf{W}}^'}) = \sum\limits_{(a,p,n) \in T} {\max \{ 0,\alpha  - ||{{\bf{x}}_a} - {{\bf{x}}_n}||_2^2 + ||{{\bf{x}}_a} - {{\bf{x}}_p}||_2^2\} } ,{{\bf{x}}_i} = {{\bf{W}}^'}\frac{{\phi ({l_i})}}{{||\phi ({l_i})|{|_2}}}$$
+$$E({{\bf{W}}^'}) = \sum\limits_{(a,p,n) \in T} {\max \{ 0,\alpha  - ||{{\bf{x}}_a} - {{\bf{x}}_n}||_2^2 + ||{{\bf{x}}_a} - {{\bf{x}}_p}||_2^2\} }$$
+
+其中$
+{{\bf{x}}_i} = {\bf{W}}'\frac{{\phi ({l_i})}}{{||\phi ({l_i})|{|_2}}}$
 
 上式中p是正样本，n是负样本，通过对该式进行优化，即可得到投影矩阵$W$。下表显示了在YFW人脸数据库上不进行特征再学习和进行特征在学习后的识别结果(特征再学习在下表中为Embedding learning):
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/lfwVGG_zpsedragzcr.png)
