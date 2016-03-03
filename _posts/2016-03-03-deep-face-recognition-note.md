@@ -66,11 +66,13 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 
 ###使用triplet loss进行特征再学习
 
-对于网络的输出分数向量$\phi ({l_t}) \in {R^D}$，对其进行$l_2$归一化，然后使用affine投影将其投影为${{\bf{x}}_t} = W'\phi ({l_t})/||\phi ({l_t})|{|_2},W' \in {R^{L \times D}}$，$W'$通过triplet loss损失进行求解：
+对于网络的输出分数向量$\phi(l_t) \in R^D$，对其进行$l_2$归一化，然后使用affine投影将其投影为$x_t = W'\phi(l_t)/||\phi(l_t)||_2,W'\in R^L \times D$，$W'$通过triplet loss损失进行求解：
 
-$$E(W') = \sum\limits_{(a,p,n) \in T} {\max \{ 0,\alpha  - ||{{\bf{x}}_a} - {{\bf{x}}_n}||_2^2 + ||{{\bf{x}}_a} - {{\bf{x}}_p}||_2^2\} }$$
+$$
+E(W')=\sum\limits_{(a,b,c \in T)}{\max\{0, \alpha-||x_a-x_n||_2^2+||x_a-x_p||_2^2\}},x_i=W'\frac{{\phi(x_i)}}{{||\phi(x_i)||_2}}
+$$
 
-上式中p是正样本，n是负样本，通过对该式进行优化，即可得到投影矩阵$W$。下表显示了在YFW人脸数据库上不进行特征再学习和进行特征在学习后的识别结果(特征再学习在下表中为Embedding learning):
+上式中p是相对于a而言的正样本，n是相对于a而言的负样本，通过对该式进行优化，即可得到投影矩阵$W$。下表显示了在YFW人脸数据库上不进行特征再学习和进行特征在学习后的识别结果(特征再学习在下表中为Embedding learning):
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/lfwVGG_zpsedragzcr.png)
 从上表可以看到，Embedding learning将原来的91.6%的识别率提高到了97.3%。说明对网络输出的特征进行在学习(跟特征的fine-tune差不多的意思)，可以提高精度。
 另外在[VGG Face Descriptor](http://www.robots.ox.ac.uk/~vgg/software/vgg_face/)项目主页上作者贴出了LFW和YFW两个人脸图像库上的识别率。
