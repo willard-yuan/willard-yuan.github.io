@@ -437,11 +437,10 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
 
 }
 
-.listing-seperator h2 {
+/*.listing-seperator h2 {
     background: url(../images/timeline_century_tick.gif) left center no-repeat;
     font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
     cursor: pointer;
-    /**font-size: 3em;**/
     font-weight: 400;
     margin: 0 0 10px;
     padding: 4px 4px 4px 20px;
@@ -456,7 +455,7 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
     letter-spacing: .1em;
     line-height: 1.7em;
     padding: 3px 5px 1px;
-}
+}*/
 
 .listing-item {
     list-style-type: none;

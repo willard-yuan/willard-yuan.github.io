@@ -20,8 +20,7 @@ category: blog
 	  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
 	  {% if year != y %}
 		{% assign year = y %}
-		<!--<span class="listing-seperator">{{ y }}</span>-->
-		<h2 class="listing-seperator"><span>{{ y }}</span></h2>
+		<span class="listing-seperator">{{ y }}</span>
 	  {% endif %}
     <!--<style>#uniqueid:hover{background-color: #D3D3D3; text-decoration: none;}</style>-->
     <a  id = "uniqueid" class="listing-item" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></a>
