@@ -478,7 +478,6 @@ margin-bottom: 1em;
 padding-top: 20px;
 }
 #tag_cloud a {
-<<<<<<< HEAD
   padding: 1px 6px;
   margin: 2px;
   background: #eee;
@@ -486,25 +485,23 @@ padding-top: 20px;
   border-radius: 3px;
   text-decoration: none;
   border: 1px dashed #cccccc;
-=======
-	display: inline-block;
-	background: #fff;
-	width: auto;
-	height: auto;
-    border-radius: 3px;
-    letter-spacing: .01em;
-    cursor: pointer;
-    margin: 0 4px 7px 0;
-    color: #e0115f!important;
-    border: 1px solid #48C9B0;
-    padding: 1px 6px;
-    background: #eee;
-    text-decoration: none;
+  display: inline-block;
+  background: #fff;
+  width: auto;
+  height: auto;
+  border-radius: 3px;
+  letter-spacing: .01em;
+  cursor: pointer;
+  margin: 0 4px 7px 0;
+  color: #e0115f!important;
+  border: 1px solid #48C9B0;
+  padding: 1px 6px;
+  background: #eee;
+  text-decoration: none;
 }
 #tag_cloud a:hover{
-	color:#333333 !important;
-	text-decoration:none;
->>>>>>> 32f3c3e512be9711b884e5ccf49ae3a174dbdfbf
+  color:#333333 !important;
+  text-decoration:none;
 }
 
 /*添加博客首页为谢一挥的模板样式——结束*/
