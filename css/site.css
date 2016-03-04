@@ -417,24 +417,18 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
   padding-left: 20px;*/
 }
 .listing-seperator {
-
-    background: #ccc;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    color: #131313;
-    letter-spacing: .1em;
-    line-height: 1.7em;
-    padding: 3px 5px 1px;
-
-    /*list-style-type: none;
+    background: url(../images/timeline_century_tick.gif) left center no-repeat;
+    font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
+    /**font-size: 3em;**/
+    font-weight: 400;
+    padding: 4px 4px 4px 20px;
+    list-style-type: none;
     display: block;
-    padding: 20px 0px 20px 0px;
     text-decoration: none;
-    border-bottom: 1px solid #ddd;
     color: #48C9B0;
-    font-size:x-large;*/
-
+    font-size:x-large;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 /*.listing-seperator h2 {
