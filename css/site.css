@@ -301,7 +301,7 @@ nav a.selected:hover {
 		    -moz-animation: spin 2s linear infinite;
 		    -ms-animation: spin 2s linear infinite;
 		    -o-animation: spin 2s linear infinite;
-		    animation: spin 2s linear infinite; }	    
+		    animation: spin 2s linear infinite; }
 
 @-webkit-keyframes spin {
   from {
@@ -485,6 +485,15 @@ margin-bottom: 1em;
 padding-top: 20px;
 }
 #tag_cloud a {
+<<<<<<< HEAD
+  padding: 1px 6px;
+  margin: 2px;
+  background: #eee;
+  color: #555;
+  border-radius: 3px;
+  text-decoration: none;
+  border: 1px dashed #cccccc;
+=======
 	display: inline-block;
 	background: #fff;
 	width: auto;
@@ -502,6 +511,7 @@ padding-top: 20px;
 #tag_cloud a:hover{
 	color:#333333 !important;
 	text-decoration:none;
+>>>>>>> 32f3c3e512be9711b884e5ccf49ae3a174dbdfbf
 }
 
 /*添加博客首页为谢一挥的模板样式——结束*/
@@ -792,4 +802,45 @@ img {
 
 .jiathis_custom{
     margin-top:25px;
+}
+
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top i {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+#return-to-top:hover i {
+    color: #fff;
+    top: 5px;
 }
