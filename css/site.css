@@ -147,13 +147,13 @@ a.discreet {
   /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
   font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   line-height: 170%;
-  padding-bottom: 100px;
 }
-
+.section{
+	padding-bottom: 100px;	
+}
 .fancy {
   margin-bottom: 25px;
 }
-
 .pull-right { float: right; }
 .pull-left { float: left; }
 .clear { clear: both; }
