@@ -30,7 +30,7 @@ body {
   /*自定义背景颜色*/
   background-color: #FFFFFF;
   margin-bottom: 5px;  /*自定义段落与段落之间的间距*/
-  line-height: 170%; /*自定义body对象行与行的间距*/
+  /*自定义line-height: 170%; body对象行与行的间距*/
   font-size: 100%;
 }
 
@@ -147,6 +147,7 @@ a.discreet {
   /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
   font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   line-height: 170%;
+  padding-bottom: 100px;
 }
 
 .fancy {
