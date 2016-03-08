@@ -306,3 +306,105 @@ blockquote {
 }
 
 img[alt=drawing] { width: 60%; }
+
+.category-listing-seperator {
+    font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
+    /**font-size: 3em;**/
+    font-weight: 400;
+    list-style-type: none;
+    display: block;
+    text-decoration: none;
+    font-size:x-large;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.category-listing-seperator:nth-child(5n+0) {
+    color: #e74c3c;
+}
+
+.category-listing-seperator:nth-child(5n+1) {
+    color: #1abc9c;
+}
+
+.category-listing-seperator:nth-child(5n+2) {
+    color: #3498db;
+}
+
+.category-listing-seperator:nth-child(5n+3) {
+    color: #9b59b6;
+}
+
+.category-listing-seperator:nth-child(5n+4) {
+    color: #e67e22;
+}
+
+.listing-item li:nth-child(4n+1){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+        &:before {
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+    }
+    background: #9b59b6;
+}
+
+.listing-item li:nth-child(4n+2){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+    &:before {
+    position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+    }
+    background: #3498db;
+}
+.listing-item li:nth-child(4n+3){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+    &:before {
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+  }
+  background: #9b59b6;
+}
+.listing-item li:nth-child(4n+4){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+    &:before {
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+  }
+  background: #e74c3c;
+}

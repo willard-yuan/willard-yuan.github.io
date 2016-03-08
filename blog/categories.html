@@ -23,15 +23,14 @@ category: categories
 
 <section class="inner">
 {% for cat in site.categories %}
-  <li class="listing-seperator" id="{{ cat[0] }}">{{ cat[0] }}（共{{ cat[1].size }}篇）</li>
+  <li class="category-listing-seperator" id="{{ cat[0] }}">{{ cat[0] }}（共{{ cat[1].size }}篇）</li>
 {% for post in cat[1] %}
-<a  class="listing-item" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></a>
+<li class="listing-item" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></li>
 {% endfor %}
 {% endfor %}
-</ul>
 </section>
 
-<script src="../js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
+<script src="../js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script>
 <script language="javascript">
 $.fn.tagcloud.defaults = {
     size: {start: 1, end: 1, unit: 'em'},
