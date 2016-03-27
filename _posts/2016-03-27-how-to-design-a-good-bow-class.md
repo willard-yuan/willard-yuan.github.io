@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: 如何设计好词袋模型的类类型
