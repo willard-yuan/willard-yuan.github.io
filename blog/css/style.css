@@ -46,7 +46,7 @@ h1,h2,h3,h4,h5,h6{  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino San
 }**/
 h2:before{
     content: "#";
-    color: #42b983;
+    color: #48C9B0;
     position: absolute;
     left: 1.6em;
     margin-top:-0.25em;
