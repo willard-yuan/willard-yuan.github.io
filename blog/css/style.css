@@ -426,3 +426,39 @@ img[alt=drawing] { width: 60%; }
   }
   background: #e74c3c;
 }
+
+/*添加博文上一篇下一篇功能*/
+.pager {
+    padding-left: 0;
+    margin: 20px 0;
+    list-style: none;
+    text-align: center;
+}
+.pager .previous>a, .pager .previous>span {
+    float: left;
+}
+
+.pager li>a, .pager li>span {
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.previous>a, .next>a {
+    color: rgba(0,179,179,0.83333);
+}
+
+.pager .next>a, .pager .next>span {
+    float: right;
+}
+
+.pager li {
+    display: inline;
+}
+
+/*添加多说样式*/
+.duoshuo{
+  margin-top:5em;;
+}
