@@ -458,6 +458,29 @@ img[alt=drawing] { width: 60%; }
     display: inline;
 }
 
+.pager li > a,
+.pager li > span {/* Hux learn from
+     *     TypeIsBeautiful,
+     *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
+     */
+     font-family: "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+     line-height: 1.7;
+     font-size: 14px;
+     font-weight: 800;
+     letter-spacing: 1px;
+     padding: 10px 5px;
+     background-color: white;
+     border-radius: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .pager li > a,
+  .pager li > span {
+    font-size: 14px;
+    padding: 15px 25px;
+  }
+}
+
 /*添加多说样式*/
 .duoshuo{
   margin-top:5em;;
