@@ -21,29 +21,12 @@
 body {
   color: #222;
   text-align: center;
-  /*自定义的字体
-  font-family:Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
-  /*font-family:"Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
   font-family:"Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
-  /*font-family:"FontAwesome","Microsoft YaHei",Arial,sans-serif;*/
   text-rendering: optimizeLegibility;
-  /*自定义背景颜色*/
-  background-color: #FFFFFF;
+  background-color: #f3f3f3;
   margin-bottom: 5px;  /*自定义段落与段落之间的间距*/
   /*自定义line-height: 170%; body对象行与行的间距*/
   font-size: 100%;
-}
-
-/*.top-bar {
-  height: 4px;
-  background-color: #255b96;
-} */
-
-.top-bar {
-  background-color: lightyellow;
-  line-height: 32px;
-  color: #666;
-  border-bottom: 3px solid #E0115F;
 }
 
 p{
@@ -118,7 +101,7 @@ table td, table th {
 
 a {
   /*color: #255b96;*/
-  color: #e0115f;
+  color: #404040;
   text-decoration: none;
 }
 
@@ -141,10 +124,6 @@ a.discreet {
 }
 
 .fancy, section, article {
-  /*font-family: "proxima-nova", Helvetica, Arial, sans-serif;*/
-  /*定义article字体
-  font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;*/
-  /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/
   font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   line-height: 170%;
 }
