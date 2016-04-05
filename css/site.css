@@ -34,48 +34,12 @@ p{
   margin: 1em 0;
   }
 
-h1, .h1, h2, .h2, h3, .h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    line-height: 1.1;
-}
-
-h1, h2, h3 {
-	/*定义标题,字标题字体大小*/
-  	font-family: font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;
-  	/*定义标题,字标题字体颜色*/
-  	color:#3d4657;
-}
-
-h1 {
-	font-size: 1.7em;
-	line-height: 1.7em;
-	font-weight: 700;
-}
-
-h1 small {
-	font-weight: 400;
-	font-size: 50%;
-	color: #999;
-}
-
-h2 {
-	font-size:1.5em;
-}
-
-h3 {
-	font-size:1.17em;
-}
-
 /*添加段与段之间的分割线样式*/
 hr {
     border-bottom: 1px dashed #f9f9f9;
     border-top: 2px dashed #22c3aa;
     margin-top:2em;
     margin-bottom: 2em;
-}
 }
 
 p {
@@ -101,8 +65,7 @@ table td, table th {
 /* Common */
 
 a {
-  /*color: #255b96;*/
-  color: #404040;
+  color: #a00;
   text-decoration: none;
 }
 
@@ -129,7 +92,7 @@ a.discreet {
   line-height: 170%;
 }
 section{
-	padding-bottom: 10px;	
+	padding-bottom: 10px;
 }
 .fancy {
   margin-bottom: 25px;
@@ -149,16 +112,16 @@ section{
 
 /* Header and navigation */
 header {
-  /*font-family: 'Asap', Helvetica, Arial, sans-serif;*/
-  /*font-family: "Helvetica Neue",Helvetica Neue,Helvetica,Hiragino Sans GB,Microsoft Yahei,Arial;*/ /*导航条字体*/
-  font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif; /*导航条字体*/
+  font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   /*font-weight: bold;*/
 }
 
-header nav {
-  float: left;
-  padding-top: 14px;
-}
+/*.top-bar {
+  background-color: lightyellow;
+  line-height: 32px;
+  color: #666;
+  border-bottom: 3px solid #E0115F;
+}*/
 
 .header-container {
   /*border-bottom: 1px solid #eee;*/
@@ -166,9 +129,81 @@ header nav {
   background: #ffffff;
 }
 
-/*添加post部分的颜色*/
-#container{
-  /*background-color:#fafafa;*/
+header nav {
+  float: left;
+  padding-top: 14px;
+}
+
+nav a {
+  display: inline-block;
+  margin-right: 1.2em;
+  padding-bottom: 0.2em;
+  font-weight: 700;
+  border-bottom: 3px solid transparent;
+  font-size: 100%;
+  color: #404040;
+}
+
+nav a:last-child {
+  margin-right: 0;
+}
+
+nav a:hover {
+  text-decoration: none;
+  border-bottom: 3px solid #3073b3;
+}
+
+nav a.selected {
+  color: black;
+}
+
+nav a.selected:hover {
+  border-bottom: none;
+}
+
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    line-height: 1.1;
+}
+
+h1, h2, h3 {
+    /*定义标题,字标题字体大小*/
+    font-family: font-family: Georgia,"Xin Gothic","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;
+    /*定义标题,字标题字体颜色*/
+    color:#3d4657;
+}
+
+h1 {
+    font-size: 1.7em;
+    line-height: 1.7em;
+    font-weight: 700;
+}
+
+h1 small {
+    font-weight: 400;
+    font-size: 50%;
+    color: #999;
+}
+
+h2 {
+    font-size:1.5em;
+}
+
+h3 {
+    font-size:1.17em;
+}
+
+/**设置引用格式**/
+blockquote {
+  margin: 1em 0 1em 0em;
+  color: #666;
+  border-left: 0.4em solid #48C9B0;
+  padding-left: 0.6em;
+  font-style: italic;
 }
 
 @media(max-width: 400px) {
@@ -243,32 +278,7 @@ header .logo a, header .logo a:hover {
   }
 }
 
-nav a {
-  display: inline-block;
-  margin-right: 1.2em;
-  padding-bottom: 0.2em;
-  font-weight: 700;
-  border-bottom: 3px solid transparent;
-  font-size: 100%;
-}
-
-nav a:last-child {
-  margin-right: 0;
-}
-
-nav a:hover {
-  text-decoration: none;
-  border-bottom: 3px solid #3073b3;
-}
-
-nav a.selected {
-  color: black;
-}
-
-nav a.selected:hover {
-  border-bottom: none;
-}
-
+/**设置导航中头像样式**/
 .avatar {
   border-radius: 50%;
   max-width: 50px;
@@ -279,11 +289,12 @@ nav a.selected:hover {
 
 /*图像旋转*/
 .avatar:hover {
-		    -webkit-animation: spin 2s linear infinite;
-		    -moz-animation: spin 2s linear infinite;
-		    -ms-animation: spin 2s linear infinite;
-		    -o-animation: spin 2s linear infinite;
-		    animation: spin 2s linear infinite; }
+    -webkit-animation: spin 2s linear infinite;
+    -moz-animation: spin 2s linear infinite;
+    -ms-animation: spin 2s linear infinite;
+    -o-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
 
 @-webkit-keyframes spin {
   from {
@@ -521,138 +532,6 @@ header h1.title a:hover {
 }
 
 .convinced { /*margin: 6em 0 4em 0;*/}
-
-/*****************************************************************************/
-/*
-/* Posts
-/*
-/*****************************************************************************/
-
-/* 文章代码格式 */
-.post pre {
-    display: block;
-    padding: 9.5px;
-    margin: 0px 0px 10px;
-    font-size: 13px;
-    line-height: 1.42857;
-    border-radius: 4px;
-    border: 1px solid #CCC;
-    color: #333;
-    word-break: break-all;
-    word-wrap: break-word;
-    background-color: #F5F5F5;
-}
-
-.post pre{
-  	font-size:.8rem;  /*设置代码字体大小*/
-  	font-family: Consolas,"Liberation Mono",Courier,monospace;/*设置代码字体类型*/
-}
-
-.post pre code{
-    font-size:.8rem;  /*设置代码字体大小*/
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-    border: none;
-    line-height: 170%;
-}
-
-.post code {
-  /*font-size: 18px;原主题定义的代码字体大小*/
-  font-size: 90%;
-  background-color: #F4F4F4;
-  border: 1px solid #eee;
-  padding: 0 .2em;
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  border-radius: 4px;
-}
-
-.post ul, .post ol {
-  /*padding-left: 2.5em;*/
-}
-
-/* terminal */
-.post pre.terminal {
-  border: 1px solid #000;
-  background-color: #333;
-  color: #FFF;
-}
-
-.post pre.terminal code {
-  background-color: #333;
-}
-
-.post-photo {
-  height: 24em;
-  margin-top: -1.5em;
-  margin-bottom: 2.5em;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0px 4px 8px #999;
-}
-
-@media (max-width: 420px) {
-  .post-photo {
-    height: 13em;
-  }
-}
-
-figure .two-third {
-  max-width: 66%;
-}
-
-@media (max-width: 600px) {
-  figure .two-third {
-    max-width: 100%;
-  }
-}
-
-
-/* Quotes设置引用文字时的格式 */
-blockquote {
-  margin: 1em 0 1em 0em;
-  color: #666;
-  border-left: 0.4em solid #48C9B0;
-  padding-left: 0.6em;
-  font-style: italic;
-}
-
-.post-footer-self-promotion {
-  margin-top: 1.6em;
-  margin-bottom: 0.3em;
-  font-style: italic;
-  margin-top: 4em;
-  /*margin-bottom: 6em;*/
-  border: 1px solid #eee;
-  border-radius: 5px;
-  padding: 0 1em;
-  background-color: #fefefe;
-}
-.post-footer-self-promotion img {
-  float: left;
-  margin-left: -84px;
-  margin-top: 16px;
-}
-.post-footer-self-promotion strong {
-  background-color: lightyellow;
-}
-
-img.inline.pull-right {
-  margin-left: 1em;
-}
-
-img.inline.pull-left {
-  margin-right: 1em;
-  max-width: 22%;
-}
-
-img {
-  max-width: 100%;
-}
-
-.french-flag {
-  vertical-align: -3px;
-  height: 18px;
-  margin-left: 0.2em;
-}
 
 .suggest-translate {
   font-style: italic;
