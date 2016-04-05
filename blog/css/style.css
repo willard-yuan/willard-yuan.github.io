@@ -27,6 +27,7 @@ article h1 {
 }
 
 p{
+  text-align: justify;
   font-size:1rem;
   margin: 30px 0;
 }
