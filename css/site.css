@@ -160,8 +160,9 @@ header nav {
 }
 
 .header-container {
-  border-bottom: 1px solid #eee;
+  /*border-bottom: 1px solid #eee;*/
   margin-bottom: 1.5em;
+  background: #ffffff;
 }
 
 /*添加post部分的颜色*/
