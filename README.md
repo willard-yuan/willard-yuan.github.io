@@ -25,6 +25,3 @@
 7. **book**模板，这个你需要有一个豆瓣账号，现在[books/index.html](https://github.com/willard-yuan/willard-yuan.github.io/blob/master/books/index.html)页面把title等修改一下，然后到[douban.api.js](https://github.com/willard-yuan/willard-yuan.github.io/blob/master/js/douban.api.js)把账号user和api改一下。
 
 上面7步改完了，应该就没什么问题了。
-
-## Todo
-- 添加时间线，参考[fexo](https://github.com/forsigner/fexo)
