@@ -44,12 +44,24 @@ h1,h2,h3,h4,h5,h6{  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino San
     background: transparent linear-gradient(to right, #3073b3, rgba(255, 255, 255, 0)) repeat scroll 0% 0%;
     color: #FFF;
 }**/
-h2:before{
+
+/**h2:before{
     content: "#";
     color: #48C9B0;
     position: absolute;
     left: 1.6em;
     margin-top:-0.25em;
+    font-size: 1.4em;
+    font-weight: bold;
+}**/
+
+h2:before {
+    content: "#";
+    color: #48C9B0;
+    display: inline-block;
+    float: left;
+    padding: 3px 10px 0px 0px;
+    margin-top: -0.25em;
     font-size: 1.4em;
     font-weight: bold;
 }
