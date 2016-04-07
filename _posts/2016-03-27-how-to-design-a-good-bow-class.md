@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何设计好词袋模型的类类型
-categories: [image retrieval]
+categories: [Image Retrieval]
 ---
 
 >回顾过去自己写过的一些词袋模型，比如[BoW图像检索Python实战](http://yongyuan.name/blog/practical-BoW-for-image-retrieval-with-python.html)、[图像检索(CBIR)三剑客之BoF、VLAD、FV](http://yongyuan.name/blog/BoF-VLAD-FV.html)以及[Bag of Words cpp实现](http://yongyuan.name/blog/bag-of-words-cpp-implement.html)，这些写出来的要么只是助于自己理解词袋模型的有关理论，要么也只是面向实验的一些验证，或者更直接点可以说只是些小玩具摆了。
