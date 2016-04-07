@@ -21,7 +21,7 @@
 body {
   color: #222;
   text-align: center;
-  font-family:Bitter, Georgia, "Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;
+  font-family:"Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   text-rendering: optimizeLegibility;
   background-color: #f3f3f3;
   margin-bottom: 5px;  /*自定义段落与段落之间的间距*/
@@ -88,7 +88,7 @@ a.discreet {
 }
 
 .fancy, section, article {
-  font-family: "Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
+  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;
   line-height: 170%;
 }
 section{
