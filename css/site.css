@@ -197,6 +197,24 @@ h3 {
     font-size:1.17em;
 }
 
+.post-recents-in-index{
+  paddin-top: 2em;
+}
+
+.post-list-in-index{
+  margin-top: 0px;
+  margin-bottom: opx;
+  list-style: none;
+}
+
+.post-list-date-in-index{
+  margin-right: 1em;
+}
+
+section ul{
+  padding-left: 0em;
+}
+
 /**设置引用格式**/
 blockquote {
   margin: 1em 0 1em 0em;
