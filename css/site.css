@@ -23,7 +23,7 @@ body {
   text-align: center;
   font-family:"Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   text-rendering: optimizeLegibility;
-  background-color: #f3f3f3;
+  background-color: #ffffff;
   margin-bottom: 5px;  /*自定义段落与段落之间的间距*/
   /*自定义line-height: 170%; body对象行与行的间距*/
   font-size: 100%;
@@ -116,17 +116,10 @@ header {
   /*font-weight: bold;*/
 }
 
-/*.top-bar {
-  background-color: lightyellow;
-  line-height: 32px;
-  color: #666;
-  border-bottom: 3px solid #E0115F;
-}*/
-
 .header-container {
   /*border-bottom: 1px solid #eee;*/
   margin-bottom: 1.5em;
-  background: #ffffff;
+  background: #f3f3f3;
 }
 
 header nav {
@@ -401,13 +394,6 @@ footer .links li {
 
 footer .links a:hover {
   text-decoration: none;
-}
-
-ul.posts {
-  list-style-type: none;
-  margin-bottom: 2em;
-  padding-left: 0;
-  border-left: 3px solid #E0115F;
 }
 
 /*添加博客首页为谢一挥的模板样式——开始*/
