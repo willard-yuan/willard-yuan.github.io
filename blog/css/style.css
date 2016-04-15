@@ -173,6 +173,30 @@ img {
     margin: 1.5em auto 1.6em auto;
 }
 
+.sidebox {
+    border: 1px dotted rgb(127, 127, 127);
+    padding: 4px 3px 4px 6px;
+    float: right ! important;
+    font-size: 90%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin-left: 6px;
+    visibility: visible;
+    max-width: 50%;
+    width: 35%;
+}
+
+.sidebox ul {
+    padding: 0em 0em 0em 1.3em;
+    margin: 0em;
+}
+
+.sidebox ol li, .sidebox ol ul {
+    margin: 0;
+    padding: 0;
+    line-height: 25px;
+}
+
 /*
  * Equations with KaTeX
  *
@@ -287,6 +311,9 @@ img[alt=drawing] { width: 60%; }
         border-radius: 50%;
   }
   background: #e74c3c;
+}
+
+.post-link-in-posts{
 }
 
 /*添加博文上一篇下一篇功能*/
