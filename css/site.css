@@ -259,6 +259,7 @@ header .logo a, header .logo a:hover {
   word-wrap: break-word;
 }
 
+/*设置移动端样式*/
 @media (max-width: 700px) {
   .inner, pre code, footer, .post > * {
     margin-left: 18px !important;
@@ -277,15 +278,19 @@ header .logo a, header .logo a:hover {
   }
 
   header .avatar {
-    margin-top: 1em;
+    margin-top: 0em;
     max-width: 80px;
-    vertical-align: -20px;
-    margin-left: 0
+    /*vertical-align: -20px;
+    margin-left: 0*/
   }
 
   header nav {
     float: none;
     text-align: center;
+  }
+
+  header nav a{
+    padding-top: 0.5em;
   }
 }
 
