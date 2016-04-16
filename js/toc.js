@@ -1,4 +1,3 @@
-<script>
 // https://github.com/ghiculescu/jekyll-table-of-contents
 $(document).ready(function() {
   var no_back_to_top_links = false
@@ -35,4 +34,3 @@ $(document).ready(function() {
   }
   output.hide().html(html).show('slow');
 });
-</script>
