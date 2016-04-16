@@ -213,12 +213,8 @@ img {
     border-left: 0.4em solid #48C9B0;
 }
 
-
-ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
-  /*margin-bottom: 1.0em;*//*自定义的间距*/
+ul.posts li {
   padding: 0em 0 1em -4em;
-  /*text-align:center;
-  padding-left: 20px;*/
 }
 .listing-seperator {
     /**background: url(../images/timeline_century_tick.gif) left center no-repeat;**/
@@ -240,7 +236,7 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
     display: block;
     padding: 0.8em 0px 0.8em 0px;
     text-decoration: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom:1px dashed #d0d0d0;
     color: #a00;
 }
 .listing-item a {
