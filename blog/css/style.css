@@ -225,7 +225,7 @@ ul.posts li {/*原主题自定义的博客首页标题与标题的间距*/
     font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
     /**font-size: 3em;**/
     font-weight: 400;
-    padding: 4px 4px 4px 20px;
+    padding: 4px 4px 4px 0px;
     list-style-type: none;
     display: block;
     text-decoration: none;
