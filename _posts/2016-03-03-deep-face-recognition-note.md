@@ -5,7 +5,7 @@ categories: [Computer Vision]
 ---
 
 
-##基本概念
+## 基本概念
 
 在具体到人脸识别方法之前，先对人脸识别中的Face detection, Face alignment, Face verification和Face identification(recognization)进行必要的讲解说明，以方便后续知识的展开。
 
@@ -24,12 +24,12 @@ categories: [Computer Vision]
 
 对上面的概念清楚了后，我们再接着讲一下在人脸识别里面的人脸图像数据库。
 
-##人脸图像数据库
+## 人脸图像数据库
 
 人脸图像这个东西因为受到安全隐私等限制，所以一般大规模的人脸数据库比较难拿到，目前我知道到的公开的人脸图像库有LFW（Labelled Faces in the Wild）和YFW（Youtube Faces in the Wild）。下面再列举一些大规模的人脸图像数据库：
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/facedatasets_zps8mujnhcl.png)
 
-##Deep Face Recognition
+## Deep Face Recognition
 
 人脸识别按特征分类可以分成两种：一种是基于浅层特征的人脸识别，一种是基于深度学习的人脸识别方法。Deep Face Recognition这篇文章做了两件事：一是介绍了一种抓取网络上的图片并在有限的人力标注下得到一个大规模人脸图像的方法，二是测试了不同CNN网络结构下人脸校正以及度量学习对人脸识别的精度的影响。
 
@@ -48,7 +48,7 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 
 在2015年谷歌的Facenet中，谷歌的研究人员使用了前面介绍的人脸图像库中的Google人脸数据库上去训练CNN网络，他们使用的是"triplet-based"损失，通过最小化类内差异和最大化类间差异，并在训练阶段将该损失应用在多层（不仅仅是最后一层），在LFW和YTF上获得了最好的识别成绩。
 
-###人脸数据库搜集
+### 人脸数据库搜集
 
 1. **获取候选人名**。IMDB电影名人列表大约有500K个不同的人名，先从上面通过popularity排序获取到5k个人名，其中男女各一半。这些人名通过不断的筛选排除，最后得到了2622个人人名。
 2. **为每一个人名搜集图片**。借助Google和Bing图片搜索引擎，分别按**人名**和**人名 actor**的两种方式进行查询，比如“Leonardo DiCaprio”和“Leonardo DiCaprio actor”，每次查询选前面500张，这样可以为每个人名（后面将其称为identity）获取到2000张图像。
@@ -59,12 +59,12 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 下表使每个过程标注所花费的时间：
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/datatime_zpsteframsl.png)
 
-###网络结构与训练
+### 网络结构与训练
 
 在文章中，作者将其视为一个N=2622的分类问题，即每一个identity都是一类，选用的网络结构是vggNet，网络的最后一层是分类器$(W,b)$，分类的误差用softmax log-loss来计算。一旦学习过程完成后，就可以把分类器$(W,b)$去除，分数向量$\phi ({l_t})$便可以作为特征通过计算欧式距离进行人脸校验。
 上面得到的分数向量能够进一步得到改善，通过在欧式空间里面使用"triplet loss"的方式进行训练。其实这里所说使用"triplet loss"的方式进行训练，是对特征的进一步精炼，使用的"triplet loss"学习方非常的常见，是度量学习里面的一种，下面具体讲一下这个特征再学习过程。
 
-###使用triplet loss进行特征再学习)
+### 使用triplet loss进行特征再学习)
 
 对于上面网络的输出分数向量$\phi(l_t) \in R^D$，对其进行$l_2$归一化，然后使用affine投影将其投影为$x_t=W'\phi(l_t)/\|\|\phi(l_t)\|\|_2$，$W' \in R^{L \times D}$，$W'$即为要求解的投影矩阵，$W'$通过triplet loss损失进行求解(也称作嵌入学习，Embedding learing)：
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/vggFormulation_zpsp772f4ds.jpg)
@@ -75,13 +75,13 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 另外在[VGG Face Descriptor](http://www.robots.ox.ac.uk/~vgg/software/vgg_face/)项目主页上作者贴出了LFW和YFW两个人脸图像库上的识别率。
 ![](http://www.robots.ox.ac.uk/~vgg/software/vgg_face/table.png)
 
-###实验结果
+### 实验结果
 
 在文章中，作者在LFW人脸数据库上分别对Fisher Vector Faces、DeepFace、Fusion、DeepID-2,3、FaceNet、FaceNet+Alignment以及作者的方法进行对比，具体的识别精度我们看下表。
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/YFWVGG_zpsr0vz0jzf.png)
 从上表可以看到，Deep Face Recognition这篇文章所提出的方法训练所用图库大小最小，但取得了跟其他方法具有可比性的结果。
 
-##自己验证效果
+## 自己验证效果
 
 Deep Face Recognition这篇文章其实去年刚发出来的时候就看了，当时还对其效果进行了验证，采用的是人脸减速的方式进行验证的，今天既然对它写成了笔记，就把这个小验证实验也跟着说说。先把结论说一下：**效果确实很好**！。具体的实验代码可以到我的github上下载：[CNN-for-Face-Image-Retrieval](https://github.com/willard-yuan/CNN-for-Face-Image-Retrieval)
 
