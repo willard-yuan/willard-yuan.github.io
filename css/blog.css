@@ -43,7 +43,7 @@ ul{margin:0;padding:0}
 .post ul, .post ol {
     text-align: justify;
     /* list-style-type: none; */
-    margin-left: 30px;
+    margin-left: 20px;
 }
 }
 
@@ -237,7 +237,9 @@ ul.posts li {
     padding: 0.8em 0px 0.8em 0px;
     text-decoration: none;
     border-bottom:1px dashed #d0d0d0;
-    color: #a00;
+    /* color: #a00;*/
+    color: #555; 
+    font-weight: 800;
 }
 .listing-item a {
     text-decoration: none;
