@@ -26,7 +26,7 @@ CVPR 2011《Iterative Quantization: A Procrustean Approach to Learning Binary Co
 ![ITQ_airplane]({{ site.url }}/images/posts/ITQ_airplane.png)
 
 
-Matlab源代码：Yunchao Gong Homepage上公开了源码，不过并提供数据库，直接运行不了，我已经对源码进行了modify，有需要的可以看LSH、ITQ、SKLSH图像检索实验实现(Code)这篇文章，在这篇文章中提供了modified后的代码，也可以直接到我的GitHub主页上下载modified后的代码。
+Matlab源代码$\sum\_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$：Yunchao Gong Homepage上公开了源码，不过并提供数据库，直接运行不了，我已经对源码进行了modify，有需要的可以看LSH、ITQ、SKLSH图像检索实验实现(Code)这篇文章，在这篇文章中提供了modified后的代码，也可以直接到我的GitHub主页上下载modified后的代码。
 
 Github: [ITQ_ImageRetrieval](https://github.com/willard-yuan/ITQ_ImageRetrieval)
 
