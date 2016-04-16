@@ -3,6 +3,7 @@ layout: post
 title: 本科毕业一周年
 categories: [Life]
 photo: xiaMenUniversity.jpg
+tags: 大学
 ---
 
 无声无息里，时间悄悄的度完了一年。行色冲冲的七月，终于走完。趁着高温假的闲暇，打理一下近期的心情与这一年来自己在做什么，以及自己想做什么。

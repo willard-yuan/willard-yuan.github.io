@@ -2,6 +2,7 @@
 layout: post
 title: precision recall曲线Matlab实现
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 在用哈希进行检索时，常会用到precision recall曲线对其性能进行定量评价。precision recall的定义在[信息检索评价指标](http://yuanyong.org/blog/evaluation-of-information-retrieval.html)中已做了详细说明，这里再记录一下precision recall的具体实现。

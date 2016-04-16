@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Python Vlfeat接口及Pydot模块安装总结
-categories: [Python, Machine Learning]
+categories: [Machine Learning]
+tags: 机器学习
 ---
 
 最近在调试[《Programming Computer Vision with Python》](http://yuanyong.org/zh-pcvwithpy/)第三章中的sift描述符及相连图像进行可视化的代码时，折腾耗费了不少时间，现在对整个调试过程中遇到的一些问题及解决方案做下记录总结。

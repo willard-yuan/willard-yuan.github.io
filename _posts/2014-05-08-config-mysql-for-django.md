@@ -2,6 +2,7 @@
 layout: post
 title: Django配置MySQL
 categories: [Django]
+tags: Django
 ---
 
 最近想和Tony用Django开发某个app，在MySQL这部分本小子碰到了些安装方面的问题。虽然此前在用wp时也接触到了MySQL，不过这次算是一次近距离的接触。这里记录下本小子在安装方面碰到的一些问题和发现的几个很有用的知识，算是对初次近距离接触MySQL的一个记录吧。

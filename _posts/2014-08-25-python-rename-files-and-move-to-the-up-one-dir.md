@@ -2,6 +2,7 @@
 layout: post
 title: python重命名101 ObjectCategories下图像并移到上一级目录
 categories: [Python]
+tags: Python
 ---
 
 今天在做一个图像检索系统的Demo演示时需要用到一个比较大的数据库，查看了一下手头的几个数据库，决定选用[**Caltech 101**](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)。**Caltech 101**有102类，在`101_ObjectCategories文件夹下有102个文件夹，而每一个文件夹下的图像文件名都是以`image_0xxx.jpg`这种方式命名的，如果一个个的把它们搬出来的话，不仅重名而且还费时费力。因为对python比较熟悉，知道这事用python来完成肯定不怎么难，费了10来分钟，写了个脚本，圆满的完成了任务。写完再搜**Caltech 101**链接的时候，发现已有人对这个问题做了处理，详见[这里](http://blog.csdn.net/chuminnan2010/article/details/21188231)。大致瞄了几眼，感觉跟自己下面用python写的相比，写的好复杂。

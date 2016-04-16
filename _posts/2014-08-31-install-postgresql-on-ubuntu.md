@@ -2,6 +2,7 @@
 layout: post
 title: Ubuntu14.04安裝postgresql
 categories: [Linux]
+tags: Linux
 ---
 
 在Ubuntu14.04下要用到postgresql,所以查了一下安装的资料:[How To Install and Use PostgreSQL on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04).安装教程安装完后,运行应用,发觉报下面错误:

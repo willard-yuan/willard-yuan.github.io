@@ -2,6 +2,7 @@
 layout: post
 title: PicSearch is now an open source project
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 ## Brief introduction

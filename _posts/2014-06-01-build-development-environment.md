@@ -2,6 +2,7 @@
 layout: post
 title: Ubuntu开发环境配置
 categories: [资源集合]
+tags: 资源整理
 ---
 
 ## 安装tree

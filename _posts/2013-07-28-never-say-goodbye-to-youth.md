@@ -2,6 +2,7 @@
 layout: post
 title: 青春，请不要毕业
 categories: [Life]
+tags: 大学
 ---
 
 毕业，曾经多么熟悉，却又无法真正触动神经的词语。

@@ -2,6 +2,7 @@
 layout: post
 title: 初涉Pysqlite遇到的问题
 categories: [Python]
+tags: Python
 ---
 
 近日在翻译[《Programming Computer Vision with Python》](http://programmingcomputervision.com/)第7章图像搜索时，代码中用到了pysqlite模块，因为自己一直也是做图像搜索这一块的，所以用把Demo按书上交代的一步一步的实现。在pysqlite这一步折腾了大半天也没把pysqlite安装好，气馁之时又仔细阅读了Google搜来的文档，发觉自Python2.5版本后，pysqlite已经成为了Python的标准库了，所以，就不在需要另外安装了，直接import就可以了。

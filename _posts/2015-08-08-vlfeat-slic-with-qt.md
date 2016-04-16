@@ -2,6 +2,7 @@
 layout: post
 title: Qt之VLFeat SLIC超像素分割(Cpp版)
 categories: [Computer Vision]
+tags: SLIC
 ---
 
 近段时间学了点Qt，恰好前段时间用借助VLfeat以及OpenCV捣鼓了SLIC超像素分割，具体可见[VLFeat SLIC超像素分割(Cpp版)](http://yongyuan.name/blog/vlfeat-slic-cpp.html)这篇文章。然后寻思着能不能给这个超像素分割加个界面，使它操作起来方面点。捣鼓了两天，做出来的如下：

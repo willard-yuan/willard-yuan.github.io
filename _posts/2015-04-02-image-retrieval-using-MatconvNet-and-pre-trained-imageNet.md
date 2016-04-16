@@ -2,6 +2,7 @@
 layout: post
 title: Image retrieval using MatconvNet and pre-trained imageNet
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 <!--<object width="526" height="374">

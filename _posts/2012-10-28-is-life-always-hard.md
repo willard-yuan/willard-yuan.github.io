@@ -2,6 +2,7 @@
 layout: post
 title: Is life always hard?
 categories: [Life]
+tags: 生活
 ---
 
 和两个朋友聊天。

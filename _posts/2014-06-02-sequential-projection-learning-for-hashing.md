@@ -2,6 +2,7 @@
 layout: post
 title: 论文阅读笔记Sequential Projection Learning for Hashing
 categories: [Image Retrieval]
+tags: 哈希
 ---
 
 >真不能再挖坑了，前面挖聊很多坑都没来得及填，从今往后，能写多少就是多少。Sequential projection learning for hashing这篇文章去年就阅读了，当时阅读完没来得及做笔记，这一段时间又重新拿来品读了一年天，并对其中的公式进行了推导，这篇文章作者主页上有slide，讲得挺好的。下面是自己的一些推导，由于公式编辑起来不急手写得快，所以就用笔记代替了。

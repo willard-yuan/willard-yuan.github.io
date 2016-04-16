@@ -2,6 +2,7 @@
 layout: post
 title: 让生活更美好的OS工具
 categories: [资源集合]
+tags: 资源
 ---
 
 本着以使生活更美好的原则，记录一些本小子觉得比较好使的高效工具。

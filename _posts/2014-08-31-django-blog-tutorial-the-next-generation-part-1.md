@@ -2,6 +2,7 @@
 layout: post
 title: Django blog教程-下一個版本-第一部分
 categories: [Django]
+tags: Django
 ---
 
 我在博客里写的关于博客引擎的系列教程到目前为止收到了极大的欢迎,我收到了很多人询问我的一些问题,或者仅仅只是表达他们的感谢,对此,我十分的感谢.

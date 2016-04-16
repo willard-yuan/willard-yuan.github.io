@@ -2,6 +2,7 @@
 layout: post
 title: CSS调整图片居中显示
 categories: [前端设计]
+tags: 前端
 ---
 
 在wordpress中，虽然有将图片居中显示的可视化调整工具，但每次调整每张图片都要做调整总是一件很繁琐的事情。这几天，本小子一直在寻找本博客中博文出现的图片居中显示的方法，一直到今天，总算搞定了这事，这里要非常感谢这篇文章[《How to center images with CSS》](http://imagecss.com/center.html)。嘿嘿，本小子现在遇到问题事，渐渐喜欢上了用英文放狗搜。

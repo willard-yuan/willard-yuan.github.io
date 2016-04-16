@@ -2,6 +2,7 @@
 layout: post
 title: Code Guide-规范自我编程风格
 categories: [编程规范]
+tags: 规范
 ---
 
 ## 项目命名

@@ -2,6 +2,7 @@
 layout: post
 title: 使用Dlib开源库做object detection
 categories: [Machine Learning]
+tags: Dlib
 ---
 
 >D-lib：A toolkit for making real world machine learning and data analysis applications in C++。

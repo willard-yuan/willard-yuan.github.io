@@ -2,6 +2,7 @@
 layout: post
 title: CNN for image retrieval
 categories: [Image Retrieval]
+tags: CNN,图像检索
 ---
 
 ## 背景

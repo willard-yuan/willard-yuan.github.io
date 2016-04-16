@@ -2,6 +2,7 @@
 layout: post
 title: Deep Learning for Content-Based Image Retrieval
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 到目前为止，DL用于CBIR这类文章还是挺少的。下面是自己搜集到的DL用于CBIR方面的一些文章。

@@ -2,6 +2,7 @@
 layout: post
 title: Python graph安装出错
 categories: [Python]
+tags: Python
 ---
 
 今天安装Python graph时不论在实验室的电脑上还是在自己的电脑上，都报出下面错误：

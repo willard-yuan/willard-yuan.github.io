@@ -2,6 +2,7 @@
 layout: post
 title: Jekyll写作技巧小札
 categories: [Jekyll]
+tags: Jekyll
 ---
 
 今天本小子又发现新大陆了，[jekyllrb](http://jekyllrb.com/),对应的中文文档为[jekyllcn](http://jekyllcn.com/),感谢这帮帅小伙助力开源，世界因开源精神更美好。本小子通读了翻译的文档，发觉关于Jekyll的很多知识点本小子都没注意到，所以对那份文档做些读后笔记，方便需用之时查询。

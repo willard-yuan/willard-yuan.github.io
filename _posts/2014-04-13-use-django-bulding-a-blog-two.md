@@ -2,6 +2,7 @@
 layout: post
 title: Django开发简易博客(二)
 categories: [Django]
+tags: Django
 ---
 
 ## admin连结并激活

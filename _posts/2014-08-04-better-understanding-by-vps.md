@@ -2,6 +2,7 @@
 layout: post
 title: 通过VPS加深对Linux命令的一些理解
 categories: [Linux]
+tags: Linux
 ---
 
 ## `ps aux`和`ps -ef`的区别

@@ -2,6 +2,7 @@
 layout: post
 title: ANN(Approximate Nearest Neighbor)搜索
 categories: [Image Retrieval,Machine Learning]
+tags: ANN
 ---
 
 目前ANN近似近邻搜索有两种比较流行的方法：树方法和哈希方法。

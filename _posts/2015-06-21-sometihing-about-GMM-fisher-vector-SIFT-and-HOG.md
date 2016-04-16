@@ -2,6 +2,7 @@
 layout: post
 title: GMM、fisher vector、SIFT与HOG特征资料
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 ## GMM与fisher vector理解

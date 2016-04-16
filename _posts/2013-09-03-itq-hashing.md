@@ -2,6 +2,7 @@
 layout: post
 title: 论文阅读笔记Iterative Quantization
 categories: [Image Retrieval]
+tags: 哈希
 ---
 
 

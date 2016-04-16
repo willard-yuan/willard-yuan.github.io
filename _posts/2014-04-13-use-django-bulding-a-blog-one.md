@@ -2,6 +2,7 @@
 layout: post
 title: Django开发简易博客(一)
 categories: [Django]
+tags: Django
 ---
 
 看了好长一段时间的Python和Djanggo框架，毫无水涨船高之势。借着周末的时间，开始实战练习。计划通过搭建一个完整的博客系统，将学的离散的Python、Django、HTML、CSS、Bootstrap知识串起来。好了，回归正题，开始开发之旅吧。

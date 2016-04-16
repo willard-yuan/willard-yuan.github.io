@@ -2,6 +2,7 @@
 layout: post
 title: Clustering Pixels Using K-Means
 categories: [Machine Learning]
+tags: 机器学习
 ---
 
 在K-Means Using Python中，给出了一个用K-Means聚类的tutorial，这次将K-Means用在具体图像像素聚类中，需要说明的是除了在很简单的图像上，单纯在像素值上应用K-Means给出的结果是毫无意义的。要产生有意义的结果，需要更多复杂的类模型或空间一致性而不是平均像素色彩。这里，我们仅仅在RGB三通道像素值上运用K-Means，关于图像分割问题会在后面的学习过程中将给出一些笔记与示例。

@@ -2,6 +2,7 @@
 layout: post
 title: django-markdown使用实例
 categories: [Django]
+tags: Django
 ---
 
 最近在开发虫虫读书的时候,想为它添加markdown语法支持.在github上搜了一下,发觉[django_markdown](https://github.com/klen/django_markdown)差不多是django的主流选择.今晚在看[Building a Blog with Django 1.7 in 16 mins](http://www.youtube.com/watch?v=7rgph8en0Jc)恰好里面也用到了django-markdown,于是结合文档说明与视频,初步实现了后台编辑文本时的markdown语法支持.

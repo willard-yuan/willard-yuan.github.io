@@ -2,6 +2,7 @@
 layout: post
 title: 大二寝室联合聚餐
 categories: [Life]
+tags: 大学
 ---
 
 真的没有想到在这样一个相对封闭的环境里竟然可以将沙沙她们请过来聚餐。

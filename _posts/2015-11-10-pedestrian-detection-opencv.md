@@ -2,6 +2,7 @@
 layout: post
 title: 【译】OpenCV行人检测
 categories: [计算机视觉]
+tags: OpenCV
 ---
 
 >本文翻译自：[Pedestrian Detection OpenCV](https://www.pyimagesearch.com/2015/11/09/pedestrian-detection-opencv/)。

@@ -2,6 +2,7 @@
 layout: post
 title: 通过audiojs为网页添加背景音乐
 categories: [前端设计]
+tags: 前端
 ---
 
 前一段时间捣鼓了一个好玩的网页，在网页调整得差不多了后，结合网页自身的内容，便想着要是能够在打开网页时自动播放背景音乐话，效果应该很perfect，然后又开始了没完的折腾。谷歌搜了老长时间，终于找到一个很不错的js插件[audiojs](http://kolber.github.io/audiojs/),看了一下主页上给的文档说明及使用示例，把它用到自己的小项目[love](https://github.com/willard-yuan/love)里，应该无压力。于是找了一首自己很喜欢的《卡农》背景音乐，下面是整个移植过程的详细说明。

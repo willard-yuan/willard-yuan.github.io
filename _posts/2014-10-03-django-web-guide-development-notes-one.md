@@ -2,6 +2,7 @@
 layout: post
 title: Django web开发指南阅读笔记(一)
 categories: [Django]
+tags: Django
 ---
 
 ## SQL和关系数据库

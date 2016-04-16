@@ -2,6 +2,7 @@
 layout: post
 title: Python基础知识小札一
 categories: [Python]
+tags: Python
 ---
 
 这是收录本小子学习Python中学习到的基础知识小札系列，主要方便本小子查阅以及温习。

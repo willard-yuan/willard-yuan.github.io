@@ -2,6 +2,7 @@
 layout: post
 title: Papars已读列表
 categories: [Machine Learning]
+tags: 机器学习
 ---
 
 对本小子读过的文章做个已读列表，方便自己查阅那些文章自己已读。

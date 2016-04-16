@@ -2,6 +2,7 @@
 layout: post
 title: Mac下安装OpenCV3.0和Anaconda
 categories: [Python]
+tags: OpenCV
 ---
 
 入手Mac几天了，想在Mac OS下玩玩OpenCV和keras，间歇捣鼓了两天，终于搞定zsh、OpenCV3.0以及Anaconda。OpenCV3.0刚发布不久，这方面的资料也不是很多，能够查到的一篇配置OpenCV3.0和Python2.7.x的博客[Install OpenCV 3.0 and Python 2.7+ on OSX](https://www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/)，讲得很细致，我读完一遍后觉得配置得有些繁琐，并且没有Anaconda，所以自己花时间琢磨了两天，记录一下配置过程，方便自己和小伙伴们查阅。

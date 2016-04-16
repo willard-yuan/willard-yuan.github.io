@@ -2,6 +2,7 @@
 layout: post
 title: caffe配置中的一些问题
 categories: [Machine Learning]
+tags: Caffe
 ---
 
 一直想将DL用于自己目前研究的image retrieval中，实际上，本小子在之前的博文[Deep Learning for Content-Based Image Retrieval](http://yongyuan.name/blog/deep-learning-for-cbir.html)关于用DL做检索的paper也做了些调研。可以看出，虽然DL现在很火，但是将其用于image retrieval似乎还并不多。这连天正好忙里偷闲，在Ubuntu12.04中把caffe捣鼓了一番，成功，只能说配置起来真的很egg pain。下面是自己在配置过程中出现的一些问题，配置的时候自己特地做了笔记，便于后面查阅。

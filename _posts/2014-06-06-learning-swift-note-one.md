@@ -2,6 +2,7 @@
 layout: post
 title: swift学习笔记（1）
 categories: [Swift]
+tags: Swift
 ---
 
 前几天WWDC上库克发布了swift变成语言，网上关于swift褒贬不一。不管对新发布的苹果开发语言如何，本小子乐意一学，有moneny也入手一台苹果笔记本去搞下ios开发。

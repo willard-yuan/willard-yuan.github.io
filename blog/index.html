@@ -22,9 +22,11 @@ category: blog
 		{% assign year = y %}
 		<span class="listing-seperator">{{ y }}</span>
 	  {% endif %}
-    <div class = "post-link-in-posts">
-    <a  id = "uniqueid" class="listing-item" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></a>
-    </div>
+    <a class='post-link-in-posts' href="{{ site.url }}{{ post.url }}">
+        <span class='date'>{{ post.date | date_to_string }}</span>
+        <span class='article'>{{ post.title }}</span>
+        <strong class='tag'>{{ post.tags | first }}</strong>
+    </a>
     {% endfor %}
   </ul>
 </section>

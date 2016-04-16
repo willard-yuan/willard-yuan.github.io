@@ -2,6 +2,7 @@
 layout: post
 title: 用shadowbox.js为图片添加阴影效果
 categories: [前端设计]
+tags: 前端设计
 ---
 
 正如本小子在博客[ABOUT](http://yuanyong.org/blog/about/)里描述的，本小子对排版有永不止境的追求。本小子平时有事没事会打开自己的博客，看看博客排版哪里还需要改进的。前段时间发觉自己对JS突然有感觉了，通过读读文档，基本可以实现自己想要的功能。真正开始用JS添加页面效果还是从这篇文章开始的[通过audiojs为网页添加背景音乐](http://yuanyong.org/blog/add-background-music-by-audiojs.html)。

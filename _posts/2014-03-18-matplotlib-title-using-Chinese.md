@@ -2,6 +2,7 @@
 layout: post
 title: Python title()中文标题支持
 categories: [Python]
+tags: Python
 ---
 
 晚上调试[《Programming Computer Vision with Python》](http://yuanyong.org/pcvwithpython/)中的代码时，对于图显示的标题，一直都是用英文标识的。Matplotlib这货默认不支持中文，上星期在`title()`中用中文标识时，蹦出一黑黑的屏和一堆错误，当时本小子正忙着折腾别的，由于标题部分不长，不影响美观，就直接用英文把问题给绕开了。

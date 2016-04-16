@@ -2,6 +2,7 @@
 layout: post
 title: GitHub上一些有用的Repositories
 categories: [资源集合]
+tags: Github
 ---
 
 再给自己挖个坑，发觉截止目前为止，自己给自己挖了好多的坑。不纠结了，先挖。

@@ -2,6 +2,7 @@
 layout: post
 title: 图像检索常用图像库整理
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 >此篇博文里的大部分内容来源于我在知乎上对[**做图像检索，图像库从哪儿能下载到？**](https://www.zhihu.com/question/25039851)问题的回答。
@@ -30,7 +31,7 @@ categories: [Image Retrieval]
 
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/201Books-CTurin180_zpszobkezdb.jpg)
 
-- **Stanford Mobile Visual Search**，Stanford Mobile Visual Search Dataset，2011.2，stanford提供，包括8种场景，如CD封面、油画等，每组相关图片都是采自不同相机（手机），所有场景共500张图，[链接](https://purl.stanford.edu/rb470rw0983)；随后又发布了一个[patch数据集](https://link.zhihu.com/?target=http%3A//blackhole1.stanford.edu/ivms/Datasets.htm)，Compact Descriptors for Visual Search Patches Dataset，校对了相同patch。 
+- **Stanford Mobile Visual Search**，Stanford Mobile Visual Search Dataset，2011.2，stanford提供，包括8种场景，如CD封面、油画等，每组相关图片都是采自不同相机（手机），所有场景共500张图，[链接](https://purl.stanford.edu/rb470rw0983)；随后又发布了一个[patch数据集](https://link.zhihu.com/?target=http%3A//blackhole1.stanford.edu/ivms/Datasets.htm)，Compact Descriptors for Visual Search Patches Dataset，校对了相同patch。
 
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Stanford-Mobile_zpscktap7us.jpg)
 

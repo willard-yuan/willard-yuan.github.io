@@ -2,6 +2,7 @@
 layout: post
 title: K-Means Using Python
 categories: [Python,Machine Learning]
+tags: 机器学习
 ---
 
 最近在翻译[《Programming Computer Vision with Python》](http://programmingcomputervision.com/)第六章Clustering Images图像聚类，其中用到了k-means聚类算法，这里根据书中给出的实例对用python进行k-means聚类做一些解释。关于k-means聚类算法的原理，这里不细述，具体原理可以查阅相关资料。

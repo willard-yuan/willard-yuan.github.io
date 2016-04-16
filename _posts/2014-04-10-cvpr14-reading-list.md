@@ -2,6 +2,7 @@
 layout: post
 title: CVPR14图像检索文章
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 [CVPR14](http://www.cvpapers.com/cvpr2014.html)年关于图像检索方面的papers,汇总成一个list,方便阅读。

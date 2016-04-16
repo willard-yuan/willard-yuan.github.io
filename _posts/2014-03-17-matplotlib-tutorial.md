@@ -2,6 +2,7 @@
 layout: post
 title: Matplotlib指南
 categories: [Python]
+tags: Python
 ---
 
 >本小子最近这几天在做一个关于Python科学计算方面的讲稿，做完Python简介部分后，核心的关于科学计算部分烦难了。编程语言这东西，讲起来着实不是一件好差事。想当年本小子大一上C课程的时候，叫我们C的老师绝对是催眠的好手，一堂课还没上到半个小时，下面听趴一片，那时绝对的NB。所以，本小子想通过一些具体的实例，结合实验室研究方向做一些Python方面的介绍与演示。Python科学计算这部分，其实自己了解得不多，而且国内关于这方面的中文资料更是少之又少。今天在查Matplotlib模块时，发觉了一个不错的译文资料。这么好的译文资料，竟然雪藏了。那个Python八荣八耻最后一条怎么说来着，“以总结分享为荣”，本小子偷偷地把它扒过来了，又犯罪了，囧。不过，本小子还是需要再一次的郑重申明，本译文来自[\[Reverland的知行阁\]](http://reverland.org/python/2012/09/07/matplotlib-tutorial/#ipython--pylab)
@@ -47,7 +48,7 @@ X现在是一个numpy数组，包含从-π到+π(包含π)等差分布的256个�
 
 ```bash
 [lyy@arch ~]$ ipython2 --pylab
-Python 2.7.3 (default, Apr 24 2012, 00:00:54) 
+Python 2.7.3 (default, Apr 24 2012, 00:00:54)
 Type "copyright", "credits" or "license" for more information.
 
 IPython 0.13 -- An enhanced Interactive Python.
@@ -168,7 +169,7 @@ yticks([-1, 0, +1])
 ```python
 xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
        [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
-    
+
 yticks([-1, 0, +1],
        [r'$-1$', r'$0$', r'$+1$'])
 ```
@@ -198,7 +199,7 @@ ax.spines['left'].set_position(('data',0))
 ```python
 plot(X, C, color="blue", linewidth=2.5, linestyle="-", label="cosine")
 plot(X, S, color="red",  linewidth=2.5, linestyle="-", label="sine")
-    
+
 legend(loc='upper left')
 ```
 
@@ -252,7 +253,7 @@ _Note:这一段很绕，我不知道该怎么翻译好。在matplotlib中axes容
 |参数 |	默认 |	描述|
 |--------|--------------|------------------|
 |num |	1 |	图像编号|
-|figsize |	figure.figsize |图像大小(宽度，高度)(英寸)|	
+|figsize |	figure.figsize |图像大小(宽度，高度)(英寸)|
 |dpi |	figure.dpi |每英寸分辨率|
 |facecolor| 	figure.facecolor |	背景色|
 |edgecolor| 	figure.edgecolor |绘图背景边沿色|
@@ -321,11 +322,11 @@ _Note:这一段很绕，我不知道该怎么翻译好。在matplotlib中axes容
 
 ```python
 from pylab import *
-    
+
 n = 256
 X = np.linspace(-np.pi,np.pi,n,endpoint=True)
 Y = np.sin(2*X)
-    
+
 plot (X, Y+1, color='blue', alpha=1.00)
 plot (X, Y-1, color='blue', alpha=1.00)
 show()
@@ -342,11 +343,11 @@ show()
 
 ```python
 from pylab import *
-    
+
 n = 1024
 X = np.random.normal(0,1,n)
 Y = np.random.normal(0,1,n)
-    
+
 scatter(X,Y)
 show()
 ```
@@ -389,14 +390,14 @@ show()
 
 ```python
 from pylab import *
-    
+
 def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
-    
+
 n = 256
 x = np.linspace(-3,3,n)
 y = np.linspace(-3,3,n)
 X,Y = np.meshgrid(x,y)
-    
+
 contourf(X, Y, f(X,Y), 8, alpha=.75, cmap='jet')
 C = contour(X, Y, f(X,Y), 8, colors='black', linewidth=.5)
 show()
@@ -413,9 +414,9 @@ show()
 
 ```python
 from pylab import *
-    
+
 def f(x,y): return (1-x/2+x**5+y**3)*np.exp(-x**2-y**2)
-    
+
 n = 10
 x = np.linspace(-3,3,4*n)
 y = np.linspace(-3,3,3*n)
@@ -434,7 +435,7 @@ imshow(f(X,Y)), show()
 
 ```python
 from pylab import *
-    
+
 n = 20
 Z = np.random.uniform(0,1,n)
 pie(Z), show()
@@ -451,7 +452,7 @@ pie(Z), show()
 
 ```python
 from pylab import *
-    
+
 n = 8
 X,Y = np.mgrid[0:n,0:n]
 quiver(X,Y), show()
@@ -468,13 +469,13 @@ quiver(X,Y), show()
 
 ```python
 from pylab import *
-    
+
 axes = gca()
 axes.set_xlim(0,4)
 axes.set_ylim(0,3)
 axes.set_xticklabels([])
 axes.set_yticklabels([])
-    
+
 show()
 ```
 点击图像获取答案。
@@ -487,11 +488,11 @@ show()
 
 ```python
 from pylab import *
-    
+
 subplot(2,2,1)
 subplot(2,2,3)
 subplot(2,2,4)
-    
+
 show()
 ```
 提示：你可以对不同部分使用几个subplot命令。
@@ -534,7 +535,7 @@ show()
 ```python
 from pylab import *
 from mpl_toolkits.mplot3d import Axes3D
-    
+
 fig = figure()
 ax = Axes3D(fig)
 X = np.arange(-4, 4, 0.25)
@@ -542,9 +543,9 @@ Y = np.arange(-4, 4, 0.25)
 X, Y = np.meshgrid(X, Y)
 R = np.sqrt(X**2 + Y**2)
 Z = np.sin(R)
-    
+
 ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='hot')
-    
+
 show()
 ```
 提示：你需要使用[contourf](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.contourf)命令。

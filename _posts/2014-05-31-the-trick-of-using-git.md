@@ -2,6 +2,7 @@
 layout: post
 title: Ubuntu下git使用教程
 categories: [Git]
+tags: Git
 ---
 
 ## 安装git

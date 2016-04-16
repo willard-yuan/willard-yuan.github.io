@@ -1,7 +1,8 @@
 ---
 layout: post
 title: 2015年部分互联网公司笔试综合题及答案
-categories: [Life]
+categories: [面试]
+tags: 面试
 ---
 
 笔试了几场，对部分题目做了下整理与总结，代码写得比较渣，需要多多训练。

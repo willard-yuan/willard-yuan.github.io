@@ -2,6 +2,7 @@
 layout: post
 title: All about VLAD笔记
 categories: [Image Retrieval]
+tags: 图像检索
 ---
 
 正如标题所示，这里将记录VLAD的一切。VLAD本小子虽然也读过几篇这方面的paper，不过读的时候一直理解的很粗糙。所以想借此机会开个帖子，一方面驱动自己去加深对它的理解，另一方面把这些自己对它的理解记录下来，方便自己查阅。

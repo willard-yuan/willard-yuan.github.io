@@ -2,6 +2,7 @@
 layout: post
 title: BoW图像检索Python实战
 categories: [Image Retrieval]
+tags: 词袋模型
 ---
 
 前几天把[HABI哈希图像检索工具包](http://yongyuan.name/habir/)更新到V2.0版本后，小白菜又重新回头来用Python搞BoW词袋模型，一方面主要是练练Python，另一方面也是为了CBIR群开讲的关于图像检索群活动第二期而准备的一些素材。关于BoW，网上堆资料讲得挺好挺全的了，小白菜自己在曾留下过一篇讲解BoW词袋构建过程的博文[Bag of Words模型](http://yongyuan.name/blog/bag-of-word-model.html)，所以这里主要讲讲BoW的实战。不过在实战前，小白菜还想在结合自己这两年多BoW的思考和沉淀重新以更直白的方式对BoW做一下总结。

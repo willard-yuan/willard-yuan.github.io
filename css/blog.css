@@ -236,9 +236,8 @@ ul.posts li {
     display: block;
     padding: 0.8em 0px 0.8em 0px;
     text-decoration: none;
-    border-bottom:1px dashed #d0d0d0;
     /* color: #a00;*/
-    color: #555; 
+    color: #555;
     font-weight: 800;
 }
 .listing-item a {
@@ -290,8 +289,7 @@ padding-top: 20px;
 ul.posts .date {
   margin-right: 0.3em;
   display: inline-block;
-  color: #666;
-  font-family: "sans-serif";
+  font-family: "Roboto",sans-serif;
 }
 
 ul.posts .description {
@@ -414,7 +412,62 @@ img[alt=drawing] { width: 60%; }
   background: #e74c3c;
 }
 
-.post-link-in-posts{
+.post-link-in-posts {
+    display: block;
+    overflow: hidden;
+    list-style-type: none;
+    display: block;
+    padding: 0.8em 0px 0.8em 0px;
+    text-decoration: none;
+    border-bottom: 1px dashed #d0d0d0;
+    /* color: #a00; */
+    color: #555;
+    font-weight: 800;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.post-link-in-posts .date {
+    width: 140px;
+    font-size: 0.8em;
+    color: #939aa1;
+    display: block;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts .date, .post-link-in-posts article {
+    float: left;
+}
+
+.post-link-in-posts .article {
+    color: #555;
+    margin-right: 3px;
+    transition: all 100ms linear;
+}
+
+.post-link-in-posts:hover .article {
+    color: #1EA3FF;
+}
+
+.post-link-in-posts .tag {
+    color: #939aa1;
+    font-weight: normal;
+    font-size: 0.8em;
+    float: right;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts .date, .post-link-in-posts .tag {
+    margin-top: 0.2em;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts .tag {
+    float: right;
 }
 
 /*添加博文上一篇下一篇功能*/

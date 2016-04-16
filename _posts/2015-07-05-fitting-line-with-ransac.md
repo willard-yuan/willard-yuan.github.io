@@ -2,6 +2,7 @@
 layout: post
 title: RANSAC算法做直线拟合
 categories: [Machine Learning]
+tags: 机器学习
 ---
 
 RANSAC算法之前了解过相关的原理，这两天利用晚上闲暇的时间，看了一下RANSAC算法的Python代码实现，这方面的资料很多了，这里就不在重复。在分析该[RANSAC.py](http://wiki.scipy.org/Cookbook/RANSAC)代码之前，想用自己的对RANSAC的理解对其做下总结。
