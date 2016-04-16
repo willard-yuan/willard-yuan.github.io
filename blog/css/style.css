@@ -41,8 +41,10 @@ h2:before {
 ::-moz-selection{background:#2ecc71;color:white}
 ul{margin:0;padding:0}
 .post ul, .post ol {
-    padding-left: 1em;
     text-align: justify;
+    list-style-type: none;
+    padding: 0 0 0 0px;
+}
 }
 
 /*设置博文的容器*/
