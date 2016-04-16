@@ -12,7 +12,7 @@ categories: [Life]
 
 当教室闹声渐息时，顿时便被背景乐深深的触动了，刚开始还以为是[《Scarborough Fair》](http://v.youku.com/v_show/id_XMTAwMTk5NDg0.html),不过模模糊糊看到屏幕下的歌词重复了很多次“carry on till tomorrow”,便用标签记下了关键词。回寝室Google找到了这首天籁之音——《Carry on Till Tomorrow》，从音韵的风格上来听，《Scarborough Fair》和《Carry on Till Tomorrow》个人感受还是极其相似的，都充满了些许感伤和浓浓的岁月沧桑感。《Carry on Till Tomorrow》，就这样与你不期而遇。
 
-<object width="526" height="374">
+<object width="800" height="600">
 <param name="movie" value="http://player.youku.com/player.php/sid/XMzkzODI1NDQ=/v.swf"></param>
 <param name="allowFullScreen" value="true" />
 <param name="allowScriptAccess" value="always"/>
