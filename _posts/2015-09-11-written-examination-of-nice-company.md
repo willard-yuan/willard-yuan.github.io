@@ -21,10 +21,8 @@ categories: [面试]
 答：http属于OSI网络模型中的应用层，可以阅读[TCP/IP协议族](https://zh.wikipedia.org/wiki/TCP/IP%E5%8D%8F%E8%AE%AE%E6%97%8F)、[HTTP协议详解](http://blog.csdn.net/gueter/article/details/1524447)、[TCP/IP详解学习笔记（13）-- TCP连接的建立与终止](http://www.cnblogs.com/newwy/p/3234536.html)、[TCP/IP 相关知识点与面试题集](http://www.cnblogs.com/obama/p/3292335.html)这几个相关知识。SSL有认为属于OSI模型传输层和应用层之间的，比如[ssl工作在OSI的哪一层 ](http://blog.chinaunix.net/uid-14488638-id-2802670.html)，也有认为是属于传输层的：
 
 >In the OSI model it's less defined because encryption is in Layer 6 and session control is in Layer 5. HTTPS (layer 7) uses SSL and SSL (Layers 5/6) uses TCP (Layer 4). SSL negotiation actually starts in Layer 5 and the encrypted tunneling kicks in after the SSL handshake is successful, so I would call SSL an OSI Layer 5 protocol.
-
->According to the AIO, 6th edition (p. 531), SSL and TLS work at the transport layer of the OSI model. 
-
->According to CISSP for Dummies (p. 259), "SSL operates at the Transport Layer (Layer 4) of the OSI model..."
+According to the AIO, 6th edition (p. 531), SSL and TLS work at the transport layer of the OSI model.
+According to CISSP for Dummies (p. 259), "SSL operates at the Transport Layer (Layer 4) of the OSI model..."
 
 上面讨论的内容可以阅读[SSL is on a Transport Layer or Application Layer](http://www.techexams.net/forums/isc-sscp-cissp/101590-ssl-transport-layer-application-layer.html)。
 
