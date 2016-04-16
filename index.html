@@ -56,10 +56,10 @@ description: I am Yong Yuan. Willard is my English Name, which means great brave
     {% else %}{{ post.date | date: "%b" }}
     {% endcase %}
     {% case d %}
-    {% when '01' or '21' or '31' %}{{ %d }}st
-    {% when '02' or '22' %}{{ %d }}nd
-    {% when '03' or '23' %}{{ %d }}rd
-    {% else %}{{ %d }}th
+    {% when '01' or '21' or '31' %}{{ %d }}<!--st-->
+    {% when '02' or '22' %}{{ %d }}<!--nd-->
+    {% when '03' or '23' %}{{ %d }}<!--rd-->
+    {% else %}{{ %d }}<!--th-->
     {% endcase %},
     {{ post.date | date: "%Y" }}</small><a  href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
     </li>
