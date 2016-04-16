@@ -1,10 +1,10 @@
 ---
 layout: post
-title: OpenCV行人检测
+title: 译: OpenCV行人检测
 categories: [计算机视觉]
 ---
 
-***注***：本文翻译自：[Pedestrian Detection OpenCV](https://www.pyimagesearch.com/2015/11/09/pedestrian-detection-opencv/)。
+>本文翻译自：[Pedestrian Detection OpenCV](https://www.pyimagesearch.com/2015/11/09/pedestrian-detection-opencv/)。
 
 你知道OpenCV里面已经内置的行人检测方法吗？在OpenCV里面，有一个预先训练好了的HOG+线性SVM模型，能够对图像和视频中的行人进行检测。如果你还不熟悉方向梯度直方图HOG和线性SVM方法，我建议你阅读[方向梯度直方图和物体检测](http://www.pyimagesearch.com/2014/11/10/histogram-oriented-gradients-object-detection/)这篇文章，在这篇文章中，我对该框架分了6步进行讨论。
 
