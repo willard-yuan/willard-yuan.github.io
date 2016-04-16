@@ -10,8 +10,7 @@ RANSAC算法之前了解过相关的原理，这两天利用晚上闲暇的时�
 
 在[Cookbook/RANSAC](http://wiki.scipy.org/Cookbook/RANSAC)中给出的是一个用RANSAC做直线拟合的例子。这个例子非常的直观，而且代码也很简短易懂，为便于后面详细解读该代码，这里把它贴出来：
 
-<div class="preserve-original-format">
-{% highlight python linenos %}
+```python
 # -*- coding: utf-8 -*-
 import numpy
 import scipy # use numpy if scipy unavailable
@@ -173,8 +172,7 @@ def test():
 
 if __name__=='__main__':
     test()
-{% endhighlight %}
-</div>
+```
 
 上面代码跟原版的代码相比，我删除了一些冗余的东西。在`test()`中做的是直线拟合。在看`test()`部分之前，我们先来看看RANSAC部分的代码，传入RANSAC函数中的参数有8个，前面6个是比较重要的。`data`就是全部的数据点集，`model`注释里给出的是拟合点集的模型，放到这个直线拟合的实例下，就是斜率，`n`就是拟合时所需要的最小数据点数目，放在这里直线拟合的例子中，就是用于选取的用于去做直线拟合的数据点数目，`k`就是最大允许的迭代次数，`t`是人为设定的用于判断误差接受许可的范围。这几个参数的含义知道了，剩下的就是理解`while`循环里面的内容了。在每一次循环中，选对所有的数据点做一个随机的划分，将数据点集分成两堆，分别对应`maybeinliers`和`test_points`，`maybeinliers`这部分数据用于做直线拟合，这里直线拟合采用的是最小二乘法，得到拟合到的直线的斜率`maybemodel`，然后用该直线及测试数据的横坐标去估计测试数据的纵坐标，也就是在该模型下测试数据的估计值，测试数据的估计值和测试数据的真实值做一个平方和便得到误差，将得到的误差分别和设定的可接受误差进行判断，在误差范围内的判定为inlier，否者判断为outlier。当inliers的数目达到了设定的数目的要求是，再讲inliers和maybeinliers放一下再做一下最小二乘拟合，便得到最终的最佳斜率了。
 
