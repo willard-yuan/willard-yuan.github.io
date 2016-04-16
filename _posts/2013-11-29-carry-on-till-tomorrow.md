@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 音乐: Carry on Till Tomorrow
+title: 音乐Carry on Till Tomorrow
 categories: [Life]
 ---
 
@@ -21,8 +21,8 @@ categories: [Life]
 <embed src="http://player.youku.com/player.php/sid/XMzkzODI1NDQ=/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 </object>
 
----
 有人说80后是怀旧的一代，容颜未老心却早衰。从《李雷雷和韩梅梅》、《老男孩》到电影《致我们终将逝去的青春》、《中国合伙人》、《青春派》.......80后在应对和适应过程中，呈现“早衰”心态，从而通过怀旧去暂时性规避现实，寻求现世安稳的心理慰藉。借用一句话，"怀旧是一种丧失和位移"。知乎上有人就“近几年为何主打怀旧主题的校园电影容易走入大众？”校园回忆成为最佳避难所给出了一些原因：
+
 >一、校园环境简单纯粹，远离社会纷争，做人做事相对容易，可以说是迟暮之心最安全的栖息地。</br>
 二、校园生活是青春期重要组成部分，青春期是人之一生最特殊的一段历程，往往历经动荡和蜕变后步入下一个心智阶段。</br>
 三、校园生活涵盖了普罗大众的许多第一次，这足以激活80后普遍所负载的反思型怀旧——如果一切能重来（俄裔女学者斯维特兰娜-博伊姆《怀旧的未来》一书界定怀旧有两种：修复性的怀旧、反思型的怀旧）。
@@ -34,9 +34,10 @@ categories: [Life]
 ## 艺术感染力
 
 音美，词亦美。现在很难找到词和乐都这么有感染力的歌曲了，而且还是原创。
->In younger days, I told myself my life would be my own</br>
-在年轻的日子里，我告诉自己我将有属于自己的生活</br>
-And I'd leave the place where sunshine never shone</br>
+
+>In younger days, I told myself my life would be my own
+在年轻的日子里，我告诉自己我将有属于自己的生活
+And I'd leave the place where sunshine never shone
 而且我要离开这阳光照不到的地方</br>
 For my life's too short for waiting when I see the rising sun</br>
 我的生命没有时间等待，当我看见升起的太阳那时</br>

@@ -15,8 +15,9 @@ kramdown:
     - autolink
     - footnotes
     - smart
+hard_wrap: false
 #  use_coderay: true
-#  syntax_highlighter: rouge
+syntax_highlighter: rouge
 #  coderay:
 #  coderay_line_numbers:  nil
 
