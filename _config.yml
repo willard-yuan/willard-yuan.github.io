@@ -20,10 +20,6 @@ kramdown:
 #  coderay:
 #  coderay_line_numbers:  nil
 
-# Keybase
-include:
-  - .well-known
-
 # White-listed plugins
 gems:
   - jekyll-sitemap
