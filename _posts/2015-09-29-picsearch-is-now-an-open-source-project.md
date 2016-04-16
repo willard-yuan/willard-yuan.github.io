@@ -5,6 +5,7 @@ categories: [Image Retrieval]
 ---
 
 ##Brief introduction
+
 **PicSearch** is an image search engine based on Convolutional Neural Network (CNN) feature. It's a very simple demo and it just showes the performance of CNN for image retrieval. The demo site can access to [**demo**](http://search.yongyuan.name/).
 
 <object width="800" height="600">
@@ -17,6 +18,7 @@ categories: [Image Retrieval]
 </object>
 
 ##Download the code and dataset
+
 The PicSearch is running on Caltech256 image dataset, which contains 29780 images with 256 categories. Before running the project, you must download the following code and dataset:
 
 1. PicSearch [code](https://github.com/willard-yuan/CNN-Web-Demo-for-Image-Retrieval).
@@ -26,7 +28,8 @@ The PicSearch is running on Caltech256 image dataset, which contains 29780 image
 **Note**: to test it on other dataset, you must extract the features first. You can use [CNN-for-Image-Retrieval](https://github.com/willard-yuan/CNN-for-Image-Retrieval) to extract features on other dataset.
 
 ##How to run the code
-The code is written by Python, and the web server is cherrypy, so It's very easy to understand the code and to run the code. The structure of **PicSearch** is as follows: 
+
+The code is written by Python, and the web server is cherrypy, so It's very easy to understand the code and to run the code. The structure of **PicSearch** is as follows:
 
 ```sh
 ├── 256feat2048Norml.mat
