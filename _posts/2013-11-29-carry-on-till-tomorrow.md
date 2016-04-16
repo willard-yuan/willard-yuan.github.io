@@ -23,9 +23,11 @@ categories: [Life]
 
 有人说80后是怀旧的一代，容颜未老心却早衰。从《李雷雷和韩梅梅》、《老男孩》到电影《致我们终将逝去的青春》、《中国合伙人》、《青春派》.......80后在应对和适应过程中，呈现“早衰”心态，从而通过怀旧去暂时性规避现实，寻求现世安稳的心理慰藉。借用一句话，"怀旧是一种丧失和位移"。知乎上有人就“近几年为何主打怀旧主题的校园电影容易走入大众？”校园回忆成为最佳避难所给出了一些原因：
 
->一、校园环境简单纯粹，远离社会纷争，做人做事相对容易，可以说是迟暮之心最安全的栖息地。</br>
-二、校园生活是青春期重要组成部分，青春期是人之一生最特殊的一段历程，往往历经动荡和蜕变后步入下一个心智阶段。</br>
-三、校园生活涵盖了普罗大众的许多第一次，这足以激活80后普遍所负载的反思型怀旧——如果一切能重来（俄裔女学者斯维特兰娜-博伊姆《怀旧的未来》一书界定怀旧有两种：修复性的怀旧、反思型的怀旧）。
+> 一、校园环境简单纯粹，远离社会纷争，做人做事相对容易，可以说是迟暮之心最安全的栖息地。
+> 
+> 二、校园生活是青春期重要组成部分，青春期是人之一生最特殊的一段历程，往往历经动荡和蜕变后步入下一个心智阶段。
+>
+> 三、校园生活涵盖了普罗大众的许多第一次，这足以激活80后普遍所负载的反思型怀旧——如果一切能重来（俄裔女学者斯维特兰娜-博伊姆《怀旧的未来》一书界定怀旧有两种：修复性的怀旧、反思型的怀旧）。
 
 偶尔怀怀旧，想想曾经走过的美好青春没什么不好的，休管“容颜未老心已衰”，因为，We will carry on till tomorrow。
 
@@ -35,54 +37,118 @@ categories: [Life]
 
 音美，词亦美。现在很难找到词和乐都这么有感染力的歌曲了，而且还是原创。
 
->In younger days, I told myself my life would be my own
-在年轻的日子里，我告诉自己我将有属于自己的生活
-And I'd leave the place where sunshine never shone
-而且我要离开这阳光照不到的地方</br>
-For my life's too short for waiting when I see the rising sun</br>
-我的生命没有时间等待，当我看见升起的太阳那时</br>
-Then I know again that I must carry on</br>
-它又一次告诉我必须坚持下去</br>
-Carry on till tomorrow, there's no reason to look back</br>
-坚持到明天，那是没有理由再回想</br>
-Carry on, carry on, carry on</br>
-坚持到明天……</br>
-Beyond the shadows of the clouds and onward to the sky</br>
-在远处云层的黑影前进到天空</br>
-Carry on till I find the rainbow's end</br>
-让它坚持到我找到彩虹的尽头</br>
-For my life's too short for waiting when I see the setting sun</br>
-我的生命没有时间等待，当我看见西下的夕阳时</br>
-Then I know again that I must carry on</br>
-它又一次告诉我必须坚持下去</br>
-Carry on till tomorow, there's no reason to look back</br>
-坚持到明天，那是没有理由再回想</br>
-Carry on, carry on, carry on</br>
-坚持到明天……坚持到明天……坚持到明天……</br>
-Drifting on the wings of freedom, leave this stormy day</br>
-飘浮在自由的云上，离开那些日子</br>
-And we'll ride for tomorrow's golden fields</br>
-而且会飘浮到明日金色的田野上</br>
-For my life's too short for waiting when I see the setting sun</br>
-我的生命没有时间等待，当我看见西下的夕阳时</br>
-Then I know again that I must carry on</br>
-它又一次告诉我必须坚持下去</br>
-Carry on till tomorrow, there's no reason to look back</br>
-坚持到明天，那是没有理由再回想</br>
-Carry on, carry on, carry on</br>
-坚持到明天……坚持到明天……坚持到明天……</br>
-And when the heavy journey's done, I'll rest my weary head</br>
-当着沉重的旅行结束，我将休息我疲惫的头脑</br>
-For the world and it's colors will be bright</br>
-那是为了这个世界更加光明</br>
-For my life's too short for waiting when I see the setting sun</br>
-我的生命没有时间等待，当我看见西下的夕阳时</br>
-Then I know again that I must carry on</br>
-它又一次告诉我必须坚持下去</br>
-Carry on till tomorrow, there's no reason to look back</br>
-坚持到明天，那是没有理由再回想</br>
-Carry on, carry on, carry on</br>
-坚持到明天……坚持到明天……坚持到明天……</br>
+> In younger days, I told myself my life would be my own
+>
+> 在年轻的日子里，我告诉自己我将有属于自己的生活
+>
+>And I'd leave the place where sunshine never shone
+>
+>而且我要离开这阳光照不到的地方
+>
+>For my life's too short for waiting when I see the rising sun
+>
+>我的生命没有时间等待，当我看见升起的太阳那时
+>
+>Then I know again that I must carry on
+>
+>它又一次告诉我必须坚持下去
+>
+>Carry on till tomorrow, there's no reason to look back
+>
+>坚持到明天，那是没有理由再回想
+>
+>Carry on, carry on, carry on
+>
+>坚持到明天……
+>
+>Beyond the shadows of the clouds and onward to the sky
+>
+>在远处云层的黑影前进到天空
+>
+Carry on till I find the rainbow's end
+>
+>让它坚持到我找到彩虹的尽头
+>
+>For my life's too short for waiting when I see the setting sun
+>
+>我的生命没有时间等待，当我看见西下的夕阳时
+>
+>Then I know again that I must carry on
+>
+>它又一次告诉我必须坚持下去
+>
+>Carry on till tomorow, there's no reason to look back
+>
+>坚持到明天，那是没有理由再回想
+>
+>Carry on, carry on, carry on
+>
+>坚持到明天……坚持到明天……坚持到明天……
+>
+>Drifting on the wings of freedom, leave this stormy day
+>
+>飘浮在自由的云上，离开那些日子
+>
+>And we'll ride for tomorrow's golden fields
+>
+>而且会飘浮到明日金色的田野上</br>
+>
+>For my life's too short for waiting when I see the setting sun
+>
+>我的生命没有时间等待，当我看见西下的夕阳时
+>
+>Then I know again that I must carry on
+>
+>它又一次告诉我必须坚持下去
+>
+>Carry on till tomorrow, there's no reason to look back
+>
+>坚持到明天，那是没有理由再回想
+>
+>Carry on, carry on, carry on
+>
+>坚持到明天……坚持到明天……坚持到明天……
+>
+>And when the heavy journey's done, I'll rest my weary head
+>
+>当着沉重的旅行结束，我将休息我疲惫的头脑
+>
+>For the world and it's colors will be bright
+>
+>那是为了这个世界更加光明
+>
+>For my life's too short for waiting when I see the setting sun
+>
+>我的生命没有时间等待，当我看见西下的夕阳时
+>
+>Then I know again that I must carry on
+>
+>它又一次告诉我必须坚持下去
+>
+>Carry on till tomorrow, there's no reason to look back
+>
+>坚持到明天，那是没有理由再回想
+>
+>Carry on, carry on, carry on
+>
+>坚持到明天……坚持到明天……坚持到明天……
+
+$$
+\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+$$
 
 ## 关于Bad Fingers
 
