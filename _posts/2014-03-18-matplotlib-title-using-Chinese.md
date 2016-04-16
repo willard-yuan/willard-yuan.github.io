@@ -47,7 +47,6 @@ show()
 
 时间不早了，睡觉。
 
----
 Reference：
 
 [1]. [python中matplotlib绘图中文显示问题](http://blog.chinaunix.net/uid-26611383-id-3521248.html)

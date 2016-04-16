@@ -16,6 +16,7 @@ categories: [前端设计]
 Shadowbox.init();
 </script>
 ```
+
 在自己博客的`default.html`文件`<head>`标签之间采用上面的代码进行初始化，由于本小子的shadowbox不是放在根目录的，所以还要修改一下上面`href`和`src`的路径，具体如下：
 
 ```html
@@ -25,6 +26,7 @@ Shadowbox.init();
 Shadowbox.init();
 </script>
 ```
+
 修改完后，还要添加css样式。说到这，不得不提一下两个非常有用的网址：[Box-shadow, one of CSS3′s best new features](http://www.css3.info/preview/box-shadow/)和[BOX SHADOW](http://www.cssmatic.com/box-shadow)。前者对于理解shadowbox的参数设置非常有帮助，后者则是一个在线shadowbox阴影效果生成器，可视化，非常的方便。
 
 本小子在`main.css`的`img`添加了如下的阴影效果代码：
@@ -34,5 +36,6 @@ Shadowbox.init();
 -moz-box-shadow: 1px 4px 16px 8px #5CA2BE;
 box-shadow: 1px 4px 16px 8px #5CA2BE;
 ```
+
 添加完后push到github上面，发觉阴影效果有了，但图片上面的字与下面图片的间距挨得太近了，放狗一搜，发觉`margin:20px auto;`似乎有用，然后在firefox里测试了一下，果然有用，将它添加进样式里，就可以看见现在博文里图片的阴影效果了，over。
 

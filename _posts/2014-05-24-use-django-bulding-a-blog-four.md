@@ -137,7 +137,7 @@ python manage.py syncdb
 ```
 可以看到，新建了一个`table south_migrationhistory`数据表，这个表用于记录South操作的。
 
-###编写数据模型：post
+## 编写数据模型：post
 
 编写`post`模型，使单篇博客包含`标题`、`内容`、`作者`、`发布日期`四类信息。进入blog所在目录，打开`models.py`,添加下面代码：
 

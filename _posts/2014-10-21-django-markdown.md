@@ -10,7 +10,7 @@ categories: [Django]
 
 ![2014-10-03-django-web-guide-development-notes-one-1]({{ site.url }}/images/posts/django-markdown.png)
 
-##安装
+## 安装
 
 用`pip`,安装第三方库是一件极easy的事.现在我一般都喜欢先用virtualenv做一个沙箱,然后在沙箱里安装各种库.激活沙箱后,运行下面命令即可安装django-markdown:
 
@@ -20,7 +20,7 @@ pip install django-markdown
 
 安装好后,可以`pip freeze > requirements.txt`将安装的依赖包保存在`requirements.txt`里面,方便部署和迁移.
 
-##配置
+## 配置
 
 安装好后,接下来就是在`setting.py`和`urls.py`里进行一些必要的配置了:
 
@@ -36,7 +36,7 @@ INSTALLED_APPS += ( 'django_markdown', )
 url('^markdown/', include( 'django_markdown.urls')),
 ```
 
-##使用django-markdown
+## 使用django-markdown
 
 1. 定制表单
 

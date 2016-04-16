@@ -1,13 +1,12 @@
 ---
 layout: post
-title: CVPR14 图像检索papers
+title: CVPR14图像检索文章
 categories: [Image Retrieval]
 ---
 
 [CVPR14](http://www.cvpapers.com/cvpr2014.html)年关于图像检索方面的papers,汇总成一个list,方便阅读。
 
----
-**图像检索**
+## 图像检索
 
 1. Triangulation embedding and democratic aggregation for image search (Orals)
 2. Collaborative Hashing (post)
@@ -23,29 +22,19 @@ categories: [Image Retrieval]
 12. Adaptive Object Retrieval with Kernel Reconstructive Hashing (post)
 13. Hierarchical Feature Hashing for Fast Dimensionality Reduction (post)
 
----
-**视频检索与事件检测**
+## 视频检索与事件检测
 
 1. Temporal Sequence Modeling For Video Event Detection (Orals)
 2. Visual Semantic Search: Retrieving Videos via Complex Textual Queries (post)
 
----
-**感兴趣文章**
+## 感兴趣文章
 
-- Robust Orthonormal Subspace Learning: Efficient Recovery of Corrupted Low-rank Matrices (Orals)
-
-- Fast and Accurate Image Matching with Cascade Hashing for 3D Reconstruction (Orals)
-
-- Large-scale Video Classification using Convolutional Neural Networks (Orals)
-
-- Locally Optimized Product Quantization (post)
-
-- [Product Sparse Coding](http://research.microsoft.com/en-us/um/people/kahe/publications/cvpr14psc.pdf) (post)
-
-- Distance Encoded Product Quantization (post)
-
-- Covariance descriptors for 3D shape matching and retrieval (post)
-
-- Turning Mobile Phones into 3D Scanners (post)
-
-- Linear Ranking Analysis (post)
+1. Robust Orthonormal Subspace Learning: Efficient Recovery of Corrupted Low-rank Matrices (Orals)
+2. Fast and Accurate Image Matching with Cascade Hashing for 3D Reconstruction (Orals)
+3. Large-scale Video Classification using Convolutional Neural Networks (Orals)
+4. Locally Optimized Product Quantization (post)
+5. [Product Sparse Coding](http://research.microsoft.com/en-us/um/people/kahe/publications/cvpr14psc.pdf) (post)
+6. Distance Encoded Product Quantization (post)
+7. Covariance descriptors for 3D shape matching and retrieval (post)
+8. Turning Mobile Phones into 3D Scanners (post)
+9 Linear Ranking Analysis (post)

@@ -4,13 +4,13 @@ title: Ubuntu下git使用教程
 categories: [Git]
 ---
 
-##安装git
+## 安装git
 
 ```sh
 sudo apt-get install git
 ```
 
-##检查SSH
+## 检查SSH
 
 GitHub用到了SSH，需要在shell里检查是否连接到GitHub:
 
@@ -20,7 +20,7 @@ Hi willard-yuan! You've successfully authenticated, but GitHub does not provide 
 ```
 上面表明添加成功。
 
-##克隆rep
+## 克隆rep
 
 比较常见的将远程版本库中的代码clone到本地的方式如下：
 
@@ -28,7 +28,7 @@ Hi willard-yuan! You've successfully authenticated, but GitHub does not provide 
 git clone git@github.com:willard-yuan/blog.git
 ```
 
-##其他常用Git命令
+## 其他常用Git命令
 
 ```sh
 git init # 初始化本地Git版本库
@@ -44,7 +44,7 @@ git checkout origin/master(gh-pages) #切换分支
 git push origin :branch_you_want_to_delete #删除远程分支（注意空格，把一个空的branch赋值给已有的branch，这样就删除了）
 ```
 
-##示例
+## 示例
 
 ```sh
 willard@willard-PC~/github $ git clone git@github.com:willard-yuan/pcvwithpython.git

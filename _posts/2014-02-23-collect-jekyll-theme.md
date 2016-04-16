@@ -4,31 +4,30 @@ title: Jekyll主题收藏
 categories: [Jekyll]
 ---
 
-## 2014/02/23
-从wordpress都现在的jekyll，博客采用的平台及其主题一直处于变更状态。一方面本小子喜爱折腾，另一方面，随着浏览的网页多了，本小子审美似乎也在不断的提升。从开始接触jekyll都现在正式敲定主题，本小子在寻找主题的过程了，找到了一些简约、大方、美观的jekyll主题，在这里做一下记录，收藏一下,某天或许要修改模板了，或许可以直接在这些模板的基础上改进。
+>从wordpress都现在的jekyll，博客采用的平台及其主题一直处于变更状态。一方面本小子喜爱折腾，另一方面，随着浏览的网页多了，本小子审美似乎也在不断的提升。从开始接触jekyll都现在正式敲定主题，本小子在寻找主题的过程了，找到了一些简约、大方、美观的jekyll主题，在这里做一下记录，收藏一下,某天或许要修改模板了，或许可以直接在这些模板的基础上改进。
 
----
-###项目模板
+## 项目模板
+
 [Jeklly](http://jekyllrb.com/)官网本身采用的就是Jekyll,设计大方美观，不过我不怎么喜欢它页面的配置。灰黑配色虽然很适合在编程时可以护眼，但作为一个网页配色，灰黑我会很慎用它们作为主配色。GitHub上fork该repository的人很多啊。
 ![](http://ww3.sinaimg.cn/large/ad9597a3gw1edt9j58knhj21070iydjq.jpg)
 对应中文项目模板为[jekyllcn](http://jekyllcn.com/)
 ![2014-04-16 15_40_35-Jekyllcn]({{ site.url }}/images/posts/2014-04-16 15_40_35-Jekyllcn.png)
 
----
-###公司模板
+## 公司模板
+
 1. mmistakes/made-mistakes，演示[主页](http://mademistakes.com/)，稍微改改应该可以直接作为公司用的模板。
 ![](http://ww2.sinaimg.cn/large/ad9597a3gw1edt69ng30oj213m0lraep.jpg)
 
 2. [libgit2](http://libgit2.github.com/)
 ![2014-04-15 08_50_20-libgit2]({{ site.url }}/images/posts/2014-04-15 08_50_20-libgit2.png)
 
----
-###学术主页模板
+## 学术主页模板
+
 1. jansel.github.io，演示[主页](http://jasonansel.com/) 页面元素简约、可以作为学术主页模板
 ![](http://ww4.sinaimg.cn/large/ad9597a3jw1edupinefcpj213z0lmdl9.jpg)
 
----
-###博客模板
+## 博客模板
+
 1. mmistakes/so-simple-theme，演示[主页](http://mmistakes.github.io/so-simple-theme/) 很简约大方的一个博客模板。
 ![](http://ww3.sinaimg.cn/large/ad9597a3gw1edt6dvwlamj213o0lqwgt.jpg)
 2. mmistakes/hpstr-jekyll-theme，演示[主页](http://mmistakes.github.io/hpstr-jekyll-theme/) 也是[mmistakes](https://github.com/mmistakes)设计的，很喜欢他的作品，堪称艺术品。
@@ -53,13 +52,12 @@ categories: [Jekyll]
 12. [lazywei.github.io]，演示[主页](http://lazywei.github.io)，简约风。
 13. hexo-theme-raytaylorism [Demo](http://raytaylorlin.com/)。
 ![2014-04-16 15_31_54-Ray-Lin's world]({{ site.url }}/images/posts/2014-04-16 15_31_54-Ray-Lin's world.png)
-14. [xguox.github.com](http://xguox.github.io/)。 
+14. [xguox.github.com](http://xguox.github.io/)。
 15. [webfrogs](http://webfrogs.me/),跟[yihui.name](http://yihui.name/cn/)的一样。
 16. [macduff.github.com](http://macduff.github.io/),原来为自己配置MathJax是找到的一个博客，容器居中应该更好看。
 ![2014-04-16 15_48_13-Liquid-Inertia]({{ site.url }}/images/posts/2014-04-16 15_48_13-Liquid-Inertia.png)
 17. [Poised-flw-blog](http://www.poised-flw.com),[Github](https://github.com/luofei2011/Poised-flw-blog)。
 
----
 补充三个寻找模板的地方：
 
 1. [Jekyll Theme](http://jekyllthemes.org/)官方提供的主题模板，上面有很多好看的模板供选择。

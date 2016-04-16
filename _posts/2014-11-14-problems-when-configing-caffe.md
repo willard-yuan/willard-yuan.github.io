@@ -43,7 +43,7 @@ make && make install
 # lmdb
 git clone https://gitorious.org//mdb/mdb.git
 cd mdb/libraries/liblmdb
-make && make install 
+make && make install
 ```
 3、如果用make all编译caffe时出现mkl错误：`./include/caffe/util/mkl_alternate.hpp:6:17: 致命错误： mkl.h：没有那个文件或目录
 编译中断`。主要是因为MKL与CUDA的环境设置没设置好。另外安装MKL时最好选择默认路径：
@@ -86,7 +86,7 @@ $ sudo vim cuda.conf
 完成lib文件的链接操作，执行：
 
 ```sh
-$ sudo ldconfig -v 
+$ sudo ldconfig -v
 ```
 5、When ./create_mnist.sh, fault: convert_mnist_data.bin: not found
 
@@ -94,14 +94,12 @@ $ sudo ldconfig -v
 
 最后，如果没用GPU的话，在`examples/mnist/lenet_solver.prototxt`最后一行修改GPU为CPU。
 
----
-
-##caffe python接口安装
+## caffe python接口安装
 
 1、 如果没有pip的话，先安装pip。进入caffe python目录，安装所需要的依赖关系：
 
 ```sh
-sudo pip install -r requirement.txt 
+sudo pip install -r requirement.txt
 ```
 用requirements.txt失败，用 Anaconda安装`sudo pip install -r /path/to/caffe/python/requirements.txt`在执行上述命令时， 会报错导致不能完全安装所有需要的包。 可以按照官方建议安装anaconda包。 在anaconda官网下载.sh文件，执行，最后添加bin目录到环境变量即可(在安装的时候会询问你时是否添加)。
 

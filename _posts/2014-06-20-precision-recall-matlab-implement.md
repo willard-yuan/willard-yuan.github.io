@@ -89,6 +89,7 @@ end
 %     drawnow;
 % end
 ```
+
 上面画precision和recall曲线函数来自于[Iterative Quantization: A Procrustean Approach to Learning Binary Codes](http://www.unc.edu/~yunchao/itq.htm)。BRE即[Code for Binary Reconstructive Hashing](http://www.cse.ohio-state.edu/~kulis/pubschron.htm)的代码中，同样有计算precision recall函数：
 
 ```matlab
@@ -160,7 +161,8 @@ if nargout == 0 || nargin > 3
     drawnow
 end
 ```
-不能看出，上面的score就是前面的precision,在追溯到08年，也就是谱哈希SH发表的那年，同样可以在SH中有画precision recall的曲线，跟第二个一样。考证这些，无非就是想说在自己画PR曲线时，就用这些牛提供的比较靠谱，自己写出来的不一定对。
+
+不难看出，上面的score就是前面的precision,在追溯到08年，也就是谱哈希SH发表的那年，同样可以在SH中有画precision recall的曲线，跟第二个一样。考证这些，无非就是想说在自己画PR曲线时，就用这些牛提供的比较靠谱，自己写出来的不一定对。
 
 好了，再对画precision recall输入的参数做些梳理。画precision recall曲线时，用到的groundtruth是原欧式空间中查询样本的近邻，所以在计算Wtrue时，可以采用下面的方法计算：
 
@@ -183,6 +185,7 @@ Dball = sort(D_tr,2);
 Dball = mean(Dball(:,50));
 WTT = D_tst < Dball;
 ```
+
 上面第一步先对数据进行中心化，然后进行归一化。之后挑选出训练样本和测试样本（查询样本），然后计算Wture。Dhat就是计算查询样本与database之间的汉明距离，可以通过下面方法计算：
 
 ```matlab
@@ -191,6 +194,7 @@ B1 = compactbit(H);
 B2 = compactbit(H_query);
 Dhamm = hammingDist(B2,B1);
 ```
+
 H是database中的编码，进行压缩以十进制数进行表示，同理H_query即为查询样本的编码。将上面都计算出来后，便可以得到precision和recall,plot一下就可以了。
 
 参考：

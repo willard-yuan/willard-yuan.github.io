@@ -48,5 +48,6 @@ for url in imurls:
     image.retrieve(url, os.path.basename(urlparse.urlparse(url).path))
     print 'downloading:', url
 ```
+
 上面代码中，坐标(x,y)为地理位置的经纬度，`minx`、`maxy`、`miny`、`maxy`构成矩形区域，也就是地理坐标范围。`numto`是设定的下载照片数，这里下载20张照片。在[Python Vlfeat接口及Pydot模块安装总结](http://yuanyong.org/blog/pyhton-vlfeat-pydot-tips.html)中可视化相连图像时出现的图片即是从Panoramio上下载的白宫照片。
 

@@ -4,7 +4,7 @@ title: GMM、fisher vector、SIFT与HOG特征资料
 categories: [Image Retrieval]
 ---
 
-###GMM与fisher vector理解
+## GMM与fisher vector理解
 
 查阅fisher vector资料时看到的几篇介绍fisher vector很不错的博文，要了解fisher vector你需要先了解GMM高斯混合模型，这两篇文章对GMM高斯混合模型讲解得很不错[GMM](http://www.duzhongxiang.com/gmm/)，[高斯混合模型](http://bucktoothsir.github.io/blog/2014/12/04/11-thblog/)。fisher vector讲解的博文比较多，查阅的时候，我觉得下面几篇博文对fv讲得还比较深入：[Fisher Vector](http://www.duzhongxiang.com/fisher-vector/)、[Fisher Vecotr(1)](http://bucktoothsir.github.io/blog/2014/11/24/9-th/)、[Fisher Vector(2)](http://bucktoothsir.github.io/blog/2014/11/27/10-theblog/)和[Fisher Vector 通俗学习](http://blog.csdn.net/ikerpeng/article/details/41644197)。
 
@@ -20,7 +20,7 @@ categories: [Image Retrieval]
 
 FV的Python实现代码[pyfishervector](https://github.com/jacobgil/pyfishervector/blob/master/fisher.py)与其对应的博文[Image Fisher Vector In Python](http://jacobcv.blogspot.com/2014/12/fisher-vector-in-python.html)，C++版本的可以参阅这里[bLDFV](https://github.com/constanton/bLDFV)。
 
-### SIFT、HOG
+## SIFT和HOG
 
 此外，还发觉了几篇对SIFT、HOG讲解得比较好的博文：[SIFT算法](http://www.duzhongxiang.com/sift_algorithm/)，这篇文章讲SIFT讲得不是一般的好；[HOG特征(1)](http://bucktoothsir.github.io/blog/2014/02/26/thirdblog/)、[HOG特征(3)](http://bucktoothsir.github.io/blog/2014/02/26/secondblog/)和[HOG特征(3)](http://bucktoothsir.github.io/blog/2014/03/20/fourthblog/)，博文3对HOG的生成过程配合着图解说明讲得很赞。
 

@@ -4,7 +4,7 @@ title: 数据分类浅谈：随机森林
 categories: [数据挖掘]
 ---
 
-##随机森林定义
+## 随机森林定义
 
 随机森林（Random Forest,以下简称RF）是一种树形分类器
 $${h(x,\beta_k), k = 1,...}$$
@@ -12,7 +12,7 @@ $${h(x,\beta_k), k = 1,...}$$
 
 抛开上面正式的定义，对其进行直观的理解，随机森林就是将一堆决策树聚在一起，形成一个森林，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该 属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。
 
-##随机森林构造过程
+## 随机森林构造过程
 假设数据集的每一行代表一个样本，共$N$个样本，每一列代表一个feature（属性），共$M$个特征（属性），随机森林构造过程可分解如下：
 1. 随机选取训练样本集：使用Bagging方法形成每棵树的训练集；
 > 即进行行采样，采用**有放回**的方式(即Bagging方式)，也就是在采样得到的样本集合中，可能有重复的样本。假设每棵树的输入样本为$n$个，那么采样的样本也为$n$个。这样使得在训练的时候，每一棵树的输入样本都不是全部的样本，使得相对不容易出现over-fitting。
@@ -26,17 +26,17 @@ $${h(x,\beta_k), k = 1,...}$$
 
 上面提到了bagging的概念，这个概念以及跟Boosting、Bootstrap等的联系，可以参考这篇文章[Bootstrap, Boosting, Bagging,Random forest 几种方法的联系](http://www.duzelong.com/wordpress/201508/archives1442/)。
 
-##影响随机森林分类性能的主要因素
+## 影响随机森林分类性能的主要因素
 
 1. 森林中单棵树的分类强度(Streng):每棵树的分类强大越大，则随机森林的分类性能越好；
 2. 森林中树之间的相关性(Correlation)：树与树之间的相关性越大，则随机森林的分类性能越差。
 
-##随机森林的特点
+## 随机森林的特点
 1. 两个随机性（行样本采样随机和特征采样随机）的引入，使得随机森林不容易陷入over-fitting；
 2. 两个随机性（行样本采样随机和特征采样随机）的引入，使得随机森林具备很好的抗噪声能力；
 3. 对数据集的适应能力强：既能处理离散型数据类型，也能处理连续性数据类型，数据集无需规范化；
 
-##随机森林分类例子
+## 随机森林分类例子
 在了解了随机森林的特性后，我们在[安德森鸢尾花卉数据集](https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BE%B7%E6%A3%AE%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%8D%89%E6%95%B0%E6%8D%AE%E9%9B%86)上用随机森林对其做一个分类的小实验。安德森鸢尾花卉数据集的说明见上面给出的链接，其中每一类有50个样本，共3类。首先，我们对数据集进行划分，训练集每一类中抽取36个样本，将这36*3个样本保存在[train.csv](https://github.com/willard-yuan/machine-learning-notebook/blob/master/01--Random%20Forest/train.csv)中，剩下的样本作为测试集保存在[test.csv](https://github.com/willard-yuan/machine-learning-notebook/blob/master/01--Random%20Forest/test.csv)。下面是用scikit-learn中的random forest做的分类代码：
 {% gist c827db48b9c414716b90 %}
 或者到这里nbviewer上查看[Random Forest.ipynb](http://nbviewer.ipython.org/gist/willard-yuan/c827db48b9c414716b90)

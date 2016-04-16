@@ -16,14 +16,16 @@ categories: [前端设计]
    });
 </script>
 ```
+
 这里需要注意的是`audio.js`是放在`audiojs`文件夹下的，为了实现文件按类别放在同一个文件夹下，本小子将`audio.js`移到了自己的小项目里js文件夹下，所以上面的路径要做相应的调整。
 
 由于本小子需要的是自动播放模式，所有`<audio></audio>`标签对中的参数为`autoplay`，即：
 
 ```html
-<audio src="http://kolber.github.io/audiojs/demos/mp3/juicy.mp3" 
+<audio src="http://kolber.github.io/audiojs/demos/mp3/juicy.mp3"
        autoplay></audio>
 ```
+
 将`<audio></audio>`标签对放在`<body></body>`标签对之间，这里本小子放在`<body></body>`标签对最靠前位置，然后把mp3文件夹下的音乐替换成自己喜欢的《卡农》就好了。
 
 添加完背景音乐，再打开自己捣鼓的小项目网页，perfect,又完成了一件小艺术品！

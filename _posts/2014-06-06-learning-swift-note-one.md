@@ -8,11 +8,11 @@ categories: [Swift]
 
 swift发布的当天，第一手关于swift权威的介绍与详解，当然是苹果在官网发布的《The Swift Programming Language》，目前该书在github上已有[童鞋](https://github.com/numbbbbb/the-swift-programming-language-in-chinese)开始翻译了，[《Swift 编程语言》](http://numbbbbb.github.io/the-swift-programming-language-in-chinese/)。翻译得还挺不错的，就以这本官方教程作为学习的笔记吧。
 
-##数据类型
+## 数据类型
 
 任何编程语言，都有自己的数据类型。
 
-###变量与常量
+### 变量与常量
 
 swift用`let`来对常量进行类型申明，跟别的编程语言一样，常量只能赋值一次；变量用`var`关键字来申明紧随其后的是一个变量。
 
@@ -50,7 +50,7 @@ let appleSummary = "I have \(apples) apples."
 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 ```
 
-###数组与字典
+### 数组与字典
 
 本小子觉得swift里的数组和字典和Python里的数组和字典没神马区别。所以看这个毫无压力。
 
@@ -86,7 +86,7 @@ let emptyDictionary = Dictionary<String, Float>()
 shoppingList = []
 ```
 
-##控制语句
+## 控制语句
 
 所有的编程语言都有自己的控制语句。可以使用`if-else`,`switch`进行条件操作，用`for-in`,'for','while','do-while'进行循环控制，判断语句的括号可以省略，但后面的花括号是必须的。
 
@@ -102,6 +102,7 @@ for score in individualScores {
 }
 teamScore
 ```
+
 上面`for score in individualScores`跟Python里的for循环用法一样，`score>50`的括号省略掉了。上面teamScore运行出来的结果应该是11。
 
 附:</br>

@@ -6,11 +6,11 @@ categories: [资源集合]
 
 本着以使生活更美好的原则，记录一些本小子觉得比较好使的高效工具。
 
-##Goagent
+## Goagent
 
 在天朝surf on the internet,这货必备，鉴于配置太过于熟悉了，就不啰嗦了，省1k字。
 
-##wget
+## wget
 
 不论在win下还是在linux中，此货堪称神器，虽然使用频率不是很高，当一旦在使得着的地方，这货一条命令可以省去不少无谓的折腾。更重要的是，这货轻量。
 
@@ -48,9 +48,9 @@ wget -r -p -k -np http://www.stat.ucla.edu/~mengmeng/
 
 先到这里，碎觉。
 
-##2014/06/08 更新
+## 2014/06/08 更新
 
-##Ubuntu 14.04安装wget
+## Ubuntu 14.04安装wget
 
 在ubuntu下安装wget只需运行下列命令即可：
 
@@ -60,5 +60,5 @@ sudo apt-get install wget
 同时，如果要下载单个文件，可以使用下列命令：
 
 ```sh
-http://waysaboutstuff.com/files/Practical_Computer_Vision_with_SimpleCV.pdf 
+http://waysaboutstuff.com/files/Practical_Computer_Vision_with_SimpleCV.pdf
 ```

@@ -4,7 +4,7 @@ title: Django开发简易博客(二)
 categories: [Django]
 ---
 
-### admin连结并激活
+## admin连结并激活
 Django本身就带有一个应用叫Admin,它是一个很好用的工具，下面我们将其激活，并再次对数据库和model进行同步，将admin和blog app连结起来。
 
 回到appblog目录下，打开settings.py,把INSTALLED_APPS元组改为下面形式：
@@ -58,7 +58,7 @@ python manage.py runserver
 
 用原来创建的管理员账号登陆，在管理面板中，会发现没有blog应用，下面这些就可以做这些了。
 
-###连接你的blog
+## 连接你的blog
 在blog目录下，创建一个admin.py文件，并往里面添加下面代码：
 
 ```python
@@ -88,7 +88,7 @@ admin.site.register(Post,PostAdmin)
 回到浏览器，刷新页面,将会看到你的blog应用会好多了。
 ![](http://images.cnitblog.com/blog/502877/201310/05225357-dfa617e43eab4e91b9d754e108a37c8b.jpg)
 
-###为blog app写URLS, views and templates
+## 为blog app写URLS, views and templates
 现在该写一些urls，让它包含一些url模式。Django用URLconfs中的urlpatterns来将HTTP请求映射到特定的views函数，view函数返回响应给用户。后面要做的三件事如下：
 
 1. 在appblog/urls.py中写urlpatterns
@@ -97,7 +97,7 @@ admin.site.register(Post,PostAdmin)
 
 下面对上面的三步分别进行。
 
-###写urlpatterns
+## 写urlpatterns
 打开appblog/urls.py,修改如下：
 
 ```python
@@ -126,7 +126,7 @@ urlpatterns = patterns('',
 ![2014-04-13 21_35_53-ViewDoesNotExist]({{ site.url }}/public/images/posts/2014-04-13 21_35_53-ViewDoesNotExist.png)
 收到这个错误提示，是因为映射到的view函数不存在，现在完善这一点。
 
-###写视图函数
+## 写视图函数
 
 打开blog/views.py,修改为下面形式：
 

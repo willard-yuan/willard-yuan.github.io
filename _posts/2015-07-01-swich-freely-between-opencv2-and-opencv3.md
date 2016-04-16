@@ -4,7 +4,7 @@ title: Mac下OpenCV3.0和OpenCV2.x自由切换
 categories: [Python]
 ---
 
-### 背景
+## 背景
 
 在[Mac下安装OpenCV3.0和Anaconda][1]一文中已经总结了OpenCV3.0在Mac下的安装方法，但在实际使用的时候，发觉OpenCV3.0跟OpenCV2.x差别还是比较大的，比如在[BoW图像检索Python实战][2]中原本写的程序根本没法在OpenCV3.0下跑，想SIFT、SURF都移到了[opencv\_contrib][3]。将SIFT、SUFR移出OpenCV的原因在[opencv\_contrib][4]中说明如下：
 
@@ -20,7 +20,7 @@ categories: [Python]
 
 怎么按照这个模块，目前还没找到比较好的简洁的方法。不过这篇文章不是要将这个，还是回到上面提到的问题中。为了使用OpenCV2.x版本，自然需要安装OpenCV2.x版本了，也就是安装完后，你的计算机上有两个版本的OpenCV，下面先讲讲怎么安装OpenCV2.x。
 
-### 安装OpenCV2.x
+## 安装OpenCV2.x
 OpenCV2.x的安装跟OpenCV3.0的安装一下，同样用Homebrew安装，网上流传的关于Homebrew是Mac OS缺失的管理包一点也不为过。执行下面命令几个完成Opencv2.x的安装：
 
 ```sh
@@ -31,7 +31,7 @@ brew install opencv
 
 执行上面命令进行安装后，看到有sucessful这样的字眼后，说明安装成功，不过要在Python中调用OpenCV的接口，还需要做下面要的一些工作。
 
-### 在OpenCV2.x和OpenCV3.0间版本自由切换
+## 在OpenCV2.x和OpenCV3.0间版本自由切换
 上面安装了OpenCV2.x后，要让Python调用OpenCV2.x的接口，只需执行下面命令即可：
 
 ```sh

@@ -6,7 +6,7 @@ categories: [Image Retrieval,Machine Learning]
 
 目前ANN近似近邻搜索有两种比较流行的方法：树方法和哈希方法。
 
-###特点概括
+## 特点概括
 
 基于树的方法的一些特点概括：
 
@@ -30,7 +30,7 @@ categories: [Image Retrieval,Machine Learning]
 
 4.Compact codes preferred。
 
-### Precision-Recall权衡
+## Precision-Recall权衡
 
 1. 如果想要得到较高的精度，则需要较长的编码。For high precision, longer codes (i.e. large `\( m \)`) preferred。
 

@@ -36,6 +36,7 @@ ler
 UnicodeDecodeError: 'ascii' codec can't decode byte 0xb0 in position 1: ordinal
 not in range(128)
 ```
+
 查了一下资料（答案链接[1](http://blog.csdn.net/hugleecool/article/details/17996993)和[2](http://my.oschina.net/u/993130/blog/199127)），原因如下:
 >原因与注册表有关，可能与某些国产软件对注册表的改写的gbk格式导致python无法进行第三方库的安装操作。
 

@@ -4,7 +4,7 @@ title: CVPR15 image retrieval reading list
 categories: [Image Retrieval]
 ---
 
-##Image retrieval关键词
+## Image retrieval关键词
 
 - FAemb: A Function Approximation-Based Embedding Method for Image Retrieval
 - Image Retrieval Using Scene Graphs
@@ -13,7 +13,7 @@ categories: [Image Retrieval]
 - Deep Semantic Ranking Based Hashing for Multi-Label Image Retrieval（已读）
 - Query-Adaptive Late Fusion for Image Search and Person Re-identification
 
-##Hashing关键词
+## Hashing关键词
 
 - Supervised Discrete Hashing
 - Hashing With Binary Autoencoders

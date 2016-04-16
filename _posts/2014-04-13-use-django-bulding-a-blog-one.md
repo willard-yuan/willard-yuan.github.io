@@ -6,7 +6,7 @@ categories: [Django]
 
 看了好长一段时间的Python和Djanggo框架，毫无水涨船高之势。借着周末的时间，开始实战练习。计划通过搭建一个完整的博客系统，将学的离散的Python、Django、HTML、CSS、Bootstrap知识串起来。好了，回归正题，开始开发之旅吧。
 
-###安装Django
+## 安装Django
 从[Django主页](https://www.djangoproject.com/download/)下载最新版本，解压，从命令窗口进入到Django所在的目录，安装Django
 
 ```sh
@@ -21,7 +21,7 @@ python setup.py install
 ```
 上面显示安装的Django版本为1.5。安装好后即可进行后面的步骤
 
-###创建项目
+## 创建项目
 在命令窗中进入所要放置的项目目录，比如本小子要在D盘Python_web下创建项目
 
 ```sh
@@ -107,7 +107,7 @@ INSTALLED_APPS = (
 注：将你的本地应用添加放到元组的最后是一个好习惯。
 
 
-###写blog app的模型
+## 写blog app的模型
 在使用Django开发web应用是，可以不用谢SQL，只需写models。models是用来生成数据库表的，它有很多ORM API从数据库中提取或插入数据。进入blog目录，打开models.py，其中的内容为：
 
 ```python
@@ -144,7 +144,7 @@ class Post(models.Model):
 
 第二个方法是get_absolute_url(),当我们要链接特定的post地址时，用来返回url。内部类Mata用来设置model类按何种方式排序，这里，Post对象用创建的时间进行排序，“-”表示降序排序对象。
 
-###创建数据库
+## 创建数据库
 数据库是很多web应用的基础，Django也不例外。这部分演示如何配置django数据库，然后用django管理命令同步数据库和models。
 
 打开settings.py文件，在DATABASES字典中，用于Python自带sqlite3,所以我们直接用sqlite3，并将即将生成的数据库文件保存在项目目录下。

@@ -18,7 +18,7 @@ categories: [Django]
 
 准备好了吗?让我们现在开始吧!
 
-##准备工作
+## 准备工作
 
 首先,我假设你用的是`Unix`的一些变种系统,比如`Linux`或'Mac OS X'.这并不是说你就不能跟着这个教程在`Windows`上走一遍,只是你会碰到很多麻烦,主要是一般情况上Windows对开发者并不是很友好.在一个现代的发行版比如Ubuntu上就非常的容易使用,并且你可以很轻松的在`Virtualbox`里运行它.所以,如果你用的是`Windows`的话,我还是建议你用`Ubuntu`是自己免于折腾.
 
@@ -35,7 +35,7 @@ _ Git
 
 在很多Linux发行版中,你可以发现用你的安装包管理器很容易就能够安装好这些.在Mac OS X上,我推荐你用Homebrew来安装它们,尽管你可以用别的安装包管理器来安装它们,如果你在安装其中的某个安装包碰到了问题,可以用Google搜索来有效的解决这个问题.
 
-##开始工作
+## 开始工作
 
 [Django Blog Tutorial - the Next Generation - Part 1](http://matthewdaly.co.uk/blog/2013/12/28/django-blog-tutorial-the-next-generation-part-1/)
 

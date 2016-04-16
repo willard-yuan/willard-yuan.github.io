@@ -6,11 +6,11 @@ categories: [Python]
 
 入手Mac几天了，想在Mac OS下玩玩OpenCV和keras，间歇捣鼓了两天，终于搞定zsh、OpenCV3.0以及Anaconda。OpenCV3.0刚发布不久，这方面的资料也不是很多，能够查到的一篇配置OpenCV3.0和Python2.7.x的博客[Install OpenCV 3.0 and Python 2.7+ on OSX](https://www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/)，讲得很细致，我读完一遍后觉得配置得有些繁琐，并且没有Anaconda，所以自己花时间琢磨了两天，记录一下配置过程，方便自己和小伙伴们查阅。
 
-###为什么一定要用Anaconda
+## 为什么一定要用Anaconda
 
 Anaconda是一个Python第三方模块合集，里面包含了很多常用的模块，并且它里面还自带了Python，所以安装好它后面可以省很多安装模块的麻烦。以前我在没有接触到Anaconda前用的都是Python(x,y)，但发觉那个包更新太慢，而且好像没有Linux和Mac的，所以弃用Python(x,y)改用Anaconda。
 
-###Anaconda安装
+## Anaconda安装
 Anaconda安装非常的简单，下载好对应的Mac版本，点击安装就可以了，关于Anaconda的安装过程中需要注意的可以查阅Anaconda的Mac安装说明[Mac Install](http://docs.continuum.io/anaconda/install.html)，有一点需要特别注意的是：
 ![](http://docs.continuum.io/_images/pathoption.png)
 从上图可以看到Anaconda是默认将Anaconda环境变量添加到你的`bash_profile`中的，为了使得在shell中可以使用Anaconda的Python（一般Anaconda中的Python2.7.x是比较新的），这个不要去掉勾就行了，也就是一路默认就行，不过你要清楚有这么一个添加环境变量的过程在里面。
@@ -43,7 +43,7 @@ export PATH="$HOME/anaconda/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin    
 
 如果你用的shell是zsh，比如我现在用的就是zsh，你只要把上面那段`.bash_profile`中Anaconda的环境变量复制到`.zshrc`中即可，如果`.zshrc`文件不存在，建立一个就是了，这样如果你将shell由bash shell切换到zsh shell时，用的Pythony也是Anacanda的了。
 
-###安装OpenCV3.0
+## 安装OpenCV3.0
 OpenCV3.0采用Homebrew安装非常的简单，直接执行下面命令：
 
 ```sh

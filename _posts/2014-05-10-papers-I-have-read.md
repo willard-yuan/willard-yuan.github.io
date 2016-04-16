@@ -6,8 +6,6 @@ categories: [Machine Learning]
 
 对本小子读过的文章做个已读列表，方便自己查阅那些文章自己已读。
 
----
-
 1. BING: Binarized Normed Gradients for Objectness Estimation at 300fp. CVPR 2014
 2. Spectral Rotation versus K-Means in Spectral Clustering. AAAI 2013</br>
 对于谱聚类公式具体的推导及理解，主要查阅了下面几篇博文，觉得很不错，自备梯子：

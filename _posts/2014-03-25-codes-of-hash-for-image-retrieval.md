@@ -10,8 +10,7 @@ categories: [Image Retrieval]
 
 上面这一段是摘自本小子的周报(本小子这周除改了篇文章，其余时间几乎都在打酱油，谁叫老板不给发工资，O(∩_∩)O~)，引用中的“右图”可以略过，直接看下面不同哈希算法的链接信息。
 
----
-###哈希方法
+## 哈希方法
 
 公布代码的：
 
@@ -41,18 +40,16 @@ categories: [Image Retrieval]
 
 1. **PDH**: [Predictable Dual-View Hashing](http://www.umiacs.umd.edu/~jhchoi/paper/icml2013_pdh.pdf) (ICML2013) ~~read~~
 
----
-###常用数据库
+## 常用数据库
 1. [**LabelMe**](http://www.cs.toronto.edu/~norouzi/research/mlh/data/LabelMe_gist.mat)
 2. [**min-loss-hashing**](https://github.com/willard-yuan/min-loss-hashing/tree/master/matlab)
 
----
-###关注的人
+## 关注的人
 
 注：下面不同的哈希方法的代码可以在他们的主页上找到
 
 - [**Grauman**](http://cs.nyu.edu/~fergus/pmwiki/pmwiki.php?n=PmWiki.Publications)
->[Image search and large-scale retrieval](http://www.cs.utexas.edu/~grauman/research/pubs-by-topic.html#Fast_similarity_search_and_image)系列Paper   
+>[Image search and large-scale retrieval](http://www.cs.utexas.edu/~grauman/research/pubs-by-topic.html#Fast_similarity_search_and_image)系列Paper
 
 - [**Norouzi**](http://www.cs.toronto.edu/~norouzi/)
 >Hamming Distance Metric Learning
@@ -92,15 +89,12 @@ categories: [Image Retrieval]
 
 - [**Xianglong LIU**](http://www.nlsde.buaa.edu.cn/~xlliu/), 刘老师是2012年开始做哈希，发表过一系列论文，是国内做哈希比较早的学者，在他的主页上有一些他发表的哈希文章的代码。
 
----
-###他人讲解papers的一些好博文
+## 他人讲解papers的一些好博文
 - [Locality Sensitive Hashing(LSH)之随机投影法](http://www.strongczq.com/2012/04/locality-sensitive-hashinglsh%E4%B9%8B%E9%9A%8F%E6%9C%BA%E6%8A%95%E5%BD%B1%E6%B3%95.html)
 - [Semi-Supervised Hashing](http://www.dreamingo.com:9999/blog/Semi-Supervised_Hashing)
 - [Spherical Hashing](http://blog.csdn.net/zwwkity/article/details/8565485?reload)
 
----
-
-###非哈希方法
+## 非哈希方法
 
 - [liangzheng](http://www.liangzheng.org/Publication.html)
 	- Packing and Padding: Coupled Multi-Index for Accurate Image Retrieval

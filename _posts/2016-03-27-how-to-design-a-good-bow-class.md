@@ -51,24 +51,24 @@ public:
     std::vector<std::vector<float>> desctor;
     void covdet_keypoints_and_descriptors(cv::Mat &img, std::vector<std::vector<float>> &frames, std::vector<std::vector<float>> &desctor, bool rooSIFT, bool verbose);
     std::vector<float> rootsift(std::vector<float> &dst);
-    
+
     void Serialize(std::ofstream &outfile) const {
         std::string tmpImageName = imageName;
         int strSize = (int)imageName.size();
         outfile.write((char *)&strSize, sizeof(int));
         outfile.write((char *)&tmpImageName[0], sizeof(char)*strSize); // 写入文件名
-        
+
         int descSize = (int)desctor.size();
         outfile.write((char *)&descSize, sizeof(int));
-        
+
         // 写入sift特征
         for(int i = 0; i < descSize; i++ ){
             outfile.write((char *)&(desctor[i][0]), sizeof(float) * 128);
             outfile.write((char *)&(frame[i][0]), sizeof(float) * 6);
         }
-        
+
     }
-    
+
     static siftDesctor Deserialize(std::ifstream &ifs) {
         siftDesctor siftDesc;
         int strSize = 0;
@@ -76,24 +76,24 @@ public:
         siftDesc.imageName = "";
         siftDesc.imageName.resize(strSize);
         ifs.read((char *)&(siftDesc.imageName[0]), sizeof(char)*strSize); // 读入文件名
-        
+
         int descSize = 0;
         ifs.read((char *)&descSize, sizeof(int));
-        
+
         // 读入sift特征和frame
         for(int i = 0; i < descSize; i++ ){
             std::vector<float> tmpDesc(128);
             ifs.read((char *)&(tmpDesc[0]), sizeof(float) * 128);
             siftDesc.desctor.push_back(tmpDesc);
-            
+
             std::vector<float> tmpFrame(6);
             ifs.read((char *)&(tmpFrame[0]), sizeof(float) * 6);
             siftDesc.frame.push_back(tmpFrame);
         }
-        
+
         return siftDesc;
     }
-    
+
 };
 ```
 
@@ -108,15 +108,15 @@ class bowModel {
 public:
     bowModel(){};
     bowModel(int _numWords,std::vector<siftDesctor> _imgFeatures, std::vector<std::vector<int>> _words):numWords(_numWords),imgFeatures(_imgFeatures),words(_words){};
-    
+
     int numNeighbors = 1;
     int numWords;
     std::vector<siftDesctor> imgFeatures;
     std::vector<std::vector<int>> words;
     cv::Mat centroids_opencvMat;
-    
+
     cv::flann::Index opencv_buildKDTree(cv::Mat &centroids_opencvMat);
-    
+
     void Serialize(std::ofstream &outfile) const {
         int imgFeatsSize = (int)imgFeatures.size();
         outfile.write((char *)&imgFeatsSize, sizeof(int));
@@ -125,16 +125,16 @@ public:
             imgFeatures[i].Serialize(outfile);
             outfile.write((char *)&(words[i][0]), sizeof(int) * imgFeatures[i].desctor.size());
         }
-        
+
     }
-    
+
     static bowModel Deserialize(std::ifstream &ifs) {
         bowModel BoW;
         int imgFeatsSize;
         ifs.read((char *)&imgFeatsSize, sizeof(int));
-        
+
         BoW.words.resize(imgFeatsSize);
-        
+
         for (int i = 0; i < imgFeatsSize; i++) {
             // 读入imgFeatures
             auto siftDesc = siftDesctor::Deserialize(ifs);
@@ -145,7 +145,7 @@ public:
         }
         return BoW;
     }
-    
+
 };
 ```
 

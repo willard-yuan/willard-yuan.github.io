@@ -29,7 +29,7 @@ categories: [Image Retrieval]
 
 MatConvNet是Andrea Vedaldi用Matlab开发的一个卷积网络工具包，相比于[Caffe](caffe.berkeleyvision.org)，这个工具包配置比较简单，而且最近这两年，vgg小组在深度学习领域也是成绩斐然。关于MatConvNet的文档，可以查看[MatConvNet Convolutional Neural Networks for MATLAB](http://arxiv.org/pdf/1412.4564.pdf)以及[在线文档](http://www.vlfeat.org/matconvnet/)。这里我们主要讲讲怎么配置MatConvNet以及怎样利用在imageNet上已经训练好的模型抽取特征并进行图像检索。
 
-##MatConvnet配置
+## MatConvnet配置
 
 首先，下载MatConvNet，怎么下载这个自己看着办，如果你有github的账号，推荐你star一下它，既然都用它了，不给个star好意思么(哈哈~)。下载完后，解压，移到某处，本小子自己将它放在`D:\matlabTools\`目录下，打开matlab，进入到`D:\matlabTools\matconvnet-1.0-beta10`目录下，然后在matlab命令窗下输入以下命令进行mex编译：
 
@@ -85,7 +85,7 @@ net.meta.classes.description{best}, best, bestScore)) ;
 上面用的是`urlwrite`来下载`imagenet-vgg-f.mat`的，这里强烈推荐你单独下载，然后把`urlwrite`下载的那一行去掉，`load`时指向你放置的`imagenet-vgg-f.mat`具体位置即可。测试如果顺利的话，就可以进入下一节我们真正关心的图像减速话题了。
 
 
-##用已训练模型抽取特征
+## 用已训练模型抽取特征
 
 在抽取特征之前，有必要稍微先来了解一下`imagenet-vgg-f`这个模型。这里稍微啰嗦一下上面的那个测试脚本，`im_ = imresize(im_, net.normalization.imageSize(1:2))`将图像缩放到统一尺寸，即224*224的大小，这点你可以看看net中`normalization.imageSize`，而且还必须为彩色图像。**res**有22个struct，从第17到20的struct分别是4096位，最后第21到22个struct是1000维的，是4096维经过softmax后的结果，这里我们要用的是第20个struct的数据(自己测过第19个struct，检索效果比采用第20个struct的特征差）。这个网络有8层构成，从第6层到第8层都是全连接层。关于这个网络的结构，暂时到这里。
 

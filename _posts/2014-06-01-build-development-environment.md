@@ -4,7 +4,7 @@ title: Ubuntu开发环境配置
 categories: [资源集合]
 ---
 
-##安装tree
+## 安装tree
 
 `tree`命令用来以列表的形式展示目录层次。Ubuntu下安装tree可以通过下面命令：
 
@@ -40,7 +40,7 @@ weblog
 ```
 上面L表示遍历层数，“2”表示树有两层。此外，这里也有关于tree的一些说明，[楼梯](http://liunian.info/ubuntu%E4%B9%8Btree%E5%91%BD%E4%BB%A4.html)
 
-##安装pip和virtualenv
+## 安装pip和virtualenv
 
 `pip`是python的包管理工具，有建议说Python的包都用pip进行管理，`virtualenv`是 Python 多版本管理的利器，不同版本的开发调试全靠它，可以通过下面命令安装pip和virtualenv。
 
@@ -51,7 +51,7 @@ sudo apt-get install python-pip
 sudo apt-get install virtualenv
 ```
 
-##安装git
+## 安装git
 
 `git`是目前最主流的版本控制管理工具，可以通过下面命令安装：
 
@@ -60,7 +60,7 @@ sudo apt-get install git
 ```
 关于git的使用，在[Ubuntu下git使用教程](http://yuanyong.org/blog/the-trick-of-using-git.html)中有详细介绍。
 
-##安装SimpleCV
+## 安装SimpleCV
 
 [SimpleCV](https://github.com/sightmachine/SimpleCV)是一个计算机视觉库，目前在github上很活跃。根据文档说明，可以通过下面命令安装该库：
 
@@ -84,7 +84,7 @@ pygame==1.9.1release
 在运行第三条命令的时候，出现下面错误：
 
 ```text
-willard@willard-PC~/python/cv/SimpleCV $ sudo pip install -r requirements.txt 
+willard@willard-PC~/python/cv/SimpleCV $ sudo pip install -r requirements.txt
 Requirement already satisfied (use --upgrade to upgrade): numpy in /usr/lib/python2.7/dist-packages (from -r requirements.txt (line 1))
 Requirement already satisfied (use --upgrade to upgrade): scipy in /usr/lib/python2.7/dist-packages (from -r requirements.txt (line 2))
 Downloading/unpacking PIL (from -r requirements.txt (line 3))
@@ -96,7 +96,7 @@ Storing debug log for failure in /home/willard/.pip/pip.log
 ```
 暂时还不知道是什么原因，先到这里，睡觉了。
 
-##2014/04/08 更新
+## 2014/04/08 更新
 
 没想到昨天在SimpleCV Rep开了个issue很快得到了回答，本小子将问题反馈过去，@sksavant给出的回答是：
 

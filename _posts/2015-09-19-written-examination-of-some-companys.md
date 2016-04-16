@@ -6,7 +6,8 @@ categories: [Life]
 
 笔试了几场，对部分题目做了下整理与总结，代码写得比较渣，需要多多训练。
 
-##网易算法工程师岗编程题
+## 网易算法工程师岗编程题
+
 - 问题描述:
 
 > 小V今年有n门课，每门都课都有考试。为了拿到奖学金，小V必须让自己的平均年成绩至少为avg，每门课的最终成绩由平时成绩和考试成绩组成，满分为r，现在他知道每门课的平时成绩为ai，如果想要让自己这门课的成绩多拿一分的话，小V必须花bi小时复习，不花时间意味着这门课的考试成绩只能拿0分，平时成绩加考试成绩超过r这么课最终成绩也只能按r计算。为了拿到奖学金，请问小V至少需要花多少时间复习功课？
@@ -53,20 +54,20 @@ Hint:
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    
+
     int n, r, avg;
     cin >> n >> r >> avg;
-    
+
     vector<int> A(n);
     vector<int> B(n);
-    
+
     for(int i = 0; i < n; i++){
         int tmpAi, tmpBi;
         cin >> tmpAi >> tmpBi;
         A[i] = tmpAi;
         B[i] = tmpBi;
     }
-    
+
     vector<size_t> indexes(n);
     size_t nn(0);
     generate(begin(indexes), end(indexes), [&]{return nn++;});
@@ -77,7 +78,7 @@ int main(int argc, const char * argv[]) {
         sortedB[i] = B[indexes[i]];
         sortedA[i] = A[indexes[i]];
     }
-    
+
     int sum = accumulate(sortedA.begin(), sortedA.end(), 0);
     int time = 0;
     int i = 0;
@@ -90,9 +91,9 @@ int main(int argc, const char * argv[]) {
         }
         ++i;
     }
-    
+
     cout << time << endl;
-    
+
     return 0;
 }
 ```
@@ -132,18 +133,18 @@ int main(int argc, const char * argv[]) {
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    
+
     int numBulb, distance;
     cin >> numBulb >> distance;
-    
+
     vector<int> looc(numBulb);
-    
+
     for(int i = 0; i < numBulb; i++){
         int tmp;
         cin >> tmp;
         looc[i] = tmp;
     }
-    
+
     sort(looc.begin(), looc.end(), less<int>());
     int maxDis = 0;
     for(int i = 0; i < numBulb; i++){
@@ -151,14 +152,15 @@ int main(int argc, const char * argv[]) {
         if(tmp > maxDis)
             maxDis = tmp;
     }
-    
+
     cout << maxDis/2.0 << endl;
-    
+
     return 0;
 }
 ```
 
 ## 大众点评数据挖掘岗综合题
+
 上面这道题跟第二天考的大众点评数据挖掘岗综合题的第二题解题思路一样，该题题目为：
 > N个为排序的整数，在线性时间内，求这N个数在数轴上相邻两个数之间的最大差值（写出关键算法）
 
@@ -175,7 +177,8 @@ int main(int argc, const char * argv[]) {
 - 根据条件概率公式有：
 - P(H1|E) = P(H1)*P(E|H1)/P(E) = 0.5*(30/54)/(7/18) = 0.714
 
-##京东算法岗综合题
+## 京东算法岗综合题
+
 - 问题描述：
 
 > 输入数据仅包含一组测试样例，对于每组测试案例，共有两行输入数据，输入第一行代表要处理的字符串s1(不超过50)，输入第二行代表替换的字符串s2（不超过10）.
@@ -210,7 +213,7 @@ char* replace_blank(char str[], char strB[], int len, int lenB)
     if(str == NULL || len <= 0) {
         return NULL;
     }
-    
+
     int i = 0, numberBlanks = 0; // cnt为整个字符串的空格个数，size为字符串字符个数
     while(str[i] != '\0') {
         if(str[i] == ' ') {
@@ -218,7 +221,7 @@ char* replace_blank(char str[], char strB[], int len, int lenB)
         }
         ++i;
     }
-    
+
     for(i = len-1; i >= 0; --i) {
         if(str[i] != ' ') {
             str[i+numberBlanks*(lenB - 1)] = str[i];
@@ -254,7 +257,7 @@ int main(int argc, const char * argv[]) {
     strcpy(insertedB, inputB.c_str());
     char* afterInserted = replace_blank(strA, insertedB, lenA, lenB);
     cout << afterInserted << endl;
-    
+
     return 0;
 }
 ```
@@ -300,8 +303,8 @@ int ballDistance(int h){
 }
 
 int main(int argc, const char * argv[]) {
-    
-    
+
+
     int t1, t2, t3, t4;
     cin >> t1 >> t2 >> t3 >> t4;
     int sum = ballDistance(t1) + ballDistance(t2)  + ballDistance(t3) + ballDistance(t4);

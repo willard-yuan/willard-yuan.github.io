@@ -6,7 +6,7 @@ categories: [资源集合]
 
 再给自己挖个坑，发觉截止目前为止，自己给自己挖了好多的坑。不纠结了，先挖。
 
-**impress.js**
+## impress.js
 
 >It's a presentation framework based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com.
 
@@ -18,22 +18,21 @@ categories: [资源集合]
 
 做个一个小练习，还要多练习。
 
----
-**Best-App**
+## Best-App
 
 >经常会有朋友想知道有哪些 Apps 或 服务 是值得付费来使用的，或者有哪些可以改善生活的优质产品， 于是创建了这个 List 项目，旨在让推荐变得有章可循
 
 自备梯子：[这里](https://github.com/hzlzh/Best-App)
 
-**swift**
+## swift
 
 FlappySwift:An implementation of Flappy Bird in Swift for iOS 8.自备梯子：[这里](https://github.com/fullstackio/FlappySwift)
 
-**OpenCV**
+## OpenCV
 
 Mastering OpenCV with Practical Computer Vision Projects:Code for the book "Mastering OpenCV with Practical Computer Vision Projects" by Packt Publishing 2012.自备梯子：[这里](https://github.com/MasteringOpenCV/code)
 
-**科研**
+## 科研
 
 [Ensemble of Exemplar-SVMs for Object Detection and Beyond](https://github.com/abhi2610/exemplarsvm)
 
@@ -56,7 +55,7 @@ Caffe: Convolutional Architecture for Fast Feature Extraction。自备梯子：[
 
 
 
-**杂**
+## 杂
 
 [ThinkBayes](https://github.com/AllenDowney/ThinkBayes)
 >Code repository for Think Bayes: Bayesian Statistics Made Simple by Allen B. Downey
@@ -76,12 +75,14 @@ Caffe: Convolutional Architecture for Fast Feature Extraction。自备梯子：[
 [Resume](http://greatghoul.github.io/resume/)
 一份简历模板，很正式的。
 
-**Web**
+## Web
+
 [headroom.js](https://github.com/WickyNilliams/headroom.js)
 >Give your pages some headroom. Hide your header until you need it.
 有很多结合bbotstrap的站点，在滚动条向下滚动的时候，上面的导航条会隐藏起来，用的就是这货，要想实现那种效果，当然用这个了。
 
-**gitbook**
+## gitbook
+
 >This is an attempt to make a comprehensive, easy to follow Git learning resource to be hosted on the main Git website.
 
 [梯子](https://github.com/schacon/gitbook)传送门。

@@ -62,11 +62,13 @@ DATABASES = {
     }
 }
 ```
+
 修改完成后，对数据库进行初始化：
 
 ```sh
 python manage.py syncdb
 ```
+
 初次同步需要设置登录后台管理的账号、邮箱、密码，设置完后，会在djblog所在的目录生成一个名为db.sqlite3的数据库。回到setting.py，对言语、时区、静态目录位置、模板文件存放路径进行设置。
 
 ```python
@@ -85,11 +87,13 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
 )
 ```
+
 注意，只要文件中出现了中文，需要加上`# -*- coding: utf-8 -*-`避免编码错误。完成上面设置后，回到项目djblog所在目录，建立上面对应的静态目录及模板目录：
 
 ```python
 mkdir templates static
 ```
+
 运行上面命令后，会建立templates、static两个目录，再setting.py的INSTALLED_APPS中添加创建了的应用，即blog:
 
 ```python
@@ -107,11 +111,13 @@ INSTALLED_APPS = (
     'blog',
 )
 ```
+
 进入Scripts所在目录，运行下面命令安装south：
 
 ```sh
 pip install south
 ```
+
 然后将south添加到setting.py的INSTALLED_APPS中，即：
 
 ```python
@@ -130,9 +136,11 @@ INSTALLED_APPS = (
     'south',
 )
 ```
+
 south可以用于实时更新数据库，也就是启动服务器后，在修改模型时，可以即时同步生效而不用重启服务器。同步数据库：
 
 ```sh
 python manage.py syncdb
 ```
+
 可以看到，新建了一个`table south_migrationhistory`数据表，这个表用于记录South操作的。
