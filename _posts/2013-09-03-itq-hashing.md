@@ -10,7 +10,7 @@ categories: [Image Retrieval]
 
 这篇文章的主要思路是先对原始空间的数据集`\( X \in R^{n\times d} \)`用PCA进行降维处理，设经过PCA降维后的数据集为`\( V \in R^{n\times c} \)`，该问题就可以转化为将该数据集中的数据点映射到一个二进制超立方体的顶点上，使得对应的量化误差最小，从而而已得到对应该数据集优良的二进制编码。
 
-对于PCA降维部分，不做详解，具体可以参阅该文[^1]。设`\( v\in R^c \)`为原特征空间中某一数据点经过PCA降维后的表示形式，对应在超立方体中的顶点用`\(sgn(v)\in \{ -1,1 \}^c \)`来表示，要使量化误差最小，即`\(v\in R^{c}\)`与`\(sgn(v)\in \{ -1,1 \}^c\)`的欧式距离最小，即`\( \min||sgn(v)-v)||^2\ \)`，对于所有的数据点进行二进制编码后用B表示，PCA降维后`\(V=X \times W\)`，对整个数据集为`\(\min||B-V||^2\)`。由于对矩阵进行旋转可以降低量化误差，如下图示：
+对于PCA降维部分，不做详解，具体可以参阅该文。设`\( v\in R^c \)`为原特征空间中某一数据点经过PCA降维后的表示形式，对应在超立方体中的顶点用`\(sgn(v)\in \{ -1,1 \}^c \)`来表示，要使量化误差最小，即`\(v\in R^{c}\)`与`\(sgn(v)\in \{ -1,1 \}^c\)`的欧式距离最小，即`\( \min||sgn(v)-v)||^2\ \)`，对于所有的数据点进行二进制编码后用B表示，PCA降维后`\(V=X \times W\)`，对整个数据集为`\(\min||B-V||^2\)`。由于对矩阵进行旋转可以降低量化误差，如下图示：
 
 ![ITQ_hashing]({{ site.url }}/images/posts/ITQ_hashing.png)
 
@@ -29,4 +29,4 @@ Matlab源代码：Yunchao Gong Homepage上公开了源码，不过并提供数�
 
 Github: [ITQ_ImageRetrieval](https://github.com/willard-yuan/ITQ_ImageRetrieval)
 
-[^1]. Yunchao Gong and S. Lazebnik. Iterative Quantization: A Procrustean Approach to Learning Binary Codes. In: IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2011.
+[1]. Yunchao Gong and S. Lazebnik. Iterative Quantization: A Procrustean Approach to Learning Binary Codes. In: IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2011.
