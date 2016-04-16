@@ -6,13 +6,16 @@ categories: [Image Retrieval]
 
 上上周的事了，还是记录一下吧。HABIR工具包顺应做基于哈希技术的图像检索这方面研究的小伙伴们的强烈要求，提前一个星期对原来在v1.x上陆陆续续做的修改进行整理修改后，就有了现在的v2.0版本。v2.0版本相比于v1.x版本，评价指标更加丰富，代码结构更加有层次感，添加了14年几种新的方法，实验跑出来的结果更加逼近论文中的结果。当然，其中还有一个未来得及整理的检索可视化脚本，这个脚本有待日后整理好后再push上去。代码整理完后重新对v1.x版本的文档做了大刀阔斧的整改，下面是对v2.0版本文档做的部分摘取，HABIR v2.0版本的文档详细可以参阅其文档说明[HABIR](http://yongyuan.name/habir/)。
 
-###HABIR哈希图像检索工具箱是什么？
+## HABIR哈希图像检索工具箱是什么？
+
 HABIR哈希图像检索工具箱是一个用Matlab语言写的集成了经典哈希方法以及最近几年无监督哈希方法的基准框架，里面包含了针对图像检索的主流评价指标，使用该工具箱使得你可以专注于哈希方法的设计，其他性能评价这些方面的东西可以由它来帮你完成。
 
-###为什么会有HABIR哈希图像检索工具箱？
+## 为什么会有HABIR哈希图像检索工具箱？
+
 目前我主要致力于大规模图像检索研究，在图像检索中除了专注与duplicate search外我也花很大力气在哈希大规模图像检索上。在研究的过程中，我发觉几乎很少有研究者提供不同对比方法的代码。这为研究带来了很大不便，而且我坚信在研究的过程中，我们应专注于新算法的设计，而不是新人进来时都得重新造轮子，我们可以在现有代码的基础上学习它，并将它进行拓展，为自己使用。于是，就有了你现在看到的这个[hashing-baseline-for-image-retrieval](https://github.com/willard-yuan/hashing-baseline-for-image-retrieval)，希望它能够为关注基于哈希方法进行图像检索的小伙伴们带去些许帮助。如果想深入了解哈希的话，这里总结的一篇博文对你非常的有帮助：[**Hashing图像检索源码及数据库总结**](http://yongyuan.name/blog/codes-of-hash-for-image-retrieval.html)
 
-###怎样使用HABIR哈希图像检索工具箱？
+## 怎样使用HABIR哈希图像检索工具箱？
+
 1. 下载数据库。在本地计算机上，HABIR的文件目录结构如下图所示：
 ![downfiles](http://yongyuan.name/habir/doc/downfiles.png)
 <p align="center">图1 工具包目录</p>
@@ -37,7 +40,8 @@ gist\_320d\_CIFAR-10\_yunchao下载地址：[gist_320d_CIFAR-10_yunchao.mat](htt
 - cifar10_10class\_visualization.m：可视化CIFAR-10数据库上的图像，官网上CIFAR-10数据库提供的是保存为像素值的mat文件，用该脚本你可以对该数据库上的图像进行可视化。
 
 
-###收录进HABIR哈希图像检索工具箱的哈希方法
+## 收录进HABIR哈希图像检索工具箱的哈希方法
+
 - **PCA-ITQ**,**PCA-RR**: Iterative Quantization. 作者建立的项目详细信息请移步这里：[ITQ](http://www.unc.edu/~yunchao/itq.htm)。
 >Yunchao Gong and Svetlana Lazebnik.  Iterative Quantization: A Procrustean Approach to Learning Binary Codes. In: IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2011.
 
@@ -63,7 +67,8 @@ gist\_320d\_CIFAR-10\_yunchao下载地址：[gist_320d_CIFAR-10_yunchao.mat](htt
 
 **Note**:如果你要将SELVE加入对比中的话，请保持你的Matlab版本在2012及其以下，**非常重要**。
 
-###V2.0版本结果演示
+## V2.0版本结果演示
+
 V2.0版本演示结果如下，左边为Precision-Recall曲线，中间为Recall-The number of retrieved samples曲线，右边为Precision-The number of retrieved samples曲线：
 ![precision-recall-128bits]({{ site.url }}/habir/doc/together_png/128bits.png)
 <p align="center">图3: 128位编码</p>
@@ -80,18 +85,20 @@ V2.0版本演示结果如下，左边为Precision-Recall曲线，中间为Recall
 
 **Tips**：为了对图片进行润色，推荐你用Adobe Illustrator对其进行处理使得其更加美观。
 
-###V1.x版本结果演示
+## V1.x版本结果演示
+
 检索实例http://yongyuan.name/habir/doc/v1/horse_ID8_128_1.png
 ![horse_ID8_128_1]({{ site.url }}/habir/doc/v1/horse_ID8_128_1.png)
 ![horse_ID8_128_2]({{ site.url }}/habir/doc/v1/horse_ID8_128_2.png)
 ![car_ID13_128_1]({{ site.url }}/habir/doc/v1/car_ID13_128_1.png)
 ![car_ID13_128_2]({{ site.url }}/habir/doc/v1/car_ID13_128_2.png)
 
-###运行环境
+## 运行环境
 
 - Matlab
 
-###版本更新
+## 版本更新
+
 -  V2.0   2015/06/10
     - 相比于1.x版，该版本做了较大的更新，添加了新的评价指标，基本涵盖了论文中常用的上面提到的4种指标。
 	- 对框架做了一些调整，并添加了2014年相关论文的方法。
