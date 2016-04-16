@@ -12,11 +12,11 @@ markdown: kramdown
 kramdown:
     input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
     extensions:
-#    - autolink
+    - autolink
 #    - footnotes
 #    - smart
-  use_coderay: true
-  syntax_highlighter: rouge
+#  use_coderay: true
+#  syntax_highlighter: rouge
 #  coderay:
 #  coderay_line_numbers:  nil
 
