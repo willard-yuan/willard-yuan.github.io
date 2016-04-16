@@ -42,8 +42,8 @@ h2:before {
 ul{margin:0;padding:0}
 .post ul, .post ol {
     text-align: justify;
-    list-style-type: none;
-    padding: 0 0 0 0px;
+    /* list-style-type: none; */
+    margin-left: 30px;
 }
 }
 
