@@ -23,7 +23,7 @@ category: blog
 		<span class="listing-seperator">{{ y }}</span>
 	  {% endif %}
     <div class = "post-link-in-posts">
-    <li  id = "uniqueid" class="listing-item" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></li>
+    <a  id = "uniqueid" class="listing-item" href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></a>
     </div>
     {% endfor %}
   </ul>
