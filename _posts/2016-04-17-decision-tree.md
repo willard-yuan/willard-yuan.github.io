@@ -120,7 +120,7 @@ print "the entropy of the marine organism: %.20f" % marineEnt
 ```
 上面显示在海洋生物数据集上的信息熵为0.97095059445466858072。下面对于对计算信息熵进行完整的编码，使得其能够更方便计算某个数据集的信息熵，具体如下：
 
-```
+```python
 def creatData():
     dataSet = [[1, 1, 'yes'], [1, 1, 'yes'], [1, 0, 'no'], [0, 1, 'no'], [0, 1, 'no']]
     labels = ['no surfacing', 'flippers']
