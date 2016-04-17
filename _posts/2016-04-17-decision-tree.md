@@ -1,10 +1,12 @@
 ﻿---
 layout: post
-title: 数据分类浅谈：决策数
+title: 决策树
 categories: [机器学习]
+tags: 决策树
 ---
 
 ## 背景
+
 决策树（decision tree）是一种基本的分类和**回归**（后面补充一个回归的例子？）方法，它呈现的是一种树形结构，可以认为是if-then规则的集合。其其主要优点是模型具有很好的**可读性**，且**分类速度快**；缺点是可能会产生过度匹配的问题（所以一般都会有决策树的剪枝过程）。决策树在学习时，利用训练数据，根据损失函数最小化原则建立决策树模型，其学习过程包括3个步骤：特征选择、决策树生成和决策树修剪。决策树学习的思想来源主要有Quinlan在1986年提出的ID3算法和1993年提出的C4.5算法，以及由Breiman等人在1986年提出的CART算法。
 
 决策树在现实生活中，已得到了很广泛的应用，举两个很常见的例子：
@@ -57,7 +59,7 @@ N个样本，$x_i=(x_i^{(1)},x_i^{(2)},...,x_i^{(n)})^T$为样本$i$对应的$n$
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202015-10-24%20at%2010.39.57_zps3iqdbwe9.png)
 划分数据数据集的大原则是：将无序的数据变得更加有序。度量数据杂乱无章程度的一种方法就是使用信息论中的信息熵，在划分数据之前和之后信息发生的变化称为信息增益，通过计算每个特征划分数据集获得的信息增益，获得信息增益最大的特征就是当前数据集下最好的用于划分数据最好的特征。
 
-###信息增益
+### 信息增益
 
 在信息论和概率统计中，熵是表示随机变量不确定性的度量，熵越大，表示数据越杂乱无章，反之，则说明数据越有序。设$X$是一个取有限个值的离散随机变量，其概率分布为：
 $$
@@ -102,6 +104,7 @@ plt.ylabel('$H(p)$')
 
 plt.show()
 ```
+
 运行上面代码，可以得到下图：
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/download_zps9lv2ptzd.png)
 可以看到，但$p=1-p=0.5$时，即取0或1的概率都是0.5时，熵最大，随机变量不确定性最大。
@@ -144,7 +147,7 @@ def calShannonEnt(dataSet):
         prob = float(labelCounts[key])/numEntries
         shannonEnt -= prob*math.log(prob, 2.0)
     return shannonEnt
-    
+
 print "the entropy of the marine organism: %.20f" % calShannonEnt(myData)
 
 #the number of marine organism: 5
@@ -152,11 +155,10 @@ print "the entropy of the marine organism: %.20f" % calShannonEnt(myData)
 #{'yes': 2, 'no': 3}
 #the entropy of the marine organism: 0.97095059445466858072
 ```
-从上面给出的结果可以看到，计算出来的信息熵跟我们半手工计算出来的结果是一致的。
 
-决策树学习应用信息增益准则来选择特征，上面我们对信息熵有了比较好的理解后，我们进一步来看看信息增益。
+从上面给出的结果可以看到，计算出来的信息熵跟我们半手工计算出来的结果是一致的。决策树学习应用信息增益准则来选择特征，上面我们对信息熵有了比较好的理解后，我们进一步来看看信息增益。
 
-###信息增益
+### 信息增益
 
 特征$A$对训练数据集$D$的信息增益$g(D,A)$，定义为集合$D$的经验熵$H(D)$与特征$A$给定条件下$D$的经验**条件熵$H(D|A)$**之差，即：
 $$
@@ -202,11 +204,12 @@ g(D,A_2) & = H(D) - \left(\frac{4}{5}H(D_1) + \frac{1}{5}H(D_1)\right) \\
 ```python
 gA1 = HD+0.4*np.log2(2.0/3.0)+0.2*np.log2(1.0/3.0)
 print "g(D, A1): %f" %gA1
-gA2 = HD-0.8 
+gA2 = HD-0.8
 print "g(D, A2): %f" %gA2
 #g(D, A1): 0.419973
 #g(D, A2): 0.170951
 ```
+
 由于以特征A1划分数据集的信息增益$g(D,A_1)$大于以特征A2划分数据集的信息增益$g(D,A_2)$，所以，在初始划分数据集的时候，我们选择“不浮出水面是否可以生存”这个规则来划分训练数据。
 
 下面，我们用python来计算信息增益，并验证一下其结果跟我们手算的结果是否一致，以及跟我们手工计算得出来应该选择“不浮出水面是否可以生存”的结论是否一致。
@@ -215,12 +218,12 @@ print "g(D, A2): %f" %gA2
 
 <center>
 
-| 海洋生物样本 | 不浮出水面是否可以生存 | 是否有脚蹼 | 属于鱼类 | 
+| 海洋生物样本 | 不浮出水面是否可以生存 | 是否有脚蹼 | 属于鱼类 |
 |:-----------:|:------------------:| :--------:|:--------:|
 |      1     |        1           |      1    |    yes   |
 |      2     |        1           |      1    |    yes   |
 |      3     |        1           |      0    |    no    |
-|      4     |        0           |      1    |    no    | 
+|      4     |        0           |      1    |    no    |
 |      5     |        0           |      1    |    no    |
 
 </center>
@@ -244,7 +247,6 @@ myDat = splitDataSet(dataSet, axis, value)
 print myDat
 #myDat的输出：[[1, 'yes'], [1, 'yes'], [0, 'no']]
 ```
-
 
 上面，我们按第一个特征A1将数据进行了划分，接下来我们计算特征的不同划分，来计算信息增益：
 
@@ -283,7 +285,6 @@ print "\nThe selected best feature: %d" % bestFeature
 运行上面代码，我们可以得到如下的结果：
 
 ```bash
-
 the number of marine organism: 5
 label counts:
 {'yes': 2, 'no': 3}
@@ -292,13 +293,13 @@ Base entropy: 0.970951
 ==========feature candidate=========
 [1, 1, 1, 0, 0]
 
-sub-dataset: 
+sub-dataset:
 [[1, 'no'], [1, 'no']]
 
 the number of marine organism: 2
 label counts:
 {'no': 2}
-sub-dataset: 
+sub-dataset:
 [[1, 'yes'], [1, 'yes'], [0, 'no']]
 
 the number of marine organism: 3
@@ -308,13 +309,13 @@ information gain: 0.41997320
 ==========feature candidate=========
 [1, 1, 0, 1, 1]
 
-sub-dataset: 
+sub-dataset:
 [[1, 'no']]
 
 the number of marine organism: 1
 label counts:
 {'no': 1}
-sub-dataset: 
+sub-dataset:
 [[1, 'yes'], [1, 'yes'], [0, 'no'], [0, 'no']]
 
 the number of marine organism: 4
@@ -329,7 +330,7 @@ The selected best feature: 0
 
 实际上，在上面计算完了信息增益后，我们还可以进一步计算信息增益比，接下来，我们稍微花些笔墨介绍一下信息增益比。
 
-###信息增益比
+### 信息增益比
 
 信息增益比的大小是相对于训练数据集而言的，并没有绝对的意义。它也可以作为特征选择的一种准则，其定义形式为：
 \begin{aligned}
