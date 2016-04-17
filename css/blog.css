@@ -46,8 +46,6 @@ h2:before {
     font-weight: bold;
 }
 
-::selection{background:#2ecc71;color:white}
-::-moz-selection{background:#2ecc71;color:white}
 ul{margin:0;padding:0}
 .post ul, .post ol {
     text-align: justify;
