@@ -1,6 +1,6 @@
 ---
 layout: post
-title: caffe配置中的一些问题
+title: 环境配置：Caffe配置中的一些问题
 categories: [Machine Learning]
 tags: Caffe
 ---

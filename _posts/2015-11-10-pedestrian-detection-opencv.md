@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 【译】OpenCV行人检测
+title: 技术翻译：OpenCV行人检测
 categories: [计算机视觉]
 tags: OpenCV
 ---

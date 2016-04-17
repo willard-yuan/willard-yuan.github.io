@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deep Learning for Content-Based Image Retrieval
+title: 图像检索：基于深度学习的CBIR
 categories: [Image Retrieval]
 tags: 图像检索
 ---

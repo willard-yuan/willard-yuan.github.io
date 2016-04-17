@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 如何设计好词袋模型的类类型
+title: 图像检索：如何设计一个词袋模型的类类型
 categories: [Image Retrieval]
 tags: 词袋模型
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图像检索(CBIR)三剑客之BoF、VLAD、FV
+title: 图像检索：Bo、VLAD、FV三剑客
 categories: [Image Retrieval]
 tags: 图像检索
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 使用Dlib开源库做object detection
+title: 机器视觉：使用Dlib库做物体检测
 categories: [Machine Learning]
 tags: Dlib
 ---

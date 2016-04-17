@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mac下OpenCV3.0和OpenCV2.x自由切换
+title: 环境配置：Mac下OpenCV3.0和OpenCV2.x自由切换
 categories: [Python]
 tags: Python
 ---

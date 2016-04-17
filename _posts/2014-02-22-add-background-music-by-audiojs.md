@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 通过audiojs为网页添加背景音乐
+title: 前端浅谈：通过audiojs为网页添加背景音乐
 categories: [前端设计]
 tags: 前端
 ---

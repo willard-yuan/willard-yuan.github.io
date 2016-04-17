@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Bag of Words模型
+title: 图像检索：词袋模型
 categories: [Image Retrieval]
 tags: 词袋模型
 ---

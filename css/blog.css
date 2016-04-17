@@ -26,6 +26,14 @@ p{
 
 a{text-decoration:none}
 a:focus{outline:0}
+a:hover {
+  text-decoration: none;
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
 h2:before {
     content: "#";
@@ -37,6 +45,7 @@ h2:before {
     font-size: 1.4em;
     font-weight: bold;
 }
+
 ::selection{background:#2ecc71;color:white}
 ::-moz-selection{background:#2ecc71;color:white}
 ul{margin:0;padding:0}
@@ -450,7 +459,7 @@ img[alt=drawing] { width: 60%; }
 }
 
 .post-link-in-posts:hover .article {
-    color: #1EA3FF;
+    color: #48C9B0;;
 }
 
 .post-link-in-posts .tag {

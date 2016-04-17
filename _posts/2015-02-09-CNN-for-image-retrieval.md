@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CNN for image retrieval
+title: 图像检索：CNN for image retrieval
 categories: [Image Retrieval]
 tags: CNN,图像检索
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: K-Means Using Python
+title: 机器学习：用Python写K-Means
 categories: [Python,Machine Learning]
 tags: 机器学习
 ---

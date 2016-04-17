@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Clustering Pixels Using K-Means
+title: 机器视觉：用K-Means进行图像分割
 categories: [Machine Learning]
 tags: 机器学习
 ---

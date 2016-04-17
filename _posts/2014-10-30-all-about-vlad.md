@@ -1,6 +1,6 @@
 ---
 layout: post
-title: All about VLAD笔记
+title: 论文阅读：All about VLAD
 categories: [Image Retrieval]
 tags: 图像检索
 ---

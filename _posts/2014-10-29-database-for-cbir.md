@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图像检索常用图像库整理
+title: 图像检索：常用图像库整理
 categories: [Image Retrieval]
 tags: 图像检索
 ---

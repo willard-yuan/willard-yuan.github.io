@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 论文阅读笔记Iterative Quantization
+title: 论文阅读：Iterative Quantization迭代量化
 categories: [Image Retrieval]
 tags: 哈希
 ---
@@ -30,4 +30,4 @@ Matlab源代码：Yunchao Gong Homepage上公开了源码，不过并提供数�
 
 Github: [ITQ_ImageRetrieval](https://github.com/willard-yuan/ITQ_ImageRetrieval)
 
-[1]. Yunchao Gong and S. Lazebnik. Iterative Quantization: A Procrustean Approach to Learning Binary Codes. In: IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2011.
+[1] Yunchao Gong and S. Lazebnik. Iterative Quantization: A Procrustean Approach to Learning Binary Codes. In: IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2011.
