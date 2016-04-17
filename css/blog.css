@@ -463,6 +463,8 @@ img[alt=drawing] { width: 60%; }
 }
 
 .post-link-in-posts .tag {
+    margin-top:10px;
+    margin-bottom:10px;
     color: #939aa1;
     font-weight: normal;
     font-size: 0.8em;
