@@ -1,6 +1,6 @@
 @import url("font.css");*,*:after,*:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0;margin:0}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}
 .fancy, section, article {
-  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;
+  font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
   line-height: 170%;
 }
 article h1 {
@@ -79,7 +79,7 @@ ul.posts {
 }
 
 .inner, pre code, .post > * {
-  max-width: 680px;
+  max-width: 760px; /*680*/
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -165,15 +165,6 @@ img {
 }
 .pull-right {
     float: right;
-}
-
-.inner, pre code, .post > * {
-  max-width: 760px; /*680*/
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-  width: 100%;
-  display: block;
 }
 
 .post img {
