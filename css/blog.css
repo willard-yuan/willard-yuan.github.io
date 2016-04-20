@@ -216,7 +216,7 @@ ul.posts li {
 }
 .listing-seperator {
     /**background: url(../images/timeline_century_tick.gif) left center no-repeat;**/
-    font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
     /**font-size: 3em;**/
     font-weight: 400;
     padding: 4px 4px 4px 0px;
@@ -247,7 +247,7 @@ ul.posts li {
 .listing-item time {
     float: right;
     color: #999999;
-    font-family: "Roboto", Verdana, sans-serif;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
     font-size: 14px;
     color: #888;
 }
@@ -287,7 +287,7 @@ padding-top: 20px;
 ul.posts .date {
   margin-right: 0.3em;
   display: inline-block;
-  font-family: "Roboto",sans-serif;
+  font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 
 ul.posts .description {
@@ -309,7 +309,7 @@ ul.posts .description {
 img[alt=drawing] { width: 60%; }
 
 .category-listing-seperator {
-    font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
     /**font-size: 3em;**/
     font-weight: 400;
     list-style-type: none;
