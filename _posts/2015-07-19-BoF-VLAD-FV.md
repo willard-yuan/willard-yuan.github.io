@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图像检索：Bo、VLAD、FV三剑客
+title: 图像检索：BoF、VLAD、FV三剑客
 categories: [Image Retrieval]
 tags: 图像检索
 ---

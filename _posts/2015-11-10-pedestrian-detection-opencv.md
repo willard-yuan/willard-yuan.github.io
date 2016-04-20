@@ -50,7 +50,7 @@ $ pip install --upgrade imutils
 
 我已经在我的PyImageSearch博客上在两次讲到过非极大抑制(non-maxima suppression)方法，一次是在[Python非极大抑制用于物体检测](http://www.pyimagesearch.com/2014/11/17/non-maximum-suppression-object-detection-python/)，一篇是在[用Python实现更快的非极大抑制](http://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/)，无论是哪一种情形，非极大抑制的宗旨都是获取多个重叠的边框(bounding box)，并且将他们减少至仅有一个边框。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_032.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_032.jpg)
 图1：左图有很多检测错误的边框；右图采用非极大抑制后，使得我们可以抑制那些重叠的区域，将正确的边框留下来。
 
 非极大抑制方法可以减少在进行行人检测过程中的假阳率。
@@ -142,7 +142,7 @@ for imagePath in paths.list_images(args["images"]):
 
 在应用非极大抑制后，我们在第42行和43行画出最终的边框，在**第46-48行**中我们展示图像的一些基本信息，以及检测到的边框数目，在**第51-53行**，在屏幕最终显示我们输入的图像。
 
-##行人检测结果
+## 行人检测结果
 
 为了看看我们写的行人检测脚本的实际效果，我们只需要执行下面命令：
 
@@ -152,52 +152,52 @@ $ python detect.py --images images
 
 下图是一张行人检测的结果图：
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_258.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_258.jpg)
 图2：检测效果
 
 上图我们检测到了站在警车旁的单个行人。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_014.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_014.jpg)
 图3：在前景和背景中分别检测到了1个人
 
 上面我们可以看到在前景中的男人被检测到了，同时背景中推着婴儿车的女人也检测到了。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_032.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_032.jpg)
 图4：一个展示为什么用非极大抑制很重要的例子
 
 图4的例子展示了为什么用非极大抑制很重要。`detectMultiScale`函数除了将正确的边框检测出来外，还把两个边框边框检测出来了，这两个错误的边框将图像中的行人覆盖了。通过使用非极大抑制，我们可以抑制错误的边框，只留下正确检测的边框。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_029.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_029.jpg)
 图5：另一个展示非极大抑制效果的例子
 
 我们再一次可以看到，有很多错误的边框被检测出来了，通过使用非极大抑制，我们可以抑制错误的边框，只留下正确检测的边框。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_156.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_156.jpg)
 图6：在一个购物中心检测行人
 
 图6在一个购物中心进行行人检测，图中，有两个人正向摄像头走进，另外一个人正远离摄像头，不管是哪种情形，我们的HOG检测方法都能够准确的检测出行人。在`non_maxima_suppression `函数中较大的`overlapThresh`能够确保那些部分重叠了的边框不会被抑制。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_390.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_390.jpg)
 图7：在模糊图片中检测行人
 
 老实说，我对上面图片的检测结果有点儿惊讶，因为一般而言HOG描述子在运动模糊的图片上检测效果不是很好，不过在这幅图像上，我们却将行人检测出来了。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_293.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_293.jpg)
 图8：在室外街道上检测行人
 
 这里有另外一个多个重叠边框的例子，不过因为我们的`overlapThresh`设置得比较大，所以这些边框没有被抑制，从而能够将正确的检测结果留下来。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_265.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_265.jpg)
 图9：检测一张具有4个成员的家庭的图片
 
 图9的例子展示了HOG+SVM行人检测器的多功能性，我们不仅能够检测到成年的男人，也能够检测到那三个小孩(注意：该检测器不能检测到躲藏在他老爸后面的小孩)。
 
-![](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_454.jpg)
+![drawing](https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_454.jpg)
 图10：对路标标识进行行人检测
 
 我将图10放在最后是因为我发觉这非常的有趣，我们可以很清楚的看到这只是一个路标标识，标识表示人行横道，然而，HOG+SVM检测器将它们在图中框出来了，实际上它们却并不是行人。
 
-##总结
+## 总结
 
 在这篇博文中，我们已经学到了怎样使用OpenCV的库以及Python来进行行人检测。
 
