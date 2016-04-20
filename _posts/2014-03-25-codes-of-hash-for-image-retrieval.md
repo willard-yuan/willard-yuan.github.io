@@ -62,6 +62,7 @@ tags: 哈希
 >Minimal Loss Hashing for Compact Binary Codes, [code](http://www.cs.toronto.edu/~norouzi/research/mlh/)
 
 - [**Fergus**](http://cs.nyu.edu/~fergus/pmwiki/pmwiki.php?n=PmWiki.Publications)
+
 >Spectral Hashing  
 >Multidimensional Spectral Hashing
 
