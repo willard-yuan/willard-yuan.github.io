@@ -9,7 +9,7 @@ tags: 哈希
 
 >对哈希方法重新进行调研，右图是找到的提供有部分源码的哈希方法，这其中包含了比较经典的哈希方法，比如e2lsh、mih，同时也包含有最近几年一直到13年提出来的一些比较新的哈希算法，比如13年提出的有bpbc、opq、ksh。
 
-上面这一段是摘自本小子的周报(本小子这周除改了篇文章，其余时间几乎都在打酱油，谁叫老板不给发工资(造反逆天？)，引用中的“右图”可以略过，直接看下面不同哈希算法的链接信息。
+上面这一段是摘自本小子的周报(本小子这周除改了篇文章，其余时间几乎都在打酱油，谁叫老板不给发工资(要逆天？)，引用中的“右图”可以略过，直接看下面不同哈希算法的链接信息。
 
 ## 哈希方法对比框架
 
@@ -25,7 +25,7 @@ tags: 哈希
 4. **DBQ**: Double-bit quantization for hashing [Paper](http://cs.nju.edu.cn/lwj/paper/AAAI12_DBQ.pdf) and [Code]( http://cs.nju.edu.cn/lwj/code/DBQ.rar)
 5. **E2LSH**: Local Sensitive Hash, [Project Page](http://www.mit.edu/~andoni/LSH/)
 6. **HDML**: Hamming Distance Metric Learning, [Paper](http://www.cs.toronto.edu/~norouzi/research/papers/hdml.pdf) and [Code](https://github.com/norouzi/hdml)
-7. **IMH**: Inter-Media Hashing for Large-scale Retrieval from Heterogenous Data Sources, [Project Page](http://staff.itee.uq.edu.au/shenht/UQ_IMH) [\[Code\]](http://staff.itee.uq.edu.au/shenht/UQ_IMH/imh.7z)
+7. **IMH**: Inter-Media Hashing for Large-scale Retrieval from Heterogenous Data Sources, [Project Page](http://staff.itee.uq.edu.au/shenht/UQ_IMH) and [Code](http://staff.itee.uq.edu.au/shenht/UQ_IMH/imh.7z)
 8. **ISOH**: Isotropic Hashing, [Paper](http://cs.nju.edu.cn/lwj/paper/NIPS12-IsoHash.pdf) and [Code](http://cs.nju.edu.cn/lwj/code/IsoHash.zip)
 9. **ITQ**: Iterative Quantization: A Procrustean Approach to Learning Binary Codes [Paper](http://www.unc.edu/~yunchao/papers/CVPR11_a.pdf) and [Code](http://www.unc.edu/~yunchao/code/smallcode.zip) ~~已下线~~
 10. **KLSH**: Kernelized Locality-Sensitive Hashing for Scalable Image Search, [Project Page](http://www.cse.ohio-state.edu/~kulis/klsh/klsh.htm), [Paper](http://www.cse.ohio-state.edu/~kulis/pubs/iccv_klsh.pdf) and [Code](http://www.cse.ohio-state.edu/~kulis/klsh/klsh_code.tar.gz)
@@ -53,39 +53,30 @@ tags: 哈希
 
 注：下面不同的哈希方法的代码可以在他们的主页上找到
 
-- [**Grauman**](http://cs.nyu.edu/~fergus/pmwiki/pmwiki.php?n=PmWiki.Publications)
->[Image search and large-scale retrieval](http://www.cs.utexas.edu/~grauman/research/pubs-by-topic.html#Fast_similarity_search_and_image)系列Paper
+- [**Grauman**](http://cs.nyu.edu/~fergus/pmwiki/pmwiki.php?n=PmWiki.Publications), [Image search and large-scale retrieval](http://www.cs.utexas.edu/~grauman/research/pubs-by-topic.html#Fast_similarity_search_and_image)系列Paper
 
 - [**Norouzi**](http://www.cs.toronto.edu/~norouzi/)
->Hamming Distance Metric Learning
->
->Fast Search in Hamming Space with Multi-Index Hashing
->
->Minimal Loss Hashing for Compact Binary Codes [**code**](http://www.cs.toronto.edu/~norouzi/research/mlh/)
+>Hamming Distance Metric Learning  
+>Fast Search in Hamming Space with Multi-Index Hashing  
+>Minimal Loss Hashing for Compact Binary Codes, [code](http://www.cs.toronto.edu/~norouzi/research/mlh/)
 
 - [**Fergus**](http://cs.nyu.edu/~fergus/pmwiki/pmwiki.php?n=PmWiki.Publications)
->Spectral Hashing
->
+>Spectral Hashing  
 >Multidimensional Spectral Hashing
 
 - [**Chhshen & Guosheng Lin**](http://cs.adelaide.edu.au/~chhshen/notes.html)
->A general two-step approach to learning-based hashing (CVPR 2013), [code](https://bitbucket.org/guosheng/two-step-hashing), [**阅读笔记**](http://www.dreamingo.com:9999/blog/General%20Two%20Step%20Approach%20to%20Learning%20Ba)
->
->Learning hash functions using column generation (ICML 2013), [code](https://bitbucket.org/guosheng/column-generation-hashing)
->
+>A general two-step approach to learning-based hashing (CVPR 2013), [code](https://bitbucket.org/guosheng/two-step-hashing), [阅读笔记](http://www.dreamingo.com:9999/blog/General%20Two%20Step%20Approach%20to%20Learning%20Ba)  
+>Learning hash functions using column generation (ICML 2013), [code](https://bitbucket.org/guosheng/column-generation-hashing)  
 >Fast Supervised Hashing with Decision Trees (CVPR 2014), [Paper](http://arxiv.org/pdf/1404.1561v1.pdf) and [code](https://bitbucket.org/chhshen/fasthash/)
 
 - [**Yunchao**](http://www.unc.edu/~yunchao/)
->Iterative Quantization (CVPR 2011), [**Project page**](http://www.unc.edu/~yunchao/itq.htm)
->
->Angular Quantization-based Binary Codes for Fast Similarity Search (NIPS 2012), [**Project page**](http://www.unc.edu/~yunchao/aqbc.htm)
->
+>Iterative Quantization (CVPR 2011), [**Project page**](http://www.unc.edu/~yunchao/itq.htm)  
+>Angular Quantization-based Binary Codes for Fast Similarity Search (NIPS 2012), [**Project page**](http://www.unc.edu/~yunchao/aqbc.htm)  
 >Learning Binary Codes for High-Dimensional Data Using Bilinear Projections (CVPR 2013), [**Project page**](http://www.unc.edu/~yunchao/bpbc.htm)
 
 - [**kahe**](http://research.microsoft.com/en-us/um/people/kahe/)
->K-means Hashing (CVPR 2013)[**code link from his homepage**](http://research.microsoft.com/en-us/um/people/kahe/cvpr13/matlab_KMH_release_v1.1.rar) 
->
->Optimized Product Quantization (CVPR 2013)[**Project page**](http://research.microsoft.com/en-us/um/people/kahe/cvpr13/index.html)
+>K-means Hashing (CVPR 2013), [**code**](http://research.microsoft.com/en-us/um/people/kahe/cvpr13/matlab_KMH_release_v1.1.rar)  
+>Optimized Product Quantization (CVPR 2013), [**Project page**](http://research.microsoft.com/en-us/um/people/kahe/cvpr13/index.html)
 
 - [**Jun Wang**](http://www.ee.columbia.edu/~jwang/)
 
