@@ -459,12 +459,6 @@ img[alt=drawing] { width: 60%; }
     font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 
-.fa{
-    float: right;
-	color: #939aa1;
-	font-size: 14px;
-}
-
 @media (min-width: 768px)
 .post-link-in-posts .date, .post-link-in-posts .tag {
     margin-top: 0.2em;
