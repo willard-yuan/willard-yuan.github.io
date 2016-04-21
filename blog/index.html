@@ -25,10 +25,12 @@ category: blog
     <a class='post-link-in-posts' href="{{ site.url }}{{ post.url }}">
         <span class='date'>{{ post.date | date_to_string }}</span>
         <span class='article'>{{ post.title }}</span>
+		<div class="tag-in-index-post">
         <i class="fa fa-tags"></i>
-		<div class='tag'>
+          <div class="tag">
 		        {{ post.tags | first }}
-		</div>
+          </div>
+        </div>
     </a>
     {% endfor %}
   </ul>

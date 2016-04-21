@@ -451,6 +451,12 @@ img[alt=drawing] { width: 60%; }
     color: #48C9B0;;
 }
 
+.tag-in-index-post {
+    float: right;
+    color: #939aa1;
+    font-size: 0.6em;
+}
+
 .post-link-in-posts .tag {
     color: #939aa1;
     font-weight: normal;
