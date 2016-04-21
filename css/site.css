@@ -1,16 +1,5 @@
-/*
-  Colors
-  dark blue: #255b96
-  light blue: #3073b3
-  gray: #c6c1bc
-  black: #2a1e28
-  red: #901a12
-  green: #1BAF69
-*/
-
 @import url('syntax.css');
 @import url('font/icomoon79565/style.css');
-/*@import url('bootstrap.min.css');*/
 
 /* Global Reset */
 * {
