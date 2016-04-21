@@ -38,118 +38,54 @@ tags: 生活
 
 音美，词亦美。现在很难找到词和乐都这么有感染力的歌曲了，而且还是原创。
 
-> In younger days, I told myself my life would be my own
->
-> 在年轻的日子里，我告诉自己我将有属于自己的生活
->
->And I'd leave the place where sunshine never shone
->
->而且我要离开这阳光照不到的地方
->
->For my life's too short for waiting when I see the rising sun
->
->我的生命没有时间等待，当我看见升起的太阳那时
->
->Then I know again that I must carry on
->
->它又一次告诉我必须坚持下去
->
->Carry on till tomorrow, there's no reason to look back
->
->坚持到明天，那是没有理由再回想
->
->Carry on, carry on, carry on
->
->坚持到明天……
->
->Beyond the shadows of the clouds and onward to the sky
->
->在远处云层的黑影前进到天空
->
-Carry on till I find the rainbow's end
->
->让它坚持到我找到彩虹的尽头
->
+> In younger days, I told myself my life would be my own  
+> 在年轻的日子里，我告诉自己我将有属于自己的生活  
+>And I'd leave the place where sunshine never shone  
+>而且我要离开这阳光照不到的地方  
+>For my life's too short for waiting when I see the rising sun  
+>我的生命没有时间等待，当我看见升起的太阳那时  
+>Then I know again that I must carry on  
+>它又一次告诉我必须坚持下去  
+>Carry on till tomorrow, there's no reason to look back  
+>坚持到明天，那是没有理由再回想  
+>Carry on, carry on, carry on  
+>坚持到明天……  
+>Beyond the shadows of the clouds and onward to the sky  
+>在远处云层的黑影前进到天空  
+Carry on till I find the rainbow's end  
+>让它坚持到我找到彩虹的尽头  
+>For my life's too short for waiting when I see the setting sun  
+>我的生命没有时间等待，当我看见西下的夕阳时  
+>Then I know again that I must carry on  
+>它又一次告诉我必须坚持下去  
+>Carry on till tomorow, there's no reason to look back  
+>坚持到明天，那是没有理由再回想  
+>Carry on, carry on, carry on  
+>坚持到明天……坚持到明天……坚持到明天……  
+>Drifting on the wings of freedom, leave this stormy day  
+>飘浮在自由的云上，离开那些日子   
+>And we'll ride for tomorrow's golden fields  
+>而且会飘浮到明日金色的田野上
 >For my life's too short for waiting when I see the setting sun
->
->我的生命没有时间等待，当我看见西下的夕阳时
->
+>我的生命没有时间等待，当我看见西下的夕阳时  
 >Then I know again that I must carry on
->
->它又一次告诉我必须坚持下去
->
->Carry on till tomorow, there's no reason to look back
->
->坚持到明天，那是没有理由再回想
->
->Carry on, carry on, carry on
->
->坚持到明天……坚持到明天……坚持到明天……
->
->Drifting on the wings of freedom, leave this stormy day
->
->飘浮在自由的云上，离开那些日子
->
->And we'll ride for tomorrow's golden fields
->
->而且会飘浮到明日金色的田野上</br>
->
->For my life's too short for waiting when I see the setting sun
->
->我的生命没有时间等待，当我看见西下的夕阳时
->
->Then I know again that I must carry on
->
->它又一次告诉我必须坚持下去
->
->Carry on till tomorrow, there's no reason to look back
->
->坚持到明天，那是没有理由再回想
->
->Carry on, carry on, carry on
->
->坚持到明天……坚持到明天……坚持到明天……
->
->And when the heavy journey's done, I'll rest my weary head
->
->当着沉重的旅行结束，我将休息我疲惫的头脑
->
->For the world and it's colors will be bright
->
->那是为了这个世界更加光明
->
->For my life's too short for waiting when I see the setting sun
->
->我的生命没有时间等待，当我看见西下的夕阳时
->
->Then I know again that I must carry on
->
->它又一次告诉我必须坚持下去
->
->Carry on till tomorrow, there's no reason to look back
->
->坚持到明天，那是没有理由再回想
->
->Carry on, carry on, carry on
->
->坚持到明天……坚持到明天……坚持到明天……
-
-$$
-\begin{align*}
-  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-      \vdots & \ddots & \vdots \\
-      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right)
-\end{align*}
-$$
+>它又一次告诉我必须坚持下去  
+>Carry on till tomorrow, there's no reason to look back  
+>坚持到明天，那是没有理由再回想  
+>Carry on, carry on, carry on  
+>坚持到明天……坚持到明天……坚持到明天……  
+>And when the heavy journey's done, I'll rest my weary head  
+>当着沉重的旅行结束，我将休息我疲惫的头脑  
+>For the world and it's colors will be bright  
+>那是为了这个世界更加光明  
+>For my life's too short for waiting when I see the setting sun  
+>我的生命没有时间等待，当我看见西下的夕阳时  
+>Then I know again that I must carry on   
+>它又一次告诉我必须坚持下去  
+>Carry on till tomorrow, there's no reason to look back  
+>坚持到明天，那是没有理由再回想  
+>Carry on, carry on, carry on  
+>坚持到明天……坚持到明天……坚持到明天……  
 
 ## 关于Bad Fingers
 
