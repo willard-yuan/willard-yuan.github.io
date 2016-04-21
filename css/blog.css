@@ -445,6 +445,7 @@ img[alt=drawing] { width: 60%; }
     color: #555;
     margin-right: 3px;
     transition: all 100ms linear;
+	font-size: 0.9rem;
 }
 
 .post-link-in-posts:hover .article {
