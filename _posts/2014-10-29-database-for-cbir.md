@@ -39,7 +39,7 @@ tags: 图像检索
 
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/UKBench.jpg_zpsxavgwhhl.png)
 
-- **MIR-FLICKR**，MIR-FLICKR-1M，2010，1M张Flickr上的图片，也提供25K子集下载，[链接](https://link.zhihu.com/?target=http%3A//blackhole1.stanford.edu/ivms/Datasets.htm)。
+- **MIR-FLICKR**，MIR-FLICKR-1M，2010，1M张Flickr上的图片，也提供25K子集下载，[链接](http://press.liacs.nl/mirflickr/mirflickr1m/)。
 
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/MIR-FLICKR_zpsqqmqwqdt.jpg)
 

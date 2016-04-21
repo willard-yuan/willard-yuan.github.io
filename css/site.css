@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
   Colors
   dark blue: #255b96
@@ -8,8 +9,10 @@
   green: #1BAF69
 */
 
+=======
+@import url('syntax.css');
+>>>>>>> a8f39b49b3de1f34f69c0c7a2b17a5825167ee31
 @import url('font/icomoon79565/style.css');
-/*@import url('bootstrap.min.css');*/
 
 /* Global Reset */
 * {
@@ -64,7 +67,7 @@ table td, table th {
 /* Common */
 
 a {
-  color: #a00;
+  color: #e74c3c;
   text-decoration: none;
 }
 

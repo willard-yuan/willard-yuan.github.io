@@ -1,6 +1,6 @@
 @import url("font.css");*,*:after,*:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0;margin:0}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}
 .fancy, section, article {
-  font-family: Bitter, Georgia, "Helvetica Neue","Hiragino Sans GB",Arial,"微软雅黑",sans-serif;
+  font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
   line-height: 170%;
 }
 article h1 {
@@ -12,7 +12,7 @@ article h1 {
 .meta {
   color: #666;
   /*border-top: 1px solid #ccc;*/
-  font-size: 0.9em;
+  font-size: 0.9rem;
   margin-top: 4px;
   padding: 4px 8px;
   text-align: center !important;
@@ -20,7 +20,7 @@ article h1 {
 
 p{
   text-align: justify;
-  font-size:1rem;
+  font-size: 0.9rem;
   margin: 20px 0;
 }
 
@@ -79,7 +79,7 @@ ul.posts {
 }
 
 .inner, pre code, .post > * {
-  max-width: 680px;
+  max-width: 760px; /*680*/
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -167,15 +167,6 @@ img {
     float: right;
 }
 
-.inner, pre code, .post > * {
-  max-width: 760px; /*680*/
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-  width: 100%;
-  display: block;
-}
-
 .post img {
     display: block;
     max-width: 100%;
@@ -225,9 +216,9 @@ ul.posts li {
 }
 .listing-seperator {
     /**background: url(../images/timeline_century_tick.gif) left center no-repeat;**/
-    font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
     /**font-size: 3em;**/
-    font-weight: 400;
+    font-weight: 800;
     padding: 4px 4px 4px 0px;
     list-style-type: none;
     display: block;
@@ -256,7 +247,7 @@ ul.posts li {
 .listing-item time {
     float: right;
     color: #999999;
-    font-family: "Roboto", Verdana, sans-serif;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
     font-size: 14px;
     color: #888;
 }
@@ -296,7 +287,7 @@ padding-top: 20px;
 ul.posts .date {
   margin-right: 0.3em;
   display: inline-block;
-  font-family: "Roboto",sans-serif;
+  font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 
 ul.posts .description {
@@ -318,7 +309,7 @@ ul.posts .description {
 img[alt=drawing] { width: 60%; }
 
 .category-listing-seperator {
-    font-family: "Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-seri;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
     /**font-size: 3em;**/
     font-weight: 400;
     list-style-type: none;
@@ -429,7 +420,6 @@ img[alt=drawing] { width: 60%; }
     border-bottom: 1px dashed #d0d0d0;
     /* color: #a00; */
     color: #555;
-    font-weight: 800;
 }
 
 @media (min-width: 768px)
@@ -440,7 +430,7 @@ img[alt=drawing] { width: 60%; }
 
 .post-link-in-posts .date {
     width: 120px;
-    font-size: 0.8em;
+    font-size: 0.6em;
     color: #939aa1;
     display: block;
 }
@@ -451,22 +441,29 @@ img[alt=drawing] { width: 60%; }
 }
 
 .post-link-in-posts .article {
+    font-weight: 800;
     color: #555;
     margin-right: 3px;
     transition: all 100ms linear;
+	font-size: 0.9rem;
 }
 
 .post-link-in-posts:hover .article {
     color: #48C9B0;;
 }
 
+.tag-in-index-post {
+    float: right;
+    color: #939aa1;
+    font-size: 0.6em;
+}
+
 .post-link-in-posts .tag {
-    margin-top:10px;
-    margin-bottom:10px;
     color: #939aa1;
     font-weight: normal;
-    font-size: 0.8em;
+    font-size: 0.6em;
     float: right;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 
 @media (min-width: 768px)

@@ -84,7 +84,7 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 
 ## 使用triplet loss进行特征再学习
 
-对于上面网络的输出分数向量$\phi(l_t) \in R^D$，对其进行$l_2$归一化，然后使用affine投影将其投影为$x_t=W'\phi(l_t)/\|\|\phi(l_t)\|\|_2$，$W' \in R^{L \times D}$，$W'$即为要求解的投影矩阵，$W'$通过triplet loss损失进行求解(也称作嵌入学习，Embedding learing)：
+对于上面网络的输出分数向量$\phi(l_t) \in R^D$，对其进行$l_2$归一化，然后使用affine投影将其投影为$x_t=W'\phi(l_t)/\|\|\phi(l_t)\|\|_2$，其中$W' \in R^{L \times D}$，$W'$为要求解的投影矩阵，$W'$通过triplet loss损失进行求解(也称作嵌入学习，Embedding learing)：
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/vggFormulation_zpsp772f4ds.jpg)
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/tripletLoss_zpszck9jlju.png)
 上式中p是相对于a而言的正样本，n是相对于a而言的负样本，通过对该式进行优化，即可得到投影矩阵$W$，这样在求得这个投影矩阵后，对上面网络输出的分数向量进行L2归一化，再跟该投影矩阵$W$相乘即可得到特征的最终表示。下表显示了在YFW人脸数据库上不进行特征再学习和进行特征在学习后的识别结果(特征再学习在下表中为Embedding learning):
@@ -101,15 +101,11 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 
 ## 自己验证效果
 
-Deep Face Recognition这篇文章其实去年刚发出来的时候就看了，当时还对其效果进行了验证，采用的是人脸减速的方式进行验证的，今天既然对它写成了笔记，就把这个小验证实验也跟着说说。先把结论说一下：**效果确实很好**！。具体的实验代码可以到我的github上下载：[CNN-for-Face-Image-Retrieval](https://github.com/willard-yuan/CNN-for-Face-Image-Retrieval)
+Deep Face Recognition这篇文章其实去年刚发出来的时候就看了，当时还对其效果进行了验证，采用的是人脸减速的方式进行验证的，今天既然对它写成了笔记，就把这个小验证实验也跟着说说。先把结论说一下：**效果确实比较好**！。具体的实验代码可以到我的github上下载：[CNN-for-Face-Image-Retrieval](https://github.com/willard-yuan/CNN-for-Face-Image-Retrieval)
 
 当时我做的是人脸检索实验，即用Deep Face Recognition提供的训练好了的网络模型抽取特征，维度为4096维，然后对抽取的特征进行L2归一化，再用余弦距离进行相似性度量，使用的人脸图像库不大，是别人提供给我的，比较规则，大概3000多张（虽然我测的只是这样一个小图库，我相信在大规模的人脸库上，它的效果也会很好），下面是检索的结果：
 
 ![drawing](https://camo.githubusercontent.com/92504dfe5d43354d0d20dec19cbb5f62e8083445/687474703a2f2f693330302e70686f746f6275636b65742e636f6d2f616c62756d732f6e6e31372f77696c6c6172642d7975616e2f64335f7a7073366c637a65706e7a2e706e67)
 <center>查询实例1</center>
-![drawing](https://camo.githubusercontent.com/a83f2e6feac252c555ccb781e286863b851c1ddc/687474703a2f2f693330302e70686f746f6275636b65742e636f6d2f616c62756d732f6e6e31372f77696c6c6172642d7975616e2f64325f7a70736b6b69656561706f2e706e67)
-<center>查询实例2</center>
-![drawing](https://camo.githubusercontent.com/33b8f9b9ad07d0703c7e23e25f475ddd438e376d/687474703a2f2f693330302e70686f746f6275636b65742e636f6d2f616c62756d732f6e6e31372f77696c6c6172642d7975616e2f64315f7a70736636623863326e382e706e67)
-<center>查询实例3</center>
 
 另外VGG还提供的了已经训练好了的Caffe版本模型，具体可以阅读项目主页[VGG Face Descriptor](http://www.robots.ox.ac.uk/~vgg/software/vgg_face/)
