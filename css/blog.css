@@ -232,7 +232,6 @@ ul.posts li {
 .listing-item {
     list-style-type: none;
     display: block;
-    padding: 0.8em 0px 0.8em 0px;
     text-decoration: none;
     /* color: #a00;*/
     color: #555;
@@ -256,9 +255,6 @@ margin-bottom: 1em;
 padding-top: 20px;
 }
 #tag_cloud a {
-  padding: 1px 6px;
-  margin: 2px;
-  background: #eee;
   color: #555;
   border-radius: 3px;
   text-decoration: none;
@@ -271,10 +267,9 @@ padding-top: 20px;
   letter-spacing: .01em;
   cursor: pointer;
   margin: 0 4px 7px 0;
-  color: #e0115f!important;
+  color: #e74c3c!important;
   border: 1px solid #48C9B0;
   padding: 1px 6px;
-  background: #eee;
   text-decoration: none;
 }
 #tag_cloud a:hover{
