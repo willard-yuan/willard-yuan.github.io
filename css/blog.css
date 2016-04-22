@@ -232,6 +232,7 @@ ul.posts li {
 .listing-item {
     list-style-type: none;
     display: block;
+    font-size: 0.9rem;
     text-decoration: none;
     /* color: #a00;*/
     color: #555;
@@ -247,7 +248,7 @@ ul.posts li {
     float: right;
     color: #999999;
     font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
-    font-size: 14px;
+    font-size: 0.6rem;
     color: #888;
 }
 #tag_cloud{
