@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HABIR哈希图像检索工具包更新至v2.0
+title: 图像检索：HABIR哈希图像检索工具包更新至v2.0
 categories: [Image Retrieval]
 tags: 哈希
 ---
