@@ -2,7 +2,7 @@
 layout: post
 title: 数据分类：特征处理
 categories: [数据挖掘]
-tags: 决策树
+tags: 数据挖掘
 ---
 
 ## 特征处理
