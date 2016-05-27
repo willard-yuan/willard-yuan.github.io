@@ -5,9 +5,7 @@ categories: [Image Retrieval]
 tags: 图像检索
 ---
 
-开始整理这两三年自己在image retrieval的一些资料，方便来年的毕业设计。下面是一份图像检索实验的清单，包含的都是自己实验的结果，随时保持在github上的[image-retrieval](https://github.com/willard-yuan/image-retrieval/blob/master/README.md)同步更新。
-
-## 基于SIFT局部特征的图像检索
+## BoF词袋模型
 
 基于SIFT局部特征的BOF模型非常适合于做Object retrieval, 下面是自己在[oxford building](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)数据库(5063张图片)上进行的一些实验。表格中单词数目为聚类时设定的聚类数目，以及是否采用SIFT或者rootSIFT，rootSIFT怎么计算的可以阅读[Object retrieval with large vocabularies and fast spatial matching](http://www.robots.ox.ac.uk/~vgg/publications/papers/philbin07.pdf)这篇文章，空间校正即在重排的时候，对错配的SIFT点对进行剔除，剔除的方法可以采用RANSAC或者类RANSAC方法，详细介绍可以阅读[SIFT(ASIFT) Matching with RANSAC](http://yongyuan.name/blog/SIFT(ASIFT)-Matching-with-RANSAC.html)，检索精度采用平均检索精度（mean Average Precision, mAP），其计算过程可以阅读[信息检索评价指标](http://yongyuan.name/blog/evaluation-of-information-retrieval.html)这篇文章。下面需要注意的是**查询时间**单次查询的结果，并没有进行多次查询进行平均，此外查询时间是查询和计算mAP时间的总和。
 
@@ -72,26 +70,83 @@ tags: 图像检索
 
 从上图可以看到，在一定范围内，在相同的重排深度下，单词数目越大，其mAP会越高，注意是在**一定范围内**，当超过了某个范围，其mAP并不会得到明显的提高了，比如500k和1M，从重排深度为500开始，其精度几乎一样了，这告诉我们，并不是说单词数目设得越大越好，我们应该通过实验测试选择出一个合理的单词数目，这样可以避免过量的计算以及存储空间的消耗。同样，在选择重排深度时，也并不是越大越好，我们应该选择那些在平滑转角过渡的重排深度比较合理，这里，比较好的方案是单词数目选择500k，重排深度设置为500。
 
-同样，我也把100k，500k，1M下单词下查询时间做了一张图，需要注意的是，纵轴的时间是对55张查询图像总时间的平均：
+同样，俺也把100k，500k，1M下单词下查询时间做了一张图，需要注意的是，纵轴的时间是对55张查询图像总时间的平均：
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/searchTime_zpsndzm24mt.jpg)
 
 上图显示统计的查询时间很怪异，因为随着单词数目的增加，其查询时间应该会越来越长的，但是这里得出的确实越来越短，这里可能的原因是服务器很多人在用，并不满足单一条件在变化的环境，所以所以这里的时间只是作为一个对查询时间的参考，并不能反映理论上的时间变化趋势。
+
+正如标题所示，这里将记录VLAD的一切。VLAD本小子虽然也读过几篇这方面的paper，不过读的时候一直理解的很粗糙。所以想借此机会开个帖子，一方面驱动自己去加深对它的理解，另一方面把这些自己对它的理解记录下来，方便自己查阅。
+
+## VLAD局部聚合向量
+
+在进行理论分析之前，先来看看VLAD长个什么样子，这里本小子分步展开VLAD是怎么得来的。
+
+1. 提取SIFT特征。对于一个样本数为N的数据库，先对图像库中的所有图像提取SIFT描述子，假设提取到了所有SIFT描述子数目为n,用X来表示的话，X就是一个n*128的矩阵。  
+2. 聚类生成词汇向量。假设要生成K个单词，对X直接用Kmeans聚成K类，类中心即为单词(也叫码字)。  
+3. 生成VLAD向量。这一步其实如果对BOW的生成过程清楚的话，这一步理解起来就非常简单了。BoW统计的是描述子落入最近单词里的数目，而VLAD统计的则是这些落入最近单词里与该单词的累积残差。根据Aggregating local image descriptors into compact codes的描述：
+
+>By counting the number of occurrences of visual words,
+BOW encodes the 0-order statistics of the distribution of descriptors. The Fisher vector extends the BOW by encoding high-order statistics (first and, optionally, second order).
+
+BOW做的是描述子的0阶统计分布，而FV则是扩展了的BOW的高阶统计。这里引出来的FV是什么呢？VLAD是FV的特例，这里我们先不关注FV，我们只要借此推得VLAD是BOW的高阶统计就行。
+
+经过上面三个步骤后，一幅图像可以用一个1*(K*128)维的向量表示。为了初步验证上面的过程是否正确，来看看上面那篇论文中VLAD的维数是否如这里所理解的是一个1*(K*128)维的向量，直接看实验表：
+
+![VLAD01]({{ site.url }}/images/posts/VLAD01.png)
+
+上表中FV和VLAD的D表示维数，我们看到D=K*64,这里为什么不是128呢？原因在于作者对SIFT进行了PCA降维处理，将128维降到了64维。
+
+上面VLAD生成过程用文字描述起来不够简洁，直接把论文里计算VLAD的算法流图扒过来了，算法流图如下：
+
+<center>
+
+![VLAD01]({{ site.url }}/images/posts/VLAD02.png)
+
+</center>
+
+### 提取VLAD
+
+在对VLAD有了初步的认识后，接下来我们可以动手提取VLAD，通过实验来进一步了解VLAD。
+
+### MSER
+
+MSER得到椭圆区域后，再结合SIFT，可以剔除掉很多没用的点，VLFeat中的MESR例子见[这里](http://www.vlfeat.org/overview/mser.html)。此外MSER还可以用于文本区域筛选中，具体可以看这个[Robust Text Detection in Natural Scenes and Web Images](http://prir.ustb.edu.cn/TexStar/scene-text-detection/)。概念与作用相关词：漫水填充法、显著性。
+
+### 基于SIFT特征点匹配
+
+[SIFT on GPU (SiftGPU)](http://ccwu.me/), works for nVidia, ATI and Intel cards.
+
+### Fisher Vector
+
+| 单词数目 |     128 to 64    | 检索精度mAP |
+| ---------|:----------------:|:-----------:|
+|   256    |       是         |    42.70%   |
+|   512    |       是         |    52.27%   |
+|   1024   |       是         |    56.26%   |
+|   2048   |       是         |    58.68%   |
+|   4096   |       是         |    62.37%   |
+|   8192   |       是         |    65.43%   |
+|  10000   |       是         |    66.88%   |
+|  20000   |       是         |    69.61%   |
+
+- Fisher Vector 512个单词，128降维到64，oxford building上mAP为52.27%；L2归一化中如果不采用max的方式，mAP为43.43%。
+- Fisher Vector 1024个单词，128降维到64，oxford building上mAP为56.26%；L2归一化中如果不采用max的方式，mAP为47.06%。
 
 ## 具体场景应用
 
 上面的分析选得过于理论，实际上，我也很希望做的这些东西能够在实际的场景进行测试，下面对自己遇到的实际场景（这些应用主要还是帮别人做的测试）做尽可能多的总结，虽然有些做的东西已经被我删掉了，但本小子还是希望有机会能够一一把它们补全。
 
-### 应用场景0：商品搜索
+### 商品搜索
 
 “商品”是一个很泛的词，只要拿去交易的东西，都可以成为商品，不过具体到图像搜索应用这里，我还是结果自己做过的，给“商品”几种类别，目前做过的和比较了解的，主要是衣服、鞋子、书的封皮。前面两种物品，我自己亲自测试过，书籍封皮的搜索，跟做这类产品的公司负责人电话聊过。下面分别对它们进行展开。
 
-### 应用场景1：翻拍图像搜索
+### 翻拍图像搜索
 
 这个项目主要是针对翻拍的图像进行的搜索，规模大概十万来张，整个系统要做成嵌入式的。图像检索算法设计方面，考虑到翻拍的图片会有较大的旋转、角度、光照强大（光线比较暗）变化，选用基于SIFT局部特征的方法比较适合，于是对合作方发过来的图像库用上面的方法做了相应的测试，搜索的效果比较理想，能够获得合作方对检索精度的要求。在合作方发来的图像库上做测试，检索效果比较理想。
 
 目前存在的难点是：1. 转成C++过程各模块基本成型，但其中某些核心模块还需要耗费很多的时间去调试；2. 嵌入到硬件里过程中出现的很多不需要在服务器上考虑的问题，比较搜索时间，存储空间，怎么转成纯C方面烧写到硬件上。
 
-### 应用场景2：APP图标去重
+### 图标去重
 
 这个是有客官碰到了这么一个问题，然后邮件问本小子，大概是把APP图标去重转成了图像搜索的问题，具体的任务我也不是很清楚，然后我就给他做了测试。在看了他发过来的APP图标库后，我想这个应该用最基本的特征应该就能解决得比较好，比如颜色，因为同款的APP图标要么就是分辨率存在差异，要么是APP图标有的加了字。
 
@@ -107,11 +162,11 @@ tags: 图像检索
 
 对于这种情况，用颜色特征，就非常吃力了，因为后边绿色的“爸爸去哪儿”跟前面查询图像的颜色直方图会相差很大，如果从这一点看，在APP图标搜索上，颜色似乎也不是一个很好的特征，不过还是要做一下全部的查询，然后看看平均检索精度如何。
 
-### 应用场景3：人脸搜索
+### 人脸搜索
 
 待补充
 
-### 应用场景4：模具图像搜索
+### 模具图像搜索
 
 这个是最近给人测的一个任务，在这个任务中既要做同款搜索，又要做同类搜索。对方在开发初期，大概跟对方的算法工程师聊了下，感觉对方在采用哪种方法去完成这个任务上经验不足和积累不足，anyway，我还是给对方免费提供了可行的方案，并对方案做了相应的验证。回到前面提到的两个需求，一是要能搜索同款模具，二是相似的模具也应该搜索到。在对方法进行设计时，最理想的方法是存在某种检索方法，使得搜索到的最前面的一些图像是同一模具，而紧随后面的图像则是跟查询图像具有相似外观的一些模具图像。具体可以看一下图像库中的一些图例：
 
@@ -139,26 +194,8 @@ tags: 图像检索
 
 另外，原本想的是，因为要满足两种需求，而目前还没有哪种比较好的方法能满足这样一种需求，所以设想的是在界面上设置两个按钮，后台运行两种方法，一个按钮负责**相同**物体的搜索，一个按钮负责**相似**物体的搜索。后来再经过仔细思考后，发觉这个方案可以进一步优化，比如先搜索相似，然后在相似的里面在相同，前面搜索相似相当于一个过滤或者说是分类的过程，这样就使得得到的图片都是相似的，而返回的结果里前面都是相同的。
 
-### MSER
+参考：
 
-MSER得到椭圆区域后，再结合SIFT，可以剔除掉很多没用的点，VLFeat中的MESR例子见[这里](http://www.vlfeat.org/overview/mser.html)。此外MSER还可以用于文本区域筛选中，具体可以看这个[Robust Text Detection in Natural Scenes and Web Images](http://prir.ustb.edu.cn/TexStar/scene-text-detection/)。概念与作用相关词：漫水填充法、显著性。
-
-### 基于SIFT特征点匹配
-
-[SIFT on GPU (SiftGPU)](http://ccwu.me/), works for nVidia, ATI and Intel cards.
-
-### Fisher Vector
-
-| 单词数目 |     128 to 64    | 检索精度mAP |
-| ---------|:----------------:|:-----------:|
-|   256    |       是         |    42.70%   |
-|   512    |       是         |    52.27%   |
-|   1024   |       是         |    56.26%   |
-|   2048   |       是         |    58.68%   |
-|   4096   |       是         |    62.37%   |
-|   8192   |       是         |    65.43%   |
-|  10000   |       是         |    66.88%   |
-|  20000   |       是         |    69.61%   |
-
-- Fisher Vector 512个单词，128降维到64，oxford building上mAP为52.27%；L2归一化中如果不采用max的方式，mAP为43.43%。
-- Fisher Vector 1024个单词，128降维到64，oxford building上mAP为56.26%；L2归一化中如果不采用max的方式，mAP为47.06%。
+1. [机器学习笔记——Fisher vector coding](http://blog.csdn.net/breeze5428/article/details/32706507)
+2. [Large-scale visual recognition Novel patch aggregation mechanisms](http://people.rennes.inria.fr/Herve.Jegou/courses/2012_cpvr_tutorial/4-new-patch-agggregation.pptx.pdf)
+3. [VLAD](http://blog.csdn.net/breeze5428/article/details/36441179)

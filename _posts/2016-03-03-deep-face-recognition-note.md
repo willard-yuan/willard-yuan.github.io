@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 论文阅读：Deep Face Recognition
+title: 人脸识别：Deep Face Recognition论文阅读
 categories: [Computer Vision]
 tags: 人脸识别
 ---

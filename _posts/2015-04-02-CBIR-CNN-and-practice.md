@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Image retrieval using MatconvNet and pre-trained imageNet
+title: 图像检索：CNN卷积神经网络与实战
 categories: [Image Retrieval]
-tags: 图像检索
+tags: CBIR
 ---
 
 <!--<object width="526" height="374">
@@ -179,3 +179,22 @@ Caltech-256图像数据库上搜索结果
 ![airplane-image-retrieval]({{ site.url }}/images/posts/2015-04-02/airplane-image-retrieval.jpg)
 
 最后，整个图像检索的代码已放在github上了，感兴趣的同学可以去[**CNN-for-Image-Retrieval**](https://github.com/willard-yuan/CNN-for-Image-Retrieval)，有github的同学不要吝啬你的star哦，这个代码我会随时完善更新，比如添加计算mAP的代码。
+
+![Caltech1-70]({{ site.url }}/images/posts/2015-02-09/Caltech1-70.png)
+
+![Caltech1-70-example]({{ site.url }}/images/posts/2015-02-09/Caltech1-70-example.png)
+
+![Caltech71-101]({{ site.url }}/images/posts/2015-02-09/Caltech71-101.png)
+
+![Caltech71-140-example]({{ site.url }}/images/posts/2015-02-09/Caltech71-140-example.png)
+
+![Caltech141-210]({{ site.url }}/images/posts/2015-02-09/Caltech141-210.png)
+
+![Caltech141-210-example]({{ site.url }}/images/posts/2015-02-09/Caltech141-210-example.png)
+
+![Caltech141-210-example1]({{ site.url }}/images/posts/2015-02-09/Caltech141-210-example1.png)
+
+![random]({{ site.url }}/images/posts/2015-02-09/random.png)
+![river]({{ site.url }}/images/posts/2015-02-09/river.png)
+![lion]({{ site.url }}/images/posts/2015-02-09/lion.png)
+![tiger]({{ site.url }}/images/posts/2015-02-09/tiger.png)
