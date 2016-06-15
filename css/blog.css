@@ -34,8 +34,12 @@ article h1 {
 
 p{
   text-align: justify;
-  font-size: 0.9rem;
   margin: 20px 0;
+}
+
+.post ul, .post ol ,p{
+  /*padding-left: 2.5em;*/
+  font-size: 0.9rem;
 }
 
 a{text-decoration:none}
@@ -578,10 +582,6 @@ img[alt=drawing] { width: 60%; }
   padding: 0 .2em;
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
   border-radius: 4px;
-}
-
-.post ul, .post ol {
-  /*padding-left: 2.5em;*/
 }
 
 /* terminal */
