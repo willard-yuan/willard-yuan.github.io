@@ -1,8 +1,26 @@
 @import url("font.css");*,*:after,*:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0;margin:0}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}
-.fancy, section, article {
-  font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+.fancy, article {
+  /*font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;*/
+  font-family: Georgia, "Linux Libertine",-apple-system,"Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Source Han Sans CN","Source Han Sans SC","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;
   line-height: 170%;
 }
+section {
+  font-family: "Linux Libertine",-apple-system,"Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Source Han Sans CN","Source Han Sans SC","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;
+  line-height: 170%;
+}
+
+blockquote,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ui.header {
+  font-family: "Linux Libertine", Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, "TW-Kai", serif; }
+
+
+
 article h1 {
   margin-bottom: 8px;
   line-height: 120%;
@@ -20,8 +38,12 @@ article h1 {
 
 p{
   text-align: justify;
-  font-size: 0.9rem;
   margin: 20px 0;
+}
+
+.post ul, .post ol ,p{
+  /*padding-left: 2.5em;*/
+  font-size: 0.9rem;
 }
 
 a{text-decoration:none}
@@ -564,10 +586,6 @@ img[alt=drawing] { width: 60%; }
   padding: 0 .2em;
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
   border-radius: 4px;
-}
-
-.post ul, .post ol {
-  /*padding-left: 2.5em;*/
 }
 
 /* terminal */
