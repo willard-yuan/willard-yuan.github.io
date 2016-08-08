@@ -5,6 +5,7 @@
 1. 调用豆瓣api显示书单列表
 2. 在线简历
 3. 添加latex公式支持([效果见博文](http://yongyuan.name/blog/decision-tree.html))
+4. test
 
 ### 安装步骤
 
