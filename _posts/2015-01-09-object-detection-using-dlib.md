@@ -56,6 +56,26 @@ cmake --build . --config Release
 
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/x11_zpsvho1a1p8.png)
 
+Dlib-19.1编译的时候，在安装了XQuartz的前提下，仍然报与X11的错误，具体如下：
+
+```sh
+make[2]: *** [dlib_build/CMakeFiles/dlib.dir/gui_widgets/fonts.cpp.o] Error 1
+make[1]: *** [dlib_build/CMakeFiles/dlib.dir/all] Error 2
+make: *** [all] Error 2
+error: cmake build failed!
+```
+完全删除XQuartz(如何完全删除XQuartz可以参考这个[传送门](https://gist.github.com/tonymtz/714e73ccb79e21c4fc9c))，重新安装仍然出现此问题，遂将编译器改为llvm，具体编译命令为：
+
+```sh
+cd examples
+mkdir build
+cd build
+cmake -G Xcode ..
+cmake --build . --config Release
+```
+编译成功。
+
+
 ## 检测物体
 
 D-lib自带了人脸检测器，如果要检测别的物体，先要训练出对应的检测器。
