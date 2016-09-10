@@ -5,17 +5,25 @@ description: Yong Yuan's projects. Some of them are my academy research, some ar
 category: project
 ---
 
+<link href="http://vjs.zencdn.net/5.11.6/video-js.css" rel="stylesheet">
+
+<!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
 <p class="fancy">
   Here are my projects. Some of them are my academy research, and some are just my interest.
 </p>
 
 <section>
-    <a href="https://github.com/willard-yuan/pkbigdata-image-search">
-      <img class="inline pull-right" src="http://i300.photobucket.com/albums/nn17/willard-yuan/project/eyetrack_zpsqthmgll3.png"
-           alt="PupilTracker" width="280">
-    </a>
     <h2>PupilTracker</h2>
-    <h3>Video: <a href="http://v.youku.com/v_show/id_XMTQ5MTQyMjQxMg==.html?from=y1.7-1.2">PupilTracker on Youku</a></h3>
+    <video id="my-video" class="video-js" controls preload="auto" width="720" height="450"
+  poster="test.jpg" data-setup="{}">
+    <source src="可可视觉-瞳孔跟踪.mp4" type='video/mp4'>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+    </video>
     <p><strong>My role:</strong> Main developer</p>
     <p>
 	   The information of pupilTracker will be coming soon.
