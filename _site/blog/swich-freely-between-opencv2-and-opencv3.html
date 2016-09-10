@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    环境配置：Mac下OpenCV3.0和OpenCV2.x自由切换
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link rel="alternate" type="application/atom+xml" title="RSS Feed for Yong Yuan's blog" href="/feed.xml" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <a class="" href="/project/">Project</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+	      <a href="/resume/">Resume</a>
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <a href="/books/">Book</a>
+		    <a href="/timeline/">Times</a>
+        <a href="https://github.com/willard-yuan">Github</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="/images/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    环境配置：Mac下OpenCV3.0和OpenCV2.x自由切换
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2015年07月01日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="/blog/categories.html#Python">Python</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="/tag/#Python">Python</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:2608
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <h2 id="section">背景</h2>
+
+<p>在<a href="http://yongyuan.name/blog/install-opencv3-and-anaconda-in-mac-os.html">Mac下安装OpenCV3.0和Anaconda</a>一文中已经总结了OpenCV3.0在Mac下的安装方法，但在实际使用的时候，发觉OpenCV3.0跟OpenCV2.x差别还是比较大的，比如在<a href="http://yongyuan.name/blog/practical-BoW-for-image-retrieval-with-python.html">BoW图像检索Python实战</a>中原本写的程序根本没法在OpenCV3.0下跑，想SIFT、SURF都移到了<a href="https://github.com/itseez/opencv_contrib">opencv_contrib</a>。将SIFT、SUFR移出OpenCV的原因在<a href="https://github.com/itseez/opencv_contrib">opencv_contrib</a>中说明如下：</p>
+
+<blockquote>
+  <p>This repository is intended for development of so-called “extra” modules, contributed functionality. New modules quite often do not have stable API, and they are not well-tested. Thus, they shouldn’t be released as a part of official OpenCV distribution, since the library maintains binary compatibility, and tries to provide decent performance and stability.</p>
+</blockquote>
+
+<blockquote>
+  <p>So, all the new modules should be developed separately, and published in the opencv_contrib repository at first. Later, when the module matures and gains popularity, it is moved to the central OpenCV repository, and the development team provides production quality support for this module.</p>
+</blockquote>
+
+<p>总之就是这些模块还不是很稳定，需要不断的测试和修改，OpenCV中的SIFT效果确实还不尽如人意。所以，在OpenCV3.0中要使用SIFT、SURF等特征你需要额外的按照<a href="https://github.com/itseez/opencv_contrib">opencv_contrib</a>。</p>
+
+<blockquote>
+  <p>The opencv_contrib  repo which contains extra modules for OpenCV, such as feature detection, local invariant descriptors (SIFT, SURF, etc.), text detection in natural images, line descriptors, and more.</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Note</strong>: We don’t have to pull down the opencv_contrib  repo if we don’t want to. OpenCV will compile and install just fine without it. But if you compile OpenCV without opencv_contrib , be warned that you’ll be missing out on some pretty important features, which will become very obvious, very fast, especially if you’re used to working with the 2.4.X version of OpenCV.                    摘自<a href="https://www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/">Install OpenCV 3.0 and Python 2.7+ on OSX</a></p>
+</blockquote>
+
+<p>怎么按照这个模块，目前还没找到比较好的简洁的方法。不过这篇文章不是要将这个，还是回到上面提到的问题中。为了使用OpenCV2.x版本，自然需要安装OpenCV2.x版本了，也就是安装完后，你的计算机上有两个版本的OpenCV，下面先讲讲怎么安装OpenCV2.x。</p>
+
+<h2 id="opencv2x">安装OpenCV2.x</h2>
+<p>OpenCV2.x的安装跟OpenCV3.0的安装一下，同样用Homebrew安装，网上流传的关于Homebrew是Mac OS缺失的管理包一点也不为过。执行下面命令几个完成Opencv2.x的安装：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>brew install opencv
+</code></pre>
+</div>
+
+<p>在安装OpenCV3.0的时候，用的命令是<code class="highlighter-rouge">brew install Opencv3</code>，在这里安装的时候，我停留了一下在想这样安装下来的OpenCV版本是不是1.x的版本的，按照完后面测试查看时发现按照的应该是OpenCV2.x的最后一个最新的版本。</p>
+
+<p>执行上面命令进行安装后，看到有sucessful这样的字眼后，说明安装成功，不过要在Python中调用OpenCV的接口，还需要做下面要的一些工作。</p>
+
+<h2 id="opencv2xopencv30">在OpenCV2.x和OpenCV3.0间版本自由切换</h2>
+<p>上面安装了OpenCV2.x后，要让Python调用OpenCV2.x的接口，只需执行下面命令即可：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">echo</span> /usr/local/opt/opencv/lib/python2.7/site-packages &gt;&gt; /Users/willard/anaconda/lib/python2.7/site-packages/homebrew.pth <span class="c"># choose opencv2</span>
+</code></pre>
+</div>
+
+<p>这条命令跟安装OpenCV3.0时为了使Python也能调用OpenCV3.0所使用的命令极像。执行完上面命令后，会在<code class="highlighter-rouge">/Users/willard/anaconda/lib/python2.7/site-packages/</code>目录下生成<code class="highlighter-rouge">homebrew.pth</code>文件，用cat命令查看homebrew文件中的内容其实就是<code class="highlighter-rouge">/usr/local/opt/opencv/lib/python2.7/site-packages</code>，<code class="highlighter-rouge">echo</code>是打印输出命令，<code class="highlighter-rouge">&gt;&gt;</code>重定向。现在便可以在Python中调用OpenCV2.x了，我们可以对其进行验证：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>➜  ~  python
+Python 2.7.9 |Anaconda 2.2.0 <span class="o">(</span>x86<span class="se">\_</span>64<span class="o">)</span>| <span class="o">(</span>default, Dec 15 2014, 10:37:34<span class="o">)</span>
+<span class="o">[</span>GCC 4.2.1 <span class="o">(</span>Apple Inc. build 5577<span class="o">)]</span> on darwin
+Type <span class="s2">"help"</span>, <span class="s2">"copyright"</span>, <span class="s2">"credits"</span> or <span class="s2">"license"</span> <span class="k">for </span>more information.
+Anaconda is brought to you by Continuum Analytics.
+Please check out: http://continuum.io/thanks and https://binstar.org
+<span class="gp">&gt; </span>&gt; &gt; import cv2
+<span class="gp">&gt; </span>&gt; &gt; cv2.__version__
+<span class="s1">'2.4.11'</span>
+</code></pre>
+</div>
+
+<p>可以看到，目前我使用的OpenCV版本是2.4.11版本的。好了，现在既然OpenCV2.x可以用了，那如果我们想用OpenCV3.0版本怎么办？这个就更简单了，直接把上面在<code class="highlighter-rouge">/Users/willard/anaconda/lib/python2.7/site-packages/</code>生成的<code class="highlighter-rouge">homebrew.pth</code>删掉就行，删掉后再在Pyton中调用OpenCV时，调用的就是OpenCV3.0的接口了。</p>
+
+<p>从上面可以看出，<code class="highlighter-rouge">/Users/willard/anaconda/lib/python2.7/site-packages/</code>目录下<code class="highlighter-rouge">opencv3.pth</code>的作用会被<code class="highlighter-rouge">homebrew.pth</code>的作用进行覆盖，所以想要在OpenCV2.x与OpenCV3.0间切换，其实就是就简单的做一下<code class="highlighter-rouge">homebrew.pth</code>的删增就OK。</p>
+
+<p>就这样，以上。</p>
+
+
+  	</div>
+	</div>
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/install-opencv3-and-anaconda-in-mac-os.html">←Mac下安装OpenCV3.0和Anaconda</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/find-the-smallest-k-numbers.html">面试整理：最小的k个数→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yuanyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->
+
+<!-- Disqus Comment BEGIN -->
+  <!--<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yongyuan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <div  style="border-bottom: 1px solid #eee"></div>
+    <footer>
+    <p class="linkings">
+        Friend: <a href="http://peqiu.com/">Xuguo</a>&nbsp&nbsp&nbsp&nbsp<a href="http://jasonmpe.github.io/">HaiTao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://raphael-mou.github.io/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://haobo-lv.github.io/">Haobo</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.52ml.net/">52ml</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caoyaqiang.com/">cyq</a>&nbsp&nbsp&nbsp&nbsp<a href="http://personal.ee.surrey.ac.uk/Personal/R.Hu/">Rui Hu</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.pyimagesearch.com/">pyimagesearch</a>&nbsp&nbsp&nbsp&nbsp<a href="http://bean.logdown.com/">bean</a>&nbsp&nbsp&nbsp&nbsp<a href="http://ml.memect.com/">ml dairy</a>&nbsp&nbsp&nbsp&nbsp<a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html/">Resources</a>
+    </p>
+    <p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p>
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    </p>
+      <a href="http://www.easycounter.com/"><img src="http://www.easycounter.com/counter.php?willard"border="0" alt="Website Hit Counter"></a> since August 2013.
+    </p>
+    <ul class="links">
+      <!--li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li-->
+    </ul>
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>

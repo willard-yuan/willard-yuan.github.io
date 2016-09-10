@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    技术翻译：OpenCV行人检测
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link rel="alternate" type="application/atom+xml" title="RSS Feed for Yong Yuan's blog" href="/feed.xml" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <a class="" href="/project/">Project</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+	      <a href="/resume/">Resume</a>
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <a href="/books/">Book</a>
+		    <a href="/timeline/">Times</a>
+        <a href="https://github.com/willard-yuan">Github</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="/images/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    技术翻译：OpenCV行人检测
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2015年11月10日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="/blog/categories.html#计算机视觉">计算机视觉</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="/tag/#OpenCV">OpenCV</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:10409
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <blockquote>
+  <p>本文翻译自：<a href="https://www.pyimagesearch.com/2015/11/09/pedestrian-detection-opencv/">Pedestrian Detection OpenCV</a>。</p>
+</blockquote>
+
+<p>你知道OpenCV里面已经内置的行人检测方法吗？在OpenCV里面，有一个预先训练好了的HOG+线性SVM模型，能够对图像和视频中的行人进行检测。如果你还不熟悉方向梯度直方图HOG和线性SVM方法，我建议你阅读<a href="http://www.pyimagesearch.com/2014/11/10/histogram-oriented-gradients-object-detection/">方向梯度直方图和物体检测</a>这篇文章，在这篇文章中，我对该框架分了6步进行讨论。</p>
+
+<p>如果你已经熟悉了这个过程，或者你仅仅只是想看看OpenCV行人检测的代码，那么现在就打开一个新文件，并将它命名为<code class="highlighter-rouge">detect.py</code>，开始我们的编程之旅吧：</p>
+
+<div class="preserve-original-format">
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><pre><span class="c"># import the necessary packages</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">imutils.object_detection</span> <span class="kn">import</span> <span class="n">non_max_suppression</span>
+<span class="kn">from</span> <span class="nn">imutils</span> <span class="kn">import</span> <span class="n">paths</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">imutils</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c"># construct the argument parse and parse the arguments</span>
+<span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-i"</span><span class="p">,</span> <span class="s">"--images"</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"path to images directory"</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+<span class="c"># initialize the HOG descriptor/person detector</span>
+<span class="n">hog</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">HOGDescriptor</span><span class="p">()</span>
+<span class="n">hog</span><span class="o">.</span><span class="n">setSVMDetector</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">HOGDescriptor_getDefaultPeopleDetector</span><span class="p">())</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+<p><strong>第2-8行</strong>导入一些我们必要的包，我们导入<code class="highlighter-rouge">print_function</code>确保我们的代码同时在Python2.7和Python3上兼容，这样可以使得我们的代码能够在OpenCV2.4.X和OPenCV3上都能够工作，然后，从我的<a href="https://github.com/jrosebr1/imutils">imutils</a>包中我们导入<code class="highlighter-rouge">non_max_suppression</code>函数。</p>
+
+<p>如果你还没有安装<code class="highlighter-rouge">imutils</code>，可以通过<code class="highlighter-rouge">pip</code>来安装：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>pip install imutils
+</code></pre>
+</div>
+
+<p>如果你已经安装了<code class="highlighter-rouge">imutils</code>，你需要把它更新到最新版(v0.3.1)，在这个版本里面，包含了<code class="highlighter-rouge">non_max_suppression</code>函数的实现，以及其它一些微小的更新：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>pip install --upgrade imutils
+</code></pre>
+</div>
+
+<p>我已经在我的PyImageSearch博客上在两次讲到过非极大抑制(non-maxima suppression)方法，一次是在<a href="http://www.pyimagesearch.com/2014/11/17/non-maximum-suppression-object-detection-python/">Python非极大抑制用于物体检测</a>，一篇是在<a href="http://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/">用Python实现更快的非极大抑制</a>，无论是哪一种情形，非极大抑制的宗旨都是获取多个重叠的边框(bounding box)，并且将他们减少至仅有一个边框。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_032.jpg" alt="drawing" /></p>
+<center>图1：左图有很多检测错误的边框；右图采用非极大抑制后，使得我们可以抑制那些重叠的区域，将正确的边框留下来</center>
+
+<p>非极大抑制方法可以减少在进行行人检测过程中的假阳率。</p>
+
+<p><strong>第11-13行</strong>处理我们命令行传入的参数，这里，我们只需要一个切换<code class="highlighter-rouge">--images</code>，用它来传入待检测行人的图像目录。</p>
+
+<p>最后，<strong>第16行和17行</strong>初始化我们的行人检测器。首先，我们调用<code class="highlighter-rouge">hog = cv2.HOGDescriptor()</code>来初始化方向梯度直方图描述子，然后，我们调用<code class="highlighter-rouge">setSVMDetector</code>来设置支持向量机(Support Vector Machine)使得它成为一个预先训练好了的行人检测器。</p>
+
+<p>到了这里，我们的OpenCV行人检测器已经完全载入了，我们只需要把它应用到一些图像上：</p>
+
+<div class="preserve-original-format">
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre></td><td class="code"><pre><span class="c"># import the necessary packages</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">imutils.object_detection</span> <span class="kn">import</span> <span class="n">non_max_suppression</span>
+<span class="kn">from</span> <span class="nn">imutils</span> <span class="kn">import</span> <span class="n">paths</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">imutils</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c"># construct the argument parse and parse the arguments</span>
+<span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"-i"</span><span class="p">,</span> <span class="s">"--images"</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"path to images directory"</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+<span class="c"># initialize the HOG descriptor/person detector</span>
+<span class="n">hog</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">HOGDescriptor</span><span class="p">()</span>
+<span class="n">hog</span><span class="o">.</span><span class="n">setSVMDetector</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">HOGDescriptor_getDefaultPeopleDetector</span><span class="p">())</span>
+
+<span class="c"># loop over the image paths</span>
+<span class="k">for</span> <span class="n">imagePath</span> <span class="ow">in</span> <span class="n">paths</span><span class="o">.</span><span class="n">list_images</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">"images"</span><span class="p">]):</span>
+	<span class="c"># load the image and resize it to (1) reduce detection time</span>
+	<span class="c"># and (2) improve detection accuracy</span>
+	<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">imagePath</span><span class="p">)</span>
+	<span class="n">image</span> <span class="o">=</span> <span class="n">imutils</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+	<span class="n">orig</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+	<span class="c"># detect people in the image</span>
+	<span class="p">(</span><span class="n">rects</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span> <span class="o">=</span> <span class="n">hog</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">winStride</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+		<span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+
+	<span class="c"># draw the original bounding boxes</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="ow">in</span> <span class="n">rects</span><span class="p">:</span>
+		<span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">orig</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+
+	<span class="c"># apply non-maxima suppression to the bounding boxes using a</span>
+	<span class="c"># fairly large overlap threshold to try to maintain overlapping</span>
+	<span class="c"># boxes that are still people</span>
+	<span class="n">rects</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="ow">in</span> <span class="n">rects</span><span class="p">])</span>
+	<span class="n">pick</span> <span class="o">=</span> <span class="n">non_max_suppression</span><span class="p">(</span><span class="n">rects</span><span class="p">,</span> <span class="n">probs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">overlapThresh</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
+
+	<span class="c"># draw the final bounding boxes</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">xA</span><span class="p">,</span> <span class="n">yA</span><span class="p">,</span> <span class="n">xB</span><span class="p">,</span> <span class="n">yB</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pick</span><span class="p">:</span>
+		<span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">xA</span><span class="p">,</span> <span class="n">yA</span><span class="p">),</span> <span class="p">(</span><span class="n">xB</span><span class="p">,</span> <span class="n">yB</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+
+	<span class="c"># show some information on the number of bounding boxes</span>
+	<span class="n">filename</span> <span class="o">=</span> <span class="n">imagePath</span><span class="p">[</span><span class="n">imagePath</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">"/"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+	<span class="k">print</span><span class="p">(</span><span class="s">"[INFO] {}: {} original boxes, {} after suppression"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+		<span class="n">filename</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rects</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">pick</span><span class="p">)))</span>
+
+	<span class="c"># show the output images</span>
+	<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">"Before NMS"</span><span class="p">,</span> <span class="n">orig</span><span class="p">)</span>
+	<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">"After NMS"</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+	<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+<p>在<strong>第20行</strong>我们对我们的<code class="highlighter-rouge">--images</code>目录下的图像进行循环，这篇博文中使用的例子样本是从<a href="http://pascal.inrialpes.fr/data/human/">INRIA Person Dataset</a>这个很流行的人物库上抽取的，更具体的说，是从GRAZ-01子集中抽取出来的，这些图片存放在源码目录下面了。</p>
+
+<p><strong>第23-25行</strong>载入磁盘中的图像，并且将图像裁剪到最大宽度为400个像素，之所以降低我们的图像维度(其实就是之所以对我们的图像尺寸进行裁剪)主要有两个原因：</p>
+
+<ol>
+  <li>减小图像的尺寸可以减少在<a href="http://www.pyimagesearch.com/2015/03/16/image-pyramids-with-python-and-opencv/">图像金字塔</a>中<a href="http://www.pyimagesearch.com/2015/03/23/sliding-windows-for-object-detection-with-python-and-opencv/">滑窗</a>的数目，如此可以降低检测的时间，从而提高整体检测的吞吐量。</li>
+  <li>调整图像的尺寸能够整体提高行人检测的精度，也就是假阳率。</li>
+</ol>
+
+<p>真正对图像中的行人进行检测的代码是在<strong>第28行和29行</strong>，通过调用<code class="highlighter-rouge">detectMultiScale</code>的<code class="highlighter-rouge">hog</code>描述子方法。这个<code class="highlighter-rouge">detectMultiScale</code>方法构造了一个尺度<code class="highlighter-rouge">scale=1.05</code>的图像金字塔，以及一个分别在x方向和y方向步长为(4,4)像素大小的滑窗。</p>
+
+<p>窗口的大小固定在32*128像素大小，这个设置是按照 seminal Dalal和Triggs论文[](Histograms of Oriented Gradients for Human Detection)来设置的。<code class="highlighter-rouge">detectMultiScale</code>函数会返回一个2-元组的<code class="highlighter-rouge">rects</code>，或者是图像中每一个行人的边框坐标(x,y)，以及由SVM在每一次检测中返回的<code class="highlighter-rouge">weights</code>置信值(我们一般也成为分数，译者注)。</p>
+
+<p><code class="highlighter-rouge">scale</code>的尺度设置得越大，在图像金字塔中层的数目就越少，相应的检测速度就越快，但是尺度太大会导致行人出现漏检；同样的，如果<code class="highlighter-rouge">scale</code>设置得太小，将会急剧的增加图像金字塔的层数，这样不仅耗费计算资源，而且还会急剧地增加检测过程中出现的假阳数目(也就是不是行人的被检测成行人)。这表明，<code class="highlighter-rouge">scale</code>是在行人检测过程中它是一个重要的参数，需要对<code class="highlighter-rouge">scale</code>进行调参。我会在后面的文章中对<code class="highlighter-rouge">detectMultiScale</code>中的每个参数做些调研。</p>
+
+<p><strong>第32行和33行</strong>获取我们的初始边框，并将它们在图像上框出来。</p>
+
+<p>不过，你将会看到在一些图像上有的行人框出来的框，有很多重叠的边框，如上面1图所示。</p>
+
+<p>针对这种情况，我们有两种选择。一种选择是检测一个边框是否完全包含了另一个边框(你可以看看<a href="https://github.com/Itseez/opencv/blob/master/samples/python2/peopledetect.py">OpenV中的一些实现例子</a>)。另外一种选择是应用非极大抑制方法，通过设置一个阈值来抑制那些重叠的边框，这就是第38行和39行所干的事。</p>
+
+<p><strong><em>注意</em></strong>：如果你想了解更多HOG框架和非极大抑制，我推荐你阅读<a href="http://www.pyimagesearch.com/2014/11/10/histogram-oriented-gradients-object-detection/">方向梯度直方图和物体检测</a>。在那篇博文中，你可以查看<a href="http://www.pyimagesearch.com/2014/11/17/non-maximum-suppression-object-detection-python/">Python非极大抑制用于物体检测</a>，以及后面更新的<a href="http://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/">Malisiewicz方法</a>。</p>
+
+<p>在应用非极大抑制后，我们在第42行和43行画出最终的边框，在<strong>第46-48行</strong>中我们展示图像的一些基本信息，以及检测到的边框数目，在<strong>第51-53行</strong>，在屏幕最终显示我们输入的图像。</p>
+
+<h2 id="section">行人检测结果</h2>
+
+<p>为了看看我们写的行人检测脚本的实际效果，我们只需要执行下面命令：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>python detect.py --images images
+</code></pre>
+</div>
+
+<p>下图是一张行人检测的结果图：</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_258.jpg" alt="drawing" /></p>
+<center>图2：检测效果</center>
+
+<p>上图我们检测到了站在警车旁的单个行人。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_014.jpg" alt="drawing" /></p>
+<center>图3：在前景和背景中分别检测到了1个人</center>
+
+<p>上面我们可以看到在前景中的男人被检测到了，同时背景中推着婴儿车的女人也检测到了。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_032.jpg" alt="drawing" /></p>
+<center>图4：一个展示为什么用非极大抑制很重要的例子</center>
+
+<p>图4的例子展示了为什么用非极大抑制很重要。<code class="highlighter-rouge">detectMultiScale</code>函数除了将正确的边框检测出来外，还把两个边框边框检测出来了，这两个错误的边框将图像中的行人覆盖了。通过使用非极大抑制，我们可以抑制错误的边框，只留下正确检测的边框。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_029.jpg" alt="drawing" /></p>
+<center>图5：另一个展示非极大抑制效果的例子</center>
+
+<p>我们再一次可以看到，有很多错误的边框被检测出来了，通过使用非极大抑制，我们可以抑制错误的边框，只留下正确检测的边框。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_156.jpg" alt="drawing" /></p>
+<center>图6：在一个购物中心检测行人</center>
+
+<p>图6在一个购物中心进行行人检测，图中，有两个人正向摄像头走进，另外一个人正远离摄像头，不管是哪种情形，我们的HOG检测方法都能够准确的检测出行人。在<code class="highlighter-rouge">non_maxima_suppression </code>函数中较大的<code class="highlighter-rouge">overlapThresh</code>能够确保那些部分重叠了的边框不会被抑制。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_390.jpg" alt="drawing" /></p>
+<center>图7：在模糊图片中检测行人</center>
+
+<p>老实说，我对上面图片的检测结果有点儿惊讶，因为一般而言HOG描述子在运动模糊的图片上检测效果不是很好，不过在这幅图像上，我们却将行人检测出来了。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_293.jpg" alt="drawing" /></p>
+<center>图8：在室外街道上检测行人</center>
+
+<p>这里有另外一个多个重叠边框的例子，不过因为我们的<code class="highlighter-rouge">overlapThresh</code>设置得比较大，所以这些边框没有被抑制，从而能够将正确的检测结果留下来。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_265.jpg" alt="drawing" /></p>
+<center>图9：检测一张具有4个成员的家庭的图片</center>
+
+<p>图9的例子展示了HOG+SVM行人检测器的多功能性，我们不仅能够检测到成年的男人，也能够检测到那三个小孩(注意：该检测器不能检测到躲藏在他老爸后面的小孩)。</p>
+
+<p><img src="https://www.pyimagesearch.com/wp-content/uploads/2015/11/pedestrian_detection_person_454.jpg" alt="drawing" /></p>
+<center>图10：对路标标识进行行人检测</center>
+
+<p>我将图10放在最后是因为我发觉这非常的有趣，我们可以很清楚的看到这只是一个路标标识，标识表示人行横道，然而，HOG+SVM检测器将它们在图中框出来了，实际上它们却并不是行人。</p>
+
+<h2 id="section-1">总结</h2>
+
+<p>在这篇博文中，我们已经学到了怎样使用OpenCV的库以及Python来进行行人检测。</p>
+
+<p>实际上OpenCV库已经内置了一个预先训练好了的<a href="http://www.pyimagesearch.com/2014/11/10/histogram-oriented-gradients-object-detection/">HOG+线性SVM检测器</a>的模型，它是基于Dalal和Triggs论文里的方法来自动的实现图像中行人的检测。</p>
+
+<p>虽然HOG的方法比Haar counter-part的精度要高，不过它仍需要对<code class="highlighter-rouge">detectMultiScale</code>进行合理的设置。在后面的博文中，我会对<code class="highlighter-rouge">detectMultiScale</code>中的每一个参数做一个调研，已经怎样调参的细节，并陈述在精度和性能之间的折中。</p>
+
+<p>不管怎么说，我都希望你喜欢这篇博文！我正打算在后面给出更多的关于物体检测的教程，如果你希望这些教程出来后能够获得及时的通知，你可以考虑订阅我的博客。</p>
+
+<p>我已经在<strong>PyImageSearch Gurus course</strong>里面包含了HOG+线性SVM的物体检测方法，你可以看看。</p>
+
+  	</div>
+	</div>
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/picsearch-is-now-an-open-source-project.html">←PicSearch is now an open source project</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/deep-face-recognition-note.html">人脸识别：Deep Face Recognition论文阅读→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yuanyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- Duoshuo Comment END -->
+
+<!-- Disqus Comment BEGIN -->
+  <!--<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yongyuan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <div  style="border-bottom: 1px solid #eee"></div>
+    <footer>
+    <p class="linkings">
+        Friend: <a href="http://peqiu.com/">Xuguo</a>&nbsp&nbsp&nbsp&nbsp<a href="http://jasonmpe.github.io/">HaiTao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://raphael-mou.github.io/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://haobo-lv.github.io/">Haobo</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.52ml.net/">52ml</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caoyaqiang.com/">cyq</a>&nbsp&nbsp&nbsp&nbsp<a href="http://personal.ee.surrey.ac.uk/Personal/R.Hu/">Rui Hu</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.pyimagesearch.com/">pyimagesearch</a>&nbsp&nbsp&nbsp&nbsp<a href="http://bean.logdown.com/">bean</a>&nbsp&nbsp&nbsp&nbsp<a href="http://ml.memect.com/">ml dairy</a>&nbsp&nbsp&nbsp&nbsp<a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html/">Resources</a>
+    </p>
+    <p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p>
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    </p>
+      <a href="http://www.easycounter.com/"><img src="http://www.easycounter.com/counter.php?willard"border="0" alt="Website Hit Counter"></a> since August 2013.
+    </p>
+    <ul class="links">
+      <!--li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li-->
+    </ul>
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>

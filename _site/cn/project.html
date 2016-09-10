@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    Yong Yuan - Projects
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <meta name="description" content="Yong Yuan's projects. Some of them are my academy research, some are just my interest." />
+  <link rel="alternate" type="application/atom+xml" title="RSS Feed for Yong Yuan's blog" href="/feed.xml" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/cn/">关于</a>
+        <a class=" selected " href="/cn/project">项目</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+        <!--<a href="/yuanyong_resume_cn.pdf">简历</a>-->
+	      <a href="/resume/">简历</a>
+        <!--<a class="" href="/publication/">出版</a>-->
+        <a class="" href="/blog/">博客</a>
+	      <a href="/books/">书单</a>
+		    <a href="/timeline/">时间线</a>
+        <a href="https://github.com/willard-yuan">Github</a>
+      </nav>
+      
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="/images/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <div class="inner">
+  <p class="fancy">
+  下面是我做过的一些比较有代表性的项目。有一些是出于硕士研究方向，有一些出于兴趣驱动。
+  <!--<abbr title="User Experience">UX</abbr>?
+  <a href="/contact/">Ping me</a> and let's build awesome and useful stuff!-->
+</p>
+
+<section>
+    <a href="https://github.com/willard-yuan/pkbigdata-image-search">
+      <img class="inline pull-right" src="/images/project/oxford.png"
+           alt="Oxford Screenshot" width="280">
+    </a>
+    <h2>DuplicateSearch</h2>
+    <h3>搜索结果: <a href="https://github.com/willard-yuan/pkbigdata-image-search">Duplicate Search</a></h3>
+    <p><strong>角色:</strong> 单独开发</p>
+    <p>卷积神经网络对于同类搜索能够取得很不错的效果，但对于Duplicate Search任务表现不佳，而实际商业应用对同款搜索应用价值更大，比如搜索衣服、鞋子等，我们希望的是从很大的衣服或鞋子中搜同款。结合开源资源以及对基于关键点结合词包模型的研究，经过一段长时的实现，再经过不断的验证，DuplicateSearch能够取得很好的效果，在oxford building数据库上平均检索精度达到83.35%。在15万大数据上检索结果见上面搜索结果。</p>
+    <p>
+      <strong>所用技术:</strong> SIFT, BoVW, Image Retrieval
+    </p>
+    <p>
+      <strong>对应博文:</strong> <a href="http://yongyuan.name/blog/BoF-VLAD-FV.html">BoF, VLAD and FV for image retrieval (Chinese)</a>
+    </p>
+</section>
+<div class="spacer"></div>
+
+<section>
+    <a href="http://v.youku.com/v_show/id_XOTM4MzgxODY4.html?f=23766923&from=y1.7-1.3">
+      <img class="inline pull-right" src="http://i300.photobucket.com/albums/nn17/willard-yuan/CNN-Image-Retrieval480_zpsex5gg9o8.png"
+           alt="PicSearch Screenshot" width="280">
+    </a>
+    <h2>PicSearch</h2>
+    <h3>在线演示: <a href="http://search.yongyuan.name">CNN for CBIR (已下架)</a></h3>
+	<p><strong>视频:</strong> <a href="http://v.youku.com/v_show/id_XOTM4MzgxODY4.html?f=23766923&from=y1.7-1.3"><strong>nature images</strong></a>, </strong><a href="http://v.youku.com/v_show/id_XOTM4MzgxODY4.html?f=23766923&from=y1.7-1.3"><strong>medical images</strong></a></p>
+	<p><strong>代码:</strong> <a href="https://github.com/willard-yuan/CNN-for-Image-Retrieval"><strong>feature extraction</strong></a>, </strong><a href="https://github.com/willard-yuan/CNN-Web-Demo-for-Image-Retrieval"><strong>search online</strong></a></p>
+	<p><strong>角色:</strong> 单独开发</p>
+    <p>经过一年对CBIR的研究，出于兴趣驱动，小白菜决定开发一个图像搜索引擎演示系统. 卷积神经网络近几年在计算机视觉社区得到了广泛的发展，并且在很多任务上取得了很好的效果. 所以在平时的空闲时间，利用对阅读的文献的理解进行编码开发。PicSearch原型所用数据库是Caltech256, 该数据库包含有29780幅图像。目前该原型发布的代码只支持库内查询，借助Keras很容易完成在线上传搜索功能。</p>
+    <p>
+      <strong>所用技术:</strong> 卷积神经网络, Python, 图像检索
+    </p>
+    <p>
+      <strong>对应博文:</strong> <a href="http://yongyuan.name/blog/image-retrieval-using-MatconvNet-and-pre-trained-imageNet.html">Image retrieval using MatconvNet and pre-trained imageNet (Chinese)</a>
+    </p>
+</section>
+<div class="spacer"></div>
+
+<section>
+    <a href="http://search.yongyuan.name">
+      <img class="inline pull-right" src="/images/project/HABIRH_with_shadow.png"
+           alt="HABIR Screenshot" width="280">
+    </a>
+    <h2>HABIR</h2>
+    <h3>项目主页: <a href="http://yongyuan.name/habir">Hashing Baseline for Image Retrieval</a></h3>
+    <p><strong>角色:</strong> 单独开发</p>
+    <p>在2013年初我就开始研究图像检索技术，其中我主要的任务之一就是设计有效的哈希算法，使得语义相似的图片对应的特征经过映射后具有相似的编码。使用哈希方法进行图像检索有两个主要的优势，即节省内存空间以及更高效的匹配速度。为了方便后来人关注于哈希算法的设计，我已经将一些经典的以及最近几年的哈希方法做成了一个对比框架，希望能对后来者有些许帮助。</p>
+    <p>
+      <strong>所用技术:</strong> Matlab, 哈希, 图像检索
+    </p>
+</section>
+<div class="spacer"></div>
+
+<section>
+    <a href="http://search.yongyuan.name">
+      <img class="inline pull-right" src="http://i300.photobucket.com/albums/nn17/willard-yuan/PCVH480_zpsoic9wbhb.png"
+           alt="PCVwithPython Screenshot" width="280">
+    </a>
+    <h2>PCVwithPython</h2>
+    <h3>项目主页: <a href="http://yongyuan.name/pcvwithpython">Programming Computer Vision with Python(Translate to Chinese)</a></h3>
+    <p><strong>角色:</strong> 主要译者之一</p>
+    <p>Python粉，并且一直认为Python是我知道的最优雅的编程语言之一。Python作为一门强大的编程语言已经用到了很多地方，比如脚本、Django开发web应用以及科学计算等。在我第一次瞄见<Programming Computer Vision with Python>这本书的时候，我被这本书里的内容深深吸引了。该书内容非常丰富且实战性强，我忍不住想要分享这本书让更多人，所以在空余时间，我沉入这本书中并和另外一个小伙伴翻译它。此外，我还对这本书中的代码进行了整理。</p>
+    <p>
+      <strong>所用技术:</strong> Python, Jekyll, Markdown
+    </p>
+</section>
+<div class="spacer"></div>
+
+  <div class="fancy center convinced">
+    Interested? Here's my <a href="https://github.com/willard-yuan">Github</a> and <a href="http://yongyuan.name/YongYuan-Resume.pdf">resume</a>,
+    let's <a href="/contact">get in touch</a>.
+  </div>
+</div>
+
+  <!--<div class="separator"></div>-->
+
+  <div  style="border-bottom: 1px solid #eee"></div>
+    <footer>
+    <p class="linkings">
+        Friend: <a href="http://peqiu.com/">Xuguo</a>&nbsp&nbsp&nbsp&nbsp<a href="http://jasonmpe.github.io/">HaiTao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://raphael-mou.github.io/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://haobo-lv.github.io/">Haobo</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.52ml.net/">52ml</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caoyaqiang.com/">cyq</a>&nbsp&nbsp&nbsp&nbsp<a href="http://personal.ee.surrey.ac.uk/Personal/R.Hu/">Rui Hu</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.pyimagesearch.com/">pyimagesearch</a>&nbsp&nbsp&nbsp&nbsp<a href="http://bean.logdown.com/">bean</a>&nbsp&nbsp&nbsp&nbsp<a href="http://ml.memect.com/">ml dairy</a>&nbsp&nbsp&nbsp&nbsp<a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html/">Resources</a>
+    </p>
+    <p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p>
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    </p>
+      <a href="http://www.easycounter.com/"><img src="http://www.easycounter.com/counter.php?willard"border="0" alt="Website Hit Counter"></a> since August 2013.
+    </p>
+    <ul class="links">
+      <!--li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li-->
+    </ul>
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>
