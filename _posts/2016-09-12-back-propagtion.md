@@ -69,7 +69,7 @@ $$
 $$
 \begin{equation}
    net_{o1}=w_5*out_{h1}+w_6*out_{h2}+b_2*1\\\\
-   net_{o1}=0.4*0.593269992+0.45*0.596884378+0.6*1=1.105905967
+   net_{o1}=0.4*0.593269992+0.45*0.596884378+0.6*1=1.105905967\\\\
    out_{o1}=\frac{1}{1+e^{-net_{o1}}}=\frac{1}{1+e^{-1.105905967}}=0.75136507
 \end{equation}
 $$
@@ -176,7 +176,7 @@ $$
 
 > 我们可以将$\frac{\partial E_{total}}{\partial out_{O1}}$和$\frac{\partial out_{O1}}{\partial net_{O1}}$写为$\frac{\partial E_{total}}{\partial net_{O1}}$，并用$\delta_{O1}$表示它，从而可以将上面的式子表示为：  
 
-$$
+> $$
 \begin{equation}
     \delta_{O1} = \frac{\partial E_{total}}{\partial out_{o1}}*\frac{\partial out_{O1}}{\partial net_{O1}}\\\\
     \delta_{O1} =  -(target_{O1}-out_{O1})*out_{O1}(1-out_{o1})   
@@ -185,15 +185,15 @@ $$
 
 > 因此有：
 
-$$
+> $$
 \begin{equation}
     \frac{\partial E_{total}}{\partial w_5}=\delta_{O1}out_{h1}
 \end{equation}
 $$
 
-有一些论文中通过将负号从$\delta$中提出来将其也可以写为下面这种形式：
+> 有一些论文中通过将负号从$\delta$中提出来将其也可以写为下面这种形式：  
 
-$$
+> $$
 \begin{equation}
     \frac{\partial E_{total}}{\partial w_5}=-\delta_{O1}out_{h1}
 \end{equation}
@@ -261,7 +261,7 @@ $$
 \end{equation}
 $$
 
-有因为$\frac{\partial net_{O1}}{\partial out_{h1}}$等于$w_{5}$:
+又因为$\frac{\partial net_{O1}}{\partial out_{h1}}$等于$w_{5}$:
 
 $$
 \begin{equation}
@@ -323,7 +323,7 @@ $$
 
 > 你可以可能会看到下面的这种写法：
 
-$$
+> $$
 \begin{equation}
    \frac{\partial E_{total}}{\partial w_{1}}=(\sum_O \frac{\partial E_{total}}{\partial out_{O}}*\frac{\partial out_{O}}{\partial net_{O}}*\frac{\partial net_{O}}{\partial out_{h1}})*\frac{\partial out_{h1}}{\partial net_{h1}}*\frac{\partial net_{h1}}{\partial w_{1}}\\\\
    \frac{\partial E_{total}}{\partial w_{1}}=(\sum_O \delta_O*w_{hO})*out_{h1}(1-out_{h1})*i\\\\
