@@ -7,7 +7,7 @@ tags: 机器视觉
 
 >下面说的这个问题及提供的方法，把它归到机器视觉里面可能会将它限制得过于狭隘，但是俺觉得把它放到机器视觉里常常面临的需要把特征保存下来的场景，会更具有代入感。
 
-在抽取图像的特征后，我们经常会面临一个问题，即怎么高效的把特征保存下来，高效在这里指读写方便且读写速度快？如果是用Python的话，根据以往的经历，其序列化可以使用pickle以及hdf5，都是非常好用的。但随着后面语言中心转移到c++，发觉在c++要对提取到的特征进行序列化，能够使用的，除了c++自带的文件流(fstream, ifstream, ostream)外，就是google protobuf(caffe用了这个)，以及boost。c++自带的文件流之前也用过一下，遇到比较复杂的数据结构且数据量大的情况，写起来费劲且读写因为涉及到循环而比较慢，google protobuf不支持不支持二维数组（指针）以及不支持STL容器序列化（见[最常用的两种C++序列化方案的使用心得（protobuf和boost serialization）](http://www.cnblogs.com/lanxuezaipiao/p/3703988.html)），所以还是boost了。
+在抽取图像的特征后，我们经常会面临一个问题，即怎么高效的把特征保存下来，高效在这里指读写方便且读写速度快？如果是用Python的话，根据以往的经历，其序列化可以使用pickle以及hdf5，都是非常好用的。但随着后面语言中心转移到c++，发觉在c++要对提取到的特征进行序列化，能够使用的，除了c++自带的文件流(fstream, ifstream, ostream)外，就是google protobuf(caffe用了这个)，以及boost。c++自带的文件流之前也用过一下，遇到比较复杂的数据结构且数据量大的情况，写起来费劲且读写因为涉及到循环而比较慢，google protobuf不支持二维数组（指针）以及不支持STL容器序列化（见[最常用的两种C++序列化方案的使用心得（protobuf和boost serialization）](http://www.cnblogs.com/lanxuezaipiao/p/3703988.html)），所以还是boost了。
 
 在一般的场合，我们的特征其数据结构应该是这样的：`std::pair<vector<string>, vector<vector<float>>>`，即`vector<string>`保存图像文件名，`vector<vector<float>>`则保存图像对应的特征，所以我们需要对该类型数据进行序列化，这个问题如果用c++自带的文件流写也是可以的，不过相比于用boost的serialization，就少了很多的折腾。下面给出一个完整的例子，例子里面的4个函数对于想要序列化STL数据类型会有很好的借鉴作用。
 
