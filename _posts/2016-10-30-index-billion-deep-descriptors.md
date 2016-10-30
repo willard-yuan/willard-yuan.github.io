@@ -51,7 +51,7 @@ for (size_t i = 0 ; i != dists_idxs.size() ; i++) {
 为了进一步确认，还可以对执行的时间进行测试确认。从上面的过程可以看到，这种brute-search的方式实在是太耗时了，那么有没有方式能够缓解这种相应不够实时的问题呢。答案是有的，我们可以通过以下手段对这种brute-force search低效的方式做一些缓解：
 
 - PCA降维。对于通过深度学习方式得到的特征，降维不会对信息造成大的损失，事实上在[Neural codes for image retrieval]()这篇文章中已经指出了PCA对于深度描述子几乎不会造成损失，小白菜之前也对这样一个结论做过验证，见下图：
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/pcaDNN_zpsgu3ydzgj.png)
+![drawing](http://i300.photobucket.com/albums/nn17/willard-yuan/pcaDNN_zpsgu3ydzgj.png)
 
 - 使用多线程技术。在计算余弦距离的时候，使用OpenMP多线程技术，这种方式能够较大幅度的降低搜索时间，比如CPU是8线程的，则可以将原来的时间降低为原来的8分之一。
 
@@ -116,5 +116,5 @@ qDebug() << "index build finished ...";
 cptable->find_k_nearest_neighbors(q, 20, &idxCandidate);
 ```
 上面代码还有很大的速度方面的优化空间，anyway，我们先暂时抛开代码的优化，来看一下改用LSH索引后的效果，下面是改用LSH后查询响应的效果：
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/faceRetrievalLSH_zps698bdlag.gif)
+![drawing](http://i300.photobucket.com/albums/nn17/willard-yuan/faceRetrievalLSH_zps698bdlag.gif)
 从展示的效果来看，对于查询相应的速度，有了较大的改善，但是我们还是可以看到在查询的时候，有一段空白的白板，这个问题小白菜的猜测是它应该不是由于索引慢而导致的，对于这个短时的空白白板的优化，小白菜把它放到下期进行，同时，也会对[Efficient Indexing of Billion-Scale Datasets of Deep Descriptors](https://github.com/arbabenko/GNOIMI)这篇文章做一个理解总结。
