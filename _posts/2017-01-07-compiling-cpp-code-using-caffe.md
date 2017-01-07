@@ -18,7 +18,7 @@ Caffe作为在众多公司搞深度学习时较多使用的框架，其在使用
 
 下面细解该方法的步骤。
 
-### 重新编译一份Caffe
+## 重新编译一份Caffe
 
 对于已有Caffe环境了的小伙伴，对于重新编译一份Caffe可能觉得多余，但小白菜以为，通过下面这种方式编译，可以让你后续的步骤能够顺利进行，执行下面命令：
 
@@ -61,7 +61,7 @@ make -j 12 && make install           # doesn’t overwrite debug install
 ```
 到这里，第一步走完了。回到关于推荐重新编译一份的问题，为什么推荐重新编译一份呢？这是因为，后面在写cmake文件的时候，我们是通过find_package来找Caffe库的，如果不按上面的过程重新编译一份，find_package无法找到Caffe的库目录。当然你也可以通过其他的方式绕过去，但如果想少些折腾，还是按这个来为妥。
 
-### 编写cmake文件
+## 编写cmake文件
 
 顺利完成了**重新编译一份Caffe**的步骤后，我们来写(复制)一份`CMakeLists.txt`文件：
 
@@ -80,7 +80,7 @@ target_link_libraries(caffeinated_application ${Caffe_LIBRARIES})
 └── extract_features.cpp
 ```
 
-### 编译目标文件
+## 编译目标文件
 
 我们进入到包含`CMakeLists.txt`和`extract_features.cpp`文件的目录，执行下面命令：
 
