@@ -61,6 +61,34 @@ make -j 12 && make install           # doesn’t overwrite debug install
 ```
 到这里，第一步走完了。回到关于推荐重新编译一份的问题，为什么推荐重新编译一份呢？这是因为，后面在写cmake文件的时候，我们是通过find_package来找Caffe库的，如果不按上面的过程重新编译一份，find_package无法找到Caffe的库目录。当然你也可以通过其他的方式绕过去，但如果想少些折腾，还是按这个来为妥。
 
+### 虚拟环境运行Caffe异常
+
+讲真，只要使用python编程，anaconda绝对是一把利器。集成的ipython、jupyter、常用的第三方模块以及虚拟环境，可以省去不少让人折腾的功夫。举个例子，在日常的开发中，小白菜做开发都是在服务器上，但服务器上没有sudo权限，所以如果用Pyhon做开发，弄个虚拟开发环境必不可少。一直以来，小白菜都是用的Virtualenv来构建虚拟环境。这几天，在看Anaconda的bin目录下，发觉了Anaconda也有activate，然后揣测它应该跟Virtualenv，然后执行`source activate`，安装了Keras测试一下，发觉它并没有安装在系统目录里，而是安装在Anaconda目录下，甚喜，因为这意味着小白菜以后可以随意安装自己需要的安装包。
+
+为了方便导入Caffe，将Caffe的Python目添加到环境变量中：
+
+```sh
+export PYTHONPATH=/home/yuanyong/caffe/python:$PYTHONPATH
+```
+
+执行`source .bashrc`，然后启动ipython，导入Caffe，异常抛出如下：
+
+```python
+In [4]: import caffe
+
+In [5]: QXcbConnection: Could not connect to display
+已放弃(吐核)
+```
+因为服务器上无图像界面服务，所以推测这个错误应该跟这个图像界面的相关，然后谷歌到了[Generating matplotlib graphs without a running X server](http://stackoverflow.com/questions/4931376/generating-matplotlib-graphs-without-a-running-x-server)，在导入Caffe之前，使用Agg backend作为后端渲染，即：
+
+```python
+In [2]: import matplotlib as mpl
+In [3]: mpl.use('Agg')
+In [4]: import caffe
+```
+异常消除。这个问题比较奇怪，后来小白菜不执行`[2][3]`发觉没出现原来的错误了，不过不管出不出现了，整理以备再次出现此问题。
+
+
 ## 编写cmake文件
 
 顺利完成了**重新编译一份Caffe**的步骤后，我们来写(复制)一份`CMakeLists.txt`文件：
