@@ -131,24 +131,24 @@ hp_table.set_num_probes(2464)
 C++初始化与构建索引[L194](https://github.com/FALCONN-LIB/FALCONN/blob/master/src/benchmark/random_benchmark.cc#L194):
 
 ```c++
-    // Hyperplane hashing
-    LSHConstructionParameters params_hp;
-    params_hp.dimension = d;
-    params_hp.lsh_family = LSHFamily::Hyperplane;
-    params_hp.distance_function = distance_function;
-    params_hp.storage_hash_table = storage_hash_table;
-    params_hp.k = 19;
-    params_hp.l = num_tables;
-    params_hp.num_setup_threads = num_setup_threads;
-    params_hp.seed = seed ^ 833840234;
+// Hyperplane hashing
+LSHConstructionParameters params_hp;
+params_hp.dimension = d;
+params_hp.lsh_family = LSHFamily::Hyperplane;
+params_hp.distance_function = distance_function;
+params_hp.storage_hash_table = storage_hash_table;
+params_hp.k = 19;
+params_hp.l = num_tables;
+params_hp.num_setup_threads = num_setup_threads;
+params_hp.seed = seed ^ 833840234;
 
-    cout << "Hyperplane hash" << endl << endl;
+cout << "Hyperplane hash" << endl << endl;
 
-    Timer hp_construction;
+Timer hp_construction;
 
-    unique_ptr<LSHNearestNeighborTable<Vec>> hptable(
-        std::move(construct_table<Vec>(data, params_hp)));
-    hptable->set_num_probes(2464);
+unique_ptr<LSHNearestNeighborTable<Vec>> hptable(
+    std::move(construct_table<Vec>(data, params_hp)));
+hptable->set_num_probes(2464);
 ```
 
 可以看到，有3个很重要的参数，分别是`k`、`l`和`set_num_probes`，对应的具体意义前面已经解释，这里不再赘述。
@@ -183,7 +183,7 @@ PQ乘积量化的核心思想还是聚类，或者说具体应用到ANN近似最
 
 从上面这个过程可以很清楚地看出PQ乘积量化能够加速索引的原理：即将全样本的距离计算，转化为到子空间类中心的距离计算。比如上面所举的例子，原本brute-force search的方式计算距离的次数随样本数目N成线性增长，但是经过PQ编码后，对于耗时的距离计算，只要计算4*256次，几乎可以忽略此时间的消耗。另外，从上图也可以看出，对特征进行编码后，可以用一个相对比较短的编码来表示样本，自然对于内存的消耗要大大小于brute-force search的方式。
 
-在某些特殊的场合，我们总是希望获得精确的距离，而不是近似的距离，并且我们总是喜欢获取向量间的余弦相似度（余弦相似度距离范围在[-1,1]之间，便于设置固定的阈值），针对这种场景，可以针对PQ乘积量化得到的前top@K做一个brute-force search的排序。
+在某些特殊的场合，我们总是希望获得精确的距离，而不是近似的距离，并且我们总是喜欢获取向量间的余弦相似度（余弦相似度距离范围在\[-1,1\]之间，便于设置固定的阈值），针对这种场景，可以针对PQ乘积量化得到的前top@K做一个brute-force search的排序。
 
 ### 倒排乘积量化
 
