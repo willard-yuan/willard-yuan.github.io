@@ -1,6 +1,6 @@
 ---
 layout: post
-title: precision recall曲线Matlab实现
+title: 图像检索：precision recall曲线Matlab实现
 categories: [Image Retrieval]
 tags: 图像检索
 ---

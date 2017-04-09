@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python Vlfeat接口及Pydot模块安装总结
+title: 环境配置：Python Vlfeat接口及Pydot模块安装总结
 categories: [Machine Learning]
 tags: 机器学习
 ---

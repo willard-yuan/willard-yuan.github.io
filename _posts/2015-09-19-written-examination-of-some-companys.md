@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 面试整理：部分互联网公司笔试综合题及答案
+title: 不舍编码：部分互联网公司笔试综合题及答案
 categories: [面试]
 tags: 面试
 ---

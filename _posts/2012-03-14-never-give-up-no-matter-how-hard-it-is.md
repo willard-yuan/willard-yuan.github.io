@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 再苦的日子，跪着也要爬完
+title: 知行手记：再苦的日子，跪着也要爬完
 categories: [Life]
 tags: 生活
 ---

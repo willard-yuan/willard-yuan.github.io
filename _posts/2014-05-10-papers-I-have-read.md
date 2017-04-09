@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Papars已读列表
+title: 论文阅读：Papars已读列表
 categories: [Machine Learning]
 tags: 机器学习
 ---

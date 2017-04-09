@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python title()中文标题支持
+title: 不弃编码：Python title()中文标题支持
 categories: [Python]
 tags: Python
 ---

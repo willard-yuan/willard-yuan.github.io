@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ANN(Approximate Nearest Neighbor)搜索
+title: 图像检索：ANN(Approximate Nearest Neighbor)搜索
 categories: [Image Retrieval,Machine Learning]
 tags: ANN
 ---

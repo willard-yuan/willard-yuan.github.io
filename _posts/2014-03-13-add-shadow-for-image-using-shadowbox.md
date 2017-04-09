@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 用shadowbox.js为图片添加阴影效果
+title: 前端浅谈：用shadowbox.js为图片添加阴影效果
 categories: [前端设计]
 tags: 前端设计
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 本科毕业一周年
+title: 知行手记：本科毕业一周年
 categories: [Life]
 photo: xiaMenUniversity.jpg
 tags: 大学

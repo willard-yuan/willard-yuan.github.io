@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 善待自己生存的空间
+title: 知行手记：善待自己生存的空间
 categories: [Life]
 tags: 生活
 ---

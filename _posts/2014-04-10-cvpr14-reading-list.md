@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CVPR14图像检索文章
+title: 论文阅读：CVPR14图像检索文章
 categories: [Image Retrieval]
 tags: 图像检索
 ---

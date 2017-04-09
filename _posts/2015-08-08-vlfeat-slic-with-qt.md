@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Qt之VLFeat SLIC超像素分割(Cpp版)
+title: 机器视觉：Qt之VLFeat SLIC超像素分割(Cpp版)
 categories: [Computer Vision]
 tags: SLIC
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MBP T2到货啦
+title: 知行手记：MBP T2到货啦
 categories: [Life]
 tags: 生活
 ---

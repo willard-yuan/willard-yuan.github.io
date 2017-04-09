@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Django开发简易博客(二)
+title: 不弃编码：Django开发简易博客(二)
 categories: [Django]
 tags: Django
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 初涉Pysqlite遇到的问题
+title: 环境配置：初涉Pysqlite遇到的问题
 categories: [Python]
 tags: Python
 ---

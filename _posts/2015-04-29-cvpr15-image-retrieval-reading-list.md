@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CVPR15 image retrieval reading list
+title: 图像检索：CVPR15 image retrieval reading list
 categories: [Image Retrieval]
 tags: 图像检索
 ---

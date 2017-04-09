@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 青春散场
+title: 知行手记：青春散场
 categories: [Life]
 tags: 大学
 ---

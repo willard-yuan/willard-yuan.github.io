@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 面试整理：最小的k个数
+title: 不舍编码：最小的k个数
 categories: [Cpp]
 tags: Cpp
 ---

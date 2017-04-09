@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GMM、fisher vector、SIFT与HOG特征资料
+title: 机器视觉：GMM、fisher vector、SIFT与HOG特征资料
 categories: [Image Retrieval]
 tags: 图像检索
 ---

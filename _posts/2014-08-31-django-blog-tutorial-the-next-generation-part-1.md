@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Django blog教程-下一個版本-第一部分
+title: 不舍编码：Django blog教程-下一個版本-第一部分
 categories: [Django]
 tags: Django
 ---

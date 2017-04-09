@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 挺住，意味着一切
+title: 知行手记：挺住，意味着一切
 categories: [Life]
 tags: 生活
 ---

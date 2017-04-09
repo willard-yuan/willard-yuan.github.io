@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 大二寝室联合聚餐
+title: 知行手记：大二寝室联合聚餐
 categories: [Life]
 tags: 大学
 ---

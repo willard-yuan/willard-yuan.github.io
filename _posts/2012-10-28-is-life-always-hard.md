@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Is life always hard?
+title: 知行手记：Is life always hard?
 categories: [Life]
 tags: 生活
 ---

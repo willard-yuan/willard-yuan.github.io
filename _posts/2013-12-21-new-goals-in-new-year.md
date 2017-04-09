@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2014年，请以这样的标准完善自我
+title: 知行手记：2014年，请以这样的标准完善自我
 categories: [Life]
 tags: 生活
 ---

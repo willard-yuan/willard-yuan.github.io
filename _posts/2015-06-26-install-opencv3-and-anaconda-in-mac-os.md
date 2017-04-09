@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mac下安装OpenCV3.0和Anaconda
+title: 环境配置：Mac下安装OpenCV3.0和Anaconda
 categories: [Python]
 tags: OpenCV
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 知乎搜集的一些干货
+title: 知行手记：知乎搜集的一些干货
 categories: [Life]
 tags: 生活
 ---

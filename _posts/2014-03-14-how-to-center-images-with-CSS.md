@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CSS调整图片居中显示
+title: 前端浅谈：CSS调整图片居中显示
 categories: [前端设计]
 tags: 前端
 ---

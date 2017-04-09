@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RANSAC算法做直线拟合
+title: 机器学习：RANSAC算法做直线拟合
 categories: [Machine Learning]
 tags: 机器学习
 ---

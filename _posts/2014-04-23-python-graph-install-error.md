@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python graph安装出错
+title: 环境配置：Python graph安装出错
 categories: [Python]
 tags: Python
 ---

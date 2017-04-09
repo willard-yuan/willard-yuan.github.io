@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python基础知识小札一
+title: 不弃编码：Python基础知识小札一
 categories: [Python]
 tags: Python
 ---

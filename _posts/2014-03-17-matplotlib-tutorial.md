@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Matplotlib指南
+title: 不舍编码：Matplotlib指南
 categories: [Python]
 tags: Python
 ---

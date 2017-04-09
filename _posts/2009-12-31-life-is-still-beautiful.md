@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 生活依然很美丽
+title: 知行手记：生活依然很美丽
 categories: [Life]
 tags: 生活
 ---

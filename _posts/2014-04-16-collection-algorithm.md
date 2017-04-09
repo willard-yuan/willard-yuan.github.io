@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 算法搜藏，不定期更新
+title: 机器学习：算法搜藏，不定期更新
 categories: [Machine Learning]
 tags: 机器学习
 ---
