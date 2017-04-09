@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 有心写作：Jekyll写作技巧小札
+title: 写作技艺：Jekyll写作技巧小札
 categories: [Jekyll]
 tags: Jekyll
 ---

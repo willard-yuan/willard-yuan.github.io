@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 不舍编码：GitHub上一些有用的Repositories
+title: 编码训练：GitHub上一些有用的Repositories
 categories: [资源集合]
 tags: Github
 ---

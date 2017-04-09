@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 不舍编码：Code Guide-规范自我编程风格
+title: 编码训练：Code Guide-规范自我编程风格
 categories: [编程规范]
 tags: 规范
 ---

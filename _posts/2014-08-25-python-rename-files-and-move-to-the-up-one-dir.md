@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 不舍编码：python重命名101 ObjectCategories下图像并移到上一级目录
+title: 编码训练：python重命名101 ObjectCategories下图像并移到上一级目录
 categories: [Python]
 tags: Python
 ---

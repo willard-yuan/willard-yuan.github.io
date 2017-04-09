@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 信息检索评价指标
+title: 图像检索：信息检索评价指标
 categories: [Image Retrieval]
 tags: 图像检索
 ---

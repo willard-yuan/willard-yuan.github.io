@@ -1,6 +1,6 @@
 ---
 layout: post
-title: django-markdown使用实例
+title: 编码训练：Django-markdown使用实例
 categories: [Django]
 tags: Django
 ---

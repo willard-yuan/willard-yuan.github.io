@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 不弃编码：Python根据经纬度获取地理位置照片
+title: 编码训练：Python根据经纬度获取地理位置照片
 categories: [Python]
 tags: Python
 ---

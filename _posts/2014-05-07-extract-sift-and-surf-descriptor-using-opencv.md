@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 用OpenCV提取图像SIFT、SURF描述子
+title: 机器视觉：用OpenCV提取图像SIFT、SURF描述子
 categories: [Machine Learning]
 tags: OpenCV, SIFT
 ---

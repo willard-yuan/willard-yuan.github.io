@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 我曾听过最美的音乐(二)
+title: 广陵绝艺：我曾听过最美的音乐(二)
 categories: [Life]
 tags: 音乐
 ---

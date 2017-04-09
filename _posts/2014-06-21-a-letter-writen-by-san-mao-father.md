@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 三毛的爸爸写给三毛的一封信
+title: 知行手记：三毛的爸爸写给三毛的一封信
 categories: [Life]
 photo: lishutong.jpg
 tags: 读书

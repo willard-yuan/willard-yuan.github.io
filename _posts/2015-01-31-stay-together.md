@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 相聚
+title: 知行手记：相聚
 categories: [Life]
 tags: 生活
 ---

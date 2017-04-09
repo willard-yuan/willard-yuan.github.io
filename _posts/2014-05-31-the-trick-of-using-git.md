@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ubuntu下git使用教程
+title: 编码训练：Ubuntu下git使用教程
 categories: [Git]
 tags: Git
 ---

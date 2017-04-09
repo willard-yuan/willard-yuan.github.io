@@ -1,6 +1,6 @@
 ---
 layout: post
-title: swift学习笔记（1）
+title: 编码训练：swift学习笔记（1）
 categories: [Swift]
 tags: Swift
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Django web开发指南阅读笔记(一)
+title: 编码训练：Django web开发指南阅读笔记(一)
 categories: [Django]
 tags: Django
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 论文阅读笔记Sequential Projection Learning for Hashing
+title: 论文阅读：Sequential Projection Learning for Hashing
 categories: [Image Retrieval]
 tags: 哈希
 ---

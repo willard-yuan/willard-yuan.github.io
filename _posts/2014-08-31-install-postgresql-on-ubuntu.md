@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ubuntu14.04安裝postgresql
+title: 环境配置：Ubuntu14.04安裝postgresql
 categories: [Linux]
 tags: Linux
 ---

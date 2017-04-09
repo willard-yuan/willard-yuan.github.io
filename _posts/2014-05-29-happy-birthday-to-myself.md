@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 白菜手记：一个人的庆典
+title: 知行手记：一个人的庆典
 categories: [Life]
 tags: 生活
 ---

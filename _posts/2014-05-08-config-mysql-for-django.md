@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Django配置MySQL
+title: 环境配置：Django配置MySQL
 categories: [Django]
 tags: Django
 ---

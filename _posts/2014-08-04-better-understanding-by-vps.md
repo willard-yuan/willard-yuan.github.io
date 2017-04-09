@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 不舍编码：通过VPS加深对Linux命令的一些理解
+title: 编码训练：通过VPS加深对Linux命令的一些理解
 categories: [Linux]
 tags: Linux
 ---

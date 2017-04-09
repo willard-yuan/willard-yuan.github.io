@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Otto产品分类挑战赛亚军：不要低估最近邻算法(译)
+title: 技术翻译：不要低估最近邻算法(译)
 categories: [翻译]
 tags: 翻译
 ---

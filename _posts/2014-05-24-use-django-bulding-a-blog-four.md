@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Django开发简易博客(四)
+title: 编码训练：Django开发简易博客(四)
 categories: [Django]
 tags: Django
 ---
