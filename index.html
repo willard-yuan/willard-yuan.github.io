@@ -48,24 +48,7 @@ description: I am Yong Yuan. Willard is my English Name, which means great brave
       {% for post in site.posts limit:3 %}
       <li class="post-list-in-index">
       <small class="post-list-date-in-index">
-      {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-
-      <!-- Whitespace added for readability -->
-      {% assign d = post.date | date: "%d" %}
-      {% assign m = post.date | date: "%B" %}
-
-      {% case m %}
-      {% when 'April' or 'May' or 'June' or 'July' %}{{ m }}
-      {% when 'September' %}Sept
-      {% else %}{{ post.date | date: "%b" }}
-      {% endcase %}
-      {% case d %}
-      {% when '01' or '21' or '31' %}{{ %d }}<!--st-->
-      {% when '02' or '22' %}{{ %d }}<!--nd-->
-      {% when '03' or '23' %}{{ %d }}<!--rd-->
-      {% else %}{{ %d }}<!--th-->
-      {% endcase %},
-      {{ post.date | date: "%Y" }}</small><a  href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+      {{ post.date | date_to_string }}</small><a  href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
       </li>
       {% endfor %}
     </ul>
