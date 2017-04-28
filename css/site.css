@@ -108,7 +108,7 @@ header {
 .header-container {
   /*border-bottom: 1px solid #eee;*/
   margin-bottom: 1.5em;
-  background: #f3f3f3;
+  background: #48C9B0; /*#f3f3f3;*/
 }
 
 header nav {
