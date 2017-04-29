@@ -154,7 +154,7 @@ nav a:last-child {
 
 nav a:hover {
   text-decoration: none;
-  border-bottom: 3px solid #3073b3;
+  border-bottom: 3px solid #E74C3C;
 }
 
 nav a.selected {
