@@ -32,15 +32,29 @@
 <body>
   <div class="header-container">
     <header class="inner">
-      {% if page.url == '/cn/index.html' %}
+      {% if page.url == '/cn/' %}
       <nav>
-        <a class="{% if page.category == 'about' %} selected {% endif %}" href="/cn/">关于</a>
-        <a class="{% if page.category == 'project' %} selected {% endif %}" href="/project/">项目</a>
+        <a class="{% if page.category == 'about-zh' %} selected {% endif %}" href="/cn/">关于</a>
+        <a class="{% if page.category == 'project-zh' %} selected {% endif %}" href="/cn/project">项目</a>
         <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
-        <a href="/resume/">简历</a>
+        <!--<a href="/resume/">简历</a>-->
+        <a href="/YongYuan_resume.pdf">简历</a>
         <!--<a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">出版</a>-->
         <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">博客</a>
-		    <a href="/books/">书单</a>
+        <a href="/books/">书单</a>
+        <a href="/timeline/">时间线</a>
+        <a href="https://github.com/willard-yuan">Github</a>
+      </nav>
+      {% elsif page.url == '/cn/project' %}
+      <nav>
+        <a class="{% if page.category == 'about-zh' %} selected {% endif %}" href="/cn/">关于</a>
+        <a class="{% if page.category == 'project-zh' %} selected {% endif %}" href="/cn/project">项目</a>
+        <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
+        <!--<a href="/yuanyong_resume_cn.pdf">简历</a>-->
+        <a href="/YongYuan_resume.pdf">简历</a>
+        <!--<a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">出版</a>-->
+        <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">博客</a>
+        <a href="/books/">书单</a>
         <a href="/timeline/">时间线</a>
         <a href="https://github.com/willard-yuan">Github</a>
       </nav>
@@ -49,18 +63,18 @@
         <a class="{% if page.category == 'about' %} selected {% endif %}" href="/">About</a>
         <a class="{% if page.category == 'project' %} selected {% endif %}" href="/project/">Project</a>
         <!--<a class="{% if page.category == 'resume' %} selected {% endif %}" href="/resume/">Resume</a>-->
-		    <a href="/resume/">Resume</a>
+        <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+        <a href="/YongYuan_resume.pdf">Resume</a>
         <!--<a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">Publication</a>-->
         <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
-		    <a href="/books/">Book</a>
-        <!--<a class="{% if page.category == 'contact' %} selected {% endif %} contact" href="/contact/">Contact</a>-->
+        <a href="/books/">Book</a>
         <a href="/timeline/">Times</a>
         <a href="https://github.com/willard-yuan">Github</a>
       </nav>
-      {% endif %}
+    {% endif %}
 
       <div class="pull-right right logo">
-        <div class="name">
+        <!--<div class="name">
           <a href="/">Yong Yuan</a><br />
           <small>
             <em>
@@ -71,8 +85,8 @@
               {% endif %}
             </em>
           </small>
-        </div>
-        <img class="avatar" src="/images/YongYuan.png" alt="My profile picture" />
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="/images/YongYuan.png" alt="My profile picture" /></a>
       </div>
       <div class="clear"></div>
     </header>
