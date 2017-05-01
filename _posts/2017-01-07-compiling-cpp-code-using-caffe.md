@@ -48,6 +48,7 @@ cmake . -DCMAKE_BUILD_TYPE=Debug     # switch to debug
 make -j 12 && make install           # installs by default to build_dir/install
 cmake . -DCMAKE_BUILD_TYPE=Release   # switch to release
 make -j 12 && make install           # doesn’t overwrite debug install
+make pycaffe
 ```
 
 上面编译完成后，我们在`build/install`目录下看到Caffe作为一个供调用的库的完整文件：
@@ -60,6 +61,13 @@ make -j 12 && make install           # doesn’t overwrite debug install
 └── share
 ```
 到这里，第一步走完了。回到关于推荐重新编译一份的问题，为什么推荐重新编译一份呢？这是因为，后面在写cmake文件的时候，我们是通过find_package来找Caffe库的，如果不按上面的过程重新编译一份，find_package无法找到Caffe的库目录。当然你也可以通过其他的方式绕过去，但如果想少些折腾，还是按这个来为妥。
+
+此外，为了能够正常使用Caffe的Python接口，还需要按照Python的一些依赖模块：
+
+```sh
+cd caffe_root/python
+pip install -r requirements.txt
+```
 
 ### 虚拟环境运行Caffe异常
 
