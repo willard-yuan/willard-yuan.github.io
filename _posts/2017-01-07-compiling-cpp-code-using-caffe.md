@@ -130,3 +130,6 @@ make
 
 通过此种方法，我们能够很优雅的解决使用makefile编译调用Caffe框架的C++程序的问题，后面就可以愉快地写各种调用Caffe框架的代码了。
 
+### 附录
+
+1. [如何在Macosx上安装caffe](http://cp0000.github.io/2016/10/22/install-caffe-on-macosx/)
