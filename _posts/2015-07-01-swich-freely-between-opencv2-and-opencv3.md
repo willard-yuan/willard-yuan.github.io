@@ -9,15 +9,13 @@ tags: Python
 
 在[Mac下安装OpenCV3.0和Anaconda][1]一文中已经总结了OpenCV3.0在Mac下的安装方法，但在实际使用的时候，发觉OpenCV3.0跟OpenCV2.x差别还是比较大的，比如在[BoW图像检索Python实战][2]中原本写的程序根本没法在OpenCV3.0下跑，想SIFT、SURF都移到了[opencv\_contrib][3]。将SIFT、SUFR移出OpenCV的原因在[opencv\_contrib][4]中说明如下：
 
-> This repository is intended for development of so-called "extra" modules, contributed functionality. New modules quite often do not have stable API, and they are not well-tested. Thus, they shouldn't be released as a part of official OpenCV distribution, since the library maintains binary compatibility, and tries to provide decent performance and stability.
-
-> So, all the new modules should be developed separately, and published in the opencv\_contrib repository at first. Later, when the module matures and gains popularity, it is moved to the central OpenCV repository, and the development team provides production quality support for this module.
+> This repository is intended for development of so-called "extra" modules, contributed functionality. New modules quite often do not have stable API, and they are not well-tested. Thus, they shouldn't be released as a part of official OpenCV distribution, since the library maintains binary compatibility, and tries to provide decent performance and stability.    
+So, all the new modules should be developed separately, and published in the opencv\_contrib repository at first. Later, when the module matures and gains popularity, it is moved to the central OpenCV repository, and the development team provides production quality support for this module.
 
 总之就是这些模块还不是很稳定，需要不断的测试和修改，OpenCV中的SIFT效果确实还不尽如人意。所以，在OpenCV3.0中要使用SIFT、SURF等特征你需要额外的按照[opencv\_contrib][5]。
 
-> The opencv\_contrib  repo which contains extra modules for OpenCV, such as feature detection, local invariant descriptors (SIFT, SURF, etc.), text detection in natural images, line descriptors, and more.
-
-> **Note**: We don’t have to pull down the opencv\_contrib  repo if we don’t want to. OpenCV will compile and install just fine without it. But if you compile OpenCV without opencv\_contrib , be warned that you’ll be missing out on some pretty important features, which will become very obvious, very fast, especially if you’re used to working with the 2.4.X version of OpenCV.                    摘自[Install OpenCV 3.0 and Python 2.7+ on OSX][6]
+> The opencv\_contrib  repo which contains extra modules for OpenCV, such as feature detection, local invariant descriptors (SIFT, SURF, etc.), text detection in natural images, line descriptors, and more.  
+**Note**: We don’t have to pull down the opencv\_contrib  repo if we don’t want to. OpenCV will compile and install just fine without it. But if you compile OpenCV without opencv\_contrib , be warned that you’ll be missing out on some pretty important features, which will become very obvious, very fast, especially if you’re used to working with the 2.4.X version of OpenCV.                    摘自[Install OpenCV 3.0 and Python 2.7+ on OSX][6]
 
 怎么按照这个模块，目前还没找到比较好的简洁的方法。不过这篇文章不是要将这个，还是回到上面提到的问题中。为了使用OpenCV2.x版本，自然需要安装OpenCV2.x版本了，也就是安装完后，你的计算机上有两个版本的OpenCV，下面先讲讲怎么安装OpenCV2.x。
 
