@@ -69,6 +69,20 @@ cd caffe_root/python
 pip install -r requirements.txt
 ```
 
+**补充**：对于mac osx系统，如果按照上面编译完后，在`import caffe`时出现如下错误：
+
+```sh
+26852 segmentation fault python
+```
+这个错误主要是Makefile.conf中python的include和lib设置不合理所引起的，具体可以参考[Segfault on PyCaffe import](https://github.com/BVLC/caffe/issues/2677)。将`PYTHON_INCLUDE`和`PYTHON_LIB`修改为：
+
+```sh
+PYTHON_INCLUDE := /usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/include/python2.7
+
+PYTHON_LIB := /usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib
+```
+然后重新按照前面的步骤编译一遍即可解决上面的bug。
+
 ### 虚拟环境运行Caffe异常
 
 讲真，只要使用python编程，anaconda绝对是一把利器。集成的ipython、jupyter、常用的第三方模块以及虚拟环境，可以省去不少让人折腾的功夫。举个例子，在日常的开发中，小白菜做开发都是在服务器上，但服务器上没有sudo权限，所以如果用Pyhon做开发，弄个虚拟开发环境必不可少。一直以来，小白菜都是用的Virtualenv来构建虚拟环境。这几天，在看Anaconda的bin目录下，发觉了Anaconda也有activate，然后揣测它应该跟Virtualenv，然后执行`source activate`，安装了Keras测试一下，发觉它并没有安装在系统目录里，而是安装在Anaconda目录下，甚喜，因为这意味着小白菜以后可以随意安装自己需要的安装包。
