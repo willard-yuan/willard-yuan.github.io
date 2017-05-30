@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图像检索：模型layer选择与模型fine-tuning性能提升验证
+title: 图像检索：layer选择与fine-tuning性能提升验证
 categories: [Image Retrieval]
 tags: CBIR
 ---
@@ -62,8 +62,7 @@ MOP Pooling源自[Multi-scale Orderless Pooling of Deep Convolutional Activation
 
 ![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/mop_cnn_zpstvgo29kk.jpeg)
 
-> from [Multi-scale Orderless Pooling of Deep Convolutional Activation Features](https://arxiv.org/abs/1403.1840)
-
+> from [Multi-scale Orderless Pooling of Deep Convolutional Activation Features](https://arxiv.org/abs/1403.1840)  
 > Overview  of  multi-scale  orderless  pooling  for  CNN  activations  (MOP-CNN). Our proposed feature is a concatenation of the feature vectors from three levels: (a)Level 1, corresponding to the 4096-dimensional CNN activation for the entire 256*256image; (b) Level 2, formed by extracting activations from 128*128 patches and VLADpooling them with a codebook of 100 centers; (c) Level 3, formed in the same way aslevel 2 but with 64*64 patches.
 
 具体地，在L=1的尺度下，也就是全图，直接resize到256*256的大小，然后送进网络，得到第七层全连接层4096维的特征；在L=2时，使用128*128(步长为32)的窗口进行滑窗，由于网络的图像输入最小尺寸是256*256，所以作者将其上采样到256*256，这样可以得到很多的局部特征，然后对其进行VLAD编码，其中聚类中心设置为100，4096维的特征降到了500维，这样便得到了50000维的特征，然后将这50000维的特征再降维得到4096维的特征；L=3的处理过程与L=2的处理过程一样，只不过窗口的大小编程了64*64的大小。
