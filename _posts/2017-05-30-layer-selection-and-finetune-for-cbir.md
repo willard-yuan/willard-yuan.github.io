@@ -7,7 +7,8 @@ tags: CBIR
 
 > 这个世界上肯定有另一个我，做着我不敢做的事，过着我想过的生活。一个人逛街，一个人吃饭，一个人旅行，一个人做很多事。极致的幸福，存在于孤独的深海。在这样日复一日的生活里，我逐渐和自己达成和解。
 
-作为迁移学习的一种，finetune能够将general的特征转变为special的特征，从而使得转移后的特征能够更好的适应目标任务，而图像检索最根本的问题，仍在于如何在目标任务上获得更好的特征表达(共性与可区分性)。一种很自然的方式便是在特定的检索任务上，我们对imageNet学得的general的特征通过finetune的方式，使得表达的特征能够更好的适应我们的检索任务。在[End-to-end Learning of Deep Visual Representations for Image Retrieval](https://arxiv.org/abs/1610.07940)和[Collaborative Index Embedding for Image Retrieval](https://www.computer.org/csdl/trans/tp/preprint/07867860.pdf)中已经很清楚的指出，通过基本的classification loss的finetune的方式，能够较大幅度的提高检索的mAP。因此，在本篇博文中，小白菜针对检索，主要整理了下面四个方面的内容：
+作为迁移学习的一种，finetune能够将general的特征转变为special的特征，从而使得转移后的特征能够更好的适应目标任务，而图像检索最根本的问题，仍在于如何在目标任务上获得更好的特征表达(共性与可区分性)。一种很自然的方式便是在特定的检索任务上，我们对imageNet学得的general的特征通过finetune的方式，使得表达的特征能够更好的适应我们的检索任务。在[End-to-end Learning of Deep Visual Representations for Image Retrieval](https://arxiv.org/abs/1610.07940)和[
+Collaborative Index Embedding for Image Retrieval](https://www.computer.org/csdl/trans/tp/preprint/07867860.pdf)中已经很清楚的指出，通过基本的classification loss的finetune的方式，能够较大幅度的提高检索的mAP。因此，在本篇博文中，小白菜针对检索，主要整理了下面四个方面的内容：
 
 - CNN网络中哪一层最适合于做图像检索
 - 基于pre-trained模型做图像检索几种典型的特征表示方法
@@ -23,8 +24,8 @@ tags: CBIR
 
 小白菜选取fc6、fc6_relu6、fc7、fc7_relu7这四层语义层的特征，在[Oxford Building](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)上进行实验，评价指标采用mAP，mAP的计算采用Oxford Building提供的计算mAP代码[compute_ap.cpp](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/compute_ap.cpp)，下表是fc6、fc6_relu6、fc7、fc7_relu7对应的mAP。
 
-layer | mAP(128维) | mAP(4096维) | mAP(4096维, 未做PCA)
----|---|---|---|---|
+layer | mAP(128维) | mAP(4096维) | mAP(4096维, 未做PCA)|
+---:|:---:|:---:|:---:|
 fc7_relu7 | 44.72% | 1.11% | 41.08%
 fc7 | 45.03% | 19.67% | 41.18%
 fc6_relu6 | 43.62% | 23.0% | 43.34%
@@ -578,7 +579,7 @@ $CAFFE_ROOT/build/tools/caffe train -solver  solver.prototxt -weights http://www
 完成了在Neural Codes的landmark数据集上的fine-tuning后，我们使用经过了fine-tuning后的模型在Oxford Building数据集上mAP提升了多少。为了方便对比，我们仍然提取fc6的特征，下面是不做ft(fine-tuning)和做ft的结果对比：
 
 layer | mAP(128维) |
----|---|
+---:|:---:|
 fc6 | 45.9% |
 fc6+ft | 60.2% |
 
