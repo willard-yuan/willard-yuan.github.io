@@ -590,3 +590,14 @@ fc6+ft | 60.2% |
 如想复现本文实验，可以在这里[fc_retrieval](https://github.com/willard-yuan/cnn-cbir-benchmark/tree/master/fc_retrieval)找到相应的代码。
 
 
+## 总结
+
+在本篇博文中，小白菜就5个方面的问题展开了总结和整理，分别是：
+
+- CNN网络中哪一层最适合于做图像检索
+- 基于pre-trained模型做图像检索几种典型的特征表示方法
+- 抽取网络任意层的特征
+- 数据增强(Data Augmentation)
+- VGGNet16网络模型fine-tuning实践
+
+整个文章的基本组织结构依照典型的工科思维方式进行串接，即从理论到实践。
