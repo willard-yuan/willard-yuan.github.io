@@ -579,8 +579,14 @@ $CAFFE_ROOT/build/tools/caffe train -solver  solver.prototxt -weights http://www
 完成了在Neural Codes的landmark数据集上的fine-tuning后，我们使用经过了fine-tuning后的模型在Oxford Building数据集上mAP提升了多少。为了方便对比，我们仍然提取fc6的特征，下面是不做ft(fine-tuning)和做ft的结果对比：
 
 layer | mAP(128维) |
----:|:---:|
+:---:|:---:|
 fc6 | 45.9% |
 fc6+ft | 60.2% |
 
 可以看到，经过fine-tuning，mAP有了较大幅度的提升。从而也从实验的角度验证了对于检索任务，在数据允许的条件，对预训练模型进行fine-tuning显得非常的有必要。
+
+### 复现本文实验
+
+如想复现本文实验，可以在这里[fc_retrieval](https://github.com/willard-yuan/cnn-cbir-benchmark/tree/master/fc_retrieval)找到相应的代码。
+
+
