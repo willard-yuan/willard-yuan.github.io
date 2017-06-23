@@ -2,7 +2,7 @@
 layout: post
 title: 论文阅读：Self-Normalizing Neural Networks
 categories: [机器视觉]
-tags: Machine Learning
+tags: SNNs
 ---
 
 > 我有一壶酒，足以慰风尘。醉里经年少，乍醒华发生。
