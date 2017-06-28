@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 图像检索：基于内容的图像检索技术
-categories: [图像检索]
+categories: [Image Retrieval]
 tags: 图像检索
 ---
 
