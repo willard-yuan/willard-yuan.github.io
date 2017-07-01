@@ -80,4 +80,4 @@ for root, dirs, files in os.walk('101_ObjectCategories'):
 f.close
 ```
 
-在完成重命名后将图像搬移到上一级，并将该文件夹名称及其有多少幅图像保存在`101_ObjectCategories.txt`中。顺便吐槽一下,Windows下tree命令真烂。
+在完成重命名后将图像搬移到上一级，并将该文件夹名称及其有多少幅图像保存在`101_ObjectCategories.txt`中。顺便吐槽一下，Windows下tree命令真烂。

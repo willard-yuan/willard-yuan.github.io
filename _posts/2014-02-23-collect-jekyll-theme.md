@@ -5,7 +5,7 @@ categories: [Jekyll]
 tags: Jekyll
 ---
 
->从wordpress都现在的jekyll，博客采用的平台及其主题一直处于变更状态。一方面本小子喜爱折腾，另一方面，随着浏览的网页多了，本小子审美似乎也在不断的提升。从开始接触jekyll都现在正式敲定主题，本小子在寻找主题的过程了，找到了一些简约、大方、美观的jekyll主题，在这里做一下记录，收藏一下,某天或许要修改模板了，或许可以直接在这些模板的基础上改进。
+> 从wordpress都现在的jekyll，博客采用的平台及其主题一直处于变更状态。一方面本小子喜爱折腾，另一方面，随着浏览的网页多了，本小子审美似乎也在不断的提升。从开始接触jekyll都现在正式敲定主题，本小子在寻找主题的过程了，找到了一些简约、大方、美观的jekyll主题，在这里做一下记录，收藏一下,某天或许要修改模板了，或许可以直接在这些模板的基础上改进。
 
 ## 项目模板
 
@@ -18,7 +18,6 @@ tags: Jekyll
 
 1. mmistakes/made-mistakes，演示[主页](http://mademistakes.com/)，稍微改改应该可以直接作为公司用的模板。
 ![](http://ww2.sinaimg.cn/large/ad9597a3gw1edt69ng30oj213m0lraep.jpg)
-
 2. [libgit2](http://libgit2.github.com/)
 ![2014-04-15 08_50_20-libgit2]({{ site.url }}/images/posts/2014-04-15 08_50_20-libgit2.png)
 

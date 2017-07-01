@@ -13,6 +13,7 @@ tags: 机器学习
 
 回归正题，先记录一下sift的调试过程。sift能调试成功，很大程度上得益于本书作者的一篇博文[《Another Python Interface for SIFT》](http://www.janeriksolem.net/2011/06/another-python-interface-for-sift.html)。本小子用的是他的更新版本，也就是vlfeat版，老版本的实现在他的另一篇博文[《SIFT Python Implementation》](http://www.janeriksolem.net/2009/02/sift-python-implementation.html)中。两者差异主要体现在代码的前段部分。
 [sift.py](http://www.maths.lth.se/matematiklth/personal/solem/downloads/sift.py)前段部分如下：
+
 {% highlight python %}
 def process_image(imagename, resultname):
     """process an image and save the results in a .key ascii file"""
@@ -26,6 +27,7 @@ def process_image(imagename, resultname):
     os.system(cmmd)
     print 'processed', imagename
 {% endhighlight %}
+
 [vlfeat.py](http://www.maths.lth.se/matematiklth/personal/solem/downloads/vlfeat.py)的前段部分如下：
 
 ```python
@@ -44,6 +46,7 @@ def process_image(imagename,resultname,params="--edge-thresh 10
 	os.system(cmmd)
 	print 'processed', imagename, 'to', resultname
 ```
+
 两者调用的都是lowe大人的sift，都用到了`os.system()`调用外部可执行文件。此前在调试的时候，也知道要将sift所在的目录添加到环境变量中，可是添加完后在命令窗口输入`sift`弹出的是这样一个窗口(围脖床图肿么了，挂了？上传老半天都传不上去！)：
 
 ![2014-03-12-sift-install]({{ site.url }}/images/posts/2014-03-12-sift-install.png)
@@ -62,6 +65,7 @@ def process_image(imagename,resultname,params="--edge-thresh 10
 关于sift的说明就记录到这里吧。
 
 ## Pydot模块
+
 再说说在调试相连图像进行可视化时遇到的问题。本小子之前安装过Pydot模块，然后在程序中导入Pydot模块后运行代码，跑到一半蹦出来个`GraphViz's executables not found`的错误，崩溃。放狗一搜，原来要对相连图像进行可视化，要用到[GraphViz](http://www.graphviz.org/)。讲到这，不得不顺带提一下[AT&T](http://www.research.att.com/software_tools?fbid=WTw8egB6QOJ),牛x的实验室啊，GraphViz就是这个实验室开发出来的。下载完GraphViz后安装，添加进环境变量后运行，我靠，又蹦出来个错误`Couldn't import dot_parser, loading of dot files will be possible.`，崩溃。泪崩啊，继续放狗，发觉Pydot依赖于这两个包：[GraphViz](http://www.graphviz.org/)和[pyparsing](http://pyparsing.wikispaces.com/),可是从官网下载下来安装后，再安装Pydot模块`python setup.py install`还是提示上面那个错误。本小子不甘心就这么放弃，找啊找，在CSDN找到了这篇文章[《Python包的安装和使用》](http://blog.csnd.net.tjhd1989/article/details/8954062)。似乎Pydot对高版本的支持还有些问题，下载博文里的安装包，安装Pydot时会有提醒:
 
 ![2014-03-12-sift-install-poblem]({{ site.url }}/images/posts/2014-03-12-sift-install-poblem.png)

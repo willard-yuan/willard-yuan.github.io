@@ -11,11 +11,11 @@ tags: Linux
 Error: You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side application.
 ```
 
-根据给的错误谷歌了一下,发觉下面这个答案很好:
+根据给的错误谷歌了一下，发觉下面这个答案很好:
 
 ```text
 Looks like you are on Linux.
 
 Try installing libpq-dev for Debian/Ubuntu, or postgresql-devel for RHEL systems.
 ```
-按照找个安装后,再运行应用,可行.
+按照找个安装后，再运行应用，可行.

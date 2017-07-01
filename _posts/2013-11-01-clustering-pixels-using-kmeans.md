@@ -47,12 +47,13 @@ axis('off')
 imshow(codeim)
 show()
 ```
+
 上面两层for循环实现的就是窗口滑动时，窗口中三通道像素的平均值，并将求得的三个通道上的平均值作为feature，后面的过程就是K-Means Using Python中详解的内容，这里不再赘述。下面是像素聚类结果：
-![](http://ww2.sinaimg.cn/large/ad9597a3gw1ea5wwniwvgj20m80gjjtb.jpg)
+
+![](http://ose5hybez.bkt.clouddn.com/2013/1101/images_kmeans.jpg)
+
 再次需要强调的是利用像素聚类的方法只能对一些简单的图像进行分割，对于复杂点的图像，我们可以采用图割的方法，后面会对这方面进行一些分析。
 
-参考：
-
-[1] http://www.data-compression.com/vq.shtml
-
+参考：  
+[1] http://www.data-compression.com/vq.shtml  
 [2] http://blog.csdn.net/zouxy09/article/details/9153255

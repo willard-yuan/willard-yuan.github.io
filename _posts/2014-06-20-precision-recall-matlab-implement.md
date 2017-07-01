@@ -201,4 +201,3 @@ H是database中的编码，进行压缩以十进制数进行表示，同理H_que
 参考：
 
 [1]:[Code for Binary Reconstructive Hashing](http://www.cse.ohio-state.edu/~kulis/pubschron.htm)
-

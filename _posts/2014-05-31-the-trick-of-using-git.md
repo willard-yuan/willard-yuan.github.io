@@ -5,13 +5,13 @@ categories: [Git]
 tags: Git
 ---
 
-## 安装git
+### 安装git
 
 ```sh
 sudo apt-get install git
 ```
 
-## 检查SSH
+### 检查SSH
 
 GitHub用到了SSH，需要在shell里检查是否连接到GitHub:
 
@@ -19,9 +19,10 @@ GitHub用到了SSH，需要在shell里检查是否连接到GitHub:
 willard@willard-PC~/github/blog $ ssh -T git@github.com
 Hi willard-yuan! You've successfully authenticated, but GitHub does not provide shell access.
 ```
+
 上面表明添加成功。
 
-## 克隆rep
+### 克隆rep
 
 比较常见的将远程版本库中的代码clone到本地的方式如下：
 
@@ -29,7 +30,7 @@ Hi willard-yuan! You've successfully authenticated, but GitHub does not provide 
 git clone git@github.com:willard-yuan/blog.git
 ```
 
-## 其他常用Git命令
+### 其他常用Git命令
 
 ```sh
 git init # 初始化本地Git版本库
@@ -45,7 +46,7 @@ git checkout origin/master(gh-pages) #切换分支
 git push origin :branch_you_want_to_delete #删除远程分支（注意空格，把一个空的branch赋值给已有的branch，这样就删除了）
 ```
 
-## 示例
+### 示例
 
 ```sh
 willard@willard-PC~/github $ git clone git@github.com:willard-yuan/pcvwithpython.git
@@ -56,6 +57,7 @@ Receiving objects: 100% (1960/1960), 58.58 MiB | 2.10 MiB/s, done.
 Resolving deltas: 100% (671/671), done.
 Checking connectivity... done.
 ```
+
 克隆下来后，便可以对项目的文件进行修改添加，修改添加完成后，提交到远程版本控制库：
 
 ```sh
@@ -63,6 +65,7 @@ willard@willard-PC~/github/pcvwithpython $ git add .
 willard@willard-PC~/github/pcvwithpython $ git commit -m "update content in ch07"[gh-pages 221c8bc] update content in ch07
  1 file changed, 4 insertions(+)
 ```
+
 在push之前，我们先来查看一下当前项目远程连接的是哪个版本库地址：
 
 ```sh
@@ -70,11 +73,13 @@ willard@willard-PC~/github/pcvwithpython $ git remote -v
 origin	git@github.com:willard-yuan/pcvwithpython.git (fetch)
 origin	git@github.com:willard-yuan/pcvwithpython.git (push)
 ```
+
 然后push:
 
 ```sh
 git push
 ```
+
 注意，这里本小子并没有用`git push origin master`,用该命令，出现下面错误：
 
 ```sh
@@ -83,6 +88,7 @@ Warning: Permanently added the RSA host key for IP address '2001:778:0:ffff:64:0
 error: src refspec master does not match any.
 error: failed to push some refs to 'git@github.com:willard-yuan/pcvwithpython.git
 ```
+
 暂时就这样吧。
 
 Reference:

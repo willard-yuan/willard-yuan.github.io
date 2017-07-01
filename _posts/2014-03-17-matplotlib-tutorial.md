@@ -5,7 +5,7 @@ categories: [Python]
 tags: Python
 ---
 
->本小子最近这几天在做一个关于Python科学计算方面的讲稿，做完Python简介部分后，核心的关于科学计算部分烦难了。编程语言这东西，讲起来着实不是一件好差事。想当年本小子大一上C课程的时候，叫我们C的老师绝对是催眠的好手，一堂课还没上到半个小时，下面听趴一片，那时绝对的NB。所以，本小子想通过一些具体的实例，结合实验室研究方向做一些Python方面的介绍与演示。Python科学计算这部分，其实自己了解得不多，而且国内关于这方面的中文资料更是少之又少。今天在查Matplotlib模块时，发觉了一个不错的译文资料。这么好的译文资料，竟然雪藏了。那个Python八荣八耻最后一条怎么说来着，“以总结分享为荣”，本小子偷偷地把它扒过来了，又犯罪了，囧。不过，本小子还是需要再一次的郑重申明，本译文来自[\[Reverland的知行阁\]](http://reverland.org/python/2012/09/07/matplotlib-tutorial/#ipython--pylab)
+> 本小子最近这几天在做一个关于Python科学计算方面的讲稿，做完Python简介部分后，核心的关于科学计算部分烦难了。编程语言这东西，讲起来着实不是一件好差事。想当年本小子大一上C课程的时候，叫我们C的老师绝对是催眠的好手，一堂课还没上到半个小时，下面听趴一片，那时绝对的NB。所以，本小子想通过一些具体的实例，结合实验室研究方向做一些Python方面的介绍与演示。Python科学计算这部分，其实自己了解得不多，而且国内关于这方面的中文资料更是少之又少。今天在查Matplotlib模块时，发觉了一个不错的译文资料。这么好的译文资料，竟然雪藏了。那个Python八荣八耻最后一条怎么说来着，“以总结分享为荣”，本小子偷偷地把它扒过来了，又犯罪了，囧。不过，本小子还是需要再一次的郑重申明，本译文来自[\[Reverland的知行阁\]](http://reverland.org/python/2012/09/07/matplotlib-tutorial/#ipython--pylab)
 
 翻译自:[Matplotlib tutorial](http://www.loria.fr/~rougier/teaching/matplotlib/)Nicolas P. Rougier - Euroscipy 2012
 
@@ -60,6 +60,7 @@ object?   -> Details about 'object', use 'object??' for extra details.
 Welcome to pylab, a matplotlib-based Python environment [backend: Qt4Agg].
 For more information, type 'help(pylab)'.
 ```
+
 或者你可以下载每个示例然后使用普通的的python运行它：
 
 ```bash
@@ -84,6 +85,7 @@ plot(X,S)
 
 show()
 ```
+
 ### 示例默认
 
 [![using defaults](http://www.loria.fr/~rougier/teaching/matplotlib/figures/exercice_2.png)](http://www.loria.fr/~rougier/teaching/matplotlib/scripts/exercice_2.py)
@@ -127,6 +129,7 @@ yticks(np.linspace(-1,1,5,endpoint=True))
 # Show result on screen
 show()
 ```
+
 ### 更改色彩和线宽
 
 [![using defaults](http://www.loria.fr/~rougier/teaching/matplotlib/figures/exercice_3.png)](http://www.loria.fr/~rougier/teaching/matplotlib/scripts/exercice_3.py)
@@ -138,6 +141,7 @@ figure(figsize=(10,6), dpi=80)
 plot(X, C, color="blue", linewidth=2.5, linestyle="-")
 plot(X, S, color="red",  linewidth=2.5, linestyle="-")
 ```
+
 ### 设置边界
 
 [![using defaults](http://www.loria.fr/~rougier/teaching/matplotlib/figures/exercice_4.png)](http://www.loria.fr/~rougier/teaching/matplotlib/scripts/exercice_4.py)
@@ -331,6 +335,7 @@ plot (X, Y+1, color='blue', alpha=1.00)
 plot (X, Y-1, color='blue', alpha=1.00)
 show()
 ```
+
 提示：你需要使用[fill_between](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between)命令。
 
 点击图片获取答案。
@@ -351,6 +356,7 @@ Y = np.random.normal(0,1,n)
 scatter(X,Y)
 show()
 ```
+
 提示：色彩由(X,Y)角度给出。
 
 点击图像获取答案。
@@ -402,6 +408,7 @@ contourf(X, Y, f(X,Y), 8, alpha=.75, cmap='jet')
 C = contour(X, Y, f(X,Y), 8, colors='black', linewidth=.5)
 show()
 ```
+
 提示：你需要使用[clabel](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.clabel)命令。
 
 点击图像获取答案。
@@ -423,6 +430,7 @@ y = np.linspace(-3,3,3*n)
 X,Y = np.meshgrid(x,y)
 imshow(f(X,Y)), show()
 ```
+
 提示:你需要注意imshow命令中图像的_来源_，并且使用色[彩条](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.colorbar)(colorbar)。
 
 点击图像获取答案。
@@ -478,6 +486,7 @@ axes.set_yticklabels([])
 
 show()
 ```
+
 点击图像获取答案。
 
 ### 多图绘制
@@ -495,6 +504,7 @@ subplot(2,2,4)
 
 show()
 ```
+
 提示：你可以对不同部分使用几个subplot命令。
 
 点击图像获取答案。
@@ -522,6 +532,7 @@ for r,bar in zip(radii, bars):
 
 show()
 ```
+
 提示：你仅仅需要修改_axes_这行。
 
 点击图像获取答案。
@@ -548,6 +559,7 @@ ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='hot')
 
 show()
 ```
+
 提示：你需要使用[contourf](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.contourf)命令。
 
 点击图像获取答案。

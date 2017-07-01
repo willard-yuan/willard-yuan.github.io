@@ -5,8 +5,7 @@ categories: [Image Retrieval]
 tags: 哈希
 ---
 
-
->CVPR 2011《Iterative Quantization: A Procrustean Approach to Learning Binary Codes》论文阅读笔记。看过的文章，不做记录，即便当时理解透了，过一段时间后，知识总会模糊不清。所以从现在开始，对一些自己阅读过的一些精彩的文章，悉心记录，方便自己查阅温故，当然如果对同行有所裨益的话，亦是一件开心的事。
+> CVPR 2011《Iterative Quantization: A Procrustean Approach to Learning Binary Codes》论文阅读笔记。看过的文章，不做记录，即便当时理解透了，过一段时间后，知识总会模糊不清。所以从现在开始，对一些自己阅读过的一些精彩的文章，悉心记录，方便自己查阅温故，当然如果对同行有所裨益的话，亦是一件开心的事。
 好了，回归正题。这篇文章发表在2011年CVRP上，一作是Yunchao Gong，师从Sanjiv Kumar，关于Sanjiv Kumar可以到她的HomePage上了解。
 
 这篇文章的主要思路是先对原始空间的数据集`\( X \in R^{n\times d} \)`用PCA进行降维处理，设经过PCA降维后的数据集为`\( V \in R^{n\times c} \)`，该问题就可以转化为将该数据集中的数据点映射到一个二进制超立方体的顶点上，使得对应的量化误差最小，从而而已得到对应该数据集优良的二进制编码。
@@ -24,7 +23,6 @@ tags: 哈希
 论文给出了检索飞机的一个实例效果：
 
 ![ITQ_airplane]({{ site.url }}/images/posts/ITQ_airplane.png)
-
 
 Matlab源代码：Yunchao Gong Homepage上公开了源码，不过并提供数据库，直接运行不了，我已经对源码进行了modify，有需要的可以看LSH、ITQ、SKLSH图像检索实验实现(Code)这篇文章，在这篇文章中提供了modified后的代码，也可以直接到我的GitHub主页上下载modified后的代码。
 

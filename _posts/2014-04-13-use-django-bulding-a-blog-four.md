@@ -12,6 +12,7 @@ virtualenv用来建立一个虚拟的python环境，一个专属于项目的pyth
 ```sh
 python setup.py install
 ```
+
 virtualenv安装后，将其添加到环境变量中，即将`;C:\Python27\Scripts`添加到PATH里。打开命令窗，进入要创建项目所在的目录，运行下面命令：
 
 ```
@@ -22,6 +23,7 @@ active
 pip install django==1.6.5
 pip install ipython
 ```
+
 ipython是一个比python自带的shell要更强大的交互工具，这里安装它主要方便与于django进行交互。进入weblog,可以查看到有些目录：
 
 ```sh
@@ -36,6 +38,7 @@ dir
                0 个文件              0 字节
                6 个目录 30,818,910,208 可用字节
 ```
+
 接着运行下面命令创建project及app：
 
 ```sh
@@ -43,12 +46,14 @@ python C:\Python27\Scripts\django-admin.py startproject djblog
 cd djblog
 python C:\Python27\Scripts\django-admin.py startapp blog
 ```
+
 进入djblog，打开setting.py，添加下面代码：
 
 ```python
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ```
+
 继续修改，找到DATABASES，将其修改为下面的样子：
 
 ```python

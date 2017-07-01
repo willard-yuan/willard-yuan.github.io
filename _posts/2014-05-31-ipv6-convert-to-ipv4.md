@@ -22,7 +22,8 @@ tags: IPV4
 这里，之所以要禁用Ipv4，本小子的理解是，通过使用Ipv4，使在访问Ipv4地址时，强制进行转换，如果你不禁用Ipv4的话，则打开浏览网址会自动跳转到账号登陆页面，从而无法实现Ipv6转Ipv4。
 
 上面讲的是技术实现，Windows下设置与上面的类似。下面再来了解一下转换的原理。
->当IPv6 Only User发起连接访问普通IPv6网站，流量将会匹配IPv6默认路由而直接转发至IPv6 Router处理。而访问的是IPv4单协议栈的服务器时，将经DNS64 Server进行前缀合成，Pref64::/n网段的流量将被路由转发至NAT64 Router上，从而实现IPv6与IPv4地址和协议的转换，访问IPv4 网络中的资源。
+
+> 当IPv6 Only User发起连接访问普通IPv6网站，流量将会匹配IPv6默认路由而直接转发至IPv6 Router处理。而访问的是IPv4单协议栈的服务器时，将经DNS64 Server进行前缀合成，Pref64::/n网段的流量将被路由转发至NAT64 Router上，从而实现IPv6与IPv4地址和协议的转换，访问IPv4 网络中的资源。
 
 上面大概说明了通过NAT64和DNS64进行转换的原理。具体可以参阅[NAT64与DNS64基本原理概述](http://www.ipv6bbs.cn/thread-170-1-1.html)，如果想要了解更多的话，可以google NAT64与DNS64。
 

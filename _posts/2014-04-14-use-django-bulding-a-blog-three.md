@@ -20,6 +20,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 ```
+
 完成上面后，你还需要创建三个模板。第一个是base.html，它是其它模板要继承的模板。创建templates/base.html并且输入下面的代码在里面：
 
 ```html
@@ -39,6 +40,7 @@ TEMPLATE_DIRS = (
 </html>
 {% endraw %}
 ```
+
 在templates下创建名为blog的文件夹，进入templates/blog/,创建首页index.html,并输入下面代码：
 
 ```html
@@ -68,6 +70,7 @@ TEMPLATE_DIRS = (
 {% endblock %}
 {% endraw %}
 ```
+
 出了在templates/blog创建index.html外，还需要创建post.html,在post.html中填充如下代码：
 
 ```html
@@ -95,6 +98,7 @@ TEMPLATE_DIRS = (
 {% endblock %}
 {% endraw %}
 ```
+
 上面有一些不是html元素：
 
 - {% raw %}{% tag %}{% endraw %} 是一个模板标签
@@ -140,6 +144,7 @@ div.content {
     margin:28px auto;
 }
 ```
+
 在base.html的<head>标签间，添加下面代码：
 
 ```html
@@ -147,6 +152,7 @@ div.content {
 <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}style.css">
 {% endraw %}
 ```
+
 像配置templates位置一样，需要做一些配置让django知道你的static文件在哪，并且用什么URL来引用它们。打开settings.py,修改STATIC_URL为：
 
 ```python
@@ -162,6 +168,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 ```
+
 注意：和模板目录一样这里是本小子的static的绝对目录，使用时要改成自己本机存放static文件的绝对路径。刷新浏览器：
 ![2014-04-13 22_07_16-Blog Archive]({{ site.url }}/public/images/posts/2014-04-13 22_07_16-Blog Archive.png)
 
@@ -175,8 +182,6 @@ STATICFILES_DIRS = (
 - 为app写urlpatterns view函数模板，配置关于templates相关的
 - 配置css相关，提高网站的阅读性
 
-Reference:
-
-[1]. [Get started with Django](http://www.creativebloq.com/netmag/get-started-django-7132932)
-
+Reference:  
+[1]. [Get started with Django](http://www.creativebloq.com/netmag/get-started-django-7132932)  
 [2]. [用django搭建一个简易blog系统](http://www.cnblogs.com/Happy-Tuesday/p/3353548.html)

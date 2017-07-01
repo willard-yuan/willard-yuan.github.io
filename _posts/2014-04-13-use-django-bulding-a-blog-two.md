@@ -6,6 +6,7 @@ tags: Django
 ---
 
 ## admin连结并激活
+
 Django本身就带有一个应用叫Admin,它是一个很好用的工具，下面我们将其激活，并再次对数据库和model进行同步，将admin和blog app连结起来。
 
 回到appblog目录下，打开settings.py,把INSTALLED_APPS元组改为下面形式：
@@ -25,6 +26,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 ```
+
 重新启动Django服务器，刷新浏览器，看看是否出错，经常检查是否有错误产生是一个很好的习惯。接来下，打开urls.py文件，同样修改成下面形式：
 
 ```python
@@ -48,12 +50,14 @@ urlpatterns = patterns('',
 )
 
 ```
+
 再测试一次，检查命令行终端和浏览器，看有没有错误产生。如果没有错误产生，再同步一次数据库。现在可以再运行一次syncdb命令，你会发现这个命令创建了新的表。
 
 ```sh
 python manage.py syncdb
 python manage.py runserver
 ```
+
 切换到浏览器，在地址栏输入[127.0.0.1:8000/admin](http://127.0.0.1:8000/admin/),会得到类似下面页面：
 ![2014-04-13 21_16_07-Log in _ Django site admin]({{ site.url }}/public/images/posts/2014-04-13 21_16_07-Log in _ Django site admin.png)
 
@@ -68,6 +72,7 @@ from blog.models import Post
 
 admin.site.register(Post)
 ```
+
 这是添加应用到admin最简单的方法。重启服务器刷新一下admin的页面，你将会看到像下面的页面:
 ![](http://images.cnitblog.com/blog/502877/201310/05215111-f96e5b35e26b47fcafb8801ab71c4132.jpg)
 现在blog应用已经在你admin中了，可以创建一个blog post。为了添加blog应用到admin,刚才做的是最基本的，为了让admin对用户更加友好点，添加一个用户自定义的类PostAdmin。修改admin.py为：
@@ -86,7 +91,9 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post,PostAdmin)
 ```
+
 回到浏览器，刷新页面,将会看到你的blog应用会好多了。
+
 ![](http://images.cnitblog.com/blog/502877/201310/05225357-dfa617e43eab4e91b9d754e108a37c8b.jpg)
 
 ## 为blog app写URLS, views and templates
@@ -99,6 +106,7 @@ admin.site.register(Post,PostAdmin)
 下面对上面的三步分别进行。
 
 ## 写urlpatterns
+
 打开appblog/urls.py,修改如下：
 
 ```python
@@ -123,8 +131,11 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 )
 ```
+
 `^(?P<slug>[\w\-]+)/$`为正则表达式。注意`^admin/`在正则表达式`^(?P<slug>[\w\-]+)/$`前，这是因为在正则表达式的世界里，后者同样匹配前者匹配的。重新启动Django服务器，刷新浏览器，你可以看到下面的结果：
+
 ![2014-04-13 21_35_53-ViewDoesNotExist]({{ site.url }}/public/images/posts/2014-04-13 21_35_53-ViewDoesNotExist.png)
+
 收到这个错误提示，是因为映射到的view函数不存在，现在完善这一点。
 
 ## 写视图函数
@@ -143,6 +154,9 @@ def post(request, slug):
     post = get_object_or_404(Post,slug=slug)
     return render(request,'blog/post.html',{'post': post})
 ```
+
 刷新页面，仍然会有一个错误，这次提示TemplateDoesNotExist错误
+
 ![2014-04-13 21_39_57-TemplateDoesNotExist]({{ site.url }}/public/images/posts/2014-04-13 21_39_57-TemplateDoesNotExist.png)
+
 在下一节我们做三件事来去掉TemplateDoesNotExist错误,详见后面分解。

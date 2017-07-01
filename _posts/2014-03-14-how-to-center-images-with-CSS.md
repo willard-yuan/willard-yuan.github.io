@@ -37,4 +37,5 @@ img{
     margin-right: auto;
 	}
 ```
+
 上面`/*set the images aligned*/`后面部分即是添加图片居中显示的代码。简单的三句话，完美解决图片排版的问题。

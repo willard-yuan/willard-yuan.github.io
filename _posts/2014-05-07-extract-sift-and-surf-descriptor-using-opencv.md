@@ -6,6 +6,7 @@ tags: OpenCV, SIFT
 ---
 
 ## SIFT描述子
+
 今天群里有童鞋问说在导入OpenCV模块提取Sif描述子出错，本小子便在shell里弄了个简单的Sift特征提取演示小程序，很简单。发觉用OpenCV里Sift模块提取Sift描述子要比在[图像局部描述符](http://yuanyong.org/pcvwithpython/chapter2.html)中用VLfeat容易多了。
 
 自备楼梯：Rachel-Zhang一文[SIFT特征提取分析](http://blog.csdn.net/abcjennifer/article/details/7639681)
@@ -42,8 +43,10 @@ imshow(im)
 
 show()
 ```
+
 上面验证了kp和des的大小，正如OpenCV [Introduction to SIFT](http://docs.opencv.org/trunk/doc/py_tutorials/py_feature2d/py_sift_intro/py_sift_intro.html)所说的：
->Here kp will be a list of keypoints and des is a numpy array of shape Number_of_keypoints*128.
+
+> Here kp will be a list of keypoints and des is a numpy array of shape Number_of_keypoints*128.
 
 运行上面代码，对Sift描述子进行可视化
 ![]({{ site.url }}/public/images/posts/opencv-sift.png)
@@ -92,8 +95,8 @@ from cv2 import __version__
 __version__
 ```
 
-Reference:</br>
-[1]. [Introduction to SIFT (Scale-Invariant Feature Transform)](http://docs.opencv.org/trunk/doc/py_tutorials/py_feature2d/py_sift_intro/py_sift_intro.html)
+Reference:  
+[1]. [Introduction to SIFT (Scale-Invariant Feature Transform)](http://docs.opencv.org/trunk/doc/py_tutorials/py_feature2d/py_sift_intro/py_sift_intro.html)  
 [2]. [Introduction to SURF](http://docs.opencv.org/trunk/doc/py_tutorials/py_feature2d/py_surf_intro/py_surf_intro.html)
 
 

@@ -9,13 +9,11 @@ tags: Python
 
 stackoverflow上已有人回答了关于这方面的问题：
 
->The module is called sqlite3. pysqlite2 was the module's name before it became part of the Python standard library.
-
->You probably want to use this in your code:</br>
-	import sqlite3</br>
-And the standard documentation is here: http://docs.python.org/library/sqlite3.html
-
->edit: And just to cover all the bases:</br>
+> The module is called sqlite3. pysqlite2 was the module's name before it became part of the Python standard library.  
+You probably want to use this in your code:  
+import sqlite3  
+And the standard documentation is here: http://docs.python.org/library/sqlite3.html  
+edit: And just to cover all the bases:  
 The sqlite3 module also has a dbapi2 sub-member, but you don't need to use it directly. The sqlite3 module exposes all the dbapi2 members directly.
 
 上面给出的答案就是说，Pysqlite2是它在未成为Python标准库前的名字，成为Python标准库后名字就改成了sqlite3了，Pysqlite了，直接“import sqlite3”就可以了。另外Sqlite3包含dbapi2的子成员，所以就不必：

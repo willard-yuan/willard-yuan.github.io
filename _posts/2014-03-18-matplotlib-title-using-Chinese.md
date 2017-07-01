@@ -15,6 +15,7 @@ tags: Python
 from matplotlib.font_manager import FontProperties
 font = FontProperties(fname=r"c:\windows\fonts\SimSun.ttc", size=14)
 ```
+
 上面从`matplotlib.font_manager`字体管理模块代入`FontProperties`,然后设置字体属性，`FontProperties()`设置的是Windows系统自带的宋体。关于Windows字体列表，可以查阅WIKI [Windows字体列表](http://zh.wikipedia.org/wiki/Microsoft_Windows%E5%AD%97%E9%AB%94%E5%88%97%E8%A1%A8)，`size`设置的是字体的大小。对于上面Matplotlib绘图中文显示，举个今晚调试好了的例子，本例也可以参见[《Python计算机视觉编程》](http://yuanyong.org/pcvwithpython/)的第一章[图像处理基础](http://yuanyong.org/pcvwithpython/chapter1.html):
 
 ```python
@@ -42,12 +43,12 @@ imshow(pil_im)
 
 show()
 ```
+
 上面代码`title()`中，字体属性`fontproperties=font`,即开头已经设置好了的字体属性，需要注意的是中文标识前有个字母**u**,这个不能少，否则会出错。秀一下上面代码运行的结果：
 
 ![2014-03-18-ch01_P002-003_PIL]({{ site.url }}/public/images/posts/2014-03-18-ch01_P002-003_PIL.png)
 
 时间不早了，睡觉。
 
-Reference：
-
+Reference：  
 [1]. [python中matplotlib绘图中文显示问题](http://blog.chinaunix.net/uid-26611383-id-3521248.html)

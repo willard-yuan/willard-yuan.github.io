@@ -52,8 +52,3 @@ tags: 图像检索
 ![hashing-database-for-CBIR]({{ site.url }}/images/posts/hashing-database-for-CBIR.png)
 
 （上表有Foolishwolf整理，[Hashing函数paper所用的数据集统计](http://blog.csdn.net/foolishwolf_x/article/details/38678969)）
-
-
-
-
-

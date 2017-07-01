@@ -5,36 +5,34 @@ categories: [Linux]
 tags: Linux
 ---
 
-## `ps aux`和`ps -ef`的区别
+### `ps aux`和`ps -ef`的区别
 Linux下显示系统进程的命令ps，最常用的有`ps -ef`和`ps aux`(注意不是`ps aux`)，那么这两者到底有什么区别呢？
 
->没太大差别，讨论这个问题，要追溯到Unix系统中的两种风格，System Ｖ风格和BSD 风格，ps aux最初用到Unix Style中，而ps -ef被用在System V Style中，两者输出略有不同。现在的大部分Linux系统都是可以同时使用这两种方式的。
+> 没太大差别，讨论这个问题，要追溯到Unix系统中的两种风格，System Ｖ风格和BSD 风格，ps aux最初用到Unix Style中，而ps -ef被用在System V Style中，两者输出略有不同。现在的大部分Linux系统都是可以同时使用这两种方式的。
 
 资料链接：[Linux下显示进程ps aux和ps -ef的区别](http://www.ipcpu.com/2009/09/linux-ps-aux-ef/)
 
-## 执行`sudo /etc/init.d/* start`方式和`services * start`的区别
+### 执行`sudo /etc/init.d/* start`方式和`services * start`的区别
 `services * start`可以开启服务，比如当前要开启[apache2](http://baike.baidu.com/view/1944398.htm?fr=aladdin)服务器，可以使用`services apache2 start`开启web服务。对于`sudo /etc/init.d/* start`，在查只资料前，错误的以为该命令是用来设置开机启动服务了。
 
->service 描述中讲到
->
->DESCRIPTION
+> service 描述中讲到  
+DESCRIPTION  
+service  runs a System V init script in as predictable environment as possible, removing most environment
+variables and with current working directory set to /.  
+The SCRIPT parameter specifies a System V init script, located in /etc/init.d/SCRIPT.  
 
->service  runs a System V init script in as predictable environment as possible, removing most environment
-variables and with current working directory set to /.
-
->The SCRIPT parameter specifies a System V init script, located in /etc/init.d/SCRIPT.
->
->即service 命令就是调用/etc/init.d/下边的脚本来启动服务，等于直接使用/etc/init.d/* start.
+> 即service 命令就是调用/etc/init.d/下边的脚本来启动服务，等于直接使用/etc/init.d/* start.
 
 资料链接：[请问执行/etc/init.d/* start方式和services * start 有什么区别](http://bbs.chinaunix.net/thread-4114952-1-1.html)
 
 另外，自己又进一步的查看了init.d/和rc.d/的区别，原来rc.d/这个目录的放的应该就是开机就默认开启的服务。
 
->总结的说，/etc/init.d这个目录是所有服务的脚本，可以通过执行脚本并且加上参数，开启关闭或者重启对应的服务，rc.d/这个目录的放的应该就是开机就默认开启的服务，并且根据系统不同的运行及划分了不同的rc0.d/这样的目录，ubuntu下面的rc0.d/这样的目录都是直接放在/etc/下面的。
+> 总结的说，/etc/init.d这个目录是所有服务的脚本，可以通过执行脚本并且加上参数，开启关闭或者重启对应的服务，rc.d/这个目录的放的应该就是开机就默认开启的服务，并且根据系统不同的运行及划分了不同的rc0.d/这样的目录，ubuntu下面的rc0.d/这样的目录都是直接放在/etc/下面的。
 
 资料链接：[/etc/init.d和/etc/rc.d/init.d的关系](http://luochunfeng163.blog.163.com/blog/static/167009249201256112652880/)
 
-## `lsof -i：port`与`netstat -an|grep:port`的区别
+### `lsof -i：port`与`netstat -an|grep:port`的区别
+
 这两条命令是没有什么区别的，都是用来查看本机上哪个port打开了。下面是一个简单的验证过程，首先开启apache2 web服务，web服务在通信是用的是80端口，所以如果开启了apache2，则用`lsof -i：80`或`netstat -an|grep:：80`可以查看到相关信息，关闭apache2服务后，再去查看时应该是什么信息也没有，也就是80端口没开启。
 
 ```bash

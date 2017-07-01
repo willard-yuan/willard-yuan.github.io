@@ -7,7 +7,7 @@ tags: 哈希
 
 下面的这份哈希算法小结来源于本周的周报，原本并没有打算要贴出来的，不过，考虑到这些资源属于关注利用哈希算法进行大规模图像搜索的各位看官应该很有用，所以好东西本小子就不私藏了。本资源汇总最主要的收录原则是原作者主页上是否提供了源代码，为了每种方法的资料尽可能完整，本小子会尽可能的除提供源码下载地址外，还会给出PDF文章的链接、项目主页，slide等。
 
->对哈希方法重新进行调研，右图是找到的提供有部分源码的哈希方法，这其中包含了比较经典的哈希方法，比如e2lsh、mih，同时也包含有最近几年一直到13年提出来的一些比较新的哈希算法，比如13年提出的有bpbc、opq、ksh。
+> 对哈希方法重新进行调研，右图是找到的提供有部分源码的哈希方法，这其中包含了比较经典的哈希方法，比如e2lsh、mih，同时也包含有最近几年一直到13年提出来的一些比较新的哈希算法，比如13年提出的有bpbc、opq、ksh。
 
 上面这一段是摘自本小子的周报(本小子这周除改了篇文章，其余时间几乎都在打酱油，谁叫老板不给发工资(要逆天？)，引用中的“右图”可以略过，直接看下面不同哈希算法的链接信息。
 
@@ -45,6 +45,7 @@ tags: 哈希
 另外推荐两个整理的：[Learning to Hash](http://cs.nju.edu.cn/lwj/L2H.html), [Introduction to Hashing](http://stoudemireyan32.wix.com/yanli#!introduction-to-hashing/c1z2j).
 
 ## 常用数据库
+
 1. [**LabelMe**](http://www.cs.toronto.edu/~norouzi/research/mlh/data/LabelMe_gist.mat)
 2. [**min-loss-hashing**](https://github.com/willard-yuan/min-loss-hashing/tree/master/matlab)
 3. [图像检索：常用图像库整理](http://yongyuan.name/blog/database-for-cbir.html)
@@ -58,30 +59,30 @@ tags: 哈希
 - [**Norouzi**](http://www.cs.toronto.edu/~norouzi/)
 
 >Hamming Distance Metric Learning  
->Fast Search in Hamming Space with Multi-Index Hashing  
->Minimal Loss Hashing for Compact Binary Codes, [code](http://www.cs.toronto.edu/~norouzi/research/mlh/)
+Fast Search in Hamming Space with Multi-Index Hashing   
+Minimal Loss Hashing for Compact Binary Codes, [code](http://www.cs.toronto.edu/~norouzi/research/mlh/)
 
 - [**Fergus**](http://cs.nyu.edu/~fergus/pmwiki/pmwiki.php?n=PmWiki.Publications)
 
 >Spectral Hashing  
->Multidimensional Spectral Hashing
+Multidimensional Spectral Hashing
 
 - [**Chhshen & Guosheng Lin**](http://cs.adelaide.edu.au/~chhshen/notes.html)
 
 >A general two-step approach to learning-based hashing (CVPR 2013), [code](https://bitbucket.org/guosheng/two-step-hashing), [阅读笔记](http://www.dreamingo.com:9999/blog/General%20Two%20Step%20Approach%20to%20Learning%20Ba)  
->Learning hash functions using column generation (ICML 2013), [code](https://bitbucket.org/guosheng/column-generation-hashing)  
->Fast Supervised Hashing with Decision Trees (CVPR 2014), [Paper](http://arxiv.org/pdf/1404.1561v1.pdf) and [code](https://bitbucket.org/chhshen/fasthash/)
+Learning hash functions using column generation (ICML 2013), [code](https://bitbucket.org/guosheng/column-generation-hashing)  
+Fast Supervised Hashing with Decision Trees (CVPR 2014), [Paper](http://arxiv.org/pdf/1404.1561v1.pdf) and [code](https://bitbucket.org/chhshen/fasthash/)
 
 - [**Yunchao**](http://www.unc.edu/~yunchao/)
 
->Iterative Quantization (CVPR 2011), [**Project page**](http://www.unc.edu/~yunchao/itq.htm)  
->Angular Quantization-based Binary Codes for Fast Similarity Search (NIPS 2012), [**Project page**](http://www.unc.edu/~yunchao/aqbc.htm)  
->Learning Binary Codes for High-Dimensional Data Using Bilinear Projections (CVPR 2013), [**Project page**](http://www.unc.edu/~yunchao/bpbc.htm)
+>Iterative Quantization (CVPR 2011), [**Project page**](http://www.unc.edu/~yunchao/itq.htm)    
+Angular Quantization-based Binary Codes for Fast Similarity Search (NIPS 2012), [**Project page**](http://www.unc.edu/~yunchao/aqbc.htm)    
+Learning Binary Codes for High-Dimensional Data Using Bilinear Projections (CVPR 2013), [**Project page**](http://www.unc.edu/~yunchao/bpbc.htm)
 
 - [**kahe**](http://research.microsoft.com/en-us/um/people/kahe/)
 
 >K-means Hashing (CVPR 2013), [**code**](http://research.microsoft.com/en-us/um/people/kahe/cvpr13/matlab_KMH_release_v1.1.rar)  
->Optimized Product Quantization (CVPR 2013), [**Project page**](http://research.microsoft.com/en-us/um/people/kahe/cvpr13/index.html)
+Optimized Product Quantization (CVPR 2013), [**Project page**](http://research.microsoft.com/en-us/um/people/kahe/cvpr13/index.html)
 
 - [**Jun Wang**](http://www.ee.columbia.edu/~jwang/)
 
