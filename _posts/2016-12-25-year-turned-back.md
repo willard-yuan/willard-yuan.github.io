@@ -38,33 +38,33 @@ tags: Life
 
 毕业之前的生活，两点一线：实验室、寝室。周末的时候，会不定期的和小崔在寝室里煮个海带排骨汤，亦或是凑到一起看个电影，生活非常的简单。毕业之后，在美团工作的5个月里，小白菜和小坤坤小灰灰住在顺义区石门那边，住的小窝，由于朝北面，夏天看着还挺明亮的，但是冬天光线暗，就不是这个样子了......
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/WechatIMG1_zps1ct6alko.jpg)
+![](http://ose5hybez.bkt.clouddn.com/2016/1225/WechatIMG1_zps1ct6alko.JPG)
 
 住的地方离公司很远，上班比较折腾，单程差不多需要80分钟。朝十晚八点多，晚上回到住处时差不多10点20左右了，再洗个漱啥的，在周内空余时间真正能够用来学习或者写代码的时间非常少。周末生活相比读书要丰富些，因为小白菜和小坤坤小灰灰是三人一块开火的，所以会做各种好吃的，比如西红柿鸡蛋汤和土豆丝：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/WechatIMG3_zpsdguyhcv5.jpg)
+![](http://ose5hybez.bkt.clouddn.com/2016/1225/WechatIMG3_zpsdguyhcv5.JPG)
 
 比如小坤坤做的糖醋鸡腿(样子挺难看的，味道其实也...)：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/WechatIMG4_zpseunll9ab.jpg)
+![](http://ose5hybez.bkt.clouddn.com/2016/1225/WechatIMG4_zpseunll9ab.JPG)
 
 偶尔小白菜还会来个排骨海带胡萝卜金针菇黄瓜大杂脍：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/WechatIMG8_zpsztmxryh3.jpg)
+![](http://ose5hybez.bkt.clouddn.com/2016/1225/WechatIMG8_zpsztmxryh3.JPG)
 
 工作后，小白菜似乎更加会刻意地去做一些让生活看起来不错的事，比如养绿萝，小白菜希望养的绿萝能爬满整个屋子：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/WechatIMG2_zpswys1vhnl.jpg)
+![](http://ose5hybez.bkt.clouddn.com/2016/1225/WechatIMG2_zpswys1vhnl.JPG)
 
 三个人住一起有三个人住一起的热闹，不过一个人住也有一个人住的方便。历时5个月，小白菜又回到了孤身一人的生活状态，但在小白菜以为，孤身是孤独，但不寂寞。虽然之前三个人在一起的时候，可以一起去看电影一起嗨，但是一个人生活，可以有一个人生活的方式，骑单车瞎跑、逛[GitHub](https://github.com/willard-yuan)刷知乎，写博文码代码，听曲看书，做一个安静(风)一样的男子。
 
 再说游玩，2016年小白菜游走的地方非常少，实际上，不说2016年，就是把小白菜二十多年来远走过的地方，都可以用十个指头数下来。毕业之前在西安学习和生活了七年，愣是连华山都没有去爬过，成为日后朋友调侃的笑料(囧)。临近毕业(终于)可以滚蛋的时候，跟小崔、建华、小江、茂茂、阿杜连上小白菜自己六人一道去了汤峪，上午到了那里后，逛了一圈，发觉......真的没什么景点，跟历史相关的只有光武帝在此避难时和阴丽华的爱情往事。但是想到毕竟出来游玩一次不容易，然后小白菜拍了......一棵树，没错，就是一棵树，在此角度下，此树成为一道非常别致的风景：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/WechatIMG11_zpsnxcjphzh.jpg)
+![](http://ose5hybez.bkt.clouddn.com/2016/1225/WechatIMG11_zpsnxcjphzh.JPG)
 
 当然，小白菜爬山(真不是峰)的时候，不喜欢拍照的他依然没有忘记刷存在感的自我使命，给自己摆了个pose：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/WechatIMG10_zps78lk7btx.jpg)
+![](http://ose5hybez.bkt.clouddn.com/2016/1225/WechatIMG10_zps78lk7btx.JPG)
 
 因为对汤峪非常的失望，小白菜等六人不甘心就此打道回府，转车又去了小说中的白鹿原。白鹿原，白鹿原......我心里念叨着的白鹿原，就是一个山坡(你能想象到小白菜的一脸懵逼)......只是此坡建了很多特色吃货玩乐小店铺，完全是一个商业化的消费集市，目测当地政府为了推动地区的经济发展，估计对这个山坡的改造投了不少钱。然后只能既来之则安之，吃了个凉粉(贵得一笔吃不起......)逛了两圈后，毫无眷恋一丝无(牵)挂地离开了传说中的白鹿原。一次次的满怀希望，一次次的失望，小白菜越来越觉得，随着自己的成长和阅历的增加，自己的心态从好奇憧憬仰慕，到平常心看待，而且越来越理性，似乎看过的东西越多，跌下神坛的东西就越多，反倒是自己内心的声音更值得重视了。
 

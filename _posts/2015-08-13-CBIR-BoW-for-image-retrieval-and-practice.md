@@ -263,7 +263,7 @@ show()
 
 **致谢**：基础框架来源[BoW](https://github.com/grapeot/BoW)，开发版本在此基础上进行，已在Ubuntu、OS X上测试通过，Windows需要支持c++11的编译器(VS2012及其以上)。
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202015-08-13%20at%209.15.33%20PM_zpsq8qvkew7.png)
+![](http://ose5hybez.bkt.clouddn.com/2015/0813/Screen%20Shot%202015-08-13%20at%209.15.33%20PM_zpsq8qvkew7.PNG)
 
 ### 使用
 

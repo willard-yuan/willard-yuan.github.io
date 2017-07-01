@@ -51,7 +51,7 @@ AVE pooling就是average pooling，本质上它跟SUM pooling是一样的，只�
 
 MAX pooling指的是对于每一个channel（假设有N个channel），将该channel的feature map的像素值选取其中最大值作为该channel的代表，从而得到一个N维向量表示。小白菜在[flask-keras-cnn-image-retrieval](https://github.com/willard-yuan/flask-keras-cnn-image-retrieval/blob/master/extract_cnn_vgg16_keras.py)中采用的正是MAX pooling的方式。
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/max_pooling_zpsglehm2jv.jpeg)
+![](http://ose5hybez.bkt.clouddn.com/2017/max_pooling_zpsglehm2jv.JPEG)
 
 > from [Day 2 Lecture 6 Content-based Image Retrieval](https://www.slideshare.net/xavigiro/contentbased-image-retrieval-d2l6-insightdcu-machine-learning-workshop-2017)
 
@@ -61,7 +61,7 @@ MAX pooling指的是对于每一个channel（假设有N个channel），将该cha
 
 MOP Pooling源自[Multi-scale Orderless Pooling of Deep Convolutional Activation Features](https://arxiv.org/abs/1403.1840)这篇文章，一作是Yunchao Gong，此前在搞[哈希](https://github.com/willard-yuan/hashing-baseline-for-image-retrieval)的时候，读过他的一些论文，其中比较都代表性的论文是ITQ，小白菜还专门写过一篇笔记[论文阅读：Iterative Quantization迭代量化](http://yongyuan.name/blog/itq-hashing.html)。MOP pooling的基本思想是多尺度与VLAD(VLAD原理可以参考小白菜之前写的博文[图像检索：BoF、VLAD、FV三剑客](http://yongyuan.name/blog/CBIR-BoF-VLAD-FV.html))，其具体的pooling步骤如下：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/mop_cnn_zpstvgo29kk.jpeg)
+![](http://ose5hybez.bkt.clouddn.com/2017/mop_cnn_zpstvgo29kk.JPEG)
 
 > from [Multi-scale Orderless Pooling of Deep Convolutional Activation Features](https://arxiv.org/abs/1403.1840)  
 > Overview  of  multi-scale  orderless  pooling  for  CNN  activations  (MOP-CNN). Our proposed feature is a concatenation of the feature vectors from three levels: (a)Level 1, corresponding to the 4096-dimensional CNN activation for the entire 256*256image; (b) Level 2, formed by extracting activations from 128*128 patches and VLADpooling them with a codebook of 100 centers; (c) Level 3, formed in the same way aslevel 2 but with 64*64 patches.
@@ -74,13 +74,13 @@ MOP Pooling源自[Multi-scale Orderless Pooling of Deep Convolutional Activation
 
 对于Object Retrieval，在使用CNN提取特征的时候，我们所希望的是在有物体的区域进行特征提取，就像提取局部特征比如SIFT特征构[BoW、VLAD、FV向量](http://yongyuan.name/blog/CBIR-BoF-VLAD-FV.html)的时候，可以采用MSER、Saliency等手段将SIFT特征限制在有物体的区域。同样基于这样一种思路，在采用CNN做Object Retrieval的时候，我们有两种方式来更细化Object Retrieval的特征：一种是先做物体检测然后在检测到的物体区域里面提取CNN特征；另一种方式是我们通过某种权重自适应的方式，加大有物体区域的权重，而减小非物体区域的权重。CROW pooling ( [Cross-dimensional Weighting for Aggregated Deep Convolutional Features](https://arxiv.org/abs/1512.04065) )即是采用的后一种方法，通过构建Spatial权重和Channel权重，CROW pooling能够在**一定程度上**加大感兴趣区域的权重，降低非物体区域的权重。其具体的特征表示构建过程如下图所示：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/crow_zpsaejbmsln.png)
+![](http://ose5hybez.bkt.clouddn.com/2017/crow_zpsaejbmsln.PNG)
 
 其核心的过程是Spatial Weight和Channel Weight两个权重。Spatial Weight具体在计算的时候，是直接对每个channel的feature map求和相加，这个Spatial Weight其实可以理解为saliency map。我们知道，通过卷积滤波，响应强的地方一般都是物体的边缘等，因而将多个通道相加求和后，那些非零且响应大的区域，也一般都是物体所在的区域，因而我们可以将它作为feature map的权重。Channel Weight借用了IDF权重的思想，即对于一些高频的单词，比如“the”，这类词出现的频率非常大，但是它对于信息的表达其实是没多大用处的，也就是它包含的信息量太少了，因此在BoW模型中，这类停用词需要降低它们的权重。借用到Channel Weight的计算过程中，我们可以想象这样一种情况，比如某一个channel，其feature map每个像素值都是非零的，且都比较大，从视觉上看上去，白色区域占据了整个feature map，我们可以想到，这个channel的feature map是不利于我们去定位物体的区域的，因此我们需要降低这个channel的权重，而对于白色区域占feature map面积很小的channel，我们认为它对于定位物体包含有很大的信息，因此应该加大这种channel的权重。而这一现象跟IDF的思想特别吻合，所以作者采用了IDF这一权重定义了Channel Weight。
 
 总体来说，这个Spatial Weight和Channel Weight的设计还是非常巧妙的，不过这样一种pooling的方式只能在一定程度上契合感兴趣区域，我们可以看一下Spatial Weight*Channel Weight的热力图：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/sp_example_zps4ntos3ok.jpeg)
+![](http://ose5hybez.bkt.clouddn.com/2017/sp_example_zps4ntos3ok.JPEG)
 
 从上面可以看到，权重大的部分主要在塔尖部分，这一部分可以认为是discriminate区域，当然我们还可以看到，在图像的其他区域，还有一些比较大的权重分布，这些区域是我们不想要的。当然，从小白菜可视化了一些其他的图片来看，这种crow pooling方式并不总是成功的，也存在着一些图片，其权重大的区域并不是图像中物体的主体。不过，从千万级图库上跑出来的结果来看，crow pooling这种方式还是可以取得不错的效果。
 
@@ -88,7 +88,7 @@ MOP Pooling源自[Multi-scale Orderless Pooling of Deep Convolutional Activation
 
 RMAC pooling的池化方式源自于[Particular object retrieval with integral max-pooling of CNN activations](https://arxiv.org/pdf/1511.05879)，三作是Hervé Jégou(和Matthijs Douze是好基友)。在这篇文章中，作者提出来了一种RMAC pooling的池化方式，其主要的思想还是跟上面讲过的MOP pooling类似，采用的是一种变窗口的方式进行滑窗，只不过在滑窗的时候，不是在图像上进行滑窗，而是在feature map上进行的(极大的加快了特征提取速度)，此外在合并local特征的时候，MOP pooling采用的是VLAD的方式进行合并的，而RMAC pooling则处理得更简单(简单并不代表效果不好)，直接将local特征相加得到最终的global特征。其具体的滑窗方式如下图所示:
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/rmac_pooling_zpsigvxjjud.jpeg)
+![](http://ose5hybez.bkt.clouddn.com/2017/rmac_pooling_zpsigvxjjud.JPEG)
 
 > from [Day 2 Lecture 6 Content-based Image Retrieval](https://www.slideshare.net/xavigiro/contentbased-image-retrieval-d2l6-insightdcu-machine-learning-workshop-2017)
 

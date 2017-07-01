@@ -24,7 +24,7 @@ tags: 词袋模型
 
 在去年的时候，基本弄清了VLfeat中的一些函数的C接口调用方式，covdet这个函数通过阅读写给matlab的接口源码转成的C，对比matlab提取的结果和自己转成C之后提取的结果，两者完全一致。
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/designBoWmodel_zpsd6dy38tv.png)
+![](http://ose5hybez.bkt.clouddn.com/2016/0327/designBoWmodel_zpsd6dy38tv.PNG)
 
 #### 矩阵运算库的选取
 
@@ -156,7 +156,7 @@ public:
 
 目前，已经对重造的轮子展开了测试，如下图：
 
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202016-03-27%20at%2022.53.23_zpsv3l1qukh.png)
+![](http://ose5hybez.bkt.clouddn.com/2016/0327/Screen%20Shot%202016-03-27%20at%2022.53.23_zpsv3l1qukh.PNG)
 
 在ukbench和oxford building这两个数据库的结果会在测试结果出来后补充到本文后面。
 

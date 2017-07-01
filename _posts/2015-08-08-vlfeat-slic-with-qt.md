@@ -6,9 +6,9 @@ tags: SLIC
 ---
 
 近段时间学了点Qt，恰好前段时间用借助VLfeat以及OpenCV捣鼓了SLIC超像素分割，具体可见[VLFeat SLIC超像素分割(Cpp版)](http://yongyuan.name/blog/vlfeat-slic-cpp.html)这篇文章。然后寻思着能不能给这个超像素分割加个界面，使它操作起来方面点。捣鼓了两天，做出来的如下：
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202015-08-08%20at%207.58.17%20PM_zpsr7s4kl42.png)
+![](http://ose5hybez.bkt.clouddn.com/2015/0808/Screen%20Shot%202015-08-08%20at%207.58.17%20PM_zpsr7s4kl42.PNG)
 高斯模糊效果：
-![](http://i300.photobucket.com/albums/nn17/willard-yuan/blog/Screen%20Shot%202015-08-08%20at%207.57.39%20PM_zps6qqh7hsq.png)
+![](http://ose5hybez.bkt.clouddn.com/2015/0808/Screen%20Shot%202015-08-08%20at%207.57.39%20PM_zps6qqh7hsq.PNG)
 可以对图片进行高斯模糊，边缘检测以及做超像素分割。在实现的时候，界面设计比较简单，Qt的信号与槽用着比较爽，期间在将OpenCV以及VLfeat包含进来的时候，找资料捣鼓了大半天，终于好了，配置完的`.pro`如下：
 
 ```sh
