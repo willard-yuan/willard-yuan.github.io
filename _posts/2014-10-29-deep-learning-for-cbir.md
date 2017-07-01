@@ -14,6 +14,3 @@ tags: 图像检索
 3. [Supervised Hashing for Image Retrieval via Image Representation Learning](http://ss.sysu.edu.cn/~py/papers/AAAI-CNNH.pdf)
 
 4. [Using Very Deep Autoencoders for Content-Based Image Retrieval](https://www.cs.toronto.edu/~hinton/absps/esann-deep-final.pdf)
-
-
-

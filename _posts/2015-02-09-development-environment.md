@@ -10,5 +10,3 @@ tags: 开发环境
 查看8080端口被哪个占用命令：`netstat -pnl | grep 8080`，具体可以参看这里[I get this: IOError: Port 8080 not bound on 'localhost'. What could it be?](http://stackoverflow.com/questions/767575/cherrypy-hello-world-error)
 
 在centos上安装scipy安装包时，直接通过pip install如果报错的话，用`sudo yum install numpy scipy python-matplotlib ipython python-pandas sympy python-nose`尝试，具体可以参考这里：[Installing the SciPy Stack](http://www.scipy.org/install.html)
-
-
