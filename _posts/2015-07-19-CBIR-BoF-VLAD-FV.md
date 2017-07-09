@@ -92,7 +92,7 @@ BOW做的是描述子的0阶统计分布，而FV则是扩展了的BOW的高阶�
 
 经过上面三个步骤后，一幅图像可以用一个1*(K*128)维的向量表示。为了初步验证上面的过程是否正确，来看看上面那篇论文中VLAD的维数是否如这里所理解的是一个1*(K*128)维的向量，直接看实验表：
 
-![VLAD01]({{ site.url }}/images/posts/VLAD01.png)
+![VLAD01](http://ose5hybez.bkt.clouddn.com/2015/0719/VLAD01.png)
 
 上表中FV和VLAD的D表示维数，我们看到D=K*64,这里为什么不是128呢？原因在于作者对SIFT进行了PCA降维处理，将128维降到了64维。
 
@@ -100,7 +100,7 @@ BOW做的是描述子的0阶统计分布，而FV则是扩展了的BOW的高阶�
 
 <center>
 
-![VLAD01]({{ site.url }}/images/posts/VLAD02.png)
+![VLAD01](http://ose5hybez.bkt.clouddn.com/2015/0719/VLAD02.png)
 
 </center>
 
