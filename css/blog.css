@@ -19,7 +19,14 @@ h6,
 .ui.header {
   font-family: "Linux Libertine", Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, "TW-Kai", serif; }
 
-
+/*post index blockquote*/
+.inner blockquote {
+  margin: 5em 0 1em 0em;
+  color: #666;
+  border-left: 0.4em solid #48C9B0;
+  padding-left: 0.6em;
+  font-style: italic;
+}
 
 article h1 {
   margin-bottom: 8px;
