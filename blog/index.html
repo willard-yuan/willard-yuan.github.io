@@ -28,7 +28,7 @@ category: blog
 		<span class="listing-seperator">{{ y }}</span>
 	  {% endif %}
     <a class='post-link-in-posts' href="{{ site.url }}{{ post.url }}">
-        <span class='date'>{{ post.date | date_to_string }}</span>
+        <span class='date'>{{ post.date | date: "%b %d" }}</span>
         <span class='article'>{{ post.title }}</span>
 		<div class="tag-in-index-post">
         <i class="fa fa-tags"></i>
