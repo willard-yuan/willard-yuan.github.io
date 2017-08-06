@@ -13,3 +13,12 @@ tags: CBIR
 
 ## fisher vector理论要点
 
+### fisher kernel
+
+可以说fisher vector是**fisher kernel在样本独立性假设基础上**的华丽转身版，如果没有fisher kernel这一金字塔底层父系理论以及金字塔中层样本独立性假设，就不会有fisher vector这一金字塔上层高富帅的小伙。如果要提炼fisher vector最重要的两样东西，小白菜以为一个公式和一个假设足矣。
+
+### 样本独立性假设
+
+将fisher kernel应用到图像上的时候，会假定各个局部特征之间是独立的，也就是各个局部特征是不相关的，这样局部特征集合的log似然函数的梯度便转化为各个局部特征的log似然函数的求和梯度，从而才有了fisher kernel到fisher vector的华丽转身。
+
+### fisher vector索引前置处理
