@@ -11,11 +11,15 @@ N = 9408
 M = num_ouput = 4096
 ```
 
-由此，我们做了一个`(1x9408)`矩阵和`(9408x4096)`矩阵的乘法。如果`num_output`的值改变成为100，则做的是一个`(1x9408)`矩阵和`(9408x100)`矩阵的乘法。增大`num_output`会使得模型需要学习的权重参数增加。
+由此，我们做了一个`(1x9408)`矩阵和`(9408x4096)`矩阵的乘法。如果`num_output`的值改变成为100，则做的是一个`(1x9408)`矩阵和`(9408x100)`矩阵的乘法。**Inner Product layer（常被称为全连接层）将输入视为一个vector，输出也是一个vector（height和width被设为1）**。
 
-[caffe inner_product_layer.cpp](https://github.com/BVLC/caffe/blob/master/src/caffe/layers/inner_product_layer.cpp)
+增大`num_output`会使得模型需要学习的权重参数增加。
+
+[caffe inner\_product\_layer.cpp](https://github.com/BVLC/caffe/blob/master/src/caffe/layers/inner_product_layer.cpp)
 
 参考
 
 1. [What is the output of fully connected layer in CNN?](https://stackoverflow.com/questions/35788873/what-is-the-output-of-fully-connected-layer-in-cnn)
 2. [caffe_cpu_gemm函数](http://blog.csdn.net/seven_first/article/details/47378697)
+3. [Caffe学习：Layers](http://blog.csdn.net/u011762313/article/details/47361571)
+4. [Caffe Layers](http://caffe.berkeleyvision.org/tutorial/layers.html)
