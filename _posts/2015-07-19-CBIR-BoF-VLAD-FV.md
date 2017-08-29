@@ -5,6 +5,8 @@ categories: [Image Retrieval]
 tags: 图像检索
 ---
 
+[BoW](Bag of visual words model: recognizing object categories) (Bag of visual word)、[VLAD](https://hal.inria.fr/inria-00633013/document) (Aggregating local descriptors)以及[FV](https://hal.inria.fr/hal-00830491/document) (Fisher Vector)是三种非常经典的将局部特征表示成全局特征的编码方法，在图像检索领域，这图像检索领域，这三种编码方法是必须面对的三名剑客。下面是小白菜结合自己的理解，对这三种编码方法的原理和一些实践经验的总结。
+
 ## BoF词袋模型
 
 基于SIFT局部特征的BOF模型非常适合于做Object retrieval, 下面是自己在[oxford building](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)数据库(5063张图片)上进行的一些实验。表格中单词数目为聚类时设定的聚类数目，以及是否采用SIFT或者rootSIFT，rootSIFT怎么计算的可以阅读[Object retrieval with large vocabularies and fast spatial matching](http://www.robots.ox.ac.uk/~vgg/publications/papers/philbin07.pdf)这篇文章，空间校正即在重排的时候，对错配的SIFT点对进行剔除，剔除的方法可以采用RANSAC或者类RANSAC方法，详细介绍可以阅读[SIFT(ASIFT) Matching with RANSAC](http://yongyuan.name/blog/SIFT(ASIFT)-Matching-with-RANSAC.html)，检索精度采用平均检索精度（mean Average Precision, mAP），其计算过程可以阅读[信息检索评价指标](http://yongyuan.name/blog/evaluation-of-information-retrieval.html)这篇文章。下面需要注意的是**查询时间**单次查询的结果，并没有进行多次查询进行平均，此外查询时间是查询和计算mAP时间的总和。
@@ -85,7 +87,7 @@ tags: 图像检索
 2. 聚类生成词汇向量。假设要生成K个单词，对X直接用Kmeans聚成K类，类中心即为单词(也叫码字)。  
 3. 生成VLAD向量。这一步其实如果对BOW的生成过程清楚的话，这一步理解起来就非常简单了。BoW统计的是描述子落入最近单词里的数目，而VLAD统计的则是这些落入最近单词里与该单词的累积残差。根据Aggregating local image descriptors into compact codes的描述：
 
->By counting the number of occurrences of visual words,
+> By counting the number of occurrences of visual words,
 BOW encodes the 0-order statistics of the distribution of descriptors. The Fisher vector extends the BOW by encoding high-order statistics (first and, optionally, second order).
 
 BOW做的是描述子的0阶统计分布，而FV则是扩展了的BOW的高阶统计。这里引出来的FV是什么呢？VLAD是FV的特例，这里我们先不关注FV，我们只要借此推得VLAD是BOW的高阶统计就行。
@@ -100,9 +102,32 @@ BOW做的是描述子的0阶统计分布，而FV则是扩展了的BOW的高阶�
 
 ![VLAD02](http://ose5hybez.bkt.clouddn.com/2015/0719/VLAD02.png)
 
-### 提取VLAD
+### 提取VLAD特征
 
-在对VLAD有了初步的认识后，接下来我们可以动手提取VLAD，通过实验来进一步了解VLAD。
+对VLAD有了初步的认识后，接下来我们可以动手提取VLAD，通过实验来进一步了解VLAD的特性。这里我们可以直接调用INRIA开发的[Yael](http://yael.gforge.inria.fr/)工具包，该工具包提供了BoW、VALD以及FV的接口。为了更好的理解VALD编码的过程，可以打开Yael的[vlad.c](https://github.com/jackculpepper/yael/blob/master/yael/vlad.c#L48)文件，其中有`vlad_compute`方法：
+
+```cpp
+void vlad_compute(int k, int d, const float *centroids, 
+                  int n, const float *v, float *desc)  
+{
+  
+  int i,j;
+  int *assign = ivec_new (n);
+ 
+  nn (n, k, d, centroids, v, assign);
+
+  fvec_0 (desc, k * d);
+      
+  for (i = 0 ; i < n ; i++) {
+    for (j = 0 ; j < d ; j++) 
+      desc[assign[i]*d+j] += v[i*d+j] - centroids[assign[i]*d+j];
+  }      
+
+  free(assign);
+}
+
+```
+上面清楚的显示了得到的`desc`(即VLAD特征表示)为距离类中心最近的局部特征的累积和，其中方法`nn`是做最近邻查找。有了这个接口后，我们要做的就是提取局部特征，比如SIFT，然后使用Yael里提供的KMeans接口做聚类，得到聚类中心，然后调用该函数，即可得到VLAD特征表示。
 
 ### MSER
 
@@ -195,3 +220,4 @@ MSER得到椭圆区域后，再结合SIFT，可以剔除掉很多没用的点，
 1. [机器学习笔记——Fisher vector coding](http://blog.csdn.net/breeze5428/article/details/32706507)
 2. [Large-scale visual recognition Novel patch aggregation mechanisms](http://people.rennes.inria.fr/Herve.Jegou/courses/2012_cpvr_tutorial/4-new-patch-agggregation.pptx.pdf)
 3. [VLAD](http://blog.csdn.net/breeze5428/article/details/36441179)
+4. [Bag of Visual Words Model for Image Classification and Recognition](http://kushalvyas.github.io/BOV.html)
