@@ -49,11 +49,11 @@ $$
 对于两组不同的观察样本$X$和$Y$，Jaakkola和Haussler提出了使用Fisher核来度量它们之间的相似性，其数学表达形式为：
 
 \begin{equation}
-K_FK(X, Y) = (G^X_\lambda)^T F_\lambda^-1 G^X_\lambda
+K_FK(X, Y) = (G^X_\lambda)^T F_\lambda^{-1} G^X_\lambda
 \label{fk}
 \end{equation}
 
-又因为$F_{\lambda}$是半正定的，所以其逆矩阵是存在的。使用cholesky分解可以得到$F_\lambda^-1 = (L_\lambda)^T L_\lambda$，式\eqref{fk}可以写成内积的表示形式：
+又因为$F_{\lambda}$是半正定的，所以其逆矩阵是存在的。使用cholesky分解可以得到$F_\lambda^{-1} = (L_\lambda)^T L_\lambda$，上式可以写成内积的表示形式：
 
 \begin{equation}
 K_FK(X, Y) = (\wp^X_\lambda)^T \wp^Y_\lambda
