@@ -5,7 +5,7 @@ categories: [Image Retrieval]
 tags: SIFT
 ---
 
->十来天没上来写东西了，在实践试错的过程中，有太多东西没来得及总结，忙着填BoW的坑，忙着投简历(工作碗里来)。尽管这样，还是抽了点空把这十来天自己在完善[Bag of Words cpp实现(stable version 0.01)](http://yongyuan.name/blog/bag-of-words-cpp-implement.html)重排过程中做的一些东西总结一下，希望也能对后来者有些许帮助，好了进入正题。
+> 十来天没上来写东西了，在实践试错的过程中，有太多东西没来得及总结，忙着填BoW的坑，忙着投简历(工作碗里来)。尽管这样，还是抽了点空把这十来天自己在完善[Bag of Words cpp实现(stable version 0.01)](http://yongyuan.name/blog/bag-of-words-cpp-implement.html)重排过程中做的一些东西总结一下，希望也能对后来者有些许帮助，好了进入正题。
 
 一般在词袋模型中，为了提高检索的精度，你可以通过很多的trick来提高其精度(mAP)，其中一个广泛使用的技巧就是对返回的图像进行重排，重排有很多种方法，比如对多特征在分数层(决策层)进行融合也是一种重排方式，不过这里要做的是通过剔除查询图像与候选图像错配点对的方式进行重排，剔除错配点一般采用的是RANSAC算法，关于RANSAC原理可以阅读[RANSAC算法做直线拟合](http://yongyuan.name/blog/fitting-line-with-ransac.html)这篇文章，或者采用类RANSAC算法。作为初级阶段的实践，这里从两幅图像的匹配逐步深入。
 
@@ -35,8 +35,12 @@ tags: SIFT
 ![1NN/2NN<0.8+RANSAC](http://ose5hybez.bkt.clouddn.com/2015/0822/1NN2NNRANSAC_zpsuwe317az.JPG)
 可以看到，已经完全没有错配点了，从这一点来说，其效果是非常好的。不过，从正配点对数目来看，“1NN+RANSAC”的结果更密集，也就是说“1NN+RANSAC”包含了更多的正配点对，“1NN/2NN<0.8+RANSAC”正配点对要稍微少些。在大多数情况下，我们会选择完全剔除了错配点对的模型。
 
+由于VLFeat的SIFT实现要比OpenCV里的实现要好，所以又采用VLFeat的[covdet](http://www.vlfeat.org/overview/covdet.html)对SIFT的匹配做了一些实现，并为covdet提供了c++接口，下面是做完几何校正后的一些匹配结果：
+
+![](http://ose5hybez.bkt.clouddn.com/github/covdet/brand.png)
+
+![drawing](http://ose5hybez.bkt.clouddn.com/github/covdet/wine.png)
+
 ## 总结
 
 上面分别介绍了两种匹配方法，分别是“1NN”和“1NN/2NN<0.8”匹配方法，以及对它们采用RANSAC剔除错配点对的方法。有时候，如果要求经过RANSAC匹配后保留更多的正配点对，这时候，我们可以采用Affine-SIFT，简称ASIFT，具体可以阅读[ASIFT: An Algorithm for Fully Affine Invariant Comparison](http://www.ipol.im/pub/art/2011/my-asift/)这篇文章，作者提供了ASIFT的C++代码和匹配算法，可以在[ASIFT]((http://www.ipol.im/pub/art/2011/my-asift/))下载得到，我大概跑了一下里面的demo，相比与SIFT，ASIFT可以提取到很多的关键点，对旋转等变换具有更好的不变性，不过缺点也很明显，速度实在太慢，很难做到实时，所以要使用的话，一般应用在对实时性不做要求的场合。我那个代码里有OpenCV的实现，你也可以试一下其效果，该OpenCV代码实现来源于[OPENCV ASIFT C++ IMPLEMENTATION](http://www.mattsheckells.com/opencv-asift-c-implementation/)，OpenCV自带其Python实现，使用比较方便，就是速度太慢，所以自己在图像检索在写的项目中，也不打算用它了。
-
-对于怎么将上面介绍的这些匹配方法应用到图像检索重排中，后面会再做整理介绍，今天就到这里了，明天阿里笔试，亚历山大。
