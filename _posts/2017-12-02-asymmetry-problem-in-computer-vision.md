@@ -43,8 +43,6 @@ Logo的识别问题，可以分为两类:
 
 针对这种由于尺寸不对称性造成的有用特征（信号）被无用信号淹没的问题，很难在不对检索精度造成较大影响的前提下找到比较有效的解决办法。如果要剔除无用信号造成的干扰，一种比较好的方法是先进行粗略的检测，这一步不要求检测的准确率很高，只要保证召回率很高即可，然后可以根据定位到的框提取特征，再进行检索以及校验。这种方式由于剔除了非相关区域特征的干扰，所以准确率和召回率通常能够得到较好的保证，唯一不足的是，引入了检测，而检测势必要求对数据进行标注（半自动）。不过总体来说，这仍然是一种非常不错的方法。
 
-[Google Object Detection API to detect Brand Logos Part 1](https://medium.com/towards-data-science/google-object-detection-api-to-detect-brand-logos-fd9e113725d8)
-
 ### PQ中的非对称距离
 
 在此前的文章[图像检索：再叙ANN Search](http://yongyuan.name/blog/ann-search.html)中，小白菜曾对PQ做过比较详细的介绍，这里对PQ中非对称距离的计算做一详述。
