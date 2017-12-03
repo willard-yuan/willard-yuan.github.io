@@ -78,7 +78,7 @@ Polysemous Codes所拥有的这两种特性，不能不感叹它是极其优雅�
 在度量两个集合的相似性的时候，累计最小（最大）距离是一个比较好用的相似性度量距离。假设两个集合分别为$X = \lbrace x_t, i=1 \dots n \rbrace$和$Y = \lbrace y_t, j=1 \dots m \rbrace$，则$X$和$Y$集合的相似性可以通过累计最小（最大）距离来度量，即：
 
 \begin{equation}
-S(X, Y) = \sum_{i=1}^{i=n} \sum_{j=1}^{j=n} d_\min(x_i, y_j)
+S(X, Y) = \sum_{i=1}^{i=n} \sum_{j=1}^{j=m} d_\min(x_i, y_j)
 \end{equation}
 
 至于$d$选取何种距离，我们可以根据自己的应用场景来定夺，小白菜自己一般喜欢使用余弦相似度，因为该距离的计算最终可以转换成内积。累计最小（最大）距离应用的场景这里可以列举一二：
