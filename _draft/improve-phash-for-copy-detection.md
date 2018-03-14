@@ -5,7 +5,7 @@ categories: [Image Retrieval]
 tags: CBIR
 ---
 
-感知哈希是用来做图像拷贝检测（Copy Detection）最容易操作的一种方法，实际上除了感知哈希、均值哈希，还有很多的从图像本身出发计算出来的图像哈希值，在OpenCV 3.3及其以后的版本中，包含了很多图像哈希的计算方法，具体的可以参考[The module brings implementations of different image hashing algorithms](https://docs.opencv.org/3.3.1/d4/d93/group__img__hash.html)，其中各种图像哈希方法对8种不同变化的抗干扰程度，文档中有一个极好的总结：
+感知哈希是用来做图像拷贝检测（Copy Detection）最容易操作的一种方法，实际上除了感知哈希、均值哈希，还有很多的从图像本身出发计算出来的图像哈希值，在OpenCV 3.3及其以后的版本中，包含了很多图像哈希的计算方法，具体的可以参考[The module brings implementations of different image hashing algorithms](https://docs.opencv.org/3.3.1/d4/d93/group__img__hash.html)，其中各种图像哈希方法对8种不同变化的抗干扰程度，文档中做了一个很好的总结：
 
 ![](https://docs.opencv.org/3.3.1/attack_performance.JPG)
 
@@ -40,10 +40,18 @@ PHash特征 | 镜像 | 否 | 见上面说的验证过程
 FV特征 | 镜像 | 很弱 | SIFT对镜像不具备不变性，故FV对镜像召回能力很弱，具体参考论文[Flip-Invariant SIFT for Copy and Object Detection](http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6336821)
 DL相似特征 | 镜像 | 是 | 由于DL相似特征在训练的时候，数据增强里面包含镜像，DL相似特征对镜像具备旋转特性，检索显示的top@K里面，可以找回镜像的视频，见结果[镜像检索结果](http://owtbv2q93.bkt.clouddn.com/note/similarity_flip.png)
 
-### 类似纯色类图片检测
+### PHash改进方案
+
+在前面我们已经提到了PHash对于纯色或近似纯色图像做拷贝检测存在的缺陷，当DCT进行散列化时如果选取的DCT的频率过低，则对纯色或近似纯色图像的拷贝检测存在badcase，如下图所示：
+
+![](http://owtbv2q93.bkt.clouddn.com/note/pureColor_phash.png)
+
+从上图可以看到，由于查询图像是接近纯色的图片，导致我们取得DCT的低频只能捕获到图像的大致外观，因而很多接近纯色的图片到排在了前面。对这类case的改进优化，我们知道无论是取低频还是高频部分做散列化都不合适，如果只取高频，则会影响正常图片的召回。因为，我们比较容易想到的一种改进方式是：对于正常的图片，我们只需采用低频DCT哈希值做排序；对于纯色或近似纯色图像，我们先用低频DCT哈希值检索排序，然后再用高频DCT哈希值检索再做重排。这种改进方式的好处是显而易见的，对于每一张图片，我们只需要额外增加64个比特位的存储空间，并且不用对整个拷贝检测的架构做很大的调整，我们所要做的就是再计算一下高频DCT的哈希值，并且增加一个对纯色或接近纯色的检测服务，就能使PHash在图像拷贝检测上获得较大的精度提升，同时又不至于较大的减少召回。
+
+对于图像纯色或接近纯色的检测，小白菜以为应该做得轻巧简洁，因为本身PHash做拷贝检测就是一个很轻量的服务，如果图像纯色或接近纯色的检测做的过重（比如用DL对图像纯色与非纯色进行分类），就失去了用PHash做拷贝检测的意义。下面小白菜一个极轻量的图像纯色或接近纯色的检测方法：
 
 ```c++
-cv::Mat imGray = cv::imread("/Users/willard/Pictures/dct_pure/5353086134_h.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+cv::Mat imGray = cv::imread("123.jpg", CV_LOAD_IMAGE_GRAYSCALE);
     
 int histSize = 256;
 float range[] = {0, 255} ;
@@ -59,11 +67,8 @@ float maxFre = hist.at<float>(0,0);
 float secFre = hist.at<float>(0,1);
 float allFre = cv::sum(hist)[0];
     
-float ratio1 = (maxFre + secFre)/allFre;
-    
-cout << "ratio1: " << ratio1 << endl;;
-    
-if(ratio1 >= 0.76){
+float ratio1 = (maxFre + secFre)/allFre;  
+if(ratio1 >= 0.51){
     cout << "pure image" << endl;
 }
 ```
@@ -79,8 +84,6 @@ if(ratio1 >= 0.76){
 ![](http://owtbv2q93.bkt.clouddn.com/note/okcase_phash.png)
 
 但是对于纯色或者接近纯色的图片，由于PHash取的是DCT的低频分量，所有无法捕获到图像的细节信息，也就是该特征无法对纯色或者接近纯色的图片做更细粒度的区分，下面展示的是PHash失败的例子：
-
-![](http://owtbv2q93.bkt.clouddn.com/note/pureColor_phash.png)
 
 对于这种纯色或者接近纯色的图片，如果要优化查重的准确率，直接将汉明距离的阈值减小显然是不好的，它会影响非纯色图片查重的召回。
 
