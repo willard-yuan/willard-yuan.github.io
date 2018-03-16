@@ -7,7 +7,7 @@ tags: CBIR
 
 感知哈希是用来做图像拷贝检索（Copy Detection）最容易操作的一种方法，实际上除了感知哈希、均值哈希，还有很多的从图像本身出发计算出来的图像哈希值，在OpenCV 3.3及其以后的版本中，包含了很多图像哈希的计算方法，具体的可以参考[The module brings implementations of different image hashing algorithms](https://docs.opencv.org/3.3.1/d4/d93/group__img__hash.html)，其中各种图像哈希方法对8种不同变化的抗干扰程度，文档中做了一个很好的总结：
 
-![](https://docs.opencv.org/3.3.1/attack_performance.JPG)
+![drawing](https://docs.opencv.org/3.3.1/attack_performance.JPG)
 
 从图中可以看到，Phash具备较好的对不同变化的抗干扰性，因为在**一般要求不高的图像拷贝检索**场景中，应用得较多。下面小白菜就PHash的原理（计算步骤）、在使用中存在的问题以及改进方案做一个记录与总结。
 
