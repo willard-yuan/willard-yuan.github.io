@@ -7,12 +7,11 @@ tags: CBIR
 
 > 人的独立性和参与性必须适得其所，平衡发展。一方面，过分的参与必然导致远离自我核心，现代人之所以感到空虚、无聊，在很大程度上就是由于顺从、依赖和参与过多，脱离了自我核心。另一方面，过分的独立会将自己束缚在狭小的自我世界内，缺乏正常的交往，必然损害人的正常发展。
 
-本文主要是小白菜以OPQ、HNSW为代表，关于索引的一些总结与思考。
+关于索引结构，有千千万万，而在图像检索领域，索引主要是为特征索引而设计的一种数据结构。关于ANN搜索领域的学术研究，[Rasmus Pagh](http://www.itu.dk/people/pagh/)发起的大规模相似搜索项目[ANN-Benchmarks](http://sss.projects.itu.dk/ann-benchmarks/)、[Faiss](https://github.com/facebookresearch/faiss)以及[ann-benchmarks](https://github.com/erikbern/ann-benchmarks)都有对一些主流的方法做过对比，虽然三个对比的框架对不同方法的性能均有出入，但一些主流方法的性能差异是可以达成共识的，比如基于图方法的ANN其召回率均要优于其他方法。在工业上，常用的索引方法主要以倒排、[PQ及其变种](http://yongyuan.name/blog/ann-search.html)、基于树的方法（比如KD树）和[哈希](https://github.com/willard-yuan/hashing-baseline-for-image-retrieval)（典型代表LSH和[ITQ](http://yongyuan.name/blog/itq-hashing.html)）为主流。关于KD树、LSH以及PQ，小白菜曾在此前的博文[图像检索：再叙ANN Search](http://yongyuan.name/blog/ann-search.html)已有比较详细的介绍。本文是小白菜结合实际应用，对PQ的改进方法OPQ以及基于图的方法HNSW的理解，以及关于索引的一些总结与思考。
 
-关于索引结构，有千千万万，而在图像检索里，索引主要是为快速检索而设计的一种数据结构。工业中常用的索引方法主要以倒排、[PQ](http://yongyuan.name/blog/ann-search.html)和[哈希](https://github.com/willard-yuan/hashing-baseline-for-image-retrieval)（其中哈希又以LSH和[ITQ](http://yongyuan.name/blog/itq-hashing.html)为主）为主流。[Rasmus Pagh](http://www.itu.dk/people/pagh/)发起的大规模相似搜索项目[ANN-Benchmarks](http://sss.projects.itu.dk/ann-benchmarks/)、Faiss以及[ann-benchmarks](https://github.com/erikbern/ann-benchmarks)都有对一些主流的方法做过对比，虽然三个对比的框架，对不同方法的性能均有出入，但一些主流方法的性能差异是可以达成共识的，比如基于图方法的ANN其召回率均要优于其他方法。
+### OPQ vs. HNSW
 
-
-
+首先从检索的召回率来评估，基于图的索引方法是要完胜乘积量化方法PQ（OPQ）方法的，从目前各类ANN方法来看，基于图的索引方法在召回上，效果是最优的，关于这个结论，可以从做ANN方法的论文以及开源的ANN Benchmarks上都可以看到这条结论。
 
 ### 数据实验说明
 
