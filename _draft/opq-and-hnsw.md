@@ -7,11 +7,49 @@ tags: CBIR
 
 > 人的独立性和参与性必须适得其所，平衡发展。一方面，过分的参与必然导致远离自我核心，现代人之所以感到空虚、无聊，在很大程度上就是由于顺从、依赖和参与过多，脱离了自我核心。另一方面，过分的独立会将自己束缚在狭小的自我世界内，缺乏正常的交往，必然损害人的正常发展。
 
-关于索引结构，有千千万万，而在图像检索领域，索引主要是为特征索引而设计的一种数据结构。关于ANN搜索领域的学术研究，[Rasmus Pagh](http://www.itu.dk/people/pagh/)发起的大规模相似搜索项目[ANN-Benchmarks](http://sss.projects.itu.dk/ann-benchmarks/)、[Faiss](https://github.com/facebookresearch/faiss)以及[ann-benchmarks](https://github.com/erikbern/ann-benchmarks)都有对一些主流的方法做过对比，虽然三个对比的框架对不同方法的性能均有出入，但一些主流方法的性能差异是可以达成共识的，比如基于图方法的ANN其召回率均要优于其他方法。在工业上，常用的索引方法主要以倒排、[PQ及其变种](http://yongyuan.name/blog/ann-search.html)、基于树的方法（比如KD树）和[哈希](https://github.com/willard-yuan/hashing-baseline-for-image-retrieval)（典型代表LSH和[ITQ](http://yongyuan.name/blog/itq-hashing.html)）为主流。关于KD树、LSH以及PQ，小白菜曾在此前的博文[图像检索：再叙ANN Search](http://yongyuan.name/blog/ann-search.html)已有比较详细的介绍。本文是小白菜结合实际应用，对PQ的改进方法OPQ以及基于图的方法HNSW的理解，以及关于索引的一些总结与思考。
+关于索引结构，有千千万万，而在图像检索领域，索引主要是为特征索引而设计的一种数据结构。关于ANN搜索领域的学术研究，[Rasmus Pagh](http://www.itu.dk/people/pagh/)发起的大规模相似搜索项目[ANN-Benchmarks](http://sss.projects.itu.dk/ann-benchmarks/)、[Faiss](https://github.com/facebookresearch/faiss)以及[ann-benchmarks](https://github.com/erikbern/ann-benchmarks)都有对一些主流的方法做过对比。虽然三个对比的框架对不同方法的性能均有出入，但一些主流方法的性能差异是可以达成共识的，比如基于图方法的ANN其召回率均要优于其他方法。在工业上，常用的索引方法主要以倒排、[PQ及其变种](http://yongyuan.name/blog/ann-search.html)、基于树的方法（比如KD树）和[哈希](https://github.com/willard-yuan/hashing-baseline-for-image-retrieval)（典型代表LSH和[ITQ](http://yongyuan.name/blog/itq-hashing.html)）为主流。关于KD树、LSH以及PQ，小白菜曾在此前的博文[图像检索：再叙ANN Search](http://yongyuan.name/blog/ann-search.html)已有比较详细的介绍。本文是小白菜结合实际应用，对PQ的改进方法OPQ以及基于图的方法HNSW的理解，以及关于索引的一些总结与思考。
 
-### OPQ vs. HNSW
+## OPQ vs. HNSW
 
-首先从检索的召回率来评估，基于图的索引方法是要完胜乘积量化方法PQ（OPQ）方法的，从目前各类ANN方法来看，基于图的索引方法在召回上，效果是最优的，关于这个结论，可以从做ANN方法的论文以及开源的ANN Benchmarks上都可以看到这条结论。
+首先从检索的召回率上来评估，基于图的索引方法要优于目前其他一些主流ANN搜索方法，比如乘积量化方法（PQ、OPQ）、哈希方法等。虽然乘积量化方法的召回率不如HNSW，但由于乘积量化方法具备内存耗用更小、数据动态增删更灵活等特性，使得在工业检索系统中，在对召回率要求不是特别高的场景下，乘积量化方法仍然是使用得较多的一种索引方法，淘宝（详见[Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph](https://arxiv.org/abs/1707.00143)）、蘑菇街等公司均有使用。乘积量化和HNSW特性对比如下：
+
+特性 | OPQ | HNSW
+:---:|:---:|:---
+内存占用 | 小 | 较大
+召回率 | 较高 | 高 |
+数据动态增删 | 灵活 | 不易 |
+
+下面分别对改进的乘积量化方法OPQ以及基于图的方法HNSW做原理上的简要介绍。
+
+## OPQ
+
+OPQ是PQ的一种改进方法，关于PQ的介绍，在此前的文章[图像检索：再叙ANN Search](http://yongyuan.name/blog/ann-search.html)中已有详细介绍，这里仅对改进的部分做相应的介绍。
+
+## HNSW
+
+### 贡献
+
+- 图输入节点明确的选择
+- 使用不同尺度划分链接
+- 使用启发式方式来选择最近邻
+
+### 近邻图技术
+
+对于给定的近邻图，在开始搜索的时候，从若干输入点（随机选取或分割算法）开始迭代遍历整个近邻图。
+
+在每一次横向迭代的时候，算法会检查链接或当前base节点之间的距离，然后选择下一个base节点作为相邻节点，使得能最好的最小化连接间的距离。
+
+近邻图主要的缺陷：1. 在路由阶段，如果随机从一个或者固定的阶段开始，迭代的步数会随着库的大小增长呈现幂次增加；2. 当使用k-NN图的时候，一个全局连接可能的损失会导致很差的搜索结果。
+
+### 算法描述
+
+网络图以连续插入的方式构建。对于每一个要插入的元素，采用指数衰变概率分布函数来随机选取整数最大层。
+
+- 图构建元素插入过程（Algorithm 1）：从顶层开始贪心遍历graph，以便在某层A中找到最近邻。当在A层找到局部最小值之后，再将A层中找到的最近邻作为输入点，继续在下一层中寻找最近邻，重复该过程；
+- 层内最近邻查找（Algorithm 2）：贪心搜索的改进版本；
+- 在搜索阶段，维护一个动态列表，用于保持ef个找到的最近邻元素
+
+在搜索的初步阶段，ef参数设置为1。
 
 ### 数据实验说明
 
