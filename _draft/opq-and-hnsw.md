@@ -25,6 +25,12 @@ tags: CBIR
 
 OPQ是PQ的一种改进方法，关于PQ的介绍，在此前的文章[图像检索：再叙ANN Search](http://yongyuan.name/blog/ann-search.html)中已有详细介绍，这里仅对改进的部分做相应的介绍。
 
+通常，用于检索的原始特征维度较高，所以实际在使用PQ等方法构建索引的时候，常会对高维的特征使用PCA等降维方法对特征先做降维处理，这样降维预处理，可以达到两个目的：一是降低特征维度；二是在对向量进行子段切分的时候要求特征各个维度是线性无关的，做完PCA之后，可以一定程度缓解这个问题。但是这么做了后，在切分子段的时候，采用顺序切分子段仍然存在一定的问题，这个问题可以借用[ITQ](http://yongyuan.name/blog/itq-hashing.html)中的一个二维平面的例子加以说明：
+
+![drawing](http://yongyuan.name/images/posts/ITQ_hashing.png)
+
+PQ归根结底是通过centroids来对原向量的一种近似，如果不考虑子空间的划分情况也就忽略了近似效果的好坏．理想情况下，应该是像k-means一样，在＂密集＂的区域多一些centroids，稀疏的地方少一些．但PQ方法是比较均匀的切分，不能实现这一点．
+
 ## HNSW
 
 ### 贡献
