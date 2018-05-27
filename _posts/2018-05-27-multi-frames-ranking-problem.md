@@ -70,7 +70,7 @@ OPQ多帧排序方法和暴力搜索多帧排序都是基于多帧相似性度�
 查询视频第f3帧返回的结果: A2, C1, B2, D2, E1, D1
 ```
 
-对于查询视频第f1帧返回的结果，假设$A1 \leqslant B1 \leqslant E1 \leqslantC1 \leqslant D1 \leqslant B2 \leqslant E2 \leqslant 1.0 $，后面查询的同理。对上面每帧查询的结果，按视频id取最小值，得下面结果：
+对于查询视频第f1帧返回的结果，假设$A1 \leqslant B1 \leqslant E1 \leqslant C1 \leqslant D1 \leqslant B2 \leqslant E2 \leqslant 1.0 $，后面查询的同理。对上面每帧查询的结果，按视频id取最小值，得下面结果：
 
 ```text
 查询视频第f1帧返回的结果: A1, B1, E1, C1, D1
