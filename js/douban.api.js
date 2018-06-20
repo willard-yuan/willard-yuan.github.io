@@ -3,7 +3,7 @@ function DoubanApi() {
 		place:"douban",
 		user:"57528320",
 		api:"08242004429e34bb186c600cc7da9e31",
-		book:[{status:"reading",maxnum:20},{status:"read",maxnum:100},{status:"wish",maxnum:100}],
+		book:[{status:"reading",maxnum:100},{status:"read",maxnum:100},{status:"wish",maxnum:400}],
 		bookreadingtitle:"在读...",
 		bookreadtitle:"读过...",
 		bookwishtitle:"想读..."
@@ -21,13 +21,17 @@ DoubanApi.prototype.make_api_url = function(type,user,key,status,begin,end) {
 }
 
 DoubanApi.prototype.make_list_item = function(items) {
-	var html = '';
+	var html = '<table>';
+    html += '<tr>'
 	$.each(items,function(i,item){
-		html += '<li><a href="'
-			+ item.link + '" target="_blank"><img src="'
-			+ item.src + '" alt="' + item.title
-			+ '" title="' + item.title + '" /></a></li>';
+		html += '<td><a href="'
+			+ item.link + '" target="_blank">'
+           + item.title + '</a></td>';
+        if((i+1) % 4 == 0) {
+           html += '<tr>' 
+        }
 	});
+    html += '</table>'
 	return html;
 };
 
@@ -46,14 +50,14 @@ DoubanApi.prototype.parse_json = function(json) {
 DoubanApi.prototype.fix_num = function(num) {
 	var index = 1;
 	var fixnums = [];
-	if (50 > num && num  > 0) {
+	if (100 > num && num  > 0) {
 		fixnums.push({begin:index,end:num});
 	}
 	else {
 		while (num > 0) {
-			fixnums.push({begin:index,end:index + 49});
-			num -= 50;
-			index += 50;
+			fixnums.push({begin:index,end:index + 99});
+			num -= 100;
+			index += 100;
 		}
 	}
 	return fixnums;
