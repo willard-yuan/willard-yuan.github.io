@@ -33,9 +33,14 @@ OPQ是PQ的一种改进方法，关于PQ的介绍，在此前的文章[图像检
 
 为了在切分子段的时候，使得各个子空间的方差尽可能的一致，[Herve Jegou](https://research.fb.com/people/jegou-herve/)在[Aggregating local descriptors into a compact image representation](https://lear.inrialpes.fr/pubs/2010/JDSP10/jegou_compactimagerepresentation.pdf)中提出使用一个正交矩阵来对PCA降维后的数据再做一次变换，使得各个子空间的方差尽可能的一致。其对应的待优化目标函数见论文的第5页，由于优化该目标函数极其困难，Herve Jegou使用了Householder矩阵来得到该正交矩阵，但是得到的该正交矩阵并不能很好的均衡子空间的方差。
 
-OPQ致力于解决的问题正是对各个子空间方差的均衡。具体到方法上，OPQ借鉴了ITQ的思想，在聚类的时候对聚类中心寻找对应的最优旋转矩阵，使得所有子空间中各个数据点到对应子空间的类中心的L2损失的求和最小。
+OPQ致力于解决的问题正是对各个子空间方差的均衡。具体到方法上，OPQ借鉴了ITQ的思想，在聚类的时候对聚类中心寻找对应的最优旋转矩阵，使得所有子空间中各个数据点到对应子空间的类中心的L2损失的求和最小。OPQ在具体求解的时候，分为非参求解方法和带参求解方法，具体为：
+
+- 非参求解方法。跟ITQ的求解过程一样。
+- 带参求解方法。带参求解方法假设数据服从高斯分布，在此条件下，最终可以将求解过程简化为数据经过PCA分解后，特征值如何分组的问题。在实际中，该解法更具备高实用性。
 
 ## HNSW
+
+HNSW是Yury A. Malkov提出的一种基于图索引的方法，它是Yury A. Malkov在他本人之前工作NSW上一种改进，通过采用层状结构，将边按特征半径进行分层，使每个顶点在所有层中平均度数变为常数，从而将NSW的计算复杂度由多重对数(Polylogarithmic)复杂度降到了对数(logarithmic)复杂度。
 
 ### 贡献
 
@@ -54,6 +59,8 @@ OPQ致力于解决的问题正是对各个子空间方差的均衡。具体到�
 ### 算法描述
 
 网络图以连续插入的方式构建。对于每一个要插入的元素，采用指数衰变概率分布函数来随机选取整数最大层。
+
+![](http://ose5hybez.bkt.clouddn.com/2018/0715/hnsw.jpg)
 
 - 图构建元素插入过程（Algorithm 1）：从顶层开始贪心遍历graph，以便在某层A中找到最近邻。当在A层找到局部最小值之后，再将A层中找到的最近邻作为输入点，继续在下一层中寻找最近邻，重复该过程；
 - 层内最近邻查找（Algorithm 2）：贪心搜索的改进版本；
@@ -115,3 +122,33 @@ top@K | 召回 | 时间(time_us_per_query)
 300 | 0.958000 | 7763.615234us
 500 | 0.958100 | 7779.351562us
 1000| 0.958100 | 7859.372559us
+
+### 余弦相似度与余弦距离关系
+
+Supported distances:
+
+Distance | parameter | Equation
+---|---|---
+Squared L2 | 'l2' | d = sum((Ai-Bi)^2)
+Inner product | 'ip' | d = 1.0 - sum(Ai*Bi))
+Cosine similarity | 'cosine' | d = 1.0 - sum(Ai\*Bi) / sqrt(sum(Ai\*Ai) \* sum(Bi*Bi))
+
+
+### 参数说明
+
+- efConstruction：设置得越大，构建图的质量越高，搜索的精度越高，但同时索引的时间变长，推荐范围100-2000
+- efSearch：设置得越大，召回率越高，但同时查询的响应时间变长，推荐范围100-2000，在HNSW，参数ef是efSearch的缩写
+- M：在一定访问内，设置得越大，召回率增加，查询响应时间变短，但同时M增大会导致索引时间增加，推荐范围5-100
+
+### 参数详细意义
+
+- M：参数M定义了第0层以及其他层近邻数目，不过实际在处理的时候，第0层设置的近邻数目是2*M。如果要更改第0层以及其他层层近邻数目，在HNSW的源码中进行更改即可。另外需要注意的是，第0层包含了所有的数据点，其他层数据数目由参数mult定义，详细的细节可以参考HNSW论文。
+
+- delaunay_type：检索速度和索引速度可以通过该参数来均衡heuristic。HNSW默认delaunay_type为1，将delaunay_type设置为1可以提高更高的召回率(> 80%)，但同时会使得索引时间变长。因此，对于召回率要求不高的场景，推荐将delaunay_type设置为0。
+- post：post定义了在构建图的时候，对数据所做预处理的数量（以及类型），默认参数设置为0，表示不对数据做预处理，该参数可以设置为1和2（2表示会做更多的后处理）。
+
+更详细的参数说明，可以参考[parameters说明](https://github.com/nmslib/nmslib/blob/9ed3071d0a74156a9559f3347ee751922e4b06e7/python_bindings/parameters.md)。
+
+### demo
+
+小白菜基于局部特征，采用HNSW做过一版实例搜索，详细说明详见[HNSW SIFTs Retrieval](https://github.com/willard-yuan/cvtk/tree/master/hnsw_sifts_retrieval)。适用范围：中小规模。理论上，直接基于局部特征索引的方法，做到上千万级别的量级，是没有问题的，成功的例子详见(videntifier)[http://flickrdemo.videntifier.com/]。
