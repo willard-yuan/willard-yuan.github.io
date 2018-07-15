@@ -151,4 +151,4 @@ Cosine similarity | 'cosine' | d = 1.0 - sum(Ai\*Bi) / sqrt(sum(Ai\*Ai) \* sum(B
 
 ### demo
 
-小白菜基于局部特征，采用HNSW做过一版实例搜索，详细说明详见[HNSW SIFTs Retrieval](https://github.com/willard-yuan/cvtk/tree/master/hnsw_sifts_retrieval)。适用范围：中小规模。理论上，直接基于局部特征索引的方法，做到上千万级别的量级，是没有问题的，成功的例子详见(videntifier)[http://flickrdemo.videntifier.com/]。
+小白菜基于局部特征，采用HNSW做过一版实例搜索，详细说明详见[HNSW SIFTs Retrieval](https://github.com/willard-yuan/cvtk/tree/master/hnsw_sifts_retrieval)。适用范围：中小规模。理论上，直接基于局部特征索引的方法，做到上千万级别的量级，是没有问题的，成功的例子详见[videntifier](http://flickrdemo.videntifier.com/)。
