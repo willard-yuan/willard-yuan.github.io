@@ -14,8 +14,8 @@ tags: CBIR
 首先从检索的召回率上来评估，基于图的索引方法要优于目前其他一些主流ANN搜索方法，比如乘积量化方法（PQ、OPQ）、哈希方法等。虽然乘积量化方法的召回率不如HNSW，但由于乘积量化方法具备内存耗用更小、数据动态增删更灵活等特性，使得在工业检索系统中，在对召回率要求不是特别高的场景下，乘积量化方法仍然是使用得较多的一种索引方法，淘宝（详见[Fast Approximate Nearest Neighbor Search With The Navigating Spreading-out Graph](https://arxiv.org/abs/1707.00143)）、蘑菇街等公司均有使用。乘积量化和HNSW特性对比如下：
 
 特性 | OPQ | HNSW
-:---:|:---:|:---
-内存占用 | 小 | 较大
+|:---:|:---:|:---:|
+内存占用 | 小 | 大 |
 召回率 | 较高 | 高 |
 数据动态增删 | 灵活 | 不易 |
 
@@ -77,7 +77,7 @@ HNSW是Yury A. Malkov提出的一种基于图索引的方法，它是Yury A. Mal
 M参数：80，内存大小: 159364 Mb，索引文件：`cnn2b_199485332m_ef_80_M_32_ip.bin`，查询样本数目: 10000，ef: 1000，距离：内积距离
 
 top@K | 召回 | 时间(time(us) per query)
----|---|---
+|:--:|:---:|:---:|
 1 | 0.957000 | -
 2 |	0.977300 | 9754.885742us
 3 | 0.981200 | 9619.380859us
@@ -95,7 +95,7 @@ top@K | 召回 | 时间(time(us) per query)
 M参数：16，Mem: 173442 Mb， 索引文件：`cnn2b_199485332m_ef_40_M_16.bin`, 查询样本数目: 10000，ef: 1000，距离：欧氏距离
 
 top@K | 召回 | 时间(time_us_per_query)
----|---|---
+|:---:|:---:|:---:|
 1 | 0.887800 | 4845.700684us
 2 | 0.911700 | 6732.230957us
 3 | 0.916600 | 6879.585449us
@@ -110,7 +110,7 @@ top@K | 召回 | 时间(time_us_per_query)
 M参数：40，Mem: 211533 Mb， 索引文件：`cnn2b_199485332m_ef_40_M_40.bin`, 查询样本数目: 10000，ef: 1000，距离：内积距离
 
 top@K | 召回 | 时间(time_us_per_query)
----|---|---
+|:---:|:---:|:---:|
 1 | 0.928600 | 6448.714355us
 2 | 0.948300 | 7658.459961us
 3 | 0.952600 | 7674.244629us
@@ -128,7 +128,7 @@ top@K | 召回 | 时间(time_us_per_query)
 Supported distances:
 
 Distance | parameter | Equation
----|---|---
+|:---:|:---:|:---:|
 Squared L2 | 'l2' | d = sum((Ai-Bi)^2)
 Inner product | 'ip' | d = 1.0 - sum(Ai*Bi))
 Cosine similarity | 'cosine' | d = 1.0 - sum(Ai\*Bi) / sqrt(sum(Ai\*Ai) \* sum(Bi*Bi))
