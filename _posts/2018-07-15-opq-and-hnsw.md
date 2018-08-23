@@ -140,6 +140,8 @@ Cosine similarity | 'cosine' | d = 1.0 - sum(Ai\*Bi) / sqrt(sum(Ai\*Ai) \* sum(B
 - efSearch：设置得越大，召回率越高，但同时查询的响应时间变长，推荐范围100-2000，在HNSW，参数ef是efSearch的缩写
 - M：在一定访问内，设置得越大，召回率增加，查询响应时间变短，但同时M增大会导致索引时间增加，推荐范围5-100
 
+HNSW L2space返回的top@K，是距离最小的K个结果，但是在结果表示的时候，距离是从大到小排序的，所以top@K距离是最小的，top@K-1距离是次之，top@1是距离第K大的。只是结果在表示上逆序了而已，不影响最终的结果。如果要按正常的从小到大来排序，则对top@K的结果做个逆序即可。作者在python的接口里，实现了这种逆序，具体见[bindings.cpp#L287](https://github.com/nmslib/hnsw/blob/master/python_bindings/bindings.cpp#L287)，所以python的结果和c++的结果，是逆序的差异。
+
 ### 参数详细意义
 
 - M：参数M定义了第0层以及其他层近邻数目，不过实际在处理的时候，第0层设置的近邻数目是2*M。如果要更改第0层以及其他层层近邻数目，在HNSW的源码中进行更改即可。另外需要注意的是，第0层包含了所有的数据点，其他层数据数目由参数mult定义，详细的细节可以参考HNSW论文。
