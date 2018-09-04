@@ -13,7 +13,11 @@ tags: ANN
 
 ## 基于树的方法
 
-几乎所有的ANN方法都是对全空间的划分，所以基于树的方法也不例外。基于树的方法采用**树**这种数据结构的方法来表达对全空间的划分，其中又以KD树最为经典。下面左图是KD树对全空间的划分过程，以及用树这种数据结构来表达的一个过程。
+几乎所有的ANN方法都是对全空间的划分，所以基于树的方法也不例外。基于树的方法采用**树**这种数据结构的方法来表达对全空间的划分，其中又以KD树最为经典，下面分别对KD树和[Annoy](https://github.com/spotify/annoy)进行简单介绍。
+
+### KD数
+
+下面左图是KD树对全空间的划分过程，以及用树这种数据结构来表达的一个过程。
 
 ![drawing](http://ose5hybez.bkt.clouddn.com/2017/0408/kdTree_zpshq4ywnby.PNG)
 
@@ -37,6 +41,29 @@ In [9]: kdtree.visualize(tree)
 
 > kd-trees are not suitable for efficiently finding the nearest neighbour in high dimensional spaces.  
 In very high dimensional spaces, the curse of dimensionality causes the algorithm to need to visit many more branches than in lower dimensional spaces. In particular, when the number of points is only slightly higher than the number of dimensions, the algorithm is only slightly better than a linear search of all of the points.
+
+### Annoy
+
+Annoy是[Erik Bernhardsson](https://github.com/erikbern)写的一个以树为数据结构的近似最近邻搜索库，并用在[Spotify](http://www.spotify.com/)的推荐系统中。Annoy的核心是不断用选取的两个质心的法平面对空间进行分割，最终将每一个区分的子空间里面的样本数据限制在K以内。对于待插入的样本$x_i$，从根节点依次使用法向量跟$x_i$做内积运算，从而判断使用法平面的哪一边（左子树or右子树）。对于查询向量$q_i$，采用同样的方式（在树结构上体现为从根节点向叶子节点递归遍历），即可定位到跟$q_i$在同一个子空间或者邻近的子空间的样本，这些样本即为$q_i$近邻。
+
+为了提高查询的召回，Annoy采用建立多棵树的方式，这种做法是一种非常常见的做法，比如NV-tree也采用这种方式，哈希方法采用多表的哈希方法。
+
+值得注意的是，Annoy如果不保存原始特征，则Annoy只能返回查询的k个近邻，至于这k个里面的排序顺序是怎么样的，它是不知道的，如果需要知道，需要对这k个返回的结果，获取原始特征，再计算各自的相似度，排序一下即可得到这k个结果的排序。
+
+根据Annoy的定义的节点数据结构，如下：
+
+```cpp
+struct ANNOY_NODE_ATTRIBUTE Node {
+S n_descendants;
+union {
+  S children[2]; // Will possibly store more than 2
+  T norm;
+};
+T dot_factor;
+T v[1]; // We let this one overflow intentionally. Need to allocate at least 1 to make GCC happy
+};
+```
+其中`T v[1]`保存原始特征，保存原始的特征的坏处是造成占用内存过大，索引文件过大。
 
 ## 哈希方法
 
