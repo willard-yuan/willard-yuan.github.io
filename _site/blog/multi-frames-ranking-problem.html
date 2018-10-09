@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    图像检索：视频多帧排序
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="Latest 10 blog posts (atom)" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <a class="" href="/project/">Project</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+	      <a href="/YongYuan_resume.pdf">Resume</a>
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <a href="/books/">Book</a>
+		    <a href="/timeline/">Times</a>
+        <a href="https://github.com/willard-yuan">GitHub</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="http://ose5hybez.bkt.clouddn.com/index/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    图像检索：视频多帧排序
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2018年05月27日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="http://localhost:4000/blog/categories.html#Image Retrieval">Image Retrieval</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="http://localhost:4000/tag/#CBIR">CBIR</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:2585
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <h2 id="背景与问题">背景与问题</h2>
+
+<p>每一个视频抽取n帧，n是变化的，有的视频长抽的帧数多，有的视频短抽的帧数相应的也少一些。在索引的时候，将所有视频的帧都索引在一起。对于查询的视频，同样抽取视频帧，假设抽取到了m帧，那么问题来了，对这m帧的查询结果，其排序逻辑该如何设计？</p>
+
+<h2 id="多帧相似性度量">多帧相似性度量</h2>
+
+<p>对于文章开头提出的问题，可以先对其进行简化，先思考这样一个问题：<strong>两个视频</strong>，如何度量两个视频的相似性（引申问题：如果校验两个图片或两个视频是重复的）？</p>
+
+<p>如果两个视频，其提取的特征是视频维度的全局特征，即每个视频最终表示成了一个全局向量表示（比如iDT、C3D等特征），那么度量两个视频间的相似性时，可以直接计算它们之间的余弦相似性或者欧式距离等。这样固然最省事，但在实际应用中，当视频存量上亿，并且还有源源不断的视频添加进来时，显然基于视频维度提特征的方式因为耗费资源太大而无法得以在具备实时性要求的场景中加以应用。因而实际中在对视频内容做相关理解与分析的时候，往往是基于抽帧的方式（如何抽帧以及是否做关键帧检测在此不表）。在获取到视频的帧后，可以在此基础上提取视频维度的特征，或者提取帧级别的特征。</p>
+
+<p>小白菜简单地总结视频维度特征与帧级别特征（类似全局特征和局部特征）的优劣：</p>
+
+<ul>
+  <li>视频维度特征：考虑了时空维度信息，有利于表述整个视频发生的事件等全局信息，表达的特征更紧凑；</li>
+  <li>帧级别特征：最大的缺陷在于未考虑视频时间维的信息，将帧与帧之间孤立起来了。当然帧级别的特征，其对视频空间信息的特征描述的力度更细一些，在某些场景中，比如校验两个视频是否是重复视频，基于帧级别的特征反而更适用；</li>
+</ul>
+
+<p>一般而言，抽取视频维度的特征通常是非常耗时的。因而，实际面向视频的应用，除非场景应用非常有价值且规模不大可能会使用视频维度的特征，大部分的视频内容理解往往是基于帧级别的特征。现在回到本节开头的问题：两个视频，如何度量两个视频的相似性？这个问题小白菜曾在<a href="http://yongyuan.name/blog/asymmetry-problem-in-computer-vision.html">机器视觉：Asymmetry Problem in Computer Vision</a>中介绍累积最小（最大）距离非对称问题时有涉及过，可以看出，累积最小（最大）距离极其符合该应用场景。因而，对于两个视频，要度量两个视频的相似性，可以采用累积最小（最大）距离，即：</p>
+
+<p>\begin{equation}
+S(X, Y) = \sum_{i=1}^{i=n} \sum_{j=1}^{j=m} d_\min(x_i, y_j)
+\end{equation}</p>
+
+<p>累积最小（最大）距离在应用的时候，可能会出现A视频中的多个帧匹配到B视频中的一帧或交叉匹配的情况（视频序列是时序的）。对于这种情况，在算帧匹配的时候，可以使用动态规划（DP）方法避免出现多帧和一帧匹配或交叉匹配，并确保得到的$S(X,Y)$又是最小的。当然，直接计算累积最小（最大）距离也依然是很好的。实际应用中，这种基于累积最小（最大）距离的多帧相似度度量经受住了应用的考验，而且计算效率比采用DP避免交叉匹配方式更高，并且效果很理想。</p>
+
+<p>有了两个视频间多帧相似性的度量，将其拓展到一个query视频跟N个视频的相似性排序，就相比比较直观了。下面分别对暴力搜索多帧排序和OPQ多帧排序予以介绍，OPQ多帧排序是暴力搜索多帧排序的继承，只不过在对每帧查询的时候，使用的是OPQ索引，而暴力搜索则是直接query。</p>
+
+<h2 id="暴力搜索多帧排序">暴力搜索多帧排序</h2>
+
+<p>在不需要实时处理、对召回要求很高并且不是很频繁查询的场景，比如回溯任务中，暴力搜索仍然是一种值得推荐的搜索方法。原因有二：</p>
+
+<ul>
+  <li>一是特征性能发挥到最大，从而保证最好的召回率；</li>
+  <li>二是在特征维度不是很高的情况下（几百维，如果是CNN特征且维度较高，比如上千维，可以降到128d或者512d，损失精度通常很小），通过SSE加速，距离的计算也可以算得很快。</li>
+</ul>
+
+<p>对于多帧排序，其排序逻辑建立在<strong>两个视频</strong>多帧相似性度量上，即对于一个query视频，库中的每个视频在与query视频做相似性度量的时候，均应采用上一节指出的<strong>累积最小（最大）距离</strong>分别计算相似度。在实际计算的时候，这种逐个视频计算的方式可以优化为query视频与N个视频进行内积运算（特征在提取的时候进行了$L2$归一化）的方式，然后对相似性矩阵做排序处理，假设query视频帧数是$m$帧，库中共$N$个视频，每一个视频取$n$帧，则相似性矩阵大小为$m \times (N*n)$，即每一行对应query视频某一帧查询后排序的结果，如下图所示：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2018/0516/multiframes_reranking1.png" alt="drawing" /></p>
+
+<p>上图中，qF1表示查询视频的第1帧，AF1表示视频A的第1帧，后面以此类推。对该排完序后的相似性矩阵，我们需要对每$i(i = 0,…,m)$行取出视频id对应的最大的值（<strong>因为计算的是余弦相似度</strong>）作为该帧对应各视频id的结果，这个过程可以用下图来直观的表述出来：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2018/0516/multiframes_reranking2.png" alt="drawing" /></p>
+
+<p>如上图所示，以qF1帧查询为例，由于已经对该帧查询的结果按相似性进行的排序，因而qF1帧查询对A视频查询的结果为AF1，其余以此类推。最后对这m帧经过最大值筛选后的结果，按视频id进行相似性分数的归并，最终得到多帧相似性排序分数，即：</p>
+
+<div class="language-text highlighter-rouge"><pre class="highlight"><code>A视频分数：AF1+AF2+AF1+...+AF3 
+B视频分数：BF1+BF1+BF1+...+BF1
+C视频分数：CF1+CF3+0.0+...+0.0
+</code></pre>
+</div>
+
+<p>上面假设C视频对于查询视频的每帧，在设置得阈值条件下无返回结果，因而用分数0.0来表示（可以视为将所有的结果在初始化的时候初始化为0）。实际query的时候，对于每一帧的查询结果，不需要将所有的查询结果返回回来，可以通过设置一个相似度阈值只返回一定数目的结果，相似度太小的返回来了也没什么用，徒增计算量和浪费资源，这样处理后排序、筛选、合并的计算量大大降低了。</p>
+
+<h2 id="opq多帧排序">OPQ多帧排序</h2>
+
+<p>在对实时性有要求的场景，比如上传一个视频，需要从海量的视频库中召回相同或者相似的那些视频，显然暴力搜索多帧排序无法满足要求，需要以某种近似最近邻搜索方法来构建索引。关于近似最近邻搜索方法，在此前的博文如<a href="http://yongyuan.name/blog/ann-search.html">图像检索：再叙ANN Search</a>以及其他的博文中有过很多的介绍，这里仅以OPQ为例来介绍ANN多帧排序方法。</p>
+
+<p>OPQ多帧排序方法和暴力搜索多帧排序都是基于多帧相似性度量，不同的是，由于OPQ（或PQ）计算的非对称距离，其算出来的值越小，表示两者越相似，而暴力搜索采用的是余弦相似度，其值越大表示两者越相似。因而，对于OPQ多帧排序逻辑，在设计的时候，似乎只需要为排序初始化的分数初始化一个比较合理的值，这里只对返回所有结果做初始化，下面是详细的OPQ多帧排序。</p>
+
+<p>对于某查询视频queryVid，假设queryVid有m帧$（f_1,f_2,…,f_m）$，对于第i帧查询，在距离阈值小于0.1的条件下，返回了k个结果$(r_1, r_2,…,r_k)$，然后对这m帧的结果按视频id进行最小值选取与合并。举个简单的例子，假设某次查询视频只有3帧，下面是每帧查询返回的结果：</p>
+
+<div class="language-text highlighter-rouge"><pre class="highlight"><code>查询视频第f1帧返回的结果: A1, B1, E1, C1, D1, B2, E2
+查询视频第f2帧返回的结果: B1, C2, D1, C1, E1
+查询视频第f3帧返回的结果: A2, C1, B2, D2, E1, D1
+</code></pre>
+</div>
+
+<p>对于查询视频第f1帧返回的结果，假设$A1 \leqslant B1 \leqslant E1 \leqslant C1 \leqslant D1 \leqslant B2 \leqslant E2 \leqslant 1.0 $，后面查询的同理。对上面每帧查询的结果，按视频id取最小值，得下面结果：</p>
+
+<div class="language-text highlighter-rouge"><pre class="highlight"><code>查询视频第f1帧返回的结果: A1, B1, E1, C1, D1
+查询视频第f2帧返回的结果: B1, C2, D1, E1
+查询视频第f3帧返回的结果: A2, C1, B2, D2, E1
+</code></pre>
+</div>
+
+<p>对于第f2帧返回的结果，给A视频我们置一个比较大的阈值，比如上面提过的置为1.0来代替，表示第f2帧作为查询时，与A视频相似度差得比较大。之后，便可按视频id对结果进行合并了：</p>
+
+<div class="language-text highlighter-rouge"><pre class="highlight"><code>A视频分数：A1+1.0+A2
+B视频分数：B1+B1+B2   
+C视频分数：C1+C2+C1
+D视频分数：D1+D1+D2
+E视频分数：E1+E1+E1
+</code></pre>
+</div>
+
+<p>然后再对A、B、C、D、E视频上面求和后的分数从小到大排序，得到的便是最终多帧查询排序的结果。整个过程在实现的时候，可以采用<code class="highlighter-rouge">partial_sort</code>方法来完成，关于<code class="highlighter-rouge">partial_sort</code>的用法，可以参考<a href="http://www.cnblogs.com/qlee/archive/2011/05/25/2057281.html">理解你的排序操作</a>。</p>
+
+<p>无论是对于暴力搜索多帧排序、还是OPQ多帧排序，在采用了上述介绍的累积最小（最大）距离的多帧相似度度量后，跟之前采用的基于倒排查询相比，查询效果取得了极大的提升。另外对于OPQ多帧排序的结果，还可以对前top@K的结果做一次重排，能够将累积最小（最大）距离的多帧相似度度量的检索准确率发挥到最大的程度。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>在本篇博文中，小白菜以多帧索引及排序为主题进行了一些讨论，包括了</p>
+
+<ul>
+  <li>多帧相似性度量</li>
+  <li>暴力搜索多帧排序</li>
+  <li>OPQ多帧排序</li>
+</ul>
+
+<p>3个方面的内容，这些内容在视频搜索上一般都会涉及。关于多帧索引及排序的问题，学术上能够查询的论文比较少，这里小白菜结合自己的理解以及应用实践总结了小部分的经验，希望对遇到这方面问题的小伙伴有些参考的价值，也欢迎在一线从事CBIR的小伙伴拍砖交流。</p>
+
+  	</div>
+	</div>
+
+<div class="content-play">
+    <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">请我喝杯咖啡</a></p>
+    <div class="hide_box-play"></div>
+    <div class="shang_box-play">
+        <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+        <div class="shang_tit-play">
+            <p>感谢您的支持，我会继续写出更优秀的文章!</p>
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="pay_explain">请我喝杯咖啡</div>
+        <div class="shang_payselect">
+            <div class="pay_item" data-id="weipay">
+                <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+            </div>
+            <div class="pay_item checked" data-id="alipay">
+                <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+            </div>
+        </div>
+        <div class="shang_info-play">
+            <p>打开<span id="shang_pay_txt">微信</span>扫一扫，即可进行扫码打赏哦</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function dashangToggle(){
+        $(".hide_box-play").fadeToggle();
+        $(".shang_box-play").fadeToggle();
+    }
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+<style type="text/css">
+  .content-play{}
+  .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+  .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+  .shang_box-play img{border:none;border-width:0;}
+  .dashang{display:block;width:140px;margin:5px auto;height:40px;line-height:25px;padding:8px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+  .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+  .shang_close-play{float:right;display:inline-block;
+    margin-right: 10px;margin-top: 20px;
+  }
+  .shang_logo{display:block;text-align:center;margin:20px auto;}
+  .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+  .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+  .shang_payimg{width:140px;padding:10px;/*padding-left: 80px; border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+  .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+  .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+  .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+  .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+  .shang_info-play{clear:both;}
+  .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+</style>
+
+
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/improve-phash-for-copy-detection.html">←图像检索：图像拷贝检索PHash改进方案</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/opq-and-hnsw.html">图像检索：OPQ索引与HNSW索引→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Disqus Comment BEGIN -->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yongyuan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    <!--displayMath: [['$$','$$'], ['\[','\]']],-->
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <footer>
+    <div  style="border-bottom: 1px solid #eee"></div>
+    <p class="linkings">
+    Friend: <a href="https://sites.google.com/site/raphaelitemou/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://cmp.felk.cvut.cz/~toliageo/publi.html">Tolias</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.heyuhang.com/">heyuhang</a>&nbsp&nbsp&nbsp&nbsp<a href="https://blog.yuanbin.me/">yuanbin</a>&nbsp&nbsp&nbsp&nbsp<a href="http://freemind.pluskid.org/">pluskid</a>
+    </p>
+    <!--p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p-->
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> 2013-2018
+    </p>
+    <!--ul class="links">
+      <li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li>
+    </ul-->
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>

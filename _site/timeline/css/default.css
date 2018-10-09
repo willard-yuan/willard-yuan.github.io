@@ -1,0 +1,76 @@
+body{margin:0;padding:0;background:#1ABC9C;font-size:12px;overflow:auto}
+#mainDiv{width:100%;height:100%}
+#content {margin-left: 20px}
+#subtitle{text-align:right}
+#loveHeart{float:left;width:670px;height:625px}
+#garden{width:100%;height:100%}
+#elapseClock{text-align:right;font-size:18px;margin-top:10px;margin-bottom:10px}
+#words{font-family:"Consolas","Monaco","Bitstream Vera Sans Mono","Courier New","sans-serif";width:500px;font-size:24px;color:#666}
+#messages{display:none}
+#elapseClock .digit{font-family:"digit";font-size:36px}
+#loveu{padding:5px;font-size:22px;margin-top:80px;margin-right:100px;text-align:right;display:none}
+#loveu .signature{margin-top:10px;font-size:20px;font-style:italic}
+#clickSound{display:none}
+#code{float:left;width:440px;height:400px;color:#333;font-family:"Consolas","Monaco","Bitstream Vera Sans Mono","Courier New","sans-serif";font-size:15px}
+#code .string{color:#2a36ff}#code .keyword{color:#7f0055;font-weight:bold}
+#code .placeholder{margin-left:15px}#code .space{margin-left:7px}#code .comments{color:#3f7f5f}
+#copyright{margin-top:10px;text-align:center;width:100%;color:#666}
+#errorMsg{width:100%;text-align:center;font-size:24px;position:absolute;top:100px;left:0}
+#copyright a{color:#666}
+
+
+.avatar {
+  box-shadow: 0px 0px 0px 4px #FFF, 0px 0px 4px 4px #4D4D4D;
+  position: absolute;
+  margin-top:16px;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  background: url(../YongYuan.png) no-repeat;
+  background-size: 4rem;
+  }
+  
+  /*图像旋转*/
+.avatar:hover {
+		    -webkit-animation: spin 2s linear infinite;
+		    -moz-animation: spin 2s linear infinite;
+		    -ms-animation: spin 2s linear infinite;
+		    -o-animation: spin 2s linear infinite;
+		    animation: spin 2s linear infinite; }	    
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(359deg); } }
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg); }
+
+  to {
+    -moz-transform: rotate(359deg); } }
+
+@-o-keyframes spin {
+  from {
+    -o-transform: rotate(0deg); }
+
+  to {
+    -o-transform: rotate(359deg); } }
+
+@-ms-keyframes spin {
+  from {
+    -ms-transform: rotate(0deg); }
+
+  to {
+    -ms-transform: rotate(359deg); } }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+
+  to {
+    transform: rotate(359deg); } }

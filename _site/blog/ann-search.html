@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    图像检索：再叙ANN Search
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="Latest 10 blog posts (atom)" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <a class="" href="/project/">Project</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+	      <a href="/YongYuan_resume.pdf">Resume</a>
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <a href="/books/">Book</a>
+		    <a href="/timeline/">Times</a>
+        <a href="https://github.com/willard-yuan">GitHub</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="http://ose5hybez.bkt.clouddn.com/index/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    图像检索：再叙ANN Search
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2017年04月08日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="http://localhost:4000/blog/categories.html#Image Retrieval">Image Retrieval</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="http://localhost:4000/tag/#ANN">ANN</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:9831
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <p>每逢碰到这个ANN的简称，小白菜总是想到Artificial Neural Network人工神经网络，不过这里要展开的ANN并不是Artificial Neural Network，而是已被小白菜之前写过很多次的Approximate Nearest Neighbor搜索。虽然读书的那会儿，这一块的工作专注得比较多，比如哈希，也整理过一个像模像样的工具包<a href="https://github.com/willard-yuan/hashing-baseline-for-image-retrieval">hashing-baseline-for-image-retrieval</a>，以及包括KD树、PQ乘积量化等近似最近邻搜索，但这些东西放在今天小白菜的知识体系里来看，依然自以为还非常的散乱。所以借再次有专研的机会之际，再做一次整理，完善自己在索引这方面的知识体系。</p>
+
+<p>在具体到不同类的索引方法分类前，小白菜以为，从宏观上对ANN有下面的认知显得很有必要：<strong>brute-force搜索的方式是在全空间进行搜索，为了加快查找的速度，几乎所有的ANN方法都是通过对全空间分割，将其分割成很多小的子空间，在搜索的时候，通过某种方式，快速锁定在某一（几）子空间，然后在该（几个）子空间里做遍历</strong>。可以看到，正是因为缩减了遍历的空间大小范围，从而使得ANN能够处理大规模数据的索引。</p>
+
+<p>根据小白菜现有的对ANN的掌握，可以将ANN的方法分为三大类：基于树的方法、哈希方法、矢量量化方法。这三种方法里面，着重总结典型方法，其中由以哈希方法、矢量量化方法为主。</p>
+
+<h2 id="基于树的方法">基于树的方法</h2>
+
+<p>几乎所有的ANN方法都是对全空间的划分，所以基于树的方法也不例外。基于树的方法采用<strong>树</strong>这种数据结构的方法来表达对全空间的划分，其中又以KD树最为经典，下面分别对KD树和<a href="https://github.com/spotify/annoy">Annoy</a>进行简单介绍。</p>
+
+<h3 id="kd数">KD数</h3>
+
+<p>下面左图是KD树对全空间的划分过程，以及用树这种数据结构来表达的一个过程。</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/0408/kdTree_zpshq4ywnby.PNG" alt="drawing" /></p>
+
+<p>对KD树选择从哪一维度进行开始划分的标准，采用的是求每一个维度的方差，然后选择方差最大的那个维度开始划分。这里有一个比较有意思的问题是：<strong>为何要选择方差作为维度划分选取的标准</strong>？我们都知道，方差的大小可以反映数据的波动性。方差大表示数据波动性越大，选择方差最大的开始划分空间，可以使得所需的划分面数目最小，反映到树数据结构上，可以使得我们构建的KD树的树深度尽可能的小。为了更进一步加深对这一点的认识，可以以一个简单的示例图说明：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/0408/kd_zpslmugktds.JPEG" alt="drawing" /></p>
+
+<p>假设不以方差最大的x轴为划分面(x_var = 16.25)，而是以y轴(y_var = 0.0)轴为划分面，如图中虚线所示，可以看到，该划分使得图中的四个点都落入在同一个子空间中，从而使得该划分成为一个无效的划分，体现在以树结构上，就是多了一层无用的树深度。而以x轴为初始划分则不同(图像实线所示)，以x轴为初始划分可以得到数据能够比较均匀的散布在左右两个子空间中，从而使得整体的查找时间能够最短。注意，在实际的kd树划分的时候，并不是图中虚线所示，而是选取中值最近的点。上面示意图构建的具体kd树如下所示：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">kdtree</span><span class="o">.</span><span class="n">visualize</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+
+                       <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+             <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>              <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>一般而言，在空间维度比较低的时候，KD树是比较高效的，当空间维度较高时，可以采用下面的哈希方法或者矢量量化方法。</p>
+
+<blockquote>
+  <p>kd-trees are not suitable for efficiently finding the nearest neighbour in high dimensional spaces.<br />
+In very high dimensional spaces, the curse of dimensionality causes the algorithm to need to visit many more branches than in lower dimensional spaces. In particular, when the number of points is only slightly higher than the number of dimensions, the algorithm is only slightly better than a linear search of all of the points.</p>
+</blockquote>
+
+<h3 id="annoy">Annoy</h3>
+
+<p>Annoy是<a href="https://github.com/erikbern">Erik Bernhardsson</a>写的一个以树为数据结构的近似最近邻搜索库，并用在<a href="http://www.spotify.com/">Spotify</a>的推荐系统中。Annoy的核心是不断用选取的两个质心的法平面对空间进行分割，最终将每一个区分的子空间里面的样本数据限制在K以内。对于待插入的样本$x_i$，从根节点依次使用法向量跟$x_i$做内积运算，从而判断使用法平面的哪一边（左子树or右子树）。对于查询向量$q_i$，采用同样的方式（在树结构上体现为从根节点向叶子节点递归遍历），即可定位到跟$q_i$在同一个子空间或者邻近的子空间的样本，这些样本即为$q_i$近邻。</p>
+
+<p>为了提高查询的召回，Annoy采用建立多棵树的方式，这种做法是一种非常常见的做法，比如NV-tree也采用这种方式，哈希方法采用多表的哈希方法。</p>
+
+<p>值得注意的是，Annoy如果不保存原始特征，则Annoy只能返回查询的k个近邻，至于这k个里面的排序顺序是怎么样的，它是不知道的，如果需要知道，需要对这k个返回的结果，获取原始特征，再计算各自的相似度，排序一下即可得到这k个结果的排序。</p>
+
+<p>根据Annoy的定义的节点数据结构，如下：</p>
+
+<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="k">struct</span> <span class="n">ANNOY_NODE_ATTRIBUTE</span> <span class="n">Node</span> <span class="p">{</span>
+<span class="n">S</span> <span class="n">n_descendants</span><span class="p">;</span>
+<span class="k">union</span> <span class="p">{</span>
+  <span class="n">S</span> <span class="n">children</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// Will possibly store more than 2
+</span>  <span class="n">T</span> <span class="n">norm</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">T</span> <span class="n">dot_factor</span><span class="p">;</span>
+<span class="n">T</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// We let this one overflow intentionally. Need to allocate at least 1 to make GCC happy
+</span><span class="p">};</span>
+</code></pre>
+</div>
+<p>其中<code class="highlighter-rouge">T v[1]</code>保存原始特征，保存原始的特征的坏处是造成占用内存过大，索引文件过大。</p>
+
+<h2 id="哈希方法">哈希方法</h2>
+
+<p>哈希，顾名思义，就是将连续的实值散列化为0、1的离散值。在散列化的过程中，对散列化函数(也就是哈希函数)有一定的要求。根据学习的策略，可以将哈希方法分为无监督、有监督和半监督三种类型。在评估某种哈希方法用于图像检索的检索精度时，可以使用knn得到的近邻作为ground truth，也可以使用样本自身的类别作为ground truth。所以在实际评估准确度的时候，根据ground truth的定义，这里面是有一点小的trick的。通常对于无监督的哈希图像检索方法，由于我们使用的都是未标记的数据样本，所以我们会很自然的采用knn得到的近邻作为ground truth，但是对于图像检索的这一任务时，在对哈希函数的构造过程中，通常会有“相似的样本经编码后距离尽可能的近，不相似的样本编码后则尽可能的远”这一基本要求，这里讲到的相似，指语义的相似，因而你会发现，编码的基本要求放在无监督哈希方法里，似乎与采用knn得到的近邻作为ground truth的评价方式有些南辕北辙。对无监督哈希方法的ground truth一点小的疑惑在小白菜读书的时候就心存这样的困惑，一直悬而未解。当然，在做无监督的图像哈希方法，采用样本自身的类别作为ground truth是毋庸置疑的。</p>
+
+<p>小白菜读书那会儿，研究了很多的哈希图像检索方法（见<a href="https://github.com/willard-yuan/hashing-baseline-for-image-retrieval">hashing-baseline-for-image-retrieval</a>），有时候总会给一些工程实践上的错觉（在今天看来是这样的），即新论文里的方法远远碾压经典的方法，那是不是在实际中这些方法就很work很好使。实践的经历告诉小白菜，还是经典的东西更靠谱，不是因为新的方法不好，而是新的事物需要经过时间的沉淀与优化。</p>
+
+<p>所以，这里不会对近两年的哈希方法做铺陈，而是聊一聊工程中在要使用到哈希方法的场景下一般都会选用的局部敏感哈希（Local Sensitive Hashing, LSH）。</p>
+
+<h3 id="local-sensitive-hashing">Local Sensitive Hashing</h3>
+
+<p>关于LSH的介绍，小白菜以为，<a href="https://github.com/FALCONN-LIB/FALCONN/wiki/LSH-Primer">Locality-Sensitive Hashing: a Primer</a>这个讲解得极好，推荐一读。下面是小白菜结合自己的理解，提炼的一些在小白菜看来需要重点理解的知识（附上LSH划分空间示意图，在进行理解的时候可以参照改图）。</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/0408/lsh_ex_zps0lryoykz.PNG" alt="drawing" /></p>
+
+<h4 id="局部敏感是啥">局部敏感是啥？</h4>
+
+<p>当一个函数（或者更准确的说，哈希函数家族）具有如下属性的时候，我们说该哈希函数是局部敏感的：相近的样本点对比相远的样本点对更容易发生碰撞。</p>
+
+<h4 id="用哈希为什么可以加速查找">用哈希为什么可以加速查找？</h4>
+
+<p>对于brute force搜索，需要遍历数据集中的所有点，而使用哈希，我们首先找到查询样本落入在哪个cell(即所谓的桶)中，如果空间的划分是在我们想要的相似性度量下进行分割的，则查询样本的最近邻将极有可能落在查询样本的cell中，如此我们只需要在当前的cell中遍历比较，而不用在所有的数据集中进行遍历。</p>
+
+<h4 id="为什么要用多表哈希">为什么要用多表哈希？</h4>
+
+<p>对于单表哈希，当我们的哈希函数数目K取得太大，查询样本与其对应的最近邻落入同一个桶中的可能性会变得很微弱，针对这个问题，我们可以重复这个过程L次，从而增加最近邻的召回率。这个重复L次的过程，可以转化为构建L个哈希表，这样在给定查询样本时，我们可以找到L个哈希桶（每个表找到一个哈希桶），然后我们在这L个哈希表中进行遍历。这个过程相当于构建了K*L个哈希函数(注意是“相当”，不要做“等价”理解)。</p>
+
+<h4 id="多表哈希中哈希函数数目k和哈希表数目l如何选取">多表哈希中哈希函数数目K和哈希表数目L如何选取？</h4>
+
+<p>哈希函数数目K如果设置得过小，会导致每一个哈希桶中容纳了太多的数据点，从而增加了查询响应的时间；而当K设置得过大时，会使得落入每个哈希桶中的数据点变小，而为了增加召回率，我们需要增加L以便构建更多的哈希表，但是哈希表数目的增加会导致更多的内存消耗，并且也使得我们需要计算更多的哈希函数，同样会增加查询相应时间。这听起来非常的不妙，但是在K过大或过小之间仍然可以找到一个比较合理的折中位置。通过选取合理的K和L，我们可以获得比线性扫描极大的性能提升。</p>
+
+<h4 id="multiprobe-lsh是为了解决什么问题">Multiprobe LSH是为了解决什么问题？</h4>
+
+<p>多probe LSH主要是为了提高查找准确率而引入的一种策略。首先解释一下什么是Multiprobe。对于构建的L个哈希表，我们在每一个哈希表中找到查询样本落入的哈希桶，然后再在这个哈希桶中做遍历，而Multiprobe指的是我们不止在查询样本所在的哈希桶中遍历，还会找到其他的一些哈希桶，然后这些找到的T个哈希桶中进行遍历。这些其他哈希桶的选取准则是：跟查询样本所在的哈希桶邻近的哈希桶，“邻近”指的是汉明距离度量下的邻近。</p>
+
+<p>通常，如果不使用Multiprobe，我们需要的哈希表数目L在100到1000之间，在处理大数据集的时候，其空间的消耗会非常的高，幸运地是，因为有了上面的Multiprobe的策略，LSH在任意一个哈希表中查找到最近邻的概率变得更高，从而使得我们能到减少哈希表的构建数目。</p>
+
+<p>综上，对于LSH，涉及到的主要的参数有三个：</p>
+
+<ul>
+  <li>K，每一个哈希表的哈希函数（空间划分）数目</li>
+  <li>L，哈希表（每一个哈希表有K个哈希函数）的数目</li>
+  <li>T，近邻哈希桶的数目，即the number of probes</li>
+</ul>
+
+<p>这三个设置参数可以按照如下顺序进行：首先，根据可使用的内存大小选取L，然后在K和T之间做出折中：哈希函数数目K越大，相应地，近邻哈希桶的数目的数目T也应该设置得比较大，反之K越小，L也可以相应的减小。获取K和L最优值的方式可以按照如下方式进行：对于每个固定的K，如果在查询样本集上获得了我们想要的精度，则此时T的值即为合理的值。在对T进行调参的时候，我们不需要重新构建哈希表，甚至我们还可以采用二分搜索的方式来加快T参数的选取过程。</p>
+
+<h3 id="lsh开源工具包">LSH开源工具包</h3>
+
+<p>关于LSH开源工具库，有很多，这里推荐两个LSH开源工具包：<a href="https://github.com/kayzhu/LSHash">LSHash</a>和<a href="https://falconn-lib.org/">FALCONN</a>, 分别对应于学习和应用场景。</p>
+
+<h4 id="lshash">LSHash</h4>
+
+<p><a href="https://github.com/kayzhu/LSHash">LSHash</a>非常适合用来学习，里面实现的是最经典的LSH方法，并且还是单表哈希。哈希函数的系数采用随机的方式生成，具体代码如下：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">_generate_uniform_planes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="s">""" Generate uniformly distributed hyperplanes and return it as a 2D
+    numpy array.
+    """</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">hash_size</code>为哈希函数的数目，即前面介绍的K。整个框架，不论是LSH的哈希函数的生成方式，还是LSH做查询，都极其的中规中矩，所以用来作为了解LSH的过程，再适合不过。如果要在实用中使用LSH，可以使用<a href="https://falconn-lib.org/">FALCONN</a>。</p>
+
+<h4 id="falconn">FALCONN</h4>
+
+<p><a href="https://falconn-lib.org/">FALCONN</a>是经过了极致优化的LSH，其对应的论文为NIPS 2015 <a href="https://people.csail.mit.edu/ludwigs/papers/nips15_crosspolytopelsh.pdf">Practical and Optimal LSH for Angular Distance</a>，<a href="https://people.csail.mit.edu/indyk/">Piotr Indyk</a>系作者之一（Piotr Indyk不知道是谁？<a href="http://web.mit.edu/andoni/www/LSH/index.html">E2LSH</a>这个页面对于看过LSH的应该非常眼熟吧），论文有些晦涩难懂，不过FALCONN工具包却是极其容易使用的，提供有C++使用的例子<a href="https://github.com/FALCONN-LIB/FALCONN/blob/master/src/benchmark/random_benchmark.cc">random_benchmark.cc</a>以及Python的例子<a href="https://github.com/FALCONN-LIB/FALCONN/blob/master/src/python/benchmark/random_benchmark.py">random_benchmark.py</a>，另外文档非常的详实，具体可参阅<a href="https://falconn-lib.org/docs/namespacefalconn.html">falconn Namespace Reference</a>和<a href="https://falconn-lib.org/pdoc/falconn/">falconn module</a>。下面将其Python例子和C++例子中初始化索引以及构建哈希表的部分提取出来，对其中的参数做一下简要的分析。</p>
+
+<p>Python初始化与构建索引<a href="https://github.com/FALCONN-LIB/FALCONN/blob/master/src/python/benchmark/random_benchmark.py#L127">L127</a>：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Hyperplane hashing</span>
+<span class="n">params_hp</span> <span class="o">=</span> <span class="n">falconn</span><span class="o">.</span><span class="n">LSHConstructionParameters</span><span class="p">()</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">d</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">lsh_family</span> <span class="o">=</span> <span class="s">'hyperplane'</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">distance_function</span> <span class="o">=</span> <span class="s">'negative_inner_product'</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">storage_hash_table</span> <span class="o">=</span> <span class="s">'flat_hash_table'</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="mi">19</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">num_setup_threads</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">params_hp</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span> <span class="o">^</span> <span class="mi">833840234</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Hyperplane hash</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+<span class="n">hp_table</span> <span class="o">=</span> <span class="n">falconn</span><span class="o">.</span><span class="n">LSHIndex</span><span class="p">(</span><span class="n">params_hp</span><span class="p">)</span>
+<span class="n">hp_table</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">hp_table</span><span class="o">.</span><span class="n">set_num_probes</span><span class="p">(</span><span class="mi">2464</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>C++初始化与构建索引<a href="https://github.com/FALCONN-LIB/FALCONN/blob/master/src/benchmark/random_benchmark.cc#L194">L194</a>:</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// Hyperplane hashing
+</span><span class="n">LSHConstructionParameters</span> <span class="n">params_hp</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">lsh_family</span> <span class="o">=</span> <span class="n">LSHFamily</span><span class="o">::</span><span class="n">Hyperplane</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">distance_function</span> <span class="o">=</span> <span class="n">distance_function</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">storage_hash_table</span> <span class="o">=</span> <span class="n">storage_hash_table</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">k</span> <span class="o">=</span> <span class="mi">19</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">l</span> <span class="o">=</span> <span class="n">num_tables</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">num_setup_threads</span> <span class="o">=</span> <span class="n">num_setup_threads</span><span class="p">;</span>
+<span class="n">params_hp</span><span class="p">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span> <span class="o">^</span> <span class="mi">833840234</span><span class="p">;</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hyperplane hash"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+<span class="n">Timer</span> <span class="n">hp_construction</span><span class="p">;</span>
+
+<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">LSHNearestNeighborTable</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;&gt;</span> <span class="n">hptable</span><span class="p">(</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">construct_table</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">params_hp</span><span class="p">)));</span>
+<span class="n">hptable</span><span class="o">-&gt;</span><span class="n">set_num_probes</span><span class="p">(</span><span class="mi">2464</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>可以看到，有3个很重要的参数，分别是<code class="highlighter-rouge">k</code>、<code class="highlighter-rouge">l</code>和<code class="highlighter-rouge">set_num_probes</code>，对应的具体意义前面已经解释，这里不再赘述。</p>
+
+<p>FALCONN的索引构建过程非常快，百万量级的数据，维度如果是128维，其构建索引时间大概2-3min的样子，实时搜索可以做到几毫秒的响应时间。总之，这是小白菜见过的构建索引时间最短查询响应时间也极快的ANN工具库。</p>
+
+<p>另外谈一下数据规模问题。对于小数据集和中型规模的数据集(几个million-几十个million)， FALCONN和<a href="https://github.com/searchivarius/nmslib">NMSLIB</a>是一个非常不错的选择，如果对于大型规模数据集(几百个million以上)，基于矢量量化的<a href="https://github.com/facebookresearch/faiss/">Faiss</a>是一个明智的选择。关于这方面的讨论，可以参阅小白菜参阅的讨论<a href="https://github.com/facebookresearch/faiss/issues/23">benchmark</a>。</p>
+
+<p>当然，FALCONN还不是很完善，比如对于数据的动态增删目前还不支持，具体的讨论可以参见<a href="https://github.com/FALCONN-LIB/FALCONN/issues/2">Add a dynamic LSH table</a>。其实这不是FALCONN独有的问题，NMSLIB目前也不支持。一般而言，动态的增删在实际应用场合是一个基本的要求，但是我们应注意到，增删并不是毫无限制的，在增删频繁且持续了一段时间后，这是的数据分布已经不是我们原来建索引的数据分布形式了，我们应该重新构建索引。在这一点上，Faiss支持数据的动态增删。</p>
+
+<p>对于哈希方法及其典型代表局部敏感哈希，暂时就整理到这里了。下面小白菜对基于矢量量化的方法谈一谈自己理解。</p>
+
+<h2 id="矢量量化方法">矢量量化方法</h2>
+
+<p>矢量量化方法，即vector quantization，其具体定义为：<a href="http://blog.pluskid.org/?p=57">将一个向量空间中的点用其中的一个有限子集来进行编码的过程</a>。在矢量量化编码中，<a href="http://baike.baidu.com/item/%E7%9F%A2%E9%87%8F%E9%87%8F%E5%8C%96">关键是码本的建立和码字搜索算法</a>。比如常见的聚类算法，就是一种矢量量化方法。而在ANN近似最近邻搜索中，向量量化方法又以乘积量化(PQ, Product Quantization)最为典型。在之前的博文<a href="http://yongyuan.name/blog/cbir-technique-summary.html">基于内容的图像检索技术</a>的最后，对PQ乘积量化的方法做过简单的概要。在这一小节里，小白菜结合自己阅读的论文和代码对PQ乘积量化、倒排乘积量化(IVFPQ)做一种更加直观的解释。</p>
+
+<h3 id="pq乘积量化">PQ乘积量化</h3>
+
+<p>PQ乘积量化的核心思想还是聚类，或者说具体应用到ANN近似最近邻搜索上，K-Means是PQ乘积量化子空间数目为1的特例。PQ乘积量化生成码本和量化的过程可以用如下图示来说明：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/0408/PQ_zpsybhprown.PNG" alt="" /></p>
+
+<p>在训练阶段，针对N个训练样本，假设样本维度为128维，我们将其切分为4个子空间，则每一个子空间的维度为32维，然后我们在每一个子空间中，对子向量采用K-Means对其进行聚类(图中示意聚成256类)，这样每一个子空间都能得到一个码本。这样训练样本的每个子段，都可以用子空间的聚类中心来近似，对应的编码即为类中心的ID。如图所示，通过这样一种编码方式，训练样本仅使用的很短的一个编码得以表示，从而达到量化的目的。对于待编码的样本，将它进行相同的切分，然后在各个子空间里逐一找到距离它们最近的类中心，然后用类中心的id来表示它们，即完成了待编码样本的编码。</p>
+
+<p>正如前面所说的，在矢量量化编码中，关键是码本的建立和码字的搜索算法，在上面，我们得到了建立的码本以及量化编码的方式。剩下的重点就是查询样本与dataset中的样本距离如何计算的问题了。</p>
+
+<p>在查询阶段，PQ同样在计算查询样本与dataset中各个样本的距离，只不过这种距离的计算转化为间接近似的方法而获得。PQ乘积量化方法在计算距离的时候，有两种距离计算方式，一种是对称距离，另外一种是非对称距离。非对称距离的损失小(也就是更接近真实距离)，实际中也经常采用这种距离计算方式。下面过程示意的是查询样本来到时，以非对称距离的方式(红框标识出来的部分)计算到dataset样本间的计算示意：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/0408/PQ_search_zpskgugtocx.PNG" alt="" /></p>
+
+<p>具体地，查询向量来到时，按训练样本生成码本的过程，将其同样分成相同的子段，然后在每个子空间中，计算子段到该子空间中所有聚类中心得距离，如图中所示，可以得到4*256个距离，这里为便于后面的理解说明，小白菜就把这些算好的距离称作距离池。在计算库中某个样本到查询向量的距离时，比如编码为(124, 56, 132, 222)这个样本到查询向量的距离时，我们分别到距离池中取各个子段对应的距离即可，比如编码为124这个子段，在第1个算出的256个距离里面把编号为124的那个距离取出来就可，所有子段对应的距离取出来后，将这些子段的距离求和相加，即得到该样本到查询样本间的非对称距离。所有距离算好后，排序后即得到我们最终想要的结果。</p>
+
+<p>从上面这个过程可以很清楚地看出PQ乘积量化能够加速索引的原理：即将全样本的距离计算，转化为到子空间类中心的距离计算。比如上面所举的例子，原本brute-force search的方式计算距离的次数随样本数目N成线性增长，但是经过PQ编码后，对于耗时的距离计算，只要计算4*256次，几乎可以忽略此时间的消耗。另外，从上图也可以看出，对特征进行编码后，可以用一个相对比较短的编码来表示样本，自然对于内存的消耗要大大小于brute-force search的方式。</p>
+
+<p>在某些特殊的场合，我们总是希望获得精确的距离，而不是近似的距离，并且我们总是喜欢获取向量间的余弦相似度（余弦相似度距离范围在[-1,1]之间，便于设置固定的阈值），针对这种场景，可以针对PQ乘积量化得到的前top@K做一个brute-force search的排序。</p>
+
+<h3 id="倒排乘积量化">倒排乘积量化</h3>
+
+<p>倒排PQ乘积量化(IVFPQ)是PQ乘积量化的更进一步加速版。其加速的本质逃不开小白菜在最前面强调的是加速原理：<strong>brute-force搜索的方式是在全空间进行搜索，为了加快查找的速度，几乎所有的ANN方法都是通过对全空间分割，将其分割成很多小的子空间，在搜索的时候，通过某种方式，快速锁定在某一（几）子空间，然后在该（几个）子空间里做遍历</strong>。在上一小节可以看出，PQ乘积量化计算距离的时候，距离虽然已经预先算好了，但是对于每个样本到查询样本的距离，还是得老老实实挨个去求和相加计算距离。但是，实际上我们感兴趣的是那些跟查询样本相近的样本（小白菜称这样的区域为感兴趣区域），也就是说老老实实挨个相加其实做了很多的无用功，如果能够通过某种手段快速将全局遍历锁定为感兴趣区域，则可以舍去不必要的全局计算以及排序。倒排PQ乘积量化的”倒排“，正是这样一种思想的体现，在具体实施手段上，采用的是通过聚类的方式实现感兴趣区域的快速定位，在倒排PQ乘积量化中，聚类可以说应用得淋漓尽致。</p>
+
+<p>倒排PQ乘积量化整个过程如下图所示：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/0408/IVFPQ_zpswvosr8a6.PNG" alt="" /></p>
+
+<p>在PQ乘积量化之前，增加了一个粗量化过程。具体地，先对N个训练样本采用K-Means进行聚类，这里聚类的数目一般设置得不应过大，一般设置为1024差不多，这种可以以比较快的速度完成聚类过程。得到了聚类中心后，针对每一个样本x_i，找到其距离最近的类中心c_i后，两者相减得到样本x_i的残差向量(x_i-c_i)，后面剩下的过程，就是针对(x_i-c_i)的PQ乘积量化过程，此过程不再赘述。</p>
+
+<p>在查询的时候，通过相同的粗量化，可以快速定位到查询向量属于哪个c_i（即在哪一个感兴趣区域），然后在该感兴趣区域按上面所述的PQ乘积量化距离计算方式计算距离。</p>
+
+  	</div>
+	</div>
+
+<div class="content-play">
+    <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">请我喝杯咖啡</a></p>
+    <div class="hide_box-play"></div>
+    <div class="shang_box-play">
+        <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+        <div class="shang_tit-play">
+            <p>感谢您的支持，我会继续写出更优秀的文章!</p>
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="pay_explain">请我喝杯咖啡</div>
+        <div class="shang_payselect">
+            <div class="pay_item" data-id="weipay">
+                <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+            </div>
+            <div class="pay_item checked" data-id="alipay">
+                <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+            </div>
+        </div>
+        <div class="shang_info-play">
+            <p>打开<span id="shang_pay_txt">微信</span>扫一扫，即可进行扫码打赏哦</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function dashangToggle(){
+        $(".hide_box-play").fadeToggle();
+        $(".shang_box-play").fadeToggle();
+    }
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+<style type="text/css">
+  .content-play{}
+  .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+  .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+  .shang_box-play img{border:none;border-width:0;}
+  .dashang{display:block;width:140px;margin:5px auto;height:40px;line-height:25px;padding:8px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+  .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+  .shang_close-play{float:right;display:inline-block;
+    margin-right: 10px;margin-top: 20px;
+  }
+  .shang_logo{display:block;text-align:center;margin:20px auto;}
+  .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+  .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+  .shang_payimg{width:140px;padding:10px;/*padding-left: 80px; border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+  .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+  .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+  .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+  .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+  .shang_info-play{clear:both;}
+  .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+</style>
+
+
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/cbir-query-expansion.html">←图像检索：拓展查询(Query Expansion)</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/layer-selection-and-finetune-for-cbir.html">图像检索：layer选择与fine-tuning性能提升验证→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Disqus Comment BEGIN -->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yongyuan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    <!--displayMath: [['$$','$$'], ['\[','\]']],-->
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <footer>
+    <div  style="border-bottom: 1px solid #eee"></div>
+    <p class="linkings">
+    Friend: <a href="https://sites.google.com/site/raphaelitemou/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://cmp.felk.cvut.cz/~toliageo/publi.html">Tolias</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.heyuhang.com/">heyuhang</a>&nbsp&nbsp&nbsp&nbsp<a href="https://blog.yuanbin.me/">yuanbin</a>&nbsp&nbsp&nbsp&nbsp<a href="http://freemind.pluskid.org/">pluskid</a>
+    </p>
+    <!--p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p-->
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> 2013-2018
+    </p>
+    <!--ul class="links">
+      <li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li>
+    </ul-->
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>

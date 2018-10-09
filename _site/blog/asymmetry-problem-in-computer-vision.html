@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    机器视觉：Asymmetry Problem in Computer Vision
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="Latest 10 blog posts (atom)" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <a class="" href="/project/">Project</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+	      <a href="/YongYuan_resume.pdf">Resume</a>
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <a href="/books/">Book</a>
+		    <a href="/timeline/">Times</a>
+        <a href="https://github.com/willard-yuan">GitHub</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="http://ose5hybez.bkt.clouddn.com/index/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    机器视觉：Asymmetry Problem in Computer Vision
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2017年12月02日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="http://localhost:4000/blog/categories.html#计算机视觉">计算机视觉</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="http://localhost:4000/tag/#计算机视觉">计算机视觉</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:3076
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <blockquote>
+  <p>自然法则无时不刻不给予着人类以对称性的恩惠，从一片树叶到人类自身，其形态都是对称的。对称性的特性，大大减轻了人类的记忆和认知负担。然而，弱相互作用中互为镜像的物质的运动不对称却暗藏着自然法则对非对称性的偏爱。</p>
+</blockquote>
+
+<p>在计算机视觉中，对称性是一个很好的先验，如果某一个特定的物体具备对称性的话，通过引入对称性可以提升系统的精度。常见的对称性包括：</p>
+
+<ul>
+  <li>物体本身具备对称性，且这种对称性不容易受大视角变化的影响。主要应用场景为在训练诸如检测模型的时候，可以将这一信息加入到训练样本的扩增上；</li>
+  <li>相似性度量具备对称性。这种对称性常体现在设计的相似性度量准则上，A与B计算出的相似性和B与A得到的相似性是一样。</li>
+</ul>
+
+<p>我们的大脑深受对称性法则的影响，所以对于第一种情况，我们可以非常直观的将这一法则应用到我们的视觉模型训练中，但是对于第二种情况，特别是当相似性度量由非对称性在对称性上转化而来的时候，我们的第一意识却频频出错。计算机视觉中非对称现象和非对称相似性度量如此干扰我们的第一意识，以至于小白菜对这个问题曾做出过若干的思考，下面是小白菜结合自己的一些思考和经验做的总结和整理。</p>
+
+<h3 id="局部特征匹配中的非对称问题">局部特征匹配中的非对称问题</h3>
+
+<p>在用局部特征进行匹配的时候，比如SIFT，用A图匹配B图和用B图匹配A图，得到的匹配结果是不一样的，如下图所示：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/1029/sift_matching_diff.jpg" alt="" /></p>
+
+<p>在这匹配的过程中，所有的度量方式比如最近邻、次近邻、几何校验等都是具备对称性的，所以很容易给我们造成一种错觉就是他们的匹配结果应该是一样的。这里面造成匹配结果不对称的根本因素在于<strong>A图和B图它们的局部特征数目是不相等的</strong>，比如A有500个局部特征，B有800个局部特征，用500个局部特征去匹配800局部个特征和用800个局部特征去匹配500个局部特征，势必造成匹配的结果不一样。一个鲁棒的匹配算法，应该在用A匹配B和用B匹配A时都能获得比较好的匹配结果，以避免单一结果匹配较好的情形，像下面的匹配算法就不是一种好的匹配算法：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/1029/false_sift_matching.jpg" alt="" /></p>
+
+<p>在设计匹配算法的时候，我们应<strong>避免我们的算法出现单一匹配好的情形，以提高匹配的鲁棒性</strong>。如需获取上图匹配结果，可以访问<a href="https://github.com/willard-yuan/covdet.git">covdet</a>获取。</p>
+
+<h3 id="logo识别中的非对称问题">Logo识别中的非对称问题</h3>
+
+<p>Logo的识别问题，可以分为两类:</p>
+
+<ul>
+  <li>基于检测的方式</li>
+  <li>基于检索的方式</li>
+</ul>
+
+<p>基于检测方式的缺点在于新的Logo样式来临时，会面临训练样本如何获取以及人工标注的问题，虽然可以自动通过往图片上贴Logo的方式来构造训练样本，但这种方式容易造成过拟合；基于检索的方式的优点在于，它不会面临训练样本获取和标注的问题，能够以较快的速度响应新Logo检测的请求，但是基于Logo检索的方式，面临一个很大的问题就是尺寸不对称性。</p>
+
+<p>这种尺寸不对称性体现在：对于待检测的图片，Logo所占的区域是很小的，通常区域面积占总体面积比的5%都不到，这样就导致提取的Logo区域的特征（比如局部特征）被非Logo区域的特征给“淹没”掉，如下图所示：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/1029/logo-example.jpg" alt="" /></p>
+
+<p>上图这个图选取得不是很合适，因为背景比较干净，Logo区域的特征还是其了比较大的作用。对于一般的情况，由于Logo区域的特征被非Logo区域的特征给淹没掉，从而使得在Logo库里检索的时候，在top@K（K取得比较小）里面比较难以检索到相关的Logo，而且即便是做重排，也比较难以将最相关的Logo排到最前面。</p>
+
+<p>针对这种由于尺寸不对称性造成的有用特征（信号）被无用信号淹没的问题，很难在不对检索精度造成较大影响的前提下找到比较有效的解决办法。如果要剔除无用信号造成的干扰，一种比较好的方法是先进行粗略的检测，这一步不要求检测的准确率很高，只要保证召回率很高即可，然后可以根据定位到的框提取特征，再进行检索以及校验。这种方式由于剔除了非相关区域特征的干扰，所以准确率和召回率通常能够得到较好的保证，唯一不足的是，引入了检测，而检测势必要求对数据进行标注（半自动）。不过总体来说，这仍然是一种非常不错的方法。</p>
+
+<h3 id="pq中的非对称距离">PQ中的非对称距离</h3>
+
+<p>在此前的文章<a href="http://yongyuan.name/blog/ann-search.html">图像检索：再叙ANN Search</a>中，小白菜曾对PQ做过比较详细的介绍，这里对PQ中非对称距离的计算做一详述。</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/0408/PQ_search_zpskgugtocx.PNG" alt="" /></p>
+
+<p>如上图所示，非对称距离计算方式（红框标示）在计算查询向量$x$到库中某一样本$y$之间的距离时，并不需要对查询向量$x$自身进行量化，而是直接计算查询向量$x$到量化了的$y$之间的距离，这种距离计算方式可以确保非距离计算方式以更大的概率保证计算的距离更接近于真实的距离（与对称距离计算方式相比较），而且这种方式比对称距离计算方式在实施的过程中，来得更直接，因为我们不需要对查询向量进行量化，而是直接计算到对应子段之间的距离，然后采用查表的方式获取到查询向量到库中所有样本的距离。这种通过查表的方式，是PQ能够加速距离计算的核心。</p>
+
+<p>非对称性的应用，在这里展示了它有利的一面，通过将<strong>非对称性延展到相似性度量上，可以进一步缩小量化造成的损失</strong>。既然谈到了PQ的思想，我们还可以对PQ的改进做一下的延拓。</p>
+
+<h4 id="polysemous-codes">Polysemous Codes</h4>
+
+<p>PQ的改进版本很多，比如<a href="kaiminghe.com/publications/pami13opq.pdf">OPQ</a>, Jegou等人又在PQ的基础上对PQ计算距离的过程中做了进一步加速，提出了<a href="https://arxiv.org/abs/1609.01882">Polysemous Codes</a>（中译为“一词多义编码”，为何叫Polysemous Codes，容小白菜慢慢道来)。</p>
+
+<p>前面已经提到，即便是采用查表的方式，仍然还是要查表挨个对库中的每个样本计算到查询向量之间的距离，这种距离能不能转换成汉明距离的计算？正如上图所示的，对于每个向量，我们可以知道它对应的量化索引编码，如果这个量化索引编码本身就是一种汉明编码，那么我们就可以直接用通过计算汉明距离来得到粗排序的结果，然后再对topK的结果计算ADC距离，Polysemous Codes的动机正是如此，实际上Polysemous Codes不仅充当了量化索引编码，还充当了一个快速过滤的作用。</p>
+
+<p>应该说，对于所有的相似性度量距离，汉明距离计算从效率上来讲，是最快的。在faiss的项目wiki的<a href="https://github.com/facebookresearch/faiss/wiki/Faiss-indexes-(composite)">re-filtering PQ codes with polysemous codes</a>有结论：</p>
+
+<blockquote>
+  <p>It is about 6x faster to compare codes with Hamming distances than to use a product quantizer.</p>
+</blockquote>
+
+<p>也就是计算一次PQ的距离，跟计算一次汉明距离计算相比，会慢6倍左右，说明如果能把PQ编码赋予汉明编码的意义的话，距离的计算会提升6倍，这个提升还是非常巨大的。Polysemous Codes的实现已在Faiss中<a href="https://github.com/facebookresearch/faiss/blob/master/IndexPQ.h#L67">Polysemous Codes Implementation</a>。下图解释一下“Polysemous Codes”的“Polysemous”，即一词多义：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/1202/Polysemous_Codes.jpg" alt="" /></p>
+
+<blockquote>
+  <p>Polysemous codes are compact representations of vectors that can be comparedeither with product quantization (222M distance evaluations per second per core for 8-byte codes) or as binary codes (1.19G distances per second). To obtain this property, we optimize the assignment of quantization indexes to bits such that closest centroidshave a small Hamming distance. 【摘自<a href="https://arxiv.org/abs/1609.01882">Polysemous Codes</a>】</p>
+</blockquote>
+
+<p>在标准的PQ编码中，编码仅指代对应的量化索引编码，即由哪个类中心来近似该子段向量，比如上面的左图，4位的二进制编码仅表示类中心编码（编号），除此之外，无任何其他的意义；而在Polysemous Codes中，如右图所示，它不仅能表示类中心的编码（编号），而且它还是一种汉明编码，从这里可以看到，该编码包含了两种特性，我们既可以计算PQ距离，又可以计算汉明距离，因而该编码被称为“Polysemous Codes”是非常妥帖的。由于计算汉明距离更高效，而Polysemous Codes又是一种汉明码，我们可以先用汉明距离进行粗排序，在采用PQ距离进行重排。</p>
+
+<p>Polysemous Codes所拥有的这两种特性，不能不感叹它是极其优雅美丽的。</p>
+
+<h3 id="累计最小最大距离非对称问题">累计最小（最大）距离非对称问题</h3>
+
+<p>在度量两个集合的相似性的时候，累计最小（最大）距离是一个比较好用的相似性度量距离。假设两个集合分别为$X = \lbrace x_t, i=1 \dots n \rbrace$和$Y = \lbrace y_t, j=1 \dots m \rbrace$，则$X$和$Y$集合的相似性可以通过累计最小（最大）距离来度量，即：</p>
+
+<p>\begin{equation}
+S(X, Y) = \sum_{i=1}^{i=n} \sum_{j=1}^{j=m} d_\min(x_i, y_j)
+\end{equation}</p>
+
+<p>至于$d$选取何种距离，我们可以根据自己的应用场景来定夺，小白菜自己一般喜欢使用余弦相似度，因为该距离的计算最终可以转换成内积。累计最小（最大）距离应用的场景这里可以列举一二：</p>
+
+<ul>
+  <li>局部特征构成的两个集合，这里的局部特征不限于传统的局部特征，还可以是CNN构造的局部特征；</li>
+  <li>两个视频序列分别对视频帧提取全局特征，构成的两个视频帧特征集合，使用累计最小（最大）距离我们可以得到两个视频的相似性。</li>
+</ul>
+
+<p>累计最小（最大）距离通常也是一种非对称性距离，在两个集合样本数量相差得比较大时，这种非对称性表现得非常明显。以上面所说的第二个例子为例，当两个视频由于某种不是很合理的取帧方式，导致两个视频取的帧数目相差比较大时，计算出的$S(X, Y)$和$S(Y, X)$会相差得很大，必然会导致其中的一个得到的相似度比较小。对于这种情形，在此相似性度量方式下，并没有特别好的办法来改善，所以在取帧的时候，尽量使两者的数目相当。</p>
+
+<p>总体来说，累计最小（最大）距离对于度量两个集合的相似性是个不错的距离度量。下面讲讲对这个距离度量的计算速度优化问题。比如，我们要计算$X$和$Y$两个集合的相似性，并且每个集合有1000个元素，我们是要一个一个遍历计算找最小值然后相加吗？</p>
+
+<p>显然这种计算方式太慢。前面提到过，在对$d$相似性度量的选取上，小白菜喜欢使用余弦相似性，矩阵乘法使得我们可以避免掉挨个遍历循环，通过矩阵相乘得到$X$和$Y$中各个样本与样本之间的相似性后，我们可以对相似性矩阵进行排序，然后求和相加即可得到$S(X, Y)$，即$X$和$Y$之间的相似性。</p>
+
+<p>总结一下，在本篇博文中，分别从下面4个方面对计算机视觉中的非对称问题进行了探讨：</p>
+
+<ul>
+  <li>局部特征匹配中的非对称问题</li>
+  <li>Logo识别中的非对称问题</li>
+  <li>PQ中的非对称距离</li>
+  <li>累计最小（最大）距离非对称问题</li>
+</ul>
+
+<p>中间穿插了对PQ的拓展Polysemous Codes的拓展。后面如遇其他计算机视觉中的非对称性问题，会同步到这里。</p>
+
+  	</div>
+	</div>
+
+<div class="content-play">
+    <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">请我喝杯咖啡</a></p>
+    <div class="hide_box-play"></div>
+    <div class="shang_box-play">
+        <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+        <div class="shang_tit-play">
+            <p>感谢您的支持，我会继续写出更优秀的文章!</p>
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="pay_explain">请我喝杯咖啡</div>
+        <div class="shang_payselect">
+            <div class="pay_item" data-id="weipay">
+                <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+            </div>
+            <div class="pay_item checked" data-id="alipay">
+                <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+            </div>
+        </div>
+        <div class="shang_info-play">
+            <p>打开<span id="shang_pay_txt">微信</span>扫一扫，即可进行扫码打赏哦</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function dashangToggle(){
+        $(".hide_box-play").fadeToggle();
+        $(".shang_box-play").fadeToggle();
+    }
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+<style type="text/css">
+  .content-play{}
+  .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+  .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+  .shang_box-play img{border:none;border-width:0;}
+  .dashang{display:block;width:140px;margin:5px auto;height:40px;line-height:25px;padding:8px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+  .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+  .shang_close-play{float:right;display:inline-block;
+    margin-right: 10px;margin-top: 20px;
+  }
+  .shang_logo{display:block;text-align:center;margin:20px auto;}
+  .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+  .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+  .shang_payimg{width:140px;padding:10px;/*padding-left: 80px; border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+  .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+  .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+  .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+  .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+  .shang_info-play{clear:both;}
+  .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+</style>
+
+
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/fim-fisher-kernel.html">←图像检索：Fisher Information Matrix and Fisher Kernel</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/improve-phash-for-copy-detection.html">图像检索：图像拷贝检索PHash改进方案→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Disqus Comment BEGIN -->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yongyuan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    <!--displayMath: [['$$','$$'], ['\[','\]']],-->
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <footer>
+    <div  style="border-bottom: 1px solid #eee"></div>
+    <p class="linkings">
+    Friend: <a href="https://sites.google.com/site/raphaelitemou/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://cmp.felk.cvut.cz/~toliageo/publi.html">Tolias</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.heyuhang.com/">heyuhang</a>&nbsp&nbsp&nbsp&nbsp<a href="https://blog.yuanbin.me/">yuanbin</a>&nbsp&nbsp&nbsp&nbsp<a href="http://freemind.pluskid.org/">pluskid</a>
+    </p>
+    <!--p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p-->
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> 2013-2018
+    </p>
+    <!--ul class="links">
+      <li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li>
+    </ul-->
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>

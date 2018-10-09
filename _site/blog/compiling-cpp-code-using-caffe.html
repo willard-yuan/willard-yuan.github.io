@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    机器视觉：makefile编译调用Caffe框架的C++程序
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="Latest 10 blog posts (atom)" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <a class="" href="/project/">Project</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+	      <a href="/YongYuan_resume.pdf">Resume</a>
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <a href="/books/">Book</a>
+		    <a href="/timeline/">Times</a>
+        <a href="https://github.com/willard-yuan">GitHub</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="http://ose5hybez.bkt.clouddn.com/index/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    机器视觉：makefile编译调用Caffe框架的C++程序
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2017年01月07日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="http://localhost:4000/blog/categories.html#机器视觉">机器视觉</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="http://localhost:4000/tag/#机器视觉">机器视觉</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:4305
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <p>Caffe作为在众多公司搞深度学习时较多使用的框架，其在使用的友好程度上显然要比后起的一些深度学习框架要差一些，虽然如此，其作为深度学习的第一个开源框架，自有它的很多优势，比如设计结构。关于Caffe的种种，这里不表，小白菜仅聊很小的一个点，即：<strong>对于调用Caffe框架的C++程序，如何使用makefile进行编译的问题</strong>。</p>
+
+<p>这个问题是小白菜近两天遇到的一个问题，经过小半天的谷歌以及尝试，顺利解决。记录下来，一则备查询之需，二则对碰到相同问题的朋友也应该有帮助。当然对使用IDE的朋友，这个问题并不是问题，但是某些场合，比如开发环境在服务器上，这时候只能采用vim+makefile的方式来编写代码以及编译代码了，so我们终究还是避不过这个问题。</p>
+
+<p>关于使用makefile编译调用Caffe框架的C++程序，有两种方式：一种是最容易且最笨的方法，即把你写的C++程序方法Caffe的examples目录里面，然后在<code class="highlighter-rouge">CMakeLists.txt</code>里面把你的C++程序添加到相应的位置，这种方式终究不是一个长久之道；另外一种是把Caffe编译成一个库，然后我们可以像正常使用一个库一样，调用和编译C++程序了。小白菜以为，此种方式是最优雅的方法，注意，对于makefile文件，我们并不是直接写的，而是通过写cmake文件然后编译生成的makefile文件。整个过程分为三步：</p>
+
+<ul>
+  <li>重新编译一份Caffe</li>
+  <li>编写cmake文件</li>
+  <li>编译目标文件</li>
+</ul>
+
+<p>下面细解该方法的步骤。</p>
+
+<h2 id="重新编译一份caffe">重新编译一份Caffe</h2>
+
+<p>对于已有Caffe环境了的小伙伴，对于重新编译一份Caffe可能觉得多余，但小白菜以为，通过下面这种方式编译，可以让你后续的步骤能够顺利进行，执行下面命令：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/BVLC/caffe.git
+git checkout master
+cp Makefile.config.example Makefile.config
+</code></pre>
+</div>
+<p>修改<code class="highlighter-rouge">Makefile.config</code>文件，小白菜的线上环境用的Openblas做的矩阵加速，所以BLAS这一块的配置如下：</p>
+
+<div class="language-make highlighter-rouge"><pre class="highlight"><code><span class="c"># BLAS choice:
+# atlas for ATLAS (default)
+# mkl for MKL
+# open for OpenBlas
+</span><span class="nv">BLAS</span> <span class="o">:=</span> open
+<span class="nv">BLAS_INCLUDE</span> <span class="o">:=</span> /opt/OpenBLAS/include
+<span class="nv">BLAS_LIB</span> <span class="o">:=</span> /opt/OpenBLAS/lib
+</code></pre>
+</div>
+
+<p>然后，可以开始愉快地编译下面Caffe了：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd </span>build
+cmake .. -DBUILD_SHARED_LIB<span class="o">=</span>ON -DBLAS<span class="o">=</span>open
+cmake . -DCMAKE_BUILD_TYPE<span class="o">=</span>Debug     <span class="c"># switch to debug</span>
+make -j 12 <span class="o">&amp;&amp;</span> make install           <span class="c"># installs by default to build_dir/install</span>
+cmake . -DCMAKE_BUILD_TYPE<span class="o">=</span>Release   <span class="c"># switch to release</span>
+make -j 12 <span class="o">&amp;&amp;</span> make install           <span class="c"># doesn’t overwrite debug install</span>
+make pycaffe
+</code></pre>
+</div>
+
+<p>上面编译完成后，我们在<code class="highlighter-rouge">build/install</code>目录下看到Caffe作为一个供调用的库的完整文件：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>├── bin
+├── include
+├── lib
+├── python
+└── share
+</code></pre>
+</div>
+<p>到这里，第一步走完了。回到关于推荐重新编译一份的问题，为什么推荐重新编译一份呢？这是因为，后面在写cmake文件的时候，我们是通过find_package来找Caffe库的，如果不按上面的过程重新编译一份，find_package无法找到Caffe的库目录。当然你也可以通过其他的方式绕过去，但如果想少些折腾，还是按这个来为妥。</p>
+
+<p>此外，为了能够正常使用Caffe的Python接口，还需要按照Python的一些依赖模块：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>caffe_root/python
+pip install -r requirements.txt
+</code></pre>
+</div>
+
+<p><strong>补充</strong>：对于mac osx系统，如果按照上面编译完后，在<code class="highlighter-rouge">import caffe</code>时出现如下错误：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>26852 segmentation fault python
+</code></pre>
+</div>
+<p>这个错误主要是Makefile.conf中python的include和lib设置不合理所引起的，具体可以参考<a href="https://github.com/BVLC/caffe/issues/2677">Segfault on PyCaffe import</a>。将<code class="highlighter-rouge">PYTHON_INCLUDE</code>和<code class="highlighter-rouge">PYTHON_LIB</code>修改为：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>PYTHON_INCLUDE :<span class="o">=</span> /usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/include/python2.7
+
+PYTHON_LIB :<span class="o">=</span> /usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib
+</code></pre>
+</div>
+<p>然后重新按照前面的步骤编译一遍即可解决上面的bug。</p>
+
+<h3 id="虚拟环境运行caffe异常">虚拟环境运行Caffe异常</h3>
+
+<p>讲真，只要使用python编程，anaconda绝对是一把利器。集成的ipython、jupyter、常用的第三方模块以及虚拟环境，可以省去不少让人折腾的功夫。举个例子，在日常的开发中，小白菜做开发都是在服务器上，但服务器上没有sudo权限，所以如果用Pyhon做开发，弄个虚拟开发环境必不可少。一直以来，小白菜都是用的Virtualenv来构建虚拟环境。这几天，在看Anaconda的bin目录下，发觉了Anaconda也有activate，然后揣测它应该跟Virtualenv，然后执行<code class="highlighter-rouge">source activate</code>，安装了Keras测试一下，发觉它并没有安装在系统目录里，而是安装在Anaconda目录下，甚喜，因为这意味着小白菜以后可以随意安装自己需要的安装包。</p>
+
+<p>为了方便导入Caffe，将Caffe的Python目添加到环境变量中：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PYTHONPATH</span><span class="o">=</span>/home/yuanyong/caffe/python:<span class="nv">$PYTHONPATH</span>
+</code></pre>
+</div>
+
+<p>执行<code class="highlighter-rouge">source .bashrc</code>，然后启动ipython，导入Caffe，异常抛出如下：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">caffe</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">QXcbConnection</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">connect</span> <span class="n">to</span> <span class="n">display</span>
+<span class="err">已放弃</span><span class="p">(</span><span class="err">吐核</span><span class="p">)</span>
+</code></pre>
+</div>
+<p>因为服务器上无图像界面服务，所以推测这个错误应该跟这个图像界面的相关，然后谷歌到了<a href="http://stackoverflow.com/questions/4931376/generating-matplotlib-graphs-without-a-running-x-server">Generating matplotlib graphs without a running X server</a>，在导入Caffe之前，使用Agg backend作为后端渲染，即：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">mpl</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">'Agg'</span><span class="p">)</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">caffe</span>
+</code></pre>
+</div>
+<p>异常消除。这个问题比较奇怪，后来小白菜不执行[2][3]发觉没出现原来的错误了，不过不管出不出现了，整理以备再次出现此问题。</p>
+
+<h2 id="编写cmake文件">编写cmake文件</h2>
+
+<p>顺利完成了<strong>重新编译一份Caffe</strong>的步骤后，我们来写(复制)一份<code class="highlighter-rouge">CMakeLists.txt</code>文件：</p>
+
+<div class="language-cmake highlighter-rouge"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 2.8.8<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>Caffe<span class="p">)</span>
+<span class="nb">include_directories</span><span class="p">(</span><span class="si">${</span><span class="nv">Caffe_INCLUDE_DIRS</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">add_definitions</span><span class="p">(</span><span class="si">${</span><span class="nv">Caffe_DEFINITIONS</span><span class="si">}</span><span class="p">)</span>    <span class="c1"># ex. -DCPU_ONLY  </span>
+<span class="nb">add_executable</span><span class="p">(</span>caffeinated_application extract_features.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>caffeinated_application <span class="si">${</span><span class="nv">Caffe_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+</code></pre>
+</div>
+<p>此份文件来自<a href="https://github.com/BVLC/caffe/pull/1667">Improved CMake scripts</a>。上面，小白菜要单独编译一份经过修改后的提取特征的文件<code class="highlighter-rouge">extract_features.cpp</code>，整个目录是这样的：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>├── CMakeLists.txt
+└── extract_features.cpp
+</code></pre>
+</div>
+
+<h2 id="编译目标文件">编译目标文件</h2>
+
+<p>我们进入到包含<code class="highlighter-rouge">CMakeLists.txt</code>和<code class="highlighter-rouge">extract_features.cpp</code>文件的目录，执行下面命令：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>mkdir build
+<span class="nb">cd </span>build
+cmake ..
+make
+</code></pre>
+</div>
+<p>执行到这一步，得到了我们的最终可执行文件<code class="highlighter-rouge">caffeinated_application</code>，我们的整个使用makefile编译调用Caffe框架的C++程序的问题已完结。</p>
+
+<p>通过此种方法，我们能够很优雅的解决使用makefile编译调用Caffe框架的C++程序的问题，后面就可以愉快地写各种调用Caffe框架的代码了。</p>
+
+<h3 id="附录">附录</h3>
+
+<ol>
+  <li><a href="http://cp0000.github.io/2016/10/22/install-caffe-on-macosx/">如何在Macosx上安装caffe</a></li>
+</ol>
+
+  	</div>
+	</div>
+
+<div class="content-play">
+    <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">请我喝杯咖啡</a></p>
+    <div class="hide_box-play"></div>
+    <div class="shang_box-play">
+        <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+        <div class="shang_tit-play">
+            <p>感谢您的支持，我会继续写出更优秀的文章!</p>
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="pay_explain">请我喝杯咖啡</div>
+        <div class="shang_payselect">
+            <div class="pay_item" data-id="weipay">
+                <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+            </div>
+            <div class="pay_item checked" data-id="alipay">
+                <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+            </div>
+        </div>
+        <div class="shang_info-play">
+            <p>打开<span id="shang_pay_txt">微信</span>扫一扫，即可进行扫码打赏哦</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function dashangToggle(){
+        $(".hide_box-play").fadeToggle();
+        $(".shang_box-play").fadeToggle();
+    }
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+<style type="text/css">
+  .content-play{}
+  .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+  .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+  .shang_box-play img{border:none;border-width:0;}
+  .dashang{display:block;width:140px;margin:5px auto;height:40px;line-height:25px;padding:8px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+  .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+  .shang_close-play{float:right;display:inline-block;
+    margin-right: 10px;margin-top: 20px;
+  }
+  .shang_logo{display:block;text-align:center;margin:20px auto;}
+  .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+  .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+  .shang_payimg{width:140px;padding:10px;/*padding-left: 80px; border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+  .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+  .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+  .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+  .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+  .shang_info-play{clear:both;}
+  .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+</style>
+
+
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/year-turned-back.html">←总结回顾：2016年，归零清空</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/caffe-python-extract-feature-parallel.html">机器视觉：Caffe Python接口多进程提取特征→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Disqus Comment BEGIN -->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yongyuan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    <!--displayMath: [['$$','$$'], ['\[','\]']],-->
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <footer>
+    <div  style="border-bottom: 1px solid #eee"></div>
+    <p class="linkings">
+    Friend: <a href="https://sites.google.com/site/raphaelitemou/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://cmp.felk.cvut.cz/~toliageo/publi.html">Tolias</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.heyuhang.com/">heyuhang</a>&nbsp&nbsp&nbsp&nbsp<a href="https://blog.yuanbin.me/">yuanbin</a>&nbsp&nbsp&nbsp&nbsp<a href="http://freemind.pluskid.org/">pluskid</a>
+    </p>
+    <!--p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p-->
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> 2013-2018
+    </p>
+    <!--ul class="links">
+      <li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li>
+    </ul-->
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>

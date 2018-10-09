@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    图像检索：layer选择与fine-tuning性能提升验证
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="Latest 10 blog posts (atom)" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <a class="" href="/project/">Project</a>
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/yuanyong_resume_cn.pdf">Resume</a>-->
+	      <a href="/YongYuan_resume.pdf">Resume</a>
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <a href="/books/">Book</a>
+		    <a href="/timeline/">Times</a>
+        <a href="https://github.com/willard-yuan">GitHub</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Yong Yuan</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://yongyuan.name/"><img class="avatar" src="http://ose5hybez.bkt.clouddn.com/index/YongYuan.png" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    图像检索：layer选择与fine-tuning性能提升验证
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2017年05月30日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="http://localhost:4000/blog/categories.html#Image Retrieval">Image Retrieval</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="http://localhost:4000/tag/#CBIR">CBIR</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:24512
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <blockquote>
+  <p>这个世界上肯定有另一个我，做着我不敢做的事，过着我想过的生活。一个人逛街，一个人吃饭，一个人旅行，一个人做很多事。极致的幸福，存在于孤独的深海。在这样日复一日的生活里，我逐渐和自己达成和解。</p>
+</blockquote>
+
+<p>作为迁移学习的一种，finetune能够将general的特征转变为special的特征，从而使得转移后的特征能够更好的适应目标任务，而图像检索最根本的问题，仍在于如何在目标任务上获得更好的特征表达(共性与可区分性)。一种很自然的方式便是在特定的检索任务上，我们对imageNet学得的general的特征通过finetune的方式，使得表达的特征能够更好的适应我们的检索任务。在<a href="https://arxiv.org/abs/1610.07940">End-to-end Learning of Deep Visual Representations for Image Retrieval</a>和<a href="https://www.computer.org/csdl/trans/tp/preprint/07867860.pdf">
+Collaborative Index Embedding for Image Retrieval</a>中已经很清楚的指出，通过基本的classification loss的finetune的方式，能够较大幅度的提高检索的mAP。因此，在本篇博文中，小白菜针对检索，主要整理了下面四个方面的内容：</p>
+
+<ul>
+  <li>CNN网络中哪一层最适合于做图像检索</li>
+  <li>基于pre-trained模型做图像检索几种典型的特征表示方法</li>
+  <li>抽取网络任意层的特征</li>
+  <li>数据增强(Data Augmentation)</li>
+  <li>VGGNet16网络模型fine-tuning实践</li>
+</ul>
+
+<p>在采用深度学习做检索的时候，上面四方面的问题和知识基本都回避不了，因此，小白菜以为，掌握这四方面的内容显得非常有必要。</p>
+
+<h2 id="特征表达layer选择">特征表达layer选择</h2>
+
+<p>在AlexNet和VGGNet提出伊始，对于检索任务，小白菜相信，在使用pre-trained模型抽取特征的时候，我们最最自然想到的方式是抽取全连接层中的倒数第一层或者倒数第二层的特征，这里说的倒数第一层或者倒数第二层并没有具体指明是哪一层（fcx、fcx_relux、fcx_dropx），以VggNet16网络为例，全连接层包含两层，fc6和fc7，因此我们很自然想到的网络层有fc6、fc6_relu6、fc7、fc7_relu7甚至fc6_drop6和fc7_drop7（后面会说明fc6_drop6和fc6_relu6是一样的，以及fc7_drop7和fc7_relu7也是一样的），所以即便对于我们最最自然最最容易想到的方式，也面临layer的选择问题。为此，我们以VGGNet16网络为例，来分析CNN网络的语义层(全连接层)选择不同层作为特征做object retrieval的mAP的影响。</p>
+
+<p>小白菜选取fc6、fc6_relu6、fc7、fc7_relu7这四层语义层的特征，在<a href="http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/">Oxford Building</a>上进行实验，评价指标采用mAP，mAP的计算采用Oxford Building提供的计算mAP代码<a href="http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/compute_ap.cpp">compute_ap.cpp</a>，下表是fc6、fc6_relu6、fc7、fc7_relu7对应的mAP。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">layer</th>
+      <th style="text-align: center">mAP(128维)</th>
+      <th style="text-align: center">mAP(4096维)</th>
+      <th style="text-align: center">mAP(4096维, 未做PCA)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">fc7_relu7</td>
+      <td style="text-align: center">44.72%</td>
+      <td style="text-align: center">1.11%</td>
+      <td style="text-align: center">41.08%</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">fc7</td>
+      <td style="text-align: center">45.03%</td>
+      <td style="text-align: center">19.67%</td>
+      <td style="text-align: center">41.18%</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">fc6_relu6</td>
+      <td style="text-align: center">43.62%</td>
+      <td style="text-align: center">23.0%</td>
+      <td style="text-align: center">43.34%</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">fc6</td>
+      <td style="text-align: center">45.9%</td>
+      <td style="text-align: center">19.47%</td>
+      <td style="text-align: center">44.78%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>从上表可以看到，直接采用pre-trained模型抽取语义层的特征，在Oxford Building上取得的结果在45%左右，同时我们还可以看出，选取fc6、fc6_relu6、fc7、fc7_relu7对结果的影响并不大。这个结果只能说非常的一般，在基于pre-trained模型做object retrieval的方法中，比如<a href="https://arxiv.org/abs/1512.04065">Cross-dimensional Weighting for Aggregated Deep Convolutional Features</a>、<a href="https://arxiv.org/abs/1511.05879">Particular object retrieval with integral max-pooling of CNN activations</a>以及<a href="https://arxiv.org/abs/1611.01640">What Is the Best Practice for CNNs Applied to Visual Instance Retrieval?</a>指出，选用上层的语义层其实是不利于object retrieval，因为上层的语义层丢失了object的空间信息，并且从实验的角度说明了<strong>选取中间层的特征</strong>更利于object retrieval。</p>
+
+<p>实际上，在选取中间层来表达特征的过程中，我们可以去掉全连接层，从而使得我们可以摆脱掉输入图像尺寸约束(比如224*224)的约束，而保持原图大小的输入。通常，图像分辨率越大，对于分类、检测等图像任务是越有利的。因而，从这一方面讲，<strong>选取上层的全连接层作为特征，并不利于我们的object retrieval任务</strong>。一种可能的猜想是，上层全连接层的语义特征，应该更适合做全局的相似。</p>
+
+<p>虽然中间层更适合于做object retrieval，但是在选用中间层的feature map作为raw feature的时候，我们面临的一个主要问题是：如何将3d的tensor转成一个有效的向量特征表示？下面小白菜主要针对这一主要问题总结几种典型的特征表示方法，以及对中间层特征选择做一些探讨与实验。</p>
+
+<h2 id="基于pre-trained模型做object-retrieval几种典型的特征表示">基于pre-trained模型做Object Retrieval几种典型的特征表示</h2>
+
+<h3 id="sum-pooling">SUM pooling</h3>
+
+<p>基于SUM pooling的中层特征表示方法，指的是针对中间层的任意一个channel（比如VGGNet16, pool5有512个channel），将该channel的feature map的所有像素值求和，这样每一个channel得到一个实数值，N个channel最终会得到一个长度为N的向量，该向量即为SUM pooling的结果。</p>
+
+<h3 id="ave-pooling">AVE pooling</h3>
+
+<p>AVE pooling就是average pooling，本质上它跟SUM pooling是一样的，只不过是将像素值求和后还除以了feature map的尺寸。小白菜以为，<strong>AVE pooling可以带来一定意义上的平滑，可以减小图像尺寸变化的干扰</strong>。设想一张224<em>224的图像，将其resize到448</em>448后，分别采用SUM pooling和AVE pooling对这两张图像提取特征，我们猜测的结果是，SUM pooling计算出来的余弦相似度相比于AVE pooling算出来的应该更小，也就是AVE pooling应该稍微优于SUM pooling一些。</p>
+
+<h3 id="max-pooling">MAX pooling</h3>
+
+<p>MAX pooling指的是对于每一个channel（假设有N个channel），将该channel的feature map的像素值选取其中最大值作为该channel的代表，从而得到一个N维向量表示。小白菜在<a href="https://github.com/willard-yuan/flask-keras-cnn-image-retrieval/blob/master/extract_cnn_vgg16_keras.py">flask-keras-cnn-image-retrieval</a>中采用的正是MAX pooling的方式。</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/max_pooling_zpsglehm2jv.JPEG" alt="" /></p>
+
+<blockquote>
+  <p>from <a href="https://www.slideshare.net/xavigiro/contentbased-image-retrieval-d2l6-insightdcu-machine-learning-workshop-2017">Day 2 Lecture 6 Content-based Image Retrieval</a></p>
+</blockquote>
+
+<p>上面所总结的SUM pooling、AVE pooling以及MAX pooling，这三种pooling方式，在小白菜做过的实验中，MAX pooling要稍微优于SUM pooling、AVE pooling。不过这三种方式的pooling对于object retrieval的提升仍然有限。</p>
+
+<h3 id="mop-pooling">MOP pooling</h3>
+
+<p>MOP Pooling源自<a href="https://arxiv.org/abs/1403.1840">Multi-scale Orderless Pooling of Deep Convolutional Activation Features</a>这篇文章，一作是Yunchao Gong，此前在搞<a href="https://github.com/willard-yuan/hashing-baseline-for-image-retrieval">哈希</a>的时候，读过他的一些论文，其中比较都代表性的论文是ITQ，小白菜还专门写过一篇笔记<a href="http://yongyuan.name/blog/itq-hashing.html">论文阅读：Iterative Quantization迭代量化</a>。MOP pooling的基本思想是多尺度与VLAD(VLAD原理可以参考小白菜之前写的博文<a href="http://yongyuan.name/blog/CBIR-BoF-VLAD-FV.html">图像检索：BoF、VLAD、FV三剑客</a>)，其具体的pooling步骤如下：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/mop_cnn_zpstvgo29kk.JPEG" alt="" /></p>
+
+<blockquote>
+  <p>from <a href="https://arxiv.org/abs/1403.1840">Multi-scale Orderless Pooling of Deep Convolutional Activation Features</a><br />
+Overview  of  multi-scale  orderless  pooling  for  CNN  activations  (MOP-CNN). Our proposed feature is a concatenation of the feature vectors from three levels: (a)Level 1, corresponding to the 4096-dimensional CNN activation for the entire 256<em>256image; (b) Level 2, formed by extracting activations from 128</em>128 patches and VLADpooling them with a codebook of 100 centers; (c) Level 3, formed in the same way aslevel 2 but with 64*64 patches.</p>
+</blockquote>
+
+<p>具体地，在L=1的尺度下，也就是全图，直接resize到256<em>256的大小，然后送进网络，得到第七层全连接层4096维的特征；在L=2时，使用128</em>128(步长为32)的窗口进行滑窗，由于网络的图像输入最小尺寸是256<em>256，所以作者将其上采样到256</em>256，这样可以得到很多的局部特征，然后对其进行VLAD编码，其中聚类中心设置为100，4096维的特征降到了500维，这样便得到了50000维的特征，然后将这50000维的特征再降维得到4096维的特征；L=3的处理过程与L=2的处理过程一样，只不过窗口的大小编程了64*64的大小。</p>
+
+<p>作者通过实验论证了MOP pooling这种方式得到的特征一定的不变性。基于这种MOP pooling小白菜并没有做过具体的实验，所以实验效果只能参考论文本身了。</p>
+
+<h3 id="crow-pooling">CROW pooling</h3>
+
+<p>对于Object Retrieval，在使用CNN提取特征的时候，我们所希望的是在有物体的区域进行特征提取，就像提取局部特征比如SIFT特征构<a href="http://yongyuan.name/blog/CBIR-BoF-VLAD-FV.html">BoW、VLAD、FV向量</a>的时候，可以采用MSER、Saliency等手段将SIFT特征限制在有物体的区域。同样基于这样一种思路，在采用CNN做Object Retrieval的时候，我们有两种方式来更细化Object Retrieval的特征：一种是先做物体检测然后在检测到的物体区域里面提取CNN特征；另一种方式是我们通过某种权重自适应的方式，加大有物体区域的权重，而减小非物体区域的权重。CROW pooling ( <a href="https://arxiv.org/abs/1512.04065">Cross-dimensional Weighting for Aggregated Deep Convolutional Features</a> )即是采用的后一种方法，通过构建Spatial权重和Channel权重，CROW pooling能够在<strong>一定程度上</strong>加大感兴趣区域的权重，降低非物体区域的权重。其具体的特征表示构建过程如下图所示：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/crow_zpsaejbmsln.PNG" alt="" /></p>
+
+<p>其核心的过程是Spatial Weight和Channel Weight两个权重。Spatial Weight具体在计算的时候，是直接对每个channel的feature map求和相加，这个Spatial Weight其实可以理解为saliency map。我们知道，通过卷积滤波，响应强的地方一般都是物体的边缘等，因而将多个通道相加求和后，那些非零且响应大的区域，也一般都是物体所在的区域，因而我们可以将它作为feature map的权重。Channel Weight借用了IDF权重的思想，即对于一些高频的单词，比如“the”，这类词出现的频率非常大，但是它对于信息的表达其实是没多大用处的，也就是它包含的信息量太少了，因此在BoW模型中，这类停用词需要降低它们的权重。借用到Channel Weight的计算过程中，我们可以想象这样一种情况，比如某一个channel，其feature map每个像素值都是非零的，且都比较大，从视觉上看上去，白色区域占据了整个feature map，我们可以想到，这个channel的feature map是不利于我们去定位物体的区域的，因此我们需要降低这个channel的权重，而对于白色区域占feature map面积很小的channel，我们认为它对于定位物体包含有很大的信息，因此应该加大这种channel的权重。而这一现象跟IDF的思想特别吻合，所以作者采用了IDF这一权重定义了Channel Weight。</p>
+
+<p>总体来说，这个Spatial Weight和Channel Weight的设计还是非常巧妙的，不过这样一种pooling的方式只能在一定程度上契合感兴趣区域，我们可以看一下Spatial Weight*Channel Weight的热力图：</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/sp_example_zps4ntos3ok.JPEG" alt="" /></p>
+
+<p>从上面可以看到，权重大的部分主要在塔尖部分，这一部分可以认为是discriminate区域，当然我们还可以看到，在图像的其他区域，还有一些比较大的权重分布，这些区域是我们不想要的。当然，从小白菜可视化了一些其他的图片来看，这种crow pooling方式并不总是成功的，也存在着一些图片，其权重大的区域并不是图像中物体的主体。不过，从千万级图库上跑出来的结果来看，crow pooling这种方式还是可以取得不错的效果。</p>
+
+<h3 id="rmac-pooling">RMAC pooling</h3>
+
+<p>RMAC pooling的池化方式源自于<a href="https://arxiv.org/pdf/1511.05879">Particular object retrieval with integral max-pooling of CNN activations</a>，三作是Hervé Jégou(和Matthijs Douze是好基友)。在这篇文章中，作者提出来了一种RMAC pooling的池化方式，其主要的思想还是跟上面讲过的MOP pooling类似，采用的是一种变窗口的方式进行滑窗，只不过在滑窗的时候，不是在图像上进行滑窗，而是在feature map上进行的(极大的加快了特征提取速度)，此外在合并local特征的时候，MOP pooling采用的是VLAD的方式进行合并的，而RMAC pooling则处理得更简单(简单并不代表效果不好)，直接将local特征相加得到最终的global特征。其具体的滑窗方式如下图所示:</p>
+
+<p><img src="http://ose5hybez.bkt.clouddn.com/2017/rmac_pooling_zpsigvxjjud.JPEG" alt="" /></p>
+
+<blockquote>
+  <p>from <a href="https://www.slideshare.net/xavigiro/contentbased-image-retrieval-d2l6-insightdcu-machine-learning-workshop-2017">Day 2 Lecture 6 Content-based Image Retrieval</a></p>
+</blockquote>
+
+<p>图中示意的是三种窗口大小，图中‘x’代表的是窗口的中心，对于每一个窗口的feature map，论文中采用的是MAX pooling的方式，在L=3时，也就是采用图中所示的三种窗口大小，我们可以得到20个local特征，此外，我们对整个fature map做一次MAX pooling会得到一个global特征，这样对于一幅图像，我们可以得到21个local特征(如果把得到的global特征也视为local的话)，这21个local特征直接相加求和，即得到最终全局的global特征。论文中作者对比了滑动窗口数量对mAP的影响，从L=1到L=3，mAP是逐步提升的，但是在L=4时，mAP不再提升了。实际上RMAC pooling中设计的窗口的作用是定位物体位置的(CROW pooling通过权重图定位物体位置)。如上图所示，在窗口与窗口之间，都是一定的overlap，而最终在构成global特征的时候，是采用求和相加的方式，因此可以看到，那些重叠的区域我们可以认为是给予了较大的权重。</p>
+
+<p>上面说到的20个local特征和1个global特征，采用的是直接合并相加的方式，当然我们还可以把这20个local特征相加后再跟剩下的那一个global特征串接起来。实际实验的时候，发现串接起来的方式比前一种方式有2%-3%的提升。在规模100万的图库上测试，RMAC pooling能够取得不错的效果，跟Crow pooling相比，两者差别不大。</p>
+
+<p>上面总结了6中不同的pooling方式，当然还有很多的pooling方式没涵盖不到，在实际应用的时候，小白菜比较推荐采用RMAC pooling和CROW pooling的方式，主要是这两种pooling方式效果比较好，计算复杂度也比较低。</p>
+
+<h2 id="抽取网络任意层的特征">抽取网络任意层的特征</h2>
+
+<p>在上面一节中，我们频繁的对网络的不同层进行特征的抽取，并且我们还提到fc6_dropx和fc6_relux是一样的（比如fc7_drop7和fc7_relu7是一样的），这一节主要讲述使用Caffe抽取网络任意一层的特征，并从实验的角度验证fc6_dropx和fc6_relux是一样的这样一个结论。</p>
+
+<p>为了掌握Caffe中网络任意一层的特征提取，不妨以一个小的题目来说明此问题。题目内容为：给定VGGNet16网络，抽取fc7、fc7_relu7以及fc7_drop7层的特征。<br />
+求解过程：VggNet16中<a href="https://gist.githubusercontent.com/ksimonyan/211839e770f7b538e2d8/raw/0067c9b32f60362c74f4c445a080beed06b07eb3/VGG_ILSVRC_16_layers_deploy.prototxt">deploy.txt</a>中跟fc7相关的层如下：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>layers <span class="o">{</span>
+  bottom: <span class="s2">"fc6"</span>
+  top: <span class="s2">"fc7"</span>
+  name: <span class="s2">"fc7"</span>
+  <span class="nb">type</span>: INNER_PRODUCT
+  inner_product_param <span class="o">{</span>
+    num_output: 4096
+  <span class="o">}</span>
+<span class="o">}</span>
+layers <span class="o">{</span>
+  bottom: <span class="s2">"fc7"</span>
+  top: <span class="s2">"fc7"</span>
+  name: <span class="s2">"relu7"</span>
+  <span class="nb">type</span>: RELU
+<span class="o">}</span>
+layers <span class="o">{</span>
+  bottom: <span class="s2">"fc7"</span>
+  top: <span class="s2">"fc7"</span>
+  name: <span class="s2">"drop7"</span>
+  <span class="nb">type</span>: DROPOUT
+  dropout_param <span class="o">{</span>
+    dropout_ratio: 0.5
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>如果使用<code class="highlighter-rouge">net.blobs['fc7'].data[0]</code>，我们抽取的特征是fc7层的特征，也就是上面：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>layers <span class="o">{</span>
+  bottom: <span class="s2">"fc6"</span>
+  top: <span class="s2">"fc7"</span>
+  name: <span class="s2">"fc7"</span>
+  <span class="nb">type</span>: INNER_PRODUCT
+  inner_product_param <span class="o">{</span>
+    num_output: 4096
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+<p>这一层的特征，仿照抽取fc7特征抽取的代码，我们很自然的想到抽取relu7的特征为<code class="highlighter-rouge">net.blobs['relu7'].data[0]</code>和drop7的特征为<code class="highlighter-rouge">net.blobs['drop7'].data[0]</code>，但是在运行的时候提示不存在<code class="highlighter-rouge">relu7</code>层和<code class="highlighter-rouge">drop7</code>层，原因是：</p>
+
+<blockquote>
+  <p>To elaborate a bit further: The layers drop7 and relu7 have the same blobs as top and bottom, respectively, and as such the blobs’ values are manipulated directly by the layers. The advantage is saving a bit of memory, with the drawback of not being able to read out the state the values had before being fed through these two layers. It is simply not saved anywhere. If you want to save it, you can just create another two blobs and re-wire the layers a bit.</p>
+</blockquote>
+
+<p>摘自<a href="https://groups.google.com/forum/#!topic/caffe-users/766VK11Cnwo">Extracting ‘relu’ and ‘drop’ blobs with pycaffe</a>，因而，为了能够提取relu7和drop7的特征，我们需要将上面的配置文件做些更改，主要是将layers里面的字段换下名字(在finetune模型的时候，我们也需要做类似的更改字段的操作)，这里小白菜改成了：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>layers <span class="o">{</span>
+  bottom: <span class="s2">"fc6"</span>
+  top: <span class="s2">"fc7"</span>
+  name: <span class="s2">"fc7"</span>
+  <span class="nb">type</span>: INNER_PRODUCT
+  inner_product_param <span class="o">{</span>
+    num_output: 4096
+  <span class="o">}</span>
+<span class="o">}</span>
+layers <span class="o">{</span>
+  bottom: <span class="s2">"fc7"</span>
+  top: <span class="s2">"fc7_relu7"</span>
+  name: <span class="s2">"fc7_relu7"</span>
+  <span class="nb">type</span>: RELU
+<span class="o">}</span>
+layers <span class="o">{</span>
+  bottom: <span class="s2">"fc7"</span>
+  top: <span class="s2">"fc7_drop7"</span>
+  name: <span class="s2">"fc7_drop7"</span>
+  <span class="nb">type</span>: DROPOUT
+  dropout_param <span class="o">{</span>
+    dropout_ratio: 0.5
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+<p>经过这样的修改后，我们使用<code class="highlighter-rouge">net.blobs['fc7_relu7'].data[0]</code>即可抽取到relu7的特征，使用<code class="highlighter-rouge">net.blobs['fc7_drop7'].data[0]</code>可抽取到drop7的特征。</p>
+
+<h2 id="数据增强">数据增强</h2>
+
+<p>有了上面<strong>CNN网络中哪一层最适合于做图像检索</strong>、<strong>基于pre-trained模型做图像检索几种典型的特征表示方法</strong>以及<strong>抽取网络任意层的特征</strong>三方面的知识储备后，在具体fine-tuning网络进行图像检索实验前，还有一节很重要(虽然我们都很熟悉)内容，即数据增强(Data Augmentation)。数据增强作用有二：一是均衡样本，比如某些类别只有几张图片，而有的类别有上千张，如果不做均衡，分类的时候计算的分类准确率会向样本充足的类别漂移；二是提高网络对于样本旋转、缩放、模糊等的鲁棒性，提高分类精度。在实际工作中，我们拿到了图像数据样本对采用深度学习模型而言，经常是不充足且不均衡的，所以这一步数据的前置处理是非常重要的。</p>
+
+<p>在正式开始数据增强之前，对<strong>图片进行异常检测是非常重要的</strong>，其具体的异常表现在图片内容缺失、图片不可读取或者可以读取但数据出现莫名的问题，举个例子，比如通过爬虫爬取的图片，可能上半部分是正常的，下半分缺失一片灰色。因此，如果你不能确保你训练的图片数据都是可正常读取的时候，最好对图片做异常检测。假设你的训练图片具有如下层级目录：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>➜  imgs_diff tree -L 2
+.
+├── 0
+│   ├── 1227150149_1.jpg
+│   ├── 1612549977_1.jpg
+│   ├── 1764084098_1.jpg
+│   ├── 1764084288_1.jpg
+│   └── 1764085346_1.jpg
+└── 1
+    ├── 1227150149_1.jpg
+    ├── 1612549977_1.jpg
+    ├── 1764084098_1.jpg
+    ├── 1764084288_1.jpg
+    └── 1764085346_1.jpg
+</code></pre>
+</div>
+<p>下面是小白菜参考网上资料写的图片异常检测代码如下：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="k">def</span> <span class="nf">check_pic</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">'ERROR: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">path</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="n">imgs_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'/raid/yuanyong/neuralcode/ncdata/*/*'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="n">imgs_list</span><span class="p">:</span>
+    <span class="c">#img = Image.open(img_path)</span>
+    <span class="c">#if img.verify() is not None or img is None:</span>
+    <span class="c">#    print img_path</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="k">except</span> <span class="nb">IOError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">'ERROR: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">img_path</span>
+        <span class="k">continue</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">SystemError</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">'ERROR: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">img_path</span>
+        <span class="k">continue</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">'ERROR: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">img_path</span>
+</code></pre>
+</div>
+<p>通过上面的图片异常检测，我们可以找到那些不可读取或者读取有问题的图片找出来，这样在我们使用Caffe将图片转为LMDB数据存储的时候，不会出现图片读取有问题的异常。在图片异常检测完成后，便可以继续后面的数据增强了。</p>
+
+<p>在小白菜调研的数据增强工具中，小白菜以为，最好用的还是<a href="preprocessing">Keras</a>中的数据增强。Keras数据增强部分包含在<a href="https://github.com/fchollet/keras/blob/master/keras/preprocessing/image.py">image.py</a>，通过类<code class="highlighter-rouge">ImageDataGenerator</code>可以看到Keras包含了对图片的不同处理，下面是小白菜基于Keras写的数据增强脚本，假设你的图像数据目录结构具有如下结构：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>➜  imgs_dataset tree -L 2
+.
+├── 0
+│   ├── 1227150149_1.jpg
+│   ├── 1612549977_1.jpg
+│   ├── 1764084098_1.jpg
+│   ├── 1764084288_1.jpg
+│   └── 1764085346_1.jpg
+└── 1
+    ├── 1227150149_1.jpg
+    ├── 1612549977_1.jpg
+    ├── 1764084098_1.jpg
+    ├── 1764084288_1.jpg
+    └── 1764085346_1.jpg
+    ....
+</code></pre>
+</div>
+
+<p>数据增强的脚本如下：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python</span>
+<span class="c">#-*- coding: utf-8 -*-</span>
+<span class="c">#Author: yuanyong.name</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing.image</span> <span class="kn">import</span> <span class="n">ImageDataGenerator</span><span class="p">,</span> <span class="n">array_to_img</span><span class="p">,</span> <span class="n">img_to_array</span><span class="p">,</span> <span class="n">load_img</span>
+
+<span class="n">num_wanted</span> <span class="o">=</span> <span class="mi">800</span>
+<span class="n">target_path_dir</span> <span class="o">=</span> <span class="s">'/raid/yuanyong/neuralcode/ncdata'</span>
+
+<span class="n">datagen</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span>
+        <span class="n">rotation_range</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">width_shift_range</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">height_shift_range</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">shear_range</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">zoom_range</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">horizontal_flip</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="n">fill_mode</span> <span class="o">=</span> <span class="s">'nearest'</span><span class="p">)</span>
+
+<span class="n">sub_dirs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">target_path_dir</span><span class="p">)</span><span class="o">.</span><span class="nb">next</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">sub_dir</span> <span class="ow">in</span> <span class="n">sub_dirs</span><span class="p">:</span>
+    <span class="n">sub_dir_full</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_path_dir</span><span class="p">,</span> <span class="n">sub_dir</span><span class="p">)</span>
+    <span class="n">img_basenames</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">sub_dir_full</span><span class="p">)</span>
+    <span class="n">num_imgs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_basenames</span><span class="p">)</span>
+    <span class="n">num_perAug</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">num_wanted</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">num_imgs</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">num_imgs</span> <span class="o">&gt;=</span> <span class="n">num_wanted</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">num_total</span> <span class="o">=</span> <span class="mi">0</span>    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">img_basename</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">img_basenames</span><span class="p">):</span>
+        <span class="n">num_total</span> <span class="o">=</span> <span class="n">num_imgs</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">num_perAug</span>
+        <span class="k">if</span> <span class="n">num_total</span> <span class="o">&gt;=</span> <span class="n">num_wanted</span><span class="p">:</span>
+            <span class="k">break</span> 
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_dir_full</span><span class="p">,</span> <span class="n">img_basename</span><span class="p">)</span>
+        <span class="c">#print "Aug: %s" % img_path</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span> <span class="c"># this is a PIL image, please replace to your own file path</span>
+        <span class="k">if</span> <span class="n">img</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="c"># this is a Numpy array with shape (3, 150, 150)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c"># this is a Numpy array with shape (1, 3, 150, 150)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">datagen</span><span class="o">.</span><span class="n">flow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">save_to_dir</span> <span class="o">=</span> <span class="n">sub_dir_full</span><span class="p">,</span> <span class="n">save_prefix</span> <span class="o">=</span> <span class="s">'aug'</span><span class="p">,</span> <span class="n">save_format</span> <span class="o">=</span> <span class="s">'jpg'</span><span class="p">):</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">num_perAug</span><span class="p">:</span>
+                    <span class="k">break</span> <span class="c"># otherwise the generator would loop indefinitely</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">"</span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">img_path</span>
+    
+<span class="c"># delete extra aug images</span>
+<span class="k">for</span> <span class="n">sub_dir</span> <span class="ow">in</span> <span class="n">sub_dirs</span><span class="p">:</span>
+    <span class="n">sub_dir_full</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_path_dir</span><span class="p">,</span> <span class="n">sub_dir</span><span class="p">)</span>
+    <span class="n">img_basenames</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">sub_dir_full</span><span class="p">)</span>
+    <span class="n">num_imgs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_basenames</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">num_imgs</span> <span class="o">&lt;=</span> <span class="n">num_wanted</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">aug_imgs</span> <span class="o">=</span> <span class="p">[</span><span class="n">img_basename</span> <span class="k">for</span> <span class="n">img_basename</span> <span class="ow">in</span> <span class="n">img_basenames</span> <span class="k">if</span> <span class="n">img_basename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'aug_'</span><span class="p">)]</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">aug_imgs</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
+    <span class="n">num_del</span> <span class="o">=</span> <span class="n">num_imgs</span> <span class="o">-</span> <span class="n">num_wanted</span>
+    <span class="n">aug_imgs_del</span> <span class="o">=</span> <span class="n">aug_imgs</span><span class="p">[</span><span class="o">-</span><span class="n">num_del</span><span class="p">:]</span>
+
+    <span class="k">for</span> <span class="n">img_basename</span> <span class="ow">in</span> <span class="n">aug_imgs_del</span><span class="p">:</span>
+        <span class="n">img_full</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_dir_full</span><span class="p">,</span> <span class="n">img_basename</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">img_full</span><span class="p">)</span>
+
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">target_path_dir</code>是设置你训练数据集目录的，<code class="highlighter-rouge">num_wanted</code>是设置每一个类你想要多少个样本(包括原始样本在内)，比如在<a href="https://arxiv.org/abs/1404.1777">Neural Codes for Image Retrieval</a>中的数据集landmark数据集，里面的类别少的样本只有9个，多的类别样本有上千个，样本部分极其不均匀，上面代码中，小白菜设置得是<code class="highlighter-rouge">num_wanted=800</code>，即让每一个类别的样本数据控制在800左右(多出来的类别样本不会删除，比如有的类别可能原始样本就有1000张，那么不会对该类做数据增强)。</p>
+
+<p>在这一节，小白菜总结了为什么要数据增强，或者说数据增强有什么好处，然后提供了两个脚本：图片异常检测脚本<a href="https://github.com/willard-yuan/util-scripts/blob/master/py/dl/check_image.py">check_image.py</a>和数据增强脚本<a href="https://github.com/willard-yuan/util-scripts/blob/master/py/dl/keras_imgAug.py">keras_imgAug.py</a>。有了前面三部分的知识和本节数据前置处理的实践，我们终于可以进行fine-tuning了。</p>
+
+<h2 id="vggnet16网络模型fine-tuning实践">VGGNet16网络模型fine-tuning实践</h2>
+
+<p>在实际中，用CNN做分类任务的时候，一般我们总是用在ImageNet上预训练好的模型去初始化待训练模型的权重，也就是不是train from scratch，主要原因有二：一是在实际中很难获取到大量样本(即便是做了数据增强)；二是加快模型训练的速度。因而，针对检索这个任务，我们也采用fine-tuning的方式，让在ImageNet上预训练的模型迁移到我们自己的特定的数据集上，从而提升特征在检索任务上的表达能力。下面小白菜以fine-tuning Neural Codes提供的数据集为例，比较详实的总结一个完整的fine-tuning过程。</p>
+
+<p>在fine-tuning之前，我们先追问一个简单的问题和介绍一下Neural Codes提供的landmark数据集。追问的这个问题很简单：为什么几乎所有的做检索的论文中，使用的都是AlexNet、VGGNet16（偶尔会见到一两篇使用ResNet101）网络模型？难道做研究的只是关注方法，使用AlexNet、VGGNet、ResNet或者Inception系列只是替换一下模型而已？小白菜曾也有过这样的疑问，但是对这些网络测试下来，发觉VGGNet在做基于预训练模型特征再表达里面效果是最好的，对于同一个方法，使用ResNet或Inception系列，其mAP反而没有VGGNet的高。至于为什么会这样，小白菜也没有想明白(如果有小伙伴知道，请告知)，我们就暂且把它当做一条经验。</p>
+
+<p>我们再对Neural Codes论文里提供的landmark数据集做一个简单的介绍。该数据集共有680类，有的类别样本数据至于几个，多则上千，样本分布极其不均匀。不过这不是问题，通过第4节介绍的数据增强和提供的脚本，我们可以将每个类别的样本数目控制在800左右。同时，我们可以使用下面脚本将每个类别所在目录的文件夹名字命名为数字：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">path_</span> <span class="o">=</span> <span class="s">'/raid/yuanyong/neuralcode/ncdata'</span> <span class="c"># 该目录下有很多子文件夹，每个子文件夹是一个类别</span>
+<span class="n">dirs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path_</span><span class="p">)</span><span class="o">.</span><span class="nb">next</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">dirs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dir_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dirs</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">'</span><span class="si">%</span><span class="s">d, </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dir_</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_</span><span class="p">,</span> <span class="n">dir_</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+</code></pre>
+</div>
+
+<p>得到清洗后的数据后，下面分步骤详解使用VGGNet16来fine-tuning的过程。</p>
+
+<h3 id="切分数据集为train和val">切分数据集为train和val</h3>
+
+<p>经过上面重命名后的数据集文件夹目录具有如下形式：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>➜  imgs_dataset tree -L 2
+.
+├── 0
+│   ├── 1227150149_1.jpg
+│   ├── 1612549977_1.jpg
+│   ├── 1764084098_1.jpg
+│   ├── 1764084288_1.jpg
+│   └── 1764085346_1.jpg
+│   ....
+└── 1
+    ├── 1227150149_1.jpg
+    ├── 1612549977_1.jpg
+    ├── 1764084098_1.jpg
+    ├── 1764084288_1.jpg
+    └── 1764085346_1.jpg
+    ....
+</code></pre>
+</div>
+
+<p>我们需要将数据集划分为train数据集和val数据集，注意val数据集并不单纯只是在训练的时候测试一下分类的准确率。为了方便划分数据集，小白菜写了如下的脚本，可以很方便的将数据集划分为train数据集和val数据集：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">classes_path</span>  <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">'/raid/yuanyong/neuralcode/ncdata/*'</span><span class="p">)</span> <span class="c"># 该目录下有很多子文件夹，每个子文件夹train_samples = []</span>
+<span class="n">val_samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">imgs_total</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_path</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes_path</span><span class="p">):</span>
+    <span class="n">class_</span> <span class="o">=</span> <span class="n">class_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'/'</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">imgs_path</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">class_path</span> <span class="o">+</span> <span class="s">'//*'</span><span class="p">)</span>
+    <span class="n">num_imgs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">imgs_path</span><span class="p">)</span>
+    <span class="n">num_train</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_imgs</span><span class="o">*</span><span class="mf">0.6</span><span class="p">)</span> <span class="c"># 训练集占60%</span>
+    <span class="n">num_val</span> <span class="o">=</span> <span class="n">num_imgs</span> <span class="o">-</span> <span class="n">num_train</span>
+
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+    <span class="n">sample_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_imgs</span><span class="p">),</span> <span class="n">num_imgs</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">train_idx</span> <span class="o">=</span> <span class="n">sample_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">num_train</span><span class="p">]</span>
+    <span class="n">val_idx</span> <span class="o">=</span> <span class="n">sample_idx</span><span class="p">[</span><span class="n">num_train</span><span class="p">:]</span>
+
+    <span class="k">for</span> <span class="n">idx_</span> <span class="ow">in</span> <span class="n">train_idx</span><span class="p">:</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">imgs_path</span><span class="p">[</span><span class="n">idx_</span><span class="p">]</span>
+        <span class="n">train_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img_path</span> <span class="o">+</span> <span class="s">' '</span> <span class="o">+</span> <span class="n">class_</span> <span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx_</span> <span class="ow">in</span> <span class="n">val_idx</span><span class="p">:</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">imgs_path</span><span class="p">[</span><span class="n">idx_</span><span class="p">]</span>
+        <span class="n">val_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img_path</span> <span class="o">+</span> <span class="s">' '</span> <span class="o">+</span> <span class="n">class_</span> <span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+
+    <span class="n">imgs_total</span> <span class="o">+=</span> <span class="n">num_imgs</span>
+
+
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">train_samples</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">val_samples</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'lmdb/train.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_train</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s">'lmdb/val.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_val</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">train_samples</span><span class="p">:</span>
+        <span class="n">f_train</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>运行上面脚本，会在lmdb目录下(事先需要建立lmdb目录)生成两个文本文件，分别为<code class="highlighter-rouge">train.txt</code>和<code class="highlighter-rouge">val.txt</code>，对于为训练数据集和验证数据集。</p>
+
+<h3 id="图片转成lmdb存储">图片转成lmdb存储</h3>
+
+<p>为了提高图片的读取效率，Caffe将图片转成lmdb进行存储，在上面得到<code class="highlighter-rouge">train.txt</code>和<code class="highlighter-rouge">val.txt</code>后，我们需要借助caffe的<code class="highlighter-rouge">convert_imageset</code>工具将图片resize到某一固定的尺寸，同时转成为lmdb格式存储。下面是小白菜平时使用的完成该任务的一个简单脚本<code class="highlighter-rouge">crop.sh</code></p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>/home/yuanyong/caffe/build/tools/convert_imageset <span class="se">\</span>
+         --resize_height 256 <span class="se">\</span>
+         --resize_width 256 <span class="se">\</span>
+         / <span class="se">\</span>
+         lmdb/train.txt <span class="se">\</span>
+         lmdb/train_lmdb
+</code></pre>
+</div>
+<p>运行两次，分别对应于<code class="highlighter-rouge">train.txt</code>和<code class="highlighter-rouge">val.txt</code>。运行完后，会在lmdb目录下生成<code class="highlighter-rouge">train_lmdb</code>和<code class="highlighter-rouge">val_lmdb</code>两目录，为了校验转成lmdb存储是否成功，我们最好分别进入这两个目录下看看文件的大小以做简单的验证。</p>
+
+<h3 id="生成均值文件">生成均值文件</h3>
+
+<p>对于得到的<code class="highlighter-rouge">train_lmdb</code>，我们在其上计算均值。具体地，使用Caffe的<code class="highlighter-rouge">compute_image_mean</code>工具：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nv">$CAFFE_ROOT</span>/build/tools/compute_image_mean lmdb/train_lmdb lmdb/mean.binaryproto
+</code></pre>
+</div>
+<p>在lmdb目录下即可得到均值文件<code class="highlighter-rouge">mean.binaryproto</code>。</p>
+
+<h3 id="修改train_valprototxt和solverprototxt">修改train_val.prototxt和solver.prototxt</h3>
+
+<p>针对VGGNET16网络，在fine-tuning的时候，我们通常将最后的分类层的学习率设置得比前面网络层的要大，一般10倍左右。当然，我们可以结合自己的需要，可以将前面层的学习率都置为0，这样网络在fine-tuning的时候，只调整最后一层分类层的权重；在或者我们分两个阶段去做fine-tuning，第一阶段只fine-tuning最后的分类层，第二阶段正常的fine-tuning所有的层(包含最后的分类层)。同时，我们还需要对最后一层分类层重新换个名字，并且对应的分类输出类别也需要根据自己数据集的分类类别数目做调整，下面小白菜给出自己在fine-tuning Neural Codes的landmark数据集上train_val.prototxt的前面输入部分和后面分类的部分：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>name: <span class="s2">"VGG_ILSVRC_16_layers"</span>
+layers <span class="o">{</span>
+  name: <span class="s2">"data"</span>
+  <span class="nb">type</span>: DATA
+  include <span class="o">{</span>
+    phase: TRAIN
+  <span class="o">}</span>
+ transform_param <span class="o">{</span>
+    crop_size: 224
+    mean_file: <span class="s2">"/raid/yuanyong/neuralcode/lmdb/mean.binaryproto"</span>
+    mirror: <span class="nb">true</span>
+ <span class="o">}</span>
+ data_param <span class="o">{</span>
+    <span class="nb">source</span>: <span class="s2">"/raid/yuanyong/neuralcode/lmdb/train_lmdb"</span>
+    batch_size: 64
+    backend: LMDB
+  <span class="o">}</span>
+  top: <span class="s2">"data"</span>
+  top: <span class="s2">"label"</span>
+<span class="o">}</span>
+layers <span class="o">{</span>
+  name: <span class="s2">"data"</span>
+  <span class="nb">type</span>: DATA
+  include <span class="o">{</span>
+    phase: TEST
+  <span class="o">}</span>
+ transform_param <span class="o">{</span>
+    crop_size: 224
+    mean_file: <span class="s2">"/raid/yuanyong/neuralcode/lmdb/mean.binaryproto"</span>
+    mirror: <span class="nb">false</span>
+ <span class="o">}</span>
+ data_param <span class="o">{</span>
+    <span class="nb">source</span>: <span class="s2">"/raid/yuanyong/neuralcode/lmdb/val_lmdb"</span>
+    batch_size: 52
+    backend: LMDB
+  <span class="o">}</span>
+  top: <span class="s2">"data"</span>
+  top: <span class="s2">"label"</span>
+<span class="o">}</span>
+
+...
+...
+...
+
+layers <span class="o">{</span>
+  name: <span class="s2">"fc8_magic"</span>     <span class="c"># 改名字</span>
+  <span class="nb">type</span>: INNER_PRODUCT
+  bottom: <span class="s2">"fc7"</span>
+  top: <span class="s2">"fc8_magic"</span>      <span class="c"># 改名字</span>
+  blobs_lr: 10          <span class="c"># 学习率是前面网络层是10倍</span>
+  blobs_lr: 20          <span class="c"># 学习率是前面网络层是10倍</span>
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param <span class="o">{</span>
+    num_output: 680     <span class="c"># 共680类</span>
+    weight_filler <span class="o">{</span>
+      <span class="nb">type</span>: <span class="s2">"gaussian"</span>
+      std: 0.01
+    <span class="o">}</span>
+    bias_filler <span class="o">{</span>
+      <span class="nb">type</span>: <span class="s2">"constant"</span>
+      value: 0
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+layers <span class="o">{</span>
+  name: <span class="s2">"loss"</span>
+  <span class="nb">type</span>: SOFTMAX_LOSS
+  bottom: <span class="s2">"fc8_magic"</span>   <span class="c"># 改名字</span>
+  bottom: <span class="s2">"label"</span>
+  top: <span class="s2">"loss/loss"</span>
+<span class="o">}</span>
+layers <span class="o">{</span>
+  name: <span class="s2">"accuracy"</span>
+  <span class="nb">type</span>: ACCURACY
+  bottom: <span class="s2">"fc8_magic"</span>   <span class="c"># 改名字</span>
+  bottom: <span class="s2">"label"</span>
+  top: <span class="s2">"accuracy"</span>
+  include: <span class="o">{</span> phase: TEST <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>上面配置测试输入的时候，<code class="highlighter-rouge">batch_size</code>设置的是52，这个设置非常重要，我们一定要保证这个设置的<code class="highlighter-rouge">batch_size</code>跟solver.prototxt里面设置的<code class="highlighter-rouge">test_iter</code>乘起来等于测试样本数目。下面再看看solver.prototxt这个文件：</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>net: <span class="s2">"train_val.prototxt"</span>
+test_iter: 4005
+test_interval: 5000
+base_lr: 0.001
+lr_policy: <span class="s2">"step"</span>
+gamma: 0.1
+stepsize: 20000
+display: 1000
+max_iter: 50000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 5000
+snapshot_prefix: <span class="s2">"../models/snapshots_"</span>
+solver_mode: GPU
+</code></pre>
+</div>
+
+<p>比较重要的5个需要调整参数分别是<code class="highlighter-rouge">test_iter</code>、<code class="highlighter-rouge">test_interval</code>、<code class="highlighter-rouge">base_lr</code>、<code class="highlighter-rouge">stepsize</code>, <code class="highlighter-rouge">momentum</code>。<code class="highlighter-rouge">test_iter</code>怎么设置上面已经介绍。<code class="highlighter-rouge">test_interval</code>表示迭代多少次进行一次验证及测试，<code class="highlighter-rouge">base_lr</code>表示基础学习率，一般要比正常训练时的学习率要小，<code class="highlighter-rouge">stepsize</code>跟步长相关，可以简单的理解为步长的分母，<code class="highlighter-rouge">momentum</code>按推荐设置为0.9就可以。</p>
+
+<p>设置完上面的train_val.prototxt和solver.prototxt后，便可以开始正式fine-tuning了。</p>
+
+<h3 id="正式fine-tuning">正式fine-tuning</h3>
+
+<p>借助Caffe工具集下的caffe，我们只需要简单的执行下面命令即可完成网络的fine-tuning:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="nv">$CAFFE_ROOT</span>/build/tools/caffe train -solver  solver.prototxt -weights http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_16_layers.caffemodel -gpu 0,1 | tee log.txt
+</code></pre>
+</div>
+
+<p>其中<code class="highlighter-rouge">-gpu</code>后面接的数字表示GPU设备的编号，这里我们使用了0卡和1卡，同时我们将训练的日志输出到log.txt里面。</p>
+
+<h3 id="测试">测试</h3>
+
+<p>完成了在Neural Codes的landmark数据集上的fine-tuning后，我们使用经过了fine-tuning后的模型在Oxford Building数据集上mAP提升了多少。为了方便对比，我们仍然提取fc6的特征，下面是不做ft(fine-tuning)和做ft的结果对比：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">layer</th>
+      <th style="text-align: center">mAP(128维)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">fc6</td>
+      <td style="text-align: center">45.9%</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">fc6+ft</td>
+      <td style="text-align: center">60.2%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>可以看到，经过fine-tuning，mAP有了较大幅度的提升。从而也从实验的角度验证了对于检索任务，在数据允许的条件，对预训练模型进行fine-tuning显得非常的有必要。</p>
+
+<h3 id="复现本文实验">复现本文实验</h3>
+
+<p>如想复现本文实验，可以在这里<a href="https://github.com/willard-yuan/cnn-cbir-benchmark/tree/master/fc_retrieval">fc_retrieval</a>找到相应的代码。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>在本篇博文中，小白菜就5个方面的问题展开了总结和整理，分别是：</p>
+
+<ul>
+  <li>CNN网络中哪一层最适合于做图像检索</li>
+  <li>基于pre-trained模型做图像检索几种典型的特征表示方法</li>
+  <li>抽取网络任意层的特征</li>
+  <li>数据增强(Data Augmentation)</li>
+  <li>VGGNet16网络模型fine-tuning实践</li>
+</ul>
+
+<p>整个文章的基本组织结构依照典型的工科思维方式进行串接，即从理论到实践。</p>
+
+  	</div>
+	</div>
+
+<div class="content-play">
+    <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">请我喝杯咖啡</a></p>
+    <div class="hide_box-play"></div>
+    <div class="shang_box-play">
+        <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+        <div class="shang_tit-play">
+            <p>感谢您的支持，我会继续写出更优秀的文章!</p>
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="shang_payimg">
+            <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+        </div>
+        <div class="pay_explain">请我喝杯咖啡</div>
+        <div class="shang_payselect">
+            <div class="pay_item" data-id="weipay">
+                <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+            </div>
+            <div class="pay_item checked" data-id="alipay">
+                <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+            </div>
+        </div>
+        <div class="shang_info-play">
+            <p>打开<span id="shang_pay_txt">微信</span>扫一扫，即可进行扫码打赏哦</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function dashangToggle(){
+        $(".hide_box-play").fadeToggle();
+        $(".shang_box-play").fadeToggle();
+    }
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+<style type="text/css">
+  .content-play{}
+  .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+  .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+  .shang_box-play img{border:none;border-width:0;}
+  .dashang{display:block;width:140px;margin:5px auto;height:40px;line-height:25px;padding:8px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+  .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+  .shang_close-play{float:right;display:inline-block;
+    margin-right: 10px;margin-top: 20px;
+  }
+  .shang_logo{display:block;text-align:center;margin:20px auto;}
+  .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+  .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+  .shang_payimg{width:140px;padding:10px;/*padding-left: 80px; border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+  .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+  .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+  .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+  .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+  .shang_info-play{clear:both;}
+  .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+</style>
+
+
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/ann-search.html">←图像检索：再叙ANN Search</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/graduate-after-one-year.html">知行手记：毕业一周年→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Disqus Comment BEGIN -->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yongyuan'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    <!--displayMath: [['$$','$$'], ['\[','\]']],-->
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <footer>
+    <div  style="border-bottom: 1px solid #eee"></div>
+    <p class="linkings">
+    Friend: <a href="https://sites.google.com/site/raphaelitemou/">Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="http://cmp.felk.cvut.cz/~toliageo/publi.html">Tolias</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.heyuhang.com/">heyuhang</a>&nbsp&nbsp&nbsp&nbsp<a href="https://blog.yuanbin.me/">yuanbin</a>&nbsp&nbsp&nbsp&nbsp<a href="http://freemind.pluskid.org/">pluskid</a>
+    </p>
+    <!--p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p-->
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/willard-yuan/willard-yuan.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://yongyuan.name">Willard</a>.
+    </p>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> 2013-2018
+    </p>
+    <!--ul class="links">
+      <li>
+        <a href="https://github.com/willard-yuan" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li>
+    </ul-->
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>

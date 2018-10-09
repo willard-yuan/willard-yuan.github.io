@@ -1,0 +1,732 @@
+@import url("font.css");*,*:after,*:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0;margin:0}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}
+.fancy, article {
+  /*font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;*/
+  font-family: Georgia, "Linux Libertine",-apple-system,"Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Source Han Sans CN","Source Han Sans SC","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;
+  line-height: 170%;
+}
+section {
+  font-family: "Linux Libertine",-apple-system,"Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","PingFang SC","Hiragino Sans GB","Source Han Sans CN","Source Han Sans SC","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;
+  line-height: 170%;
+}
+
+blockquote,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ui.header {
+  font-family: "Linux Libertine", Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, "TW-Kai", serif; }
+
+/*post index blockquote*/
+.pidex {
+  margin: 5em 0 1em 0em;
+}
+
+article h1 {
+  margin-bottom: 8px;
+  line-height: 120%;
+  text-align: center !important;
+}
+
+.meta {
+  color: #666;
+  /*border-top: 1px solid #ccc;*/
+  font-size: 0.9rem;
+  margin-top: 4px;
+  padding: 4px 8px;
+  text-align: center !important;
+}
+
+p{
+  text-align: justify;
+  margin: 20px 0;
+}
+
+.post ul, .post ol ,p{
+  /*padding-left: 2.5em;*/
+  font-size: 0.9rem;
+}
+
+a{text-decoration:none}
+a:focus{outline:0}
+a:hover {
+  text-decoration: none;
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+h2:before {
+    content: "#";
+    color: #48C9B0;
+    display: inline-block;
+    float: left;
+    padding: 3px 10px 0px 0px;
+    margin-top: -0.3em;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+ul{margin:0;padding:0}
+.post ul, .post ol {
+    text-align: justify;
+    /* list-style-type: none; */
+    margin-left: 20px;
+}
+}
+
+/*设置博文的容器*/
+#container{
+    display: block;
+    padding: 10px;
+    background-color: rgba(255,255,255,1);
+    /**border: 1px solid rgba(0,0,0,0.16667);
+    box-shadow: 0 1px 10px rgba(0,0,0,0.33333);**/
+    position:relative;
+    width:96%;
+    max-width:840px;
+    margin:0 auto;
+ }
+
+.post-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-top: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+ul.posts {
+}
+
+.inner, pre code, .post > * {
+  max-width: 760px; /*680*/
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  width: 100%;
+  display: block;
+}
+
+.twitter-tweet.twitter-tweet-rendered {
+  margin: 1em auto !important;
+}
+
+.post > .highlight {
+  /*max-width: 100% !important;  代码块区域宽度*/
+  word-wrap: break-word;
+}
+
+@media (max-width: 700px) {
+  .inner, pre code, .post > * {
+    margin-left: 18px !important;
+    margin-right: 18px !important;
+    width: auto !important;
+  }
+  .post > .highlight {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  header .logo {
+    clear: left;
+    text-align: center;
+    padding-top: 1em;
+    float: none;
+  }
+
+  header .avatar {
+    margin-top: 1em;
+    max-width: 80px;
+    vertical-align: -20px;
+    margin-left: 0
+  }
+
+  header nav {
+    float: none;
+    text-align: center;
+  }
+}
+
+nav a:last-child {
+  margin-right: 0;
+}
+
+nav a:hover {
+  text-decoration: none;
+  border-bottom: 3px solid #E74C3C;
+}
+
+nav a.selected {
+  color: black;
+}
+
+nav a.selected:hover {
+  border-bottom: none;
+}
+
+.pull-right { float: right; }
+
+img.inline.pull-right {
+  margin-left: 1em;
+}
+
+img.inline.pull-left {
+  margin-right: 1em;
+  max-width: 30%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.clear { clear: both; }
+
+.right {
+    text-align: right;
+}
+.pull-right {
+    float: right;
+}
+
+.post img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.5em auto 1.6em auto;
+}
+
+.sidebox {
+    overflow: auto;
+    position: fixed;
+    right: 0%;
+    top:0;
+    display: block;
+    float: right ! important;
+    font-size: 90%;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin-left: 6px;
+    visibility: visible;
+    max-width: 50%;
+    background-color: #f3f3f3;
+}
+
+.sidebox toc ol{
+    border-left: 3px;
+}
+
+.sidebox ol .active {
+    border-left: 3px solid #c1272d;
+}
+
+.sidebox ol li{
+    list-style: none;
+    line-height: 25px;
+}
+
+.sidebox ol a{
+}
+
+.sidebox .sidebar {
+    color: #666;
+    border-left: 0.4em solid #48C9B0;
+}
+
+ul.posts li {
+  padding: 0em 0 1em -4em;
+}
+.listing-seperator {
+    /**background: url(../images/timeline_century_tick.gif) left center no-repeat;**/
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+    /**font-size: 3em;**/
+    font-weight: 800;
+    padding: 4px 4px 4px 0px;
+    list-style-type: none;
+    display: block;
+    text-decoration: none;
+    color: #48C9B0;
+    font-size:x-large;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.listing-item {
+    list-style-type: none;
+    display: block;
+    font-size: 0.9rem;
+    text-decoration: none;
+    /* color: #a00;*/
+    color: #555;
+    font-weight: 800;
+}
+.listing-item a {
+    text-decoration: none;
+}
+.listing-item a:hover {
+    background-color: #D3D3D3;
+}
+.listing-item time {
+    float: right;
+    color: #999999;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+    font-size: 0.6rem;
+    color: #888;
+}
+#tag_cloud{
+margin-bottom: 1em;
+padding-top: 20px;
+}
+#tag_cloud a {
+  color: #555;
+  border-radius: 3px;
+  text-decoration: none;
+  border: 1px dashed #cccccc;
+  display: inline-block;
+  background: #fff;
+  width: auto;
+  height: auto;
+  border-radius: 3px;
+  letter-spacing: .01em;
+  cursor: pointer;
+  margin: 0 4px 7px 0;
+  color: #e74c3c!important;
+  border: 1px solid #48C9B0;
+  padding: 1px 6px;
+  text-decoration: none;
+}
+#tag_cloud a:hover{
+  color:#333333 !important;
+  text-decoration:none;
+}
+
+/*添加博客首页为谢一挥的模板样式——结束*/
+
+ul.posts .date {
+  margin-right: 0.3em;
+  display: inline-block;
+  font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+ul.posts .description {
+  color: #666;
+}
+
+/*
+ * Equations with KaTeX
+ *
+ * Center the equation content.
+ */
+.equation {
+  padding-bottom:  1rem;
+  padding-top:     1rem;
+  text-align:      center;
+  font-size:       1.5em;
+}
+
+img[alt=drawing] { width: 60%; }
+
+.category-listing-seperator {
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+    /**font-size: 3em;**/
+    font-weight: 400;
+    list-style-type: none;
+    display: block;
+    text-decoration: none;
+    font-size:x-large;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.category-listing-seperator:nth-child(5n+0) {
+    color: #e74c3c;
+}
+
+.category-listing-seperator:nth-child(5n+1) {
+    color: #1abc9c;
+}
+
+.category-listing-seperator:nth-child(5n+2) {
+    color: #3498db;
+}
+
+.category-listing-seperator:nth-child(5n+3) {
+    color: #9b59b6;
+}
+
+.category-listing-seperator:nth-child(5n+4) {
+    color: #e67e22;
+}
+
+.listing-item li:nth-child(4n+1){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+        &:before {
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+    }
+    background: #9b59b6;
+}
+
+.listing-item li:nth-child(4n+2){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+    &:before {
+    position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+    }
+    background: #3498db;
+}
+.listing-item li:nth-child(4n+3){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+    &:before {
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+  }
+  background: #9b59b6;
+}
+.listing-item li:nth-child(4n+4){
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+    &:before {
+        position: absolute;
+        top: 50%;
+        left: -2px;
+        width: 10px;
+        height: 10px;
+        margin-top: -9px;
+        margin-left: -5px;
+        content: ' ';
+        border-radius: 50%;
+  }
+  background: #e74c3c;
+}
+
+.post-link-in-posts {
+    display: block;
+    overflow: hidden;
+    list-style-type: none;
+    display: block;
+    padding: 0.8em 0px 0.8em 0px;
+    text-decoration: none;
+    border-bottom: 1px dashed #d0d0d0;
+    /* color: #a00; */
+    color: #555;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.post-link-in-posts .date {
+    width: 120px;
+    font-size: 0.6em;
+    color: #939aa1;
+    display: block;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts .date, .post-link-in-posts article {
+    float: left;
+}
+
+.post-link-in-posts .article {
+    font-weight: 800;
+    color: #555;
+    margin-right: 3px;
+    transition: all 100ms linear;
+	font-size: 0.9rem;
+}
+
+.post-link-in-posts:hover .article {
+    color: #48C9B0;;
+}
+
+.tag-in-index-post {
+    float: right;
+    color: #939aa1;
+    font-size: 0.6em;
+}
+
+.post-link-in-posts .tag {
+    color: #939aa1;
+    font-weight: normal;
+    font-size: 0.6em;
+    float: right;
+    font-family: 'lucida grande', 'lucida sans unicode', lucida, 'Helvetica Neue', helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts .date, .post-link-in-posts .tag {
+    margin-top: 0.2em;
+}
+
+@media (min-width: 768px)
+.post-link-in-posts .tag {
+    float: right;
+}
+
+/*添加博文上一篇下一篇功能*/
+.pager {
+    padding-left: 0;
+    margin: 20px 0;
+    list-style: none;
+    text-align: center;
+}
+.pager .previous>a, .pager .previous>span {
+    float: left;
+}
+
+.pager li>a, .pager li>span {
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.previous>a, .next>a {
+    color: rgba(0,179,179,0.83333);
+}
+
+.pager .next>a, .pager .next>span {
+    float: right;
+}
+
+.pager li {
+    display: inline;
+}
+
+.pager li > a,
+.pager li > span {/* Hux learn from
+     *     TypeIsBeautiful,
+     *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
+     */
+     font-family: "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+     line-height: 1.7;
+     font-size: 14px;
+     font-weight: 800;
+     letter-spacing: 1px;
+     padding: 10px 5px;
+     background-color: white;
+     border-radius: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .pager li > a,
+  .pager li > span {
+    font-size: 14px;
+    padding: 15px 25px;
+  }
+}
+
+/*添加多说样式*/
+.duoshuo{
+  margin-top:5em;;
+}
+
+/**文章代码格式**/
+.post pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0px 0px 10px;
+    font-size: 13px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #F5F5F5;
+    white-space: pre-wrap; /*防止一行太长*/
+}
+.post pre{
+    font-size:.8rem;  /*设置代码字体大小*/
+    font-family: Consolas,"Liberation Mono",Courier,monospace;/*设置代码字体类型*/
+}
+.post pre code{
+    font-size:.8rem;  /*设置代码字体大小*/
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    border: none;
+    line-height: 170%;
+}
+.post code {
+  /*font-size: 18px;原主题定义的代码字体大小*/
+  font-size: 90%;
+  background-color: #F4F4F4;
+  border: 1px solid #eee;
+  padding: 0 .2em;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  border-radius: 4px;
+}
+
+/* terminal */
+.post pre.terminal {
+  border: 1px solid #000;
+  background-color: #333;
+  color: #FFF;
+}
+
+.post pre.terminal code {
+  background-color: #333;
+}
+
+.post-photo {
+  height: 24em;
+  margin-top: -1.5em;
+  margin-bottom: 2.5em;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0px 4px 8px #999;
+}
+
+@media (max-width: 420px) {
+  .post-photo {
+    height: 13em;
+  }
+}
+
+figure .two-third {
+  max-width: 66%;
+}
+
+@media (max-width: 600px) {
+  figure .two-third {
+    max-width: 100%;
+  }
+}
+
+.post-footer-self-promotion {
+  margin-top: 1.6em;
+  margin-bottom: 0.3em;
+  font-style: italic;
+  margin-top: 4em;
+  /*margin-bottom: 6em;*/
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 0 1em;
+  background-color: #fefefe;
+}
+.post-footer-self-promotion img {
+  float: left;
+  margin-left: -84px;
+  margin-top: 16px;
+}
+.post-footer-self-promotion strong {
+  background-color: lightyellow;
+}
+
+img.inline.pull-right {
+  margin-left: 1em;
+}
+
+img.inline.pull-left {
+  margin-right: 1em;
+  max-width: 22%;
+}
+
+img {
+  max-width: 100%;
+}
+
+code.has-jax {font: inherit;
+              font-size: 100%;
+              background: inherit;
+              border: inherit;
+              color: #515151;}
+
+.post > .highlight .lineno { color: #ccc; display:inline-block; padding: 0 5px; border-right:1px solid #ccc; }
+.post > .highlight pre code { display: block; white-space: pre; overflow-x: auto; word-wrap: normal; }
+
+
+.highlight  { background: #ffffff; }
+.highlight .c { color: #999988; font-style: italic } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { font-weight: bold } /* Keyword */
+.highlight .o { font-weight: bold } /* Operator */
+.highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
+.highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .gd .x { color: #000000; background-color: #ffaaaa } /* Generic.Deleted.Specific */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #999999 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .gi .x { color: #000000; background-color: #aaffaa } /* Generic.Inserted.Specific */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { font-weight: bold } /* Keyword.Constant */
+.highlight .kd { font-weight: bold } /* Keyword.Declaration */
+.highlight .kp { font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #009999 } /* Literal.Number */
+.highlight .s { color: #d14 } /* Literal.String */
+.highlight .na { color: #008080 } /* Name.Attribute */
+.highlight .nb { color: #0086B3 } /* Name.Builtin */
+.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .no { color: #008080 } /* Name.Constant */
+.highlight .ni { color: #800080 } /* Name.Entity */
+.highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nn { color: #555555 } /* Name.Namespace */
+.highlight .nt { color: #000080 } /* Name.Tag */
+.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .ow { font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlight .sb { color: #d14 } /* Literal.String.Backtick */
+.highlight .sc { color: #d14 } /* Literal.String.Char */
+.highlight .sd { color: #d14 } /* Literal.String.Doc */
+.highlight .s2 { color: #d14 } /* Literal.String.Double */
+.highlight .se { color: #d14 } /* Literal.String.Escape */
+.highlight .sh { color: #d14 } /* Literal.String.Heredoc */
+.highlight .si { color: #d14 } /* Literal.String.Interpol */
+.highlight .sx { color: #d14 } /* Literal.String.Other */
+.highlight .sr { color: #009926 } /* Literal.String.Regex */
+.highlight .s1 { color: #d14 } /* Literal.String.Single */
+.highlight .ss { color: #990073 } /* Literal.String.Symbol */
+.highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
