@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图像检索：视频多帧排序
+title: 视觉检索：视频多帧排序
 categories: [Image Retrieval]
 tags: CBIR
 ---
