@@ -20,7 +20,7 @@ M = num_ouput = 4096
 
 由此，我们做了一个`(1x9408)`矩阵和`(9408x4096)`矩阵的乘法。如果`num_output`的值改变成为100，则做的是一个`(1x9408)`矩阵和`(9408x100)`矩阵的乘法。**Inner Product layer（常被称为全连接层）将输入视为一个vector，输出也是一个vector（height和width被设为1）**。下面是IP层的示意图
 
-![](http://ose5hybez.bkt.clouddn.com/2017/draft/fcgemm_corrected.png)
+![](http://yongyuan.name/imgs/posts/fcgemm_corrected.png)
 
 > 图片摘自[Why GEMM is at the heart of deep learning](https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/)
 
@@ -104,13 +104,13 @@ $$
 
 GEMM是BLAS (Basic Linear Algebra Subprograms)库的一部分，该库在1979年首次创建。为什么GEMM在深度学习中如此重要呢？我们可以先来看一个图：
 
-![](http://ose5hybez.bkt.clouddn.com/2017/draft/gemm_cup_gpu.png)
+![](http://yongyuan.name/imgs/posts/gemm_cup_gpu.png)
 
 > 图片摘自[Yangqing Jia](http://daggerfs.com/)的[thesis](http://www.eecs.berkeley.edu/Pubs/TechRpts/2014/EECS-2014-93.pdf)
 
 上图是采用AlexNet对CNN网络中不同layer GPU和CPU的时间消耗，从更底层的实现可以看到CNN网络的主要时间消耗用在了FC (for fully-connected)和Conv (for convolution)，而FC和Conv在实现上都将其转为了矩阵相乘的形式。举个例子：
 
-![](http://ose5hybez.bkt.clouddn.com/2017/draft/cnn_gemm.jpg)
+![](http://yongyuan.name/imgs/posts/cnn_gemm.jpg)
 
 > 图片摘自[cuDNN: Efficient Primitives for Deep Learning](http://arxiv.org/pdf/1410.0759.pdf)
 

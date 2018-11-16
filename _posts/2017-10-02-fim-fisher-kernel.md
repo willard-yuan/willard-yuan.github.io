@@ -7,7 +7,7 @@ tags: CBIR
 
 > [罗纳德·费雪](http://wiki.mbalib.com/wiki/%E7%BD%97%E7%BA%B3%E5%BE%B7%C2%B7%E8%B4%B9%E9%9B%AA)（Sir Ronald Aylmer Fisher, FRS，1890.2.17－1962.7.29)，现代统计学与现代演化论的奠基者之一，安德斯·哈尔德称他是“一位几乎独自建立现代统计科学的天才”，理查·道金斯则认为他是“达尔文最伟大的继承者”。 
 
-![](http://ose5hybez.bkt.clouddn.com/2015/1002/Ronald_Aylmer_Fisher.jpg) 
+![](http://yongyuan.name/imgs/posts/ronald_aylmer_fisher.jpg) 
 
 局部特征作为一种强鲁棒性的特征，其与全局特征构成了CV领域图像内容描述的基础。相比于全局特征，局部特征往往在对低层共有模式的表达上可以做到更细的粒度（关于局部和全局在视觉认知上的作用机制，强烈推荐阅读[尺度空间理论](https://en.wikipedia.org/wiki/Scale_space)），但同时也引发了新的问题，即**特征处理效率低、存储大等方面的问题**。因而需要将局部特征经过某种编码方式，最终表示成一种紧凑的全局特征表示。
 

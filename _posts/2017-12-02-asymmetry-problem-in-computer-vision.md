@@ -18,11 +18,11 @@ tags: 计算机视觉
 
 在用局部特征进行匹配的时候，比如SIFT，用A图匹配B图和用B图匹配A图，得到的匹配结果是不一样的，如下图所示：
 
-![](http://yongyuan.name/images/posts/sift_matching_diff.jpg)
+![](http://yongyuan.name/imgs/posts/sift_matching_diff.jpg)
 
 在这匹配的过程中，所有的度量方式比如最近邻、次近邻、几何校验等都是具备对称性的，所以很容易给我们造成一种错觉就是他们的匹配结果应该是一样的。这里面造成匹配结果不对称的根本因素在于**A图和B图它们的局部特征数目是不相等的**，比如A有500个局部特征，B有800个局部特征，用500个局部特征去匹配800局部个特征和用800个局部特征去匹配500个局部特征，势必造成匹配的结果不一样。一个鲁棒的匹配算法，应该在用A匹配B和用B匹配A时都能获得比较好的匹配结果，以避免单一结果匹配较好的情形，像下面的匹配算法就不是一种好的匹配算法：
 
-![](http://yongyuan.name/images/posts/false_sift_matching.jpg)
+![](http://yongyuan.name/imgs/posts/false_sift_matching.jpg)
 
 在设计匹配算法的时候，我们应**避免我们的算法出现单一匹配好的情形，以提高匹配的鲁棒性**。如需获取上图匹配结果，可以访问[covdet](https://github.com/willard-yuan/covdet.git)获取。
 
@@ -37,7 +37,7 @@ Logo的识别问题，可以分为两类:
 
 这种尺寸不对称性体现在：对于待检测的图片，Logo所占的区域是很小的，通常区域面积占总体面积比的5%都不到，这样就导致提取的Logo区域的特征（比如局部特征）被非Logo区域的特征给“淹没”掉，如下图所示：
 
-![](http://yongyuan.name/images/posts/logo_example.jpg)
+![](http://yongyuan.name/imgs/posts/logo_example.jpg)
 
 上图这个图选取得不是很合适，因为背景比较干净，Logo区域的特征还是其了比较大的作用。对于一般的情况，由于Logo区域的特征被非Logo区域的特征给淹没掉，从而使得在Logo库里检索的时候，在top@K（K取得比较小）里面比较难以检索到相关的Logo，而且即便是做重排，也比较难以将最相关的Logo排到最前面。
 
@@ -47,7 +47,7 @@ Logo的识别问题，可以分为两类:
 
 在此前的文章[图像检索：再叙ANN Search](http://yongyuan.name/blog/ann-search.html)中，小白菜曾对PQ做过比较详细的介绍，这里对PQ中非对称距离的计算做一详述。
 
-![](http://yongyuan.name/images/posts/pq_search.png)
+![](http://yongyuan.name/imgs/posts/pq_search.png)
 
 如上图所示，非对称距离计算方式（红框标示）在计算查询向量$x$到库中某一样本$y$之间的距离时，并不需要对查询向量$x$自身进行量化，而是直接计算查询向量$x$到量化了的$y$之间的距离，这种距离计算方式可以确保非距离计算方式以更大的概率保证计算的距离更接近于真实的距离（与对称距离计算方式相比较），而且这种方式比对称距离计算方式在实施的过程中，来得更直接，因为我们不需要对查询向量进行量化，而是直接计算到对应子段之间的距离，然后采用查表的方式获取到查询向量到库中所有样本的距离。这种通过查表的方式，是PQ能够加速距离计算的核心。
 
@@ -65,7 +65,7 @@ PQ的改进版本很多，比如[OPQ](kaiminghe.com/publications/pami13opq.pdf),
 
 也就是计算一次PQ的距离，跟计算一次汉明距离计算相比，会慢6倍左右，说明如果能把PQ编码赋予汉明编码的意义的话，距离的计算会提升6倍，这个提升还是非常巨大的。Polysemous Codes的实现已在Faiss中[Polysemous Codes Implementation](https://github.com/facebookresearch/faiss/blob/master/IndexPQ.h#L67)。下图解释一下“Polysemous Codes”的“Polysemous”，即一词多义：
 
-![](http://yongyuan.name/images/posts/polysemous_codes.jpg)
+![](http://yongyuan.name/imgs/posts/polysemous_codes.jpg)
 
 > Polysemous codes are compact representations of vectors that can be comparedeither with product quantization (222M distance evaluations per second per core for 8-byte codes) or as binary codes (1.19G distances per second). To obtain this property, we optimize the assignment of quantization indexes to bits such that closest centroidshave a small Hamming distance. 【摘自[Polysemous Codes](https://arxiv.org/abs/1609.01882)】
 
