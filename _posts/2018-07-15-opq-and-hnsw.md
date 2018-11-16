@@ -60,7 +60,7 @@ HNSW是Yury A. Malkov提出的一种基于图索引的方法，它是Yury A. Mal
 
 网络图以连续插入的方式构建。对于每一个要插入的元素，采用指数衰变概率分布函数来随机选取整数最大层。
 
-![drawing](http://yongyuan.name/imgs/posts/hnsw.jpg)
+![image](http://yongyuan.name/imgs/posts/hnsw.jpg)
 
 - 图构建元素插入过程（Algorithm 1）：从顶层开始贪心遍历graph，以便在某层A中找到最近邻。当在A层找到局部最小值之后，再将A层中找到的最近邻作为输入点（entry point），继续在下一层中寻找最近邻，重复该过程；
 - 层内最近邻查找（Algorithm 2）：贪心搜索的改进版本；

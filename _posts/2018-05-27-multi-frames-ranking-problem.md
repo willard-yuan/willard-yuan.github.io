@@ -40,11 +40,11 @@ S(X, Y) = \sum_{i=1}^{i=n} \sum_{j=1}^{j=m} d_\min(x_i, y_j)
 
 对于多帧排序，其排序逻辑建立在**两个视频**多帧相似性度量上，即对于一个query视频，库中的每个视频在与query视频做相似性度量的时候，均应采用上一节指出的**累积最小（最大）距离**分别计算相似度。在实际计算的时候，这种逐个视频计算的方式可以优化为query视频与N个视频进行内积运算（特征在提取的时候进行了$L2$归一化）的方式，然后对相似性矩阵做排序处理，假设query视频帧数是$m$帧，库中共$N$个视频，每一个视频取$n$帧，则相似性矩阵大小为$m \times (N*n)$，即每一行对应query视频某一帧查询后排序的结果，如下图所示：
 
-![drawing](http://ose5hybez.bkt.clouddn.com/2018/0516/multiframes_reranking1.png)
+![drawing](http://yongyuan.name/imgs/posts/multiframes_reranking1.png)
 
 上图中，qF1表示查询视频的第1帧，AF1表示视频A的第1帧，后面以此类推。对该排完序后的相似性矩阵，我们需要对每$i(i = 0,...,m)$行取出视频id对应的最大的值（**因为计算的是余弦相似度**）作为该帧对应各视频id的结果，这个过程可以用下图来直观的表述出来：
 
-![drawing](http://ose5hybez.bkt.clouddn.com/2018/0516/multiframes_reranking2.png)
+![drawing](http://yongyuan.name/imgs/posts/multiframes_reranking2.png)
 
 如上图所示，以qF1帧查询为例，由于已经对该帧查询的结果按相似性进行的排序，因而qF1帧查询对A视频查询的结果为AF1，其余以此类推。最后对这m帧经过最大值筛选后的结果，按视频id进行相似性分数的归并，最终得到多帧相似性排序分数，即：
 
