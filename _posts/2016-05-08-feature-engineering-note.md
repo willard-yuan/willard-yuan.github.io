@@ -8,6 +8,7 @@ tags: 数据挖掘
 ## 特征处理
 
 ### 连续特征和离散特征同时存在时如何处理?
+
 quora上有人问到了这方面的问题：[What are good ways to deal with problems where you have both discrete and continous features?](https://www.quora.com/What-are-good-ways-to-deal-with-problems-where-you-have-both-discrete-and-continous-features)主要的思路是对离散的特征进行二值化处理，比如答案中举的例子：  
 
 ```text
@@ -39,15 +40,19 @@ x = 价格(连续型特征)  种类类别(离散型特征)  y = 产品卖出数�
 
 一般对于特征中既包含有连续特征又包含有离散特征，对于离散特征差不多都采用这种方式进行处理，但是这种方式有一个比较大的问题，就是当离散特征可能的取值比较多时，会导致通过这种方式处理后的特征维度非常高(one-hot表示方法都有这样一种特点)，向量非常的稀疏，在存储以及运算的时候，可以通过使用一些支持稀疏表示的矩阵库进行处理(比如Armadillo有稀疏矩阵的表示)。
 
-一些不同的回归模型比较：  
+一些不同的回归模型比较：
+  
 1. [7 Types of Regression Techniques you should know](http://www.analyticsvidhya.com/blog/2015/08/comprehensive-guide-regression/)  
 2. [10 types of regressions. Which one to use?](http://www.datasciencecentral.com/profiles/blogs/10-types-of-regressions-which-one-to-use)  
 3. [Regression analysis using Python](http://www.turingfinance.com/regression-analysis-using-python-statsmodels-and-quandl/)  
 4. [scikit learn logistic regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
 
-### 对数变换  
-价格敏感模型：对特征进行对数变换，然后采用线性回归模型。   
+### 对数变换 
+ 
+价格敏感模型：对特征进行对数变换，然后采用线性回归模型。 
+  
 那么**问题**来了： 为什么采用对数变换？具体解释可以阅读[在统计学中为什么要对变量取对数](https://www.zhihu.com/question/20099757/answer/26586088)，在这个回答里解释得非常明白了。总结原因有2个：  
+
 1. 使数据分布更平稳。对数变换能够很好地将随着自变量的增加，因变量的方差也增大的模型转化为我们熟知的问题。   
 2. 承接第1点，将非线性的数据通过对数变换，转换为线性数据，便于使用线性模型进行回归。  
 关于这一点，可以（大致）类比一下SVM，比如SVM对于线性不可分的数据，先对数据进行核函数映射，将低维的数据映射到高维空间，使数据在摄影后的高维空间中线性可分。  

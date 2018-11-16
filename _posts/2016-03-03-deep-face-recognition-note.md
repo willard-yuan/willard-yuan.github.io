@@ -18,8 +18,9 @@ Face detection, 对图像中的人脸进行检测，并将结果用矩形框框�
 
 Face alignment，对检测到的人脸进行姿态的校正，使其人脸尽可能的"正"，通过校正可以提高人脸识别的精度。校正的方法有2D校正、3D校正的方法，3D校正的方法可以使侧脸得到较好的识别。目前校正在处理过程中完全可以达到实时性的要求，具体可以阅读Face Alignment at 3000 FPS via Regressing Local Binary Features这篇文章（[论文笔记](http://blog.csdn.net/boosting1/article/details/26085223)）。在进行人脸校正的时候，会有检测特征点的位置这一步，这些特征点位置主要是诸如鼻子左侧，鼻孔下侧，瞳孔位置，上嘴唇下侧等等位置，知道了这些特征点的位置后，做一下位置驱动的变形，脸即可被校"正"了。下面两幅图像分别显示了原来的人脸和经过校正后了的人脸。
 
-![drawing](http://ose5hybez.bkt.clouddn.com/2016/0303/f3_zpswxvtrty0.JPG)
-![drawing](http://ose5hybez.bkt.clouddn.com/2016/0303/Face_zpsxvrwiwan.JPG)
+![drawing](http://yongyuan.name/imgs/posts/f3.jpg)
+
+![drawing](http://yongyuan.name/imgs/posts/face_align.jpg)
 
 ### 人脸校验
 
@@ -41,7 +42,8 @@ Face identification或Face recognition，人脸识别正如下图所示的，它
 ## 人脸图像数据库
 
 人脸图像这个东西因为受到安全隐私等限制，所以一般大规模的人脸数据库比较难拿到，目前我知道到的公开的人脸图像库有LFW（Labelled Faces in the Wild）和YFW（Youtube Faces in the Wild）。下面再列举一些大规模的人脸图像数据库：
-![](http://ose5hybez.bkt.clouddn.com/2016/0303/facedatasets_zps8mujnhcl.PNG)
+
+![](http://yongyuan.name/imgs/posts/face_datasets.png)
 
 ## Deep Face Recognition
 
@@ -75,7 +77,7 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 5. **最终的人工过滤**。这一步借助训练CNN网络来加速标注过程，具体操作按如下进行：选用AlexNet网络在这2622个identities上进行训练，然后用网络最后输出的softmax分数对每一个identity（此时的每一个identity包含有623张图片）进行降序排序，排序的依据是成为内点（按照我的理解这里的内点就是属于这个identity）的可能性，标注者按照排序的结果进行验证(文章里讲每一个identity的排序结果以200个块进行展示，如果近似纯度大于95%则说明这个块是好的，没怎么搞明白这个地方讲的)，最后获取得了982803张较好的图片。
 
 下表使每个过程标注所花费的时间：
-![](http://ose5hybez.bkt.clouddn.com/2016/0303/datatime_zpsteframsl.PNG)
+![](http://yongyuan.name/imgs/posts/datatime.png)
 
 ## 网络结构与训练
 
@@ -85,18 +87,26 @@ DeepFace的工作后来被进一步拓展成了DeepId系列，具体可以阅读
 ## 使用triplet loss进行特征再学习
 
 对于上面网络的输出分数向量$\phi(l_t) \in R^D$，对其进行$l_2$归一化，然后使用affine投影将其投影为$x_t=W'\phi(l_t)/\|\|\phi(l_t)\|\|_2$，其中$W' \in R^{L \times D}$，$W'$为要求解的投影矩阵，$W'$通过triplet loss损失进行求解(也称作嵌入学习，Embedding learing)：
-![](http://ose5hybez.bkt.clouddn.com/2016/0303/vggFormulation_zpsp772f4ds.JPG)
-![](http://ose5hybez.bkt.clouddn.com/2016/0303/tripletLoss_zpszck9jlju.PNG)
+
+![](http://yongyuan.name/imgs/posts/vgg_formulation.jpg)
+
+![](http://yongyuan.name/imgs/posts/triplet_loss.png)
+
 上式中p是相对于a而言的正样本，n是相对于a而言的负样本，通过对该式进行优化，即可得到投影矩阵$W$，这样在求得这个投影矩阵后，对上面网络输出的分数向量进行L2归一化，再跟该投影矩阵$W$相乘即可得到特征的最终表示。下表显示了在YFW人脸数据库上不进行特征再学习和进行特征在学习后的识别结果(特征再学习在下表中为Embedding learning):
-![](http://ose5hybez.bkt.clouddn.com/2016/0303/lfwVGG_zpsedragzcr.PNG)
+
+![](http://yongyuan.name/imgs/posts/lfw_vgg.png)
+
 从上表可以看到，Embedding learning将原来的91.6%的识别率提高到了97.3%。说明对网络输出的特征进行在学习(跟特征的fine-tune差不多的意思)，可以提高精度。
 另外在[VGG Face Descriptor](http://www.robots.ox.ac.uk/~vgg/software/vgg_face/)项目主页上作者贴出了LFW和YFW两个人脸图像库上的识别率。
+
 ![](http://www.robots.ox.ac.uk/~vgg/software/vgg_face/table.png)
 
 ## 实验结果
 
 在文章中，作者在LFW人脸数据库上分别对Fisher Vector Faces、DeepFace、Fusion、DeepID-2,3、FaceNet、FaceNet+Alignment以及作者的方法进行对比，具体的识别精度我们看下表。
-![](http://ose5hybez.bkt.clouddn.com/2016/0303/YFWVGG_zpsr0vz0jzf.PNG)
+
+![](http://yongyuan.name/imgs/posts/yfw_vgg.png)
+
 从上表可以看到，Deep Face Recognition这篇文章所提出的方法训练所用图库大小最小，但取得了跟其他方法具有可比性的结果。
 
 ## 自己验证效果
@@ -105,7 +115,7 @@ Deep Face Recognition这篇文章其实去年刚发出来的时候就看了，�
 
 当时我做的是人脸检索实验，即用Deep Face Recognition提供的训练好了的网络模型抽取特征，维度为4096维，然后对抽取的特征进行L2归一化，再用余弦距离进行相似性度量，使用的人脸图像库不大，是别人提供给我的，比较规则，大概3000多张（虽然我测的只是这样一个小图库，我相信在大规模的人脸库上，它的效果也会很好），下面是检索的结果：
 
-![drawing](http://ose5hybez.bkt.clouddn.com/2016/0303/d1_zpsf6b8c2n8.PNG)
-<center>查询实例1</center>
+![drawing](http://yongyuan.name/imgs/posts/d1.png)
+<center>查询实例</center>
 
 另外VGG还提供的了已经训练好了的Caffe版本模型，具体可以阅读项目主页[VGG Face Descriptor](http://www.robots.ox.ac.uk/~vgg/software/vgg_face/)

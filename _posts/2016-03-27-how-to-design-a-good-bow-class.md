@@ -5,7 +5,7 @@ categories: [Image Retrieval]
 tags: 词袋模型
 ---
 
->回顾过去自己写过的一些词袋模型，比如[BoW图像检索Python实战](http://yongyuan.name/blog/practical-BoW-for-image-retrieval-with-python.html)、[图像检索(CBIR)三剑客之BoF、VLAD、FV](http://yongyuan.name/blog/BoF-VLAD-FV.html)以及[Bag of Words cpp实现](http://yongyuan.name/blog/bag-of-words-cpp-implement.html)，这些写出来的要么只是助于自己理解词袋模型的有关理论，要么也只是面向实验的一些验证，或者更直接点可以说只是些小玩具摆了。
+> 回顾过去自己写过的一些词袋模型，比如[BoW图像检索Python实战](http://yongyuan.name/blog/practical-BoW-for-image-retrieval-with-python.html)、[图像检索(CBIR)三剑客之BoF、VLAD、FV](http://yongyuan.name/blog/BoF-VLAD-FV.html)以及[Bag of Words cpp实现](http://yongyuan.name/blog/bag-of-words-cpp-implement.html)，这些写出来的要么只是助于自己理解词袋模型的有关理论，要么也只是面向实验的一些验证，或者更直接点可以说只是些小玩具摆了。
 
 在我2016年的计划列表里，存放着一条由2015年拖过来的目标，就是写出一个可以面向商业级别的词袋模型，这条计划伴随着成功将VLfeat的一些c接口打通而变成了可能，并且在过去的大半年里，自己也一直留意在具体编写的时候选用哪些库比较合适的问题。机缘巧合，这一段时间又重新开始造起了轮子，并有了初步的成功，所以在此梳理总结一下。在谈怎样设计一个词袋模型的类类型之前，先谈谈库的选用问题。
 
@@ -24,7 +24,7 @@ tags: 词袋模型
 
 在去年的时候，基本弄清了VLfeat中的一些函数的C接口调用方式，covdet这个函数通过阅读写给matlab的接口源码转成的C，对比matlab提取的结果和自己转成C之后提取的结果，两者完全一致。
 
-![](http://ose5hybez.bkt.clouddn.com/2016/0327/designBoWmodel_zpsd6dy38tv.PNG)
+![](http://yongyuan.name/imgs/posts/design_bow_model.png)
 
 #### 矩阵运算库的选取
 
@@ -156,16 +156,6 @@ public:
 
 目前，已经对重造的轮子展开了测试，如下图：
 
-![](http://ose5hybez.bkt.clouddn.com/2016/0327/Screen%20Shot%202016-03-27%20at%2022.53.23_zpsv3l1qukh.PNG)
+![](http://yongyuan.name/imgs/posts/bow_ukbench.png)
 
 在ukbench和oxford building这两个数据库的结果会在测试结果出来后补充到本文后面。
-
-
-
-
-
-
-
-
-
-
