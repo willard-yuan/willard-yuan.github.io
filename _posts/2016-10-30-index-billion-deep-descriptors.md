@@ -8,7 +8,7 @@ tags: 机器视觉
 前一段时间山世光老师开源了[SeetaFaceEngine](https://github.com/seetaface/SeetaFaceEngine)，而在小白菜读研的时候，除了做图像检索主要的工作外，也看了一些人脸识别方面的文章，并有过相应的一些笔记[Deep Face Recognition论文阅读](http://yongyuan.name/blog/deep-face-recognition-note.html)，所以这次自然也吸引了小白菜测试的兴趣。作为最早一批测试的用户，当时并没有相关资料说明如何在Mac下让它work起来，所以，为了能让它在Xcode中运行，小白菜在SeetaFaceEngine的基础上，对它做了一些小的改动，使得它能够在Xcode里运行起来。当然，在Xcode里面做完了测试后，小白菜在此基础上继续推荐了一步，为它创建了一个QT项目，想在此基础上为它做一个简单的人脸识别和人脸检索的小应用。
 
 人脸识别和人脸检索应用代码：[SeetaFaceLib](https://github.com/willard-yuan/SeetaFaceLib)，目前代码还在不断迭代中，已经完成的部分是人脸检索。整个小应用的界面是下面这个样子：
-![drawing](http://ose5hybez.bkt.clouddn.com/2016/1030/cbirFace_zpsmfzi5nly.PNG)
+![drawing](http://yongyuan.name/imgs/posts/cbir_face.png)
 
 在QT项目刚上传到github上传不久后，远在锐捷的罗兄说这个QT工程对他帮助很大，这个反馈让小白菜深感欣慰。所谓开源，有人用或对人有帮助，这个代码写得就有它的价值了。
 
@@ -21,7 +21,7 @@ tags: 机器视觉
 前两座大山具有相互关联性，涉及到的主题是特征表达的问题，而后一个表象涉及到的是信息检索领域的索引问题。任何有关图像检索方面的问题，几乎都是围绕着这两个核心问题而展开的。对于在这两个方面而展开的工作，暂且不表。我们还是回到人脸检索这个具体的应用中，来谈谈深度描述子的索引问题。
 
 刚开始在建立这个人脸检索QT工程的时候，小白菜并没有做很多复杂的考虑，比如要考虑人脸图像规模，当时建立这个QT工程之初的动机非常简单，就是OpenCV对于检索结果的展示实在是太不方便了，而且小白菜也不需要很大规模的图像体量，另外最重要的一点是，小白菜急切地想看到检索可视化的结果，所以直接用brute-force search的方式应该还ok。但是在做完后，小白菜发现在搜索阶段，搜索不够实时，在小白菜的本机上，3000张的人脸图片，在查询的时候，会出现卡顿的情况，具体表现可以见下图：
-![drawing](http://ose5hybez.bkt.clouddn.com/2016/1030/test_zpsw1vskwjq.GIF)
+![drawing](http://yongyuan.name/imgs/posts/test_face.gif)
 
 从上图可以看到，在查询的时候，会出现较长时间的卡顿现象，于是小白菜猜测，应该是线性扫描耗时过长造成的卡顿，因为在查询触发的时候，在第一次查询开启之时会读取图库特征，以后便一直保存在内存中，也就是在后面的查询中，不会再有读取图库特征这一步了。所以，对于后面的查询，时间主要消耗纯粹的相似度计算以及排序上。具体地，会先计算查询图像(在线提取查询图像的特征)的特征，然后挨个计算查询图像到图像库(特征已离线提取)中特征的余弦距离，即：
 
@@ -51,7 +51,7 @@ for (size_t i = 0 ; i != dists_idxs.size() ; i++) {
 为了进一步确认，还可以对执行的时间进行测试确认。从上面的过程可以看到，这种brute-search的方式实在是太耗时了，那么有没有方式能够缓解这种相应不够实时的问题呢。答案是有的，我们可以通过以下手段对这种brute-force search低效的方式做一些缓解：
 
 - PCA降维。对于通过深度学习方式得到的特征，降维不会对信息造成大的损失，事实上在[Neural codes for image retrieval]()这篇文章中已经指出了PCA对于深度描述子几乎不会造成损失，小白菜之前也对这样一个结论做过验证，见下图：
-![drawing](http://ose5hybez.bkt.clouddn.com/2016/1030/pcaDNN_zpsgu3ydzgj.PNG)
+![drawing](http://yongyuan.name/imgs/posts/pca_dnn.png)
 
 - 使用多线程技术。在计算余弦距离的时候，使用OpenMP多线程技术，这种方式能够较大幅度的降低搜索时间，比如CPU是8线程的，则可以将原来的时间降低为原来的8分之一。
 
@@ -61,11 +61,11 @@ for (size_t i = 0 ; i != dists_idxs.size() ; i++) {
 - PQ量化以及以PQ量化进行演变的改进方法。对向量进行切分，单独做聚类进行编码。  
 
 KD树和PQ量化方式用图示意表述如下：
-![](http://ose5hybez.bkt.clouddn.com/2016/1030/kdpq_zpsko83eho7.PNG)
+![](http://yongyuan.name/imgs/posts/kdpq.png)
 对于KD树和PQ量化方法的优缺点，可以参阅小白菜的博文[图像检索：基于内容的图像检索技术](http://yongyuan.name/blog/cbir-technique-summary.html)。
 
 - 基于哈希编码编码的方式。这类方法在小白菜读书的时候，为其主要研究方向。采用哈希进行图像检索的主要思想可以用下面这种图进行示意
-![](http://ose5hybez.bkt.clouddn.com/2016/1030/hashing_zpsmvgjup4e.PNG)
+![](http://yongyuan.name/imgs/posts/hashing.png)
 
 更多关于哈希方法的介绍和总结，可以参阅小白菜以前对哈希方法写的一些博文。另外，关于ANN的benchmark，可以阅读开源代码[ann-benchmarks](https://github.com/erikbern/ann-benchmarks)，小白菜觉得这个非常棒，果断star吖。
 
@@ -116,5 +116,5 @@ qDebug() << "index build finished ...";
 cptable->find_k_nearest_neighbors(q, 20, &idxCandidate);
 ```
 上面代码还有很大的速度方面的优化空间，anyway，我们先暂时抛开代码的优化，来看一下改用LSH索引后的效果，下面是改用LSH后查询响应的效果：
-![drawing](http://ose5hybez.bkt.clouddn.com/2016/1030/faceRetrievalLSH_zps698bdlag.GIF)
+![drawing](http://yongyuan.name/imgs/posts/face_retrieval_lsh.gif)
 从展示的效果来看，对于查询相应的速度，有了较大的改善，但是我们还是可以看到在查询的时候，有一段空白的白板，这个问题小白菜的猜测是它应该不是由于索引慢而导致的，对于这个短时的空白白板的优化，小白菜把它放到下期进行，同时，也会对[Efficient Indexing of Billion-Scale Datasets of Deep Descriptors](https://github.com/arbabenko/GNOIMI)这篇文章做一个理解总结。

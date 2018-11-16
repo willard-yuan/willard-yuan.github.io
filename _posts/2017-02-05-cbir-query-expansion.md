@@ -66,8 +66,8 @@ MAP | 61.91% | 61.91% | 65.42% | 66.52% | 66.07% | 66.38% | 66.51% | 65.65% | 65
 
 上面表格中mAP随top@K用曲线表示如下：
 
-![drawing](http://ose5hybez.bkt.clouddn.com/2017/0205/qe_map_zpsbat8vy5x.PNG)
+![drawing](http://yongyuan.name/imgs/posts/qe_map.png)
 
 在不做Query Expansion的时候，即top@K=0时，mAP为61.91%。因为查询属于库内查询，所以top@K=1时，仍然是查询向量本身，故结果与top@K=0是一样的。从实验的结果可以看出，Query Expansion确实能够提升检索的精度，在top@K=3的时候，取得了最高的检索精度。相比于不做Query Expansion，Query Expansion可以提高4%-5%的检索精度。
 
-所以，**在实际中，做Query Expansion完全是有必要的，一则是它实现简单，二则是它提升的效果还是比较明显的**
+所以，**在实际中，做Query Expansion完全是有必要的，一则是它实现简单，二则是它提升的效果还是比较明显的**。
