@@ -107,7 +107,7 @@ Storing debug log for failure in /home/willard/.pip/pip.log
 
 没想到昨天在SimpleCV Rep开了个issue很快得到了回答，本小子将问题反馈过去，@sksavant给出的回答是：
 
->Use 'pip install -r requirements.txt --allow-all-external --allow-unverified PIL'
+> Use 'pip install -r requirements.txt --allow-all-external --allow-unverified PIL'
 
 本小子试了一下，发觉还是不行，然后按照给出的错误提示，运行`sudo pip install -r requirements.txt --allow-unverified PIL`，安装成功。
 

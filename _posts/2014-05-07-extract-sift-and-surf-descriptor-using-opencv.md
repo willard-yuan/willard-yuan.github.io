@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 机器视觉：用OpenCV提取图像SIFT、SURF描述子
-categories: [Machine Learning]
+categories: [机器视觉]
 tags: OpenCV, SIFT
 ---
 
@@ -48,8 +48,9 @@ show()
 
 > Here kp will be a list of keypoints and des is a numpy array of shape Number_of_keypoints*128.
 
-运行上面代码，对Sift描述子进行可视化
-![]({{ site.url }}/public/images/posts/opencv-sift.png)
+运行上面代码，对Sift描述子进行可视化：
+
+![](http://yongyuan.name/imgs/posts/opencv_sift.png)
 
 ## SURF描述子
 
@@ -84,8 +85,9 @@ imshow(img2)
 show()
 ```
 
-运行上面代码，对SURF描述子进行可视化
-![]({{ site.url }}/public/images/posts/opencv-surf.png)
+运行上面代码，对SURF描述子进行可视化:
+
+![](http://yongyuan.name/imgs/posts/opencv_surf.png)
 
 ## 查看OpenCV版本
 要查看OpenCV版本号，可以在Python Shell里输入下面命令：

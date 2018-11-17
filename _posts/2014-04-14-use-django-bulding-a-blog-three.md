@@ -7,8 +7,8 @@ tags: Django
 
 要去掉TemplateDoesNotExist错误，得做三件事，第一件创建下面目录：
 
-1. appblog/appblog/templates
-2. appblog/appblog/templates/blog
+- appblog/appblog/templates
+- appblog/appblog/templates/blog
 
 下一步，你需要配置Django让Django能找到你的templates。打开settings.py文件找到TEMPLATE_DIRS元组。
 
@@ -109,13 +109,13 @@ TEMPLATE_DIRS = (
 
 好了，到目前为止，回顾一下我们已经做了的事情：
 
-1. 编辑urls.py，添加一些把特定的urls映射到view函数的urlpattern
-2. 写一些view函数来对应相应的URLS
-3. 为模板创建目录
-4. 配置django去寻找模板
-5. 创建base.html模板
-6. 为每一个view函数创建一个模板
-7. 简单的学习一下django模板语言
+- 编辑urls.py，添加一些把特定的urls映射到view函数的urlpattern
+- 写一些view函数来对应相应的URLS
+- 为模板创建目录
+- 配置django去寻找模板
+- 创建base.html模板
+- 为每一个view函数创建一个模板
+- 简单的学习一下django模板语言
 
 上面创建的blog太单调了，需要添加css样式使之好看。
 
@@ -170,7 +170,7 @@ STATICFILES_DIRS = (
 ```
 
 注意：和模板目录一样这里是本小子的static的绝对目录，使用时要改成自己本机存放static文件的绝对路径。刷新浏览器：
-![2014-04-13 22_07_16-Blog Archive]({{ site.url }}/public/images/posts/2014-04-13 22_07_16-Blog Archive.png)
+![django_hello](http://yongyuan.name/imgs/posts/django_hello.png)
 
 在这个教程教程中，我们完成了下面几件事：
 

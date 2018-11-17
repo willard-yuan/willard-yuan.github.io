@@ -28,7 +28,7 @@ tags: 图像检索
 
 对于相同物体图像检索，在检索相同的物体或目标时，易受拍摄环境的影响，比如光照变化、尺度变化、视角变化、遮挡以及背景的杂乱等都会对检索结果造成较大的影响，图1.3左图给出了这几种变化的例子，此外，对于非刚性的物体，在进行检索时，物体的形变也会对检索结果造成很大的影响。
 
-![](http://yongyuan.name/imgs/posts/oxford_building_bow.jpg)
+![](http://yongyuan.name/imgs/posts/oxford_building_bow.png)
 
 由于受环境干扰比较大，因而对于相同物体图像检索，在选取特征的时候，往往会选择那些抗干扰性比较好的不变性局部特征，比如SIFT[^SIFT]、SURF[^SURF]、ORB[^ORB]等，并以此为基础通过不同的编码方式构建图像的全局描述，具有代表性的工作有词袋模型[^BoW](BoW, Bag of Words)、 局部特征聚合描述符[^VLAD](VLAD, Vector of Locally Aggregated Descriptors)以及Fisher向量[^FV](FV, Fisher Vector)，这一类以类SIFT为基础的图像检索方法，由于结合了类SIFT不变性的特性，并且采用了由局部到全局的特征表达方式，并且在实际应用时在提取SIFT 的时候还可以使用siftGPU加速SIFT提取，因而从整体上来说能够获得比较好的检索效果，但这一类方法通常其特征维度往往是非常高的，如图1.2所示，在[牛津建筑物图像数据库](\href{http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/}{http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)上采用词袋模型进行检索，为了获得较高的检索精度，在聚类时聚类数目一般都设置到了几十万，因而其最终表示的特征其维度高达几十万维，因此为它们设计高效的索引方式显得十分必要。
 

@@ -11,11 +11,11 @@ tags: IPV4
 
 首先在网络设置里禁用Ipv4,如下图所示：
 
-![]({{ site.url }}/public/images/posts/ipv6-ipv4.png)
+![](http://yongyuan.name/imgs/posts/ipv6_ipv4.png)
 
 禁用Ipv4后，紧接着设置Ipv6:
 
-![]({{ site.url }}/public/images/posts/ipv6-convert-ipv4.png)
+![](http://yongyuan.name/imgs/posts/ipv6_convert_ipv4.png)
 
 这里，Ipv6地址采取自动获取的方式，DNS服务器为该配置过程的关键点，这里DNS服务器地址采用的是`2001:778::37`，配置完成后，保存即可。完成这些步骤后，便可以通过Ipv6转Ipv4实现Ipv4地址访问。
 

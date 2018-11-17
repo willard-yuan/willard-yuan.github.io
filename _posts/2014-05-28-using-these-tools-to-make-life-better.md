@@ -25,7 +25,7 @@ Yong Yuan
 
 老外真热心,好感动：
 
->Hi Yong Yuan,  
+> Hi Yong Yuan,  
 You can get the videos from http://pascal.inrialpes.fr/data2/evve/videos/ with eg.  
 wget -r http://pascal.inrialpes.fr/data2/evve/videos -I /data2/evve/videos  
 Best,  
@@ -37,10 +37,6 @@ Matthijs
 wget -r -p -k -np http://www.stat.ucla.edu/~mengmeng/
 ```
 坐等下载完，妹子的模板就被本小子“无耻地”耙过来了，囧。关于wget用法的一些说明，可以参阅有关资料，[楼梯](http://hi.baidu.com/xjtdy888/item/9ec3bbf57672f32d743c4c92)。
-
-先到这里，碎觉。
-
-### 2014/06/08 更新
 
 ### Ubuntu 14.04安装wget
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 编码训练：Django-markdown使用实例
+title: 编码训练：Django Markdown使用实例
 categories: [Django]
 tags: Django
 ---
@@ -9,7 +9,7 @@ tags: Django
 
 下面是后台添加django-markdown后的效果图:
 
-![2014-10-03-django-web-guide-development-notes-one-1]({{ site.url }}/images/posts/django-markdown.png)
+![django-markdown](http://yongyuan.name/imgs/posts/django_markdown.png)
 
 ## 安装
 
@@ -39,7 +39,7 @@ url('^markdown/', include( 'django_markdown.urls')),
 
 ## 使用django-markdown
 
-1. 定制表单
+### 定制表单
 
 ```python
 from django_markdown.widgets import MarkdownWidget
@@ -48,7 +48,7 @@ class MyCustomForm(forms.Form):
 ```
 在前端,如果要使在发表评论时能用markdown,就可以采用上面的语法.目前我还只是在后台使用markdown.
 
-2. 定制admins
+### 定制admins
 
 ```python
 from django_markdown.admin import MarkdownModelAdmin
@@ -75,10 +75,11 @@ admin.site.register(Book, MarkdownModelAdmin)
 ```
 `Book`是我定义的一个模型,添加完上面后,在后台我定制的admin里的摘要和作者介绍这两部分的撰写就可以支持markdown语法了,也就是你可看到的上面的那个效果图.
 
-3. Flatpages
+### Flatpages
+
 这个目前还不需要,需要的时候再看.
 
-4. 模板的tags
+### 模板的tags
 
 ```html
 {% raw %}

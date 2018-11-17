@@ -5,11 +5,7 @@ categories: [Machine Learning]
 tags: Dlib
 ---
 
-> Dlib：A toolkit for making real world machine learning and data analysis applications in C++。
-
-官网地址为：http://dlib.net/，跨平台。
-
----
+> Dlib：A toolkit for making real world machine learning and data analysis applications in C++。  
 
 ## 下载Dlib
 

@@ -8,7 +8,9 @@ tags: Django
 最近想和Tony用Django开发某个app，在MySQL这部分本小子碰到了些安装方面的问题。虽然此前在用wp时也接触到了MySQL，不过这次算是一次近距离的接触。这里记录下本小子在安装方面碰到的一些问题和发现的几个很有用的知识，算是对初次近距离接触MySQL的一个记录吧。
 
 要在django里使用MySQL(Pyhon标准库自带SQLite)，必须得安装MySQL和MySQL-Python这两个软件包，MySQL是实实在在的数据库，而MySQL-Python则是MySQL Python接口（这样理解有没有错？）。刚开始时，我以为就像OpenCV Python接口一样，只要安装了MySQL Python便可以使用MySQL了，结果运行某个app时，出现下面错误：
-![]({{ site.url }}/public/images/posts/MySQL-error01.png)
+
+![](http://yongyuan.name/imgs/posts/mysql_error_1.png)
+
 提示无法连接到MySQL服务器，然后问了一下Tony，Tony说还得安装MySQL。好吧，原来不能像OpenCV Python接口一样类比。去六维下了MySQL 5.6绿化版，启动MySQL时需要进入在MySQL的bin目录下，按网上资料在命令窗运行下面命令：
 
 ```sh
@@ -21,7 +23,8 @@ net start mysql
 python manage.py runserver
 ```
 
-![]({{ site.url }}/public/images/posts/2014-05-07 21_18_47-.png)
+![](http://yongyuan.name/imgs/posts/mysql_error_2.png)
+
 提示缺少32位动态链接库，本小子用的是win64位系统，而且安装的MySQL也是64位了，怎么会出现这样的错误，重装了两遍依然出现相同错误。不经意瞧了一下[MySQL-Python](http://www.codegood.com/archives/129)下方的说明：
 
 > The choice of 32bit and 64bit depends on the version of python you have installed in your computer and not in the operating system or the server you want to access. So if you have the 32 bit python 2.7 installed on your 64 bit Windows, you will download and install the 32 bit version. - See more at: http://www.codegood.com/archives/129#sthash.HTET8CPb.dpuf。

@@ -64,6 +64,7 @@ python manage.py runserver
 用原来创建的管理员账号登陆，在管理面板中，会发现没有blog应用，下面这些就可以做这些了。
 
 ## 连接你的blog
+
 在blog目录下，创建一个admin.py文件，并往里面添加下面代码：
 
 ```python
@@ -74,7 +75,9 @@ admin.site.register(Post)
 ```
 
 这是添加应用到admin最简单的方法。重启服务器刷新一下admin的页面，你将会看到像下面的页面:
+
 ![](http://images.cnitblog.com/blog/502877/201310/05215111-f96e5b35e26b47fcafb8801ab71c4132.jpg)
+
 现在blog应用已经在你admin中了，可以创建一个blog post。为了添加blog应用到admin,刚才做的是最基本的，为了让admin对用户更加友好点，添加一个用户自定义的类PostAdmin。修改admin.py为：
 
 ```python
@@ -97,6 +100,7 @@ admin.site.register(Post,PostAdmin)
 ![](http://images.cnitblog.com/blog/502877/201310/05225357-dfa617e43eab4e91b9d754e108a37c8b.jpg)
 
 ## 为blog app写URLS, views and templates
+
 现在该写一些urls，让它包含一些url模式。Django用URLconfs中的urlpatterns来将HTTP请求映射到特定的views函数，view函数返回响应给用户。后面要做的三件事如下：
 
 1. 在appblog/urls.py中写urlpatterns
@@ -134,7 +138,7 @@ urlpatterns = patterns('',
 
 `^(?P<slug>[\w\-]+)/$`为正则表达式。注意`^admin/`在正则表达式`^(?P<slug>[\w\-]+)/$`前，这是因为在正则表达式的世界里，后者同样匹配前者匹配的。重新启动Django服务器，刷新浏览器，你可以看到下面的结果：
 
-![2014-04-13 21_35_53-ViewDoesNotExist]({{ site.url }}/public/images/posts/2014-04-13 21_35_53-ViewDoesNotExist.png)
+![django_template_does_not_exist](http://yongyuan.name/imgs/posts/django_template_does_not_exist.png)
 
 收到这个错误提示，是因为映射到的view函数不存在，现在完善这一点。
 

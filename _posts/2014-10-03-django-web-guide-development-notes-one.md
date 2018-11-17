@@ -21,7 +21,7 @@ Django遵循分层原则,不过在做法上跟常规的MVC却略有不同.首先
 
 下面是自己对Django的MVC(MTV)的理解:
 
-![2014-10-03-django-web-guide-development-notes-one-1]({{ site.url }}/images/posts/2014-10-03-django-web-guide-development-notes-one-1.png)
+![django_mvc](http://yongyuan.name/imgs/posts/django_mvc.png)
 
 (更正:上图中是"MVT")
 

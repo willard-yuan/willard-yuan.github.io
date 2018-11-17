@@ -6,6 +6,7 @@ tags: Linux
 ---
 
 ### `ps aux`和`ps -ef`的区别
+
 Linux下显示系统进程的命令ps，最常用的有`ps -ef`和`ps aux`(注意不是`ps aux`)，那么这两者到底有什么区别呢？
 
 > 没太大差别，讨论这个问题，要追溯到Unix系统中的两种风格，System Ｖ风格和BSD 风格，ps aux最初用到Unix Style中，而ps -ef被用在System V Style中，两者输出略有不同。现在的大部分Linux系统都是可以同时使用这两种方式的。
