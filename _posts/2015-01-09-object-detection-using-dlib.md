@@ -5,21 +5,21 @@ categories: [Machine Learning]
 tags: Dlib
 ---
 
->D-lib：A toolkit for making real world machine learning and data analysis applications in C++。
+> Dlib：A toolkit for making real world machine learning and data analysis applications in C++。
 
 官网地址为：http://dlib.net/，跨平台。
 
 ---
 
-## 下载D-lib
+## 下载Dlib
 
-D-lib库原来托管在[sourceforge](http://sourceforge.net/projects/dclib/files/latest/download)上，关于本库的讨论可以见这里[Discussion](http://sourceforge.net/p/dclib/discussion/)。最近作者也在github上托管了一份[dlib](https://github.com/davisking/dlib)。
+Dlib库原来托管在[sourceforge](http://sourceforge.net/projects/dclib/files/latest/download)上，关于本库的讨论可以见这里[Discussion](http://sourceforge.net/p/dclib/discussion/)。最近作者也在github上托管了一份[dlib](https://github.com/davisking/dlib)。
 
-## 配置D-lib
+## 配置Dlib
 
-D-lib不需要依赖别的库。在VS2008中配置，只需要把d-lib-xx.xx添加到包含文件中：
+Dlib不需要依赖别的库。在VS2008中配置，只需要把d-lib-xx.xx添加到包含文件中：
 
-![vs2008-dlib]({{ site.url }}/images/posts/vs2008-dlib.jpg)
+![vs2008-dlib](http://yongyuan.name/imgs/posts/vs2008_dlib.jpg)
 
 ## 编译自带实例
 
@@ -54,7 +54,7 @@ cmake --build . --config Release
 
 ***注意***：在Xcode中使用**dlib**时，记得把**X11**，如下面所示：
 
-![](http://ose5hybez.bkt.clouddn.com/2015/0109/x11_zpsvho1a1p8.PNG)
+![](http://yongyuan.name/imgs/posts/x11.png)
 
 Dlib-19.1编译的时候，在安装了XQuartz的前提下，仍然报与X11的错误，具体如下：
 
@@ -78,11 +78,11 @@ cmake --build . --config Release
 
 ## 检测物体
 
-D-lib自带了人脸检测器，如果要检测别的物体，先要训练出对应的检测器。
+Dlib自带了人脸检测器，如果要检测别的物体，先要训练出对应的检测器。
 
 ### 对训练数据集图像进行标注
 
-D-lib自带了图像标注工作，对应在tools目录下，非常的好用。在使用该工具前，先用cmake对原代码进行编译：
+Dlib自带了图像标注工作，对应在tools目录下，非常的好用。在使用该工具前，先用cmake对原代码进行编译：
 
 ```sh
 cd dclib/tools/imglab
@@ -167,6 +167,6 @@ D-lib支持Opencv，所以可以将D-lib和OpenCV结合起来使用。D-lib对Op
 
 实际上，在用cmake编译的时候，dlib文件夹下cmake文件里有设置SSE2开启了。所以如果我们要提高在VS2008里面编译出来的程序的执行效率，我们要在VS2008编译的时候做开始SSE2的设置。详细设置如下：
 
-![vs2008-sse2](http://ose5hybez.bkt.clouddn.com/2015/0109/vs2008-sse2.jpg)
+![vs2008-sse2](http://yongyuan.name/imgs/posts/vs2008_sse2.jpg)
 
 启用增强指令集中的SSE2即可加速程序的执行效率。

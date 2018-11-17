@@ -5,7 +5,7 @@ categories: [Image Retrieval]
 tags: CBIR
 ---
 
-这篇博文主要从原理和具体实战两个部分对词袋模型进行展开，实战部分包括Python实现和C++实现。
+> 这篇博文主要从原理和具体实战两个部分对词袋模型进行展开，实战部分包括Python实现和C++实现。
 
 ## BoW词袋模型原理
 
@@ -56,15 +56,15 @@ SIFT特征虽然也能描述一幅图像，但是每个SIFT矢量都是128维的
 
 举两个例子来说明BoW词袋模型。第一个例子在介绍BoW词袋模型时一般资料里会经常使用到，就是将图像类比成文档，即一幅图像类比成一个文档，将图像中提取的诸如SIFT特征点类比成文档中的单词，然后把从图像库中所有提取的所有SIFT特征点弄在一块进行聚类，从中得到具有代表性的聚类中心(单词)，再对每一幅图像中的SIFT特征点找距离它最近的聚类中心(单词)，做词频(TF)统计，图解如下： 
  
-![clustering]({{ site.url }}/images/posts/2015-06-16/clustering.png) 
+![clustering](http://yongyuan.name/imgs/posts/clustering.png) 
  
 做完词频(TF)统计后，为了降低停用词带来的干扰，可以再算个逆文档词频(IDF)，也就是给TF乘上个权重，该过程可以图解如下：
   
-![clustering]({{ site.url }}/images/posts/2015-06-16/tfidf.png) 
+![clustering]({http://yongyuan.name/imgs/posts/tfidf.png) 
  
 上面单词权重即逆文档词频(IDF)，那时通过统计每个单词包含了多少个文档然后按设定的一个对数权重公式计算得来的，具体如下： 
  
-![clustering]({{ site.url }}/images/posts/2015-06-16/idf.png)  
+![clustering]({http://yongyuan.name/imgs/posts/idf.png)  
 
 对于上传上来的查询图像，提取SIFT然后统计tf后乘上上面的idf便可得到id-idf向量，然后进行L2归一化，用内积做相似性度量。
 
@@ -253,9 +253,9 @@ show()
 ```
 上面的代码中，你可以看到rootSIFT注释掉了，你也可以去掉注释，采用rootSIFT，但这里实验中我发觉rootSIFT并没有SIFT的效果好。最后看看检索的效果，最上面一张是查询图像，后面的是搜索到的图像：
 
-![ukbench00000]({{ site.url }}/images/posts/2015-06-16/ukbench00000.jpg)
+![ukbench00000](http://yongyuan.name/imgs/posts/ukbench00000.jpg)
 
-![ukbench00055]({{ site.url }}/images/posts/2015-06-16/ukbench00055.jpg)
+![ukbench00055](http://yongyuan.name/imgs/posts/ukbench00055.jpg)
 
 ## 词袋模型图像检索C++实战
 
@@ -263,7 +263,7 @@ show()
 
 **致谢**：基础框架来源[BoW](https://github.com/grapeot/BoW)，开发版本在此基础上进行，已在Ubuntu、OS X上测试通过，Windows需要支持c++11的编译器(VS2012及其以上)。
 
-![](http://ose5hybez.bkt.clouddn.com/2015/0813/Screen%20Shot%202015-08-13%20at%209.15.33%20PM_zpsq8qvkew7.PNG)
+![](http://yongyuan.name/imgs/posts/bow_ukbench_demo.png)
 
 ### 使用
 

@@ -18,8 +18,10 @@ HABIR哈希图像检索工具箱是一个用Matlab语言写的集成了经典哈
 ## 怎样使用HABIR哈希图像检索工具箱？
 
 1. 下载数据库。在本地计算机上，HABIR的文件目录结构如下图所示：
+
 ![downfiles](http://yongyuan.name/habir/doc/downfiles.png)
 <p align="center">图1 工具包目录</p>
+
 ![CIFAR-10](http://yongyuan.name/habir/doc/CIFAR-10.png)
 <p align="center">图2 CIFAR-10图像数据库目录</p>
 
@@ -71,16 +73,22 @@ gist\_320d\_CIFAR-10\_yunchao下载地址：[gist_320d_CIFAR-10_yunchao.mat](htt
 ## V2.0版本结果演示
 
 V2.0版本演示结果如下，左边为Precision-Recall曲线，中间为Recall-The number of retrieved samples曲线，右边为Precision-The number of retrieved samples曲线：
+
 ![precision-recall-128bits]({{ site.url }}/habir/doc/together_png/128bits.png)
 <p align="center">图3: 128位编码</p>
+
 ![precision-recall-64bits]({{ site.url }}/habir/doc/together_png/64bits.png)
 <p align="center">图4: 64位编码</p>
+
 ![precision-recall-32bits]({{ site.url }}/habir/doc/together_png/32bits.png)
 <p align="center">图5：32位编码</p>
+
 ![precision-recall-16bits]({{ site.url }}/habir/doc/together_png/16bits.png)
 <p align="center">图6：16位编码</p>
+
 ![precision-recall-8bits]({{ site.url }}/habir/doc/together_png/8bits.png)
 <p align="center">图7：8位编码</p>
+
 ![mAP]({{ site.url }}/habir/doc/together_png/mAP.png)
 <p align="center">图8：不同编码位下mAP曲线(run times = 1)</p>
 
@@ -115,4 +123,3 @@ V2.0版本演示结果如下，左边为Precision-Recall曲线，中间为Recall
 -  V1.0   原型版本: 2013/07/22
 
 就酱紫，明天还要做CBIR群活动第二期的PPT，群活动第一期关于基于哈希技术的图像检索视频和对应PPT可以分别从我的百度网盘中下载：[基于哈希的图像搜索技术视频](http://pan.baidu.com/s/1c0IuLSO)和[基于哈希的图像搜索技术PPT](http://pan.baidu.com/s/1ntHw63B)。
-

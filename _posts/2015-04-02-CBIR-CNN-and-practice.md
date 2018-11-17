@@ -26,7 +26,7 @@ tags: CBIR
 
 **注意**：其中文件夹matconvnet-1.0-beta17是已经编译好了的，鉴于MatConvNet只能在**Matlab 2014**及其以上以及系统必须是**64位**，所以在使用此工具箱之前得满足这两个条件。如果是Pythoner，推荐使用[flask-keras-cnn-image-retrieval](https://github.com/willard-yuan/flask-keras-cnn-image-retrieval)，纯Python，非常易于写成在线图像搜索应用。
 
->MatConvNet is a MATLAB toolbox implementing Convolutional Neural Networks (CNNs) for computer vision applications. It is simple, efficient, and can run and learn state-of-the-art CNNs. Several example CNNs are included to classify and encode images.
+> MatConvNet is a MATLAB toolbox implementing Convolutional Neural Networks (CNNs) for computer vision applications. It is simple, efficient, and can run and learn state-of-the-art CNNs. Several example CNNs are included to classify and encode images.
 
 MatConvNet是Andrea Vedaldi用Matlab开发的一个卷积网络工具包，相比于[Caffe](caffe.berkeleyvision.org)，这个工具包配置比较简单，而且最近这两年，vgg小组在深度学习领域也是成绩斐然。关于MatConvNet的文档，可以查看[MatConvNet Convolutional Neural Networks for MATLAB](http://arxiv.org/pdf/1412.4564.pdf)以及[在线文档](http://www.vlfeat.org/matconvnet/)。这里我们主要讲讲怎么配置MatConvNet以及怎样利用在imageNet上已经训练好的模型抽取特征并进行图像检索。
 
@@ -43,7 +43,7 @@ vl_compilenn
 
 **注意**：如果编译失败，可能的原因是你的matlab版本有点低（我在matlab2012b上没有编译成功），这个我查看了一下github上得issures，发觉也有人碰到这样的问题。另外根据Andrea Vedaldi在[error in compiling CPU version with windows 7 + matlab 2014a](https://github.com/vlfeat/matconvnet/issues/92)说的：
 
->Hi, we never tested a 32-bit build. Is there a particular reason why you are not running MATLAB 64 bit? Note that MATLAB 32 bit will be phased out by Mathwork in one of the upcoming releases. There does not seem much incentive in creating a 32 bit version of the code, although I am sure it could be done with  relatively little effort. Also, in most applications of deep learning 4GB of addressable memory seem a little too little.
+> Hi, we never tested a 32-bit build. Is there a particular reason why you are not running MATLAB 64 bit? Note that MATLAB 32 bit will be phased out by Mathwork in one of the upcoming releases. There does not seem much incentive in creating a 32 bit version of the code, although I am sure it could be done with  relatively little effort. Also, in most applications of deep learning 4GB of addressable memory seem a little too little.
 
 所以建议使用64位的matlab，此外在编译的时候，确认mex是否在matlab命令窗里可用，不行的话就setup吧，我用的是vs2010的编译器。
 
@@ -175,26 +175,30 @@ end
 
 示例：Caltech-256图像数据库
 <p align="center"><img src="http://www.vision.caltech.edu/VisionWiki/images/thumb/2/23/Caltech256a_crop.png/537px-Caltech256a_crop.png" alt="caltech256"/></p>
+
 Caltech-256图像数据库上搜索结果
-![airplane-image-retrieval]({{ site.url }}/images/posts/2015-04-02/airplane-image-retrieval.jpg)
+![airplane-image-retrieval](http://yongyuan.name/imgs/posts/airplane_image_retrieval.jpg)
 
 最后，整个图像检索的代码已放在github上了，感兴趣的同学可以去[**CNN-for-Image-Retrieval**](https://github.com/willard-yuan/CNN-for-Image-Retrieval)，有github的同学不要吝啬你的star哦，这个代码我会随时完善更新，比如添加计算mAP的代码。
 
-![Caltech1-70]({{ site.url }}/images/posts/2015-02-09/Caltech1-70.png)
+![Caltech1-70](http://yongyuan.name/imgs/posts/Caltech1-70.png)
 
-![Caltech1-70-example]({{ site.url }}/images/posts/2015-02-09/Caltech1-70-example.png)
+![Caltech1-70-example](http://yongyuan.name/imgs/posts/Caltech1-70-example.png)
 
-![Caltech71-101]({{ site.url }}/images/posts/2015-02-09/Caltech71-101.png)
+![Caltech71-101](http://yongyuan.name/imgs/posts/Caltech71-101.png)
 
-![Caltech71-140-example]({{ site.url }}/images/posts/2015-02-09/Caltech71-140-example.png)
+![Caltech71-140-example](http://yongyuan.name/imgs/posts/2015-02-09/Caltech71-140-example.png)
 
-![Caltech141-210]({{ site.url }}/images/posts/2015-02-09/Caltech141-210.png)
+![Caltech141-210](http://yongyuan.name/imgs/posts/2015-02-09/Caltech141-210.png)
 
-![Caltech141-210-example]({{ site.url }}/images/posts/2015-02-09/Caltech141-210-example.png)
+![Caltech141-210-example](http://yongyuan.name/imgs/posts/2015-02-09/Caltech141-210-example.png)
 
-![Caltech141-210-example1]({{ site.url }}/images/posts/2015-02-09/Caltech141-210-example1.png)
+![Caltech141-210-example1](http://yongyuan.name/imgs/posts/2015-02-09/Caltech141-210-example1.png)
 
-![random]({{ site.url }}/images/posts/2015-02-09/random.png)
-![river]({{ site.url }}/images/posts/2015-02-09/river.png)
-![lion]({{ site.url }}/images/posts/2015-02-09/lion.png)
-![tiger]({{ site.url }}/images/posts/2015-02-09/tiger.png)
+![random](http://yongyuan.name/imgs/posts/random.png)
+
+![river]({http://yongyuan.name/imgs/posts/river.png)
+
+![lion]({http://yongyuan.name/imgs/posts/lion.png)
+
+![tiger](http://yongyuan.name/imgs/posts/tiger.png)

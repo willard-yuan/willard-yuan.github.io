@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图像检索：CVPR图像检索论文阅读列表
+title: 图像检索：CVPR 2015图像检索论文阅读列表
 categories: [Image Retrieval]
 tags: 图像检索
 ---

@@ -20,6 +20,7 @@ So, all the new modules should be developed separately, and published in the ope
 怎么按照这个模块，目前还没找到比较好的简洁的方法。不过这篇文章不是要将这个，还是回到上面提到的问题中。为了使用OpenCV2.x版本，自然需要安装OpenCV2.x版本了，也就是安装完后，你的计算机上有两个版本的OpenCV，下面先讲讲怎么安装OpenCV2.x。
 
 ## 安装OpenCV2.x
+
 OpenCV2.x的安装跟OpenCV3.0的安装一下，同样用Homebrew安装，网上流传的关于Homebrew是Mac OS缺失的管理包一点也不为过。执行下面命令几个完成Opencv2.x的安装：
 
 ```sh
@@ -31,6 +32,7 @@ brew install opencv
 执行上面命令进行安装后，看到有sucessful这样的字眼后，说明安装成功，不过要在Python中调用OpenCV的接口，还需要做下面要的一些工作。
 
 ## 在OpenCV2.x和OpenCV3.0间版本自由切换
+
 上面安装了OpenCV2.x后，要让Python调用OpenCV2.x的接口，只需执行下面命令即可：
 
 ```sh
