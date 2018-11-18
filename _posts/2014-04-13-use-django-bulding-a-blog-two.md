@@ -138,7 +138,7 @@ urlpatterns = patterns('',
 
 `^(?P<slug>[\w\-]+)/$`为正则表达式。注意`^admin/`在正则表达式`^(?P<slug>[\w\-]+)/$`前，这是因为在正则表达式的世界里，后者同样匹配前者匹配的。重新启动Django服务器，刷新浏览器，你可以看到下面的结果：
 
-![django_template_does_not_exist](http://yongyuan.name/imgs/posts/django_template_does_not_exist.png)
+![django_template_does_not_exist](http://yongyuan.name/imgs/posts/view_does_not_exist.png)
 
 收到这个错误提示，是因为映射到的view函数不存在，现在完善这一点。
 
@@ -161,6 +161,6 @@ def post(request, slug):
 
 刷新页面，仍然会有一个错误，这次提示TemplateDoesNotExist错误
 
-![2014-04-13 21_39_57-TemplateDoesNotExist]({{ site.url }}/public/images/posts/2014-04-13 21_39_57-TemplateDoesNotExist.png)
+![django_template_does_not_exist](http://yongyuan.name/imgs/posts/django_template_does_not_exist.png)
 
-在下一节我们做三件事来去掉TemplateDoesNotExist错误,详见后面分解。
+在下一节我们做三件事来去掉TemplateDoesNotExist错误，详见后面分解。
