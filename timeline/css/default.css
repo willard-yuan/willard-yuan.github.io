@@ -28,17 +28,17 @@ body{margin:0;padding:0;background:#1ABC9C;font-size:12px;overflow:auto}
   border-radius: 2rem;
   -webkit-border-radius: 2rem;
   -moz-border-radius: 2rem;
-  background: url(../YongYuan.png) no-repeat;
+  background: url(../../imgs/yongyuan_55.png) no-repeat;
   background-size: 4rem;
   }
-  
+
   /*图像旋转*/
 .avatar:hover {
 		    -webkit-animation: spin 2s linear infinite;
 		    -moz-animation: spin 2s linear infinite;
 		    -ms-animation: spin 2s linear infinite;
 		    -o-animation: spin 2s linear infinite;
-		    animation: spin 2s linear infinite; }	    
+		    animation: spin 2s linear infinite; }
 
 @-webkit-keyframes spin {
   from {
