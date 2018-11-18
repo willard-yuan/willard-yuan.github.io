@@ -49,6 +49,6 @@ tags: 图像检索
 
 - **哈希检索常用数据库**，如下图：
 
-![hashing-database-for-CBIR]({{ site.url }}/images/posts/hashing-database-for-CBIR.png)
+![hashing_database_for_cbir](http://yongyuan.name/imgs/posts/hashing_database_for_cbir.png)
 
 （上表有Foolishwolf整理，[Hashing函数paper所用的数据集统计](http://blog.csdn.net/foolishwolf_x/article/details/38678969)）

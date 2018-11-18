@@ -5,7 +5,7 @@ categories: [Machine Learning]
 tags: Dlib
 ---
 
-> Dlib：A toolkit for making real world machine learning and data analysis applications in C++。  
+> Dlib：A toolkit for making real world machine learning and data analysis applications in C++。
 
 ## 下载Dlib
 
@@ -107,7 +107,7 @@ Linux: ./imglab mydataset.xml
 
 运行上面命令后，会弹出下面标注对话框:
 
-![imlab-example]({{ site.url }}/images/posts/imlab-example.jpg)
+![imlab_example]({http://yongyuan.name/imgs/posts/imlab_example.jpg)
 
 一旦标注完成，点击菜单保存即可。你还可以通过下面的命令：
 

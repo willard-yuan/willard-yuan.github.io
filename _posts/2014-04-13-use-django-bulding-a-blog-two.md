@@ -59,7 +59,8 @@ python manage.py runserver
 ```
 
 切换到浏览器，在地址栏输入[127.0.0.1:8000/admin](http://127.0.0.1:8000/admin/),会得到类似下面页面：
-![2014-04-13 21_16_07-Log in _ Django site admin]({{ site.url }}/public/images/posts/2014-04-13 21_16_07-Log in _ Django site admin.png)
+
+![](http://yongyuan.name/imgs/posts/django_site_admin.png)
 
 用原来创建的管理员账号登陆，在管理面板中，会发现没有blog应用，下面这些就可以做这些了。
 

@@ -35,6 +35,7 @@ python C:\Python27\Scripts\django-admin.py startproject appblog
 cd appblog
 python manage.py runserver
 ```
+
 注：上面`python C:\Python27\Scripts\django-admin.py startproject appblog`中有资料显示不需要指明django-admin的路径，在本小子的机子上报错，可能是环境变量没配好。
 开启Django服务器后，在浏览器中输入[127.0.0.1:8000](http://127.0.0.1:8000/)便可看到下面的页面
 
