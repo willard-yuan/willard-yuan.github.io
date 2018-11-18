@@ -39,15 +39,15 @@ tags: SIFT
 
 在看匹配结果前，我们可以先做一个大概的预测，因为“1NN/2NN<0.8”得到的很多点就是正确匹配的点对，所以将其放入RANSAC中后，能够得到很好的拟合模型，所以其剔除错配点对效果也应该更好。为了验证这一预测，我们看一下“1NN/2NN<0.8+RANSAC”具体的效果，如下图所示：
 
-![1NN/2NN<0.8+RANSAC](http://yongyuan.name/imgs/1nn2nn_ransac.jpg)
+![1NN/2NN<0.8+RANSAC](http://yongyuan.name/imgs/posts/1nn2nn_ransac.jpg)
 
 可以看到，已经完全没有错配点了，从这一点来说，其效果是非常好的。不过，从正配点对数目来看，“1NN+RANSAC”的结果更密集，也就是说“1NN+RANSAC”包含了更多的正配点对，“1NN/2NN<0.8+RANSAC”正配点对要稍微少些。在大多数情况下，我们会选择完全剔除了错配点对的模型。
 
 由于VLFeat的SIFT实现要比OpenCV里的实现要好，所以又采用VLFeat的[covdet](http://www.vlfeat.org/overview/covdet.html)对SIFT的匹配做了一些实现，并为covdet提供了c++接口，下面是做完几何校正后的一些匹配结果：
 
-![](http://yongyuan.name/imgs/brand.png)
+![](http://yongyuan.name/imgs/posts/brand.png)
 
-![drawing](http://yongyuan.name/imgs/wine.png)
+![drawing](http://yongyuan.name/imgs/posts/wine.png)
 
 ## 总结
 
