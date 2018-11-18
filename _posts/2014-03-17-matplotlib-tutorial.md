@@ -635,16 +635,3 @@ plot(*args, **kwargs)
 ## 快速参考
 
 没什么好翻译的，看原文吧……[传送门](http://www.loria.fr/~rougier/teaching/matplotlib/#quick-references)
-
-### 线条属性
-
-### 线型
-
-### 标记
-
-### 色彩表
-
-----
-
-[^1]:资源文件？
-[^2]:有时是左上角

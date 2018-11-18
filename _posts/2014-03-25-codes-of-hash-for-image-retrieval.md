@@ -91,6 +91,7 @@ Optimized Product Quantization (CVPR 2013), [**Project page**](http://research.m
 - [**Xianglong LIU**](http://www.nlsde.buaa.edu.cn/~xlliu/), 刘老师是2012年开始做哈希，发表过一系列论文，是国内做哈希比较早的学者，在他的主页上有一些他发表的哈希文章的代码。
 
 ## 他人讲解papers的一些好博文
+
 - [Locality Sensitive Hashing(LSH)之随机投影法](http://www.strongczq.com/2012/04/locality-sensitive-hashinglsh%E4%B9%8B%E9%9A%8F%E6%9C%BA%E6%8A%95%E5%BD%B1%E6%B3%95.html)
 - [Semi-Supervised Hashing](http://www.dreamingo.com:9999/blog/Semi-Supervised_Hashing)
 - [Spherical Hashing](http://blog.csdn.net/zwwkity/article/details/8565485?reload)

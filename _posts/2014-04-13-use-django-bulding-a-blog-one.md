@@ -207,16 +207,3 @@ python manage.py runserver
 ```
 
 切换到浏览器，刷新，没什么改变，在下一节，通过添加admin来完善这一部分。
-
-附：
-
-md DOS创建文件夹，怎么创建？
-
-重启系统环境
-
-SET PATH=C:\
-ECHO %PATH%
-
-添加notepad++到系统环境变量
-
-E:\ProgramFiles\360Cloud\Notepad++

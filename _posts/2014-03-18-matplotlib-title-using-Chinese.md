@@ -46,7 +46,7 @@ show()
 
 上面代码`title()`中，字体属性`fontproperties=font`,即开头已经设置好了的字体属性，需要注意的是中文标识前有个字母**u**,这个不能少，否则会出错。秀一下上面代码运行的结果：
 
-![2014-03-18-ch01_P002-003_PIL]({{ site.url }}/public/images/posts/2014-03-18-ch01_P002-003_PIL.png)
+![](http://yongyuan.name/imgs/posts/ch01_P002_003_pil.png)
 
 时间不早了，睡觉。
 
