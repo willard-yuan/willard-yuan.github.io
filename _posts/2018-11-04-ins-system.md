@@ -11,7 +11,7 @@ tags: CBIR
 
 <section>
     <video id="my-video" class="video-js" controls preload="auto" width="760" height="475"
-  poster="ins.jpg" data-setup="{}">
+  poster="http://yongyuan.name/project/imgs/ins.jpg" data-setup="{}">
     <source src="http://yongyuan.name/project/videos/ins.mp4" type='video/mp4'>
     <p class="vjs-no-js">
       To view this video please enable JavaScript, and consider upgrading to a web browser that
@@ -49,7 +49,7 @@ INS特征学习有其相对比较固定的思路，但是在不同的应用场�
 
 下图是基于相似检索场景和基于拷贝场景训练出来的模型，在召回率上对比（图片摘自指导同事做的实验图）：
 
-![img](http://yongyuan.name/imgs/posts/dup_net.png)
+![img](http://yongyuan.name/imgs/posts/dupnet_simnet.jpg)
 
 上图xxx和xxx都是基于相似检索场景训练出来的模型，duplicate是基于拷贝检测场景训练出来的模型，可以看到，采用基于拷贝检测场景训练出来的模型，在视频拷贝检测上，召回来有了非常好的提升。同时，基于这种场景训练出来的模型，在排序上，靠前的跟偏重图片各种物理属性视觉上的相似，而不是语义上的相似。
 
