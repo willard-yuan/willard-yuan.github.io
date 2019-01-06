@@ -15,6 +15,9 @@ tags: CV
 
 ### Deep Image Retrieval
 
+Deep Image Retrieval在刚开始出来的时候，小白菜读过几遍，对将RMAC（RMAC的介绍请参阅[layer选择与fine-tuning性能提升验证](http://yongyuan.name/blog/layer-selection-and-finetune-for-cbir.html)）加入到网络中做成一个end2end的方式这一点其实理解得不是那么有感触，当时只觉得这一点不算是主要的创新点，毕竟RMAC是已有的了，比较有贡献的是训练数据清洗那一块以及这篇是第一个使用triplet loss把Oxford building建筑数据集mAP做到80%+的文章。这一段时间，当小白菜回过头来重新读这篇文章并实现相关实验的时候，发觉这个end2end的RMAC对mAP起了非常大的提升作用，论文后面也实验了用RPN网络来替代RMAC，实验效果显示提升很小，从而也间接验证了RMAC的有效性。
 
+![](http://yongyuan.name/imgs/posts/dir_rmac.jpg)
 
+Deep Image Retrieval训练框架核心的东西如上图所示。比较重要的两个地方是：一是在对最后的feature map做roi pooling的时候，采用的RMAC（共得到21个区域框特征）；二是这21个区域块的特征做中心化，然后再接全连接，两个合在一块，相当于RMAC的PCA降维。
 
