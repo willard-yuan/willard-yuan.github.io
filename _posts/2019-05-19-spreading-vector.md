@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 图像检索：Spreading Vectors for Similarity Search
-categories: [图像检索]
-tags: 图像检索
+categories: [Image Retrieval]
+tags: CBIR
 ---
 
 > Thinking in Reverse.
