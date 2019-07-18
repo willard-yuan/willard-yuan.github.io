@@ -60,11 +60,11 @@ SIFT特征虽然也能描述一幅图像，但是每个SIFT矢量都是128维的
  
 做完词频(TF)统计后，为了降低停用词带来的干扰，可以再算个逆文档词频(IDF)，也就是给TF乘上个权重，该过程可以图解如下：
   
-![clustering]({http://yongyuan.name/imgs/posts/tfidf.png) 
+![clustering](http://yongyuan.name/imgs/posts/tfidf.png) 
  
 上面单词权重即逆文档词频(IDF)，那时通过统计每个单词包含了多少个文档然后按设定的一个对数权重公式计算得来的，具体如下： 
  
-![clustering]({http://yongyuan.name/imgs/posts/idf.png)  
+![clustering](http://yongyuan.name/imgs/posts/idf.png)  
 
 对于上传上来的查询图像，提取SIFT然后统计tf后乘上上面的idf便可得到id-idf向量，然后进行L2归一化，用内积做相似性度量。
 
@@ -246,10 +246,11 @@ for i, ID in enumerate(rank_ID[0][0:16]):
 
 show()
 ```
+
 将上面的代码保存为`search.py`,对某幅图像进行查询时，只需在命令行里输入：
 
 ```sh
-#python search.py -i dataset/train/ukbench00000.jpg(查询图像的路径)
+python search.py -i dataset/train/ukbench00000.jpg(查询图像的路径)
 ```
 上面的代码中，你可以看到rootSIFT注释掉了，你也可以去掉注释，采用rootSIFT，但这里实验中我发觉rootSIFT并没有SIFT的效果好。最后看看检索的效果，最上面一张是查询图像，后面的是搜索到的图像：
 
