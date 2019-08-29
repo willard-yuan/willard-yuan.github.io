@@ -24,14 +24,14 @@ Collaborative Index Embedding for Image Retrieval](https://www.computer.org/csdl
 
 小白菜选取fc6、fc6_relu6、fc7、fc7_relu7这四层语义层的特征，在[Oxford Building](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/)上进行实验，评价指标采用mAP，mAP的计算采用Oxford Building提供的计算mAP代码[compute_ap.cpp](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/compute_ap.cpp)，下表是fc6、fc6_relu6、fc7、fc7_relu7对应的mAP。
 
-layer | mAP(128维) | mAP(4096维) | mAP(4096维, 未做PCA)|
----:|:---:|:---:|:---:|
-fc7_relu7 | 44.72% | 1.11% | 41.08%
-fc7 | 45.03% | 19.67% | 41.18%
-fc6_relu6 | 43.62% | 23.0% | 43.34%
-fc6 | 45.9% |19.47% | 44.78%
+layer | mAP(PCA降维至128维) | mAP(4096维原始特征)|
+---:|:---:|:---:|
+fc7_relu7 | 44.72% | 41.08%
+fc7 | 45.03% | 41.18%
+fc6_relu6 | 43.62% | 43.34%
+fc6 | 45.9% | 44.78%
 
-从上表可以看到，直接采用pre-trained模型抽取语义层的特征，在Oxford Building上取得的结果在45%左右，同时我们还可以看出，选取fc6、fc6_relu6、fc7、fc7_relu7对结果的影响并不大。这个结果只能说非常的一般，在基于pre-trained模型做object retrieval的方法中，比如[Cross-dimensional Weighting for Aggregated Deep Convolutional Features](https://arxiv.org/abs/1512.04065)、[Particular object retrieval with integral max-pooling of CNN activations](https://arxiv.org/abs/1511.05879)以及[What Is the Best Practice for CNNs Applied to Visual Instance Retrieval?](https://arxiv.org/abs/1611.01640)指出，选用上层的语义层其实是不利于object retrieval，因为上层的语义层丢失了object的空间信息，并且从实验的角度说明了**选取中间层的特征**更利于object retrieval。
+从上表可以看到，直接采用pre-trained模型抽取语义层的特征，在Oxford Building上取得的结果在45%左右，并且可以发现，PCA降维后mAP反而会有提升（注意：降维训练数据集用的Oxford本身）。同时我们还可以看出，选取fc6、fc6_relu6、fc7、fc7_relu7对结果的影响并不大。这个结果只能说非常的一般，在基于pre-trained模型做object retrieval的方法中，比如[Cross-dimensional Weighting for Aggregated Deep Convolutional Features](https://arxiv.org/abs/1512.04065)、[Particular object retrieval with integral max-pooling of CNN activations](https://arxiv.org/abs/1511.05879)以及[What Is the Best Practice for CNNs Applied to Visual Instance Retrieval?](https://arxiv.org/abs/1611.01640)指出，选用上层的语义层其实是不利于object retrieval，因为上层的语义层丢失了object的空间信息，并且从实验的角度说明了**选取中间层的特征**更利于object retrieval。
 
 实际上，在选取中间层来表达特征的过程中，我们可以去掉全连接层，从而使得我们可以摆脱掉输入图像尺寸约束(比如224*224)的约束，而保持原图大小的输入。通常，图像分辨率越大，对于分类、检测等图像任务是越有利的。因而，从这一方面讲，**选取上层的全连接层作为特征，并不利于我们的object retrieval任务**。一种可能的猜想是，上层全连接层的语义特征，应该更适合做全局的相似。
 
