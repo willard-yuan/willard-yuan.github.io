@@ -1,9 +1,18 @@
 ---
 layout: post
-title: 向量索引
+title: 图像检索：向量索引
 categories: [Image Retrieval]
 tags: ANN
 ---
+
+> 本篇是对之前写过的几篇涉及到向量索引博文的系统整理和补充，分别为：
+>
+- [Asymmetry Problem in Computer Vision](https://yongyuan.name/blog/asymmetry-problem-in-computer-vision.html)
+- [再叙ANN Search](http://yongyuan.name/blog/ann-search.html)
+- [十亿规模的深度描述子如何有效索引](http://yongyuan.name/blog/index-billion-deep-descriptors.html)
+- [基于内容的图像检索技术](http://yongyuan.name/blog/cbir-technique-summary.html)
+
+
 
 无论是在学界还是工业界，向量索引是一个研究得比较多的问题，学术上对应的专有名词叫Approximate Nearest Neighbor Search (ANNS)，即近似最近邻搜索。为什么是近似，而不是我们想要的精确？这就是精度与时间、算力资源的折中，采用了牺牲精度换取时间和空间的方式，从海量的样本中实时获取跟查询最相似的样本。
 
