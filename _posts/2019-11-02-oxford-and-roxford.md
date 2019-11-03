@@ -14,13 +14,9 @@ Oxford数据集小白菜也一直在用，之所以在实际中验证一些检�
 
 然后小白菜也这么一直用着，虽然ROxford新定义的GT已经发布了。直到最近，在验证开发的局部特征检索系统在公开数据集上的效果时，一如既往的选择了Oxford的MAP作为衡量指标，发现了针对一些query，其定义的GT存在非常不合理的地方，下面举一个具体的query予以说明。
 
-在Oxford里，`all_souls_000013.jpg`作为query（见[all_souls_1_query.txt](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/gt_files_170407.tgz)）时，包含相同建筑目标的`all_souls_000206.jpg`被当做跟query不相关的图片，放在了junk里（见all_souls_1_junk.txt）。`all_souls_000013.jpg`对应的图片为：
+在Oxford里，`all_souls_000013.jpg`作为query（见[all_souls_1_query.txt](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/gt_files_170407.tgz)）时，包含相同建筑目标的`all_souls_000206.jpg`被当做跟query不相关的图片，放在了junk里（见all_souls_1_junk.txt）。`all_souls_000013.jpg`和`all_souls_000206.jpg`对应的图片分别为：
 
-![drawing](http://yongyuan.name/imgs/posts/all_souls_000013.jpg)
-
-`all_souls_000206.jpg`对应的图片为：
-
-![drawing](http://yongyuan.name/imgs/posts/all_souls_000206.jpg)
+![drawing](http://yongyuan.name/imgs/posts/all_souls_000013_all_souls_000206)
 
 从上面显示的图片可以看到，`all_souls_000206.jpg`跟`all_souls_000013.jpg`是相关的，它们包含了相同的建筑部分，其对应的匹配结果为：
 
