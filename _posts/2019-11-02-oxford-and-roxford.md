@@ -16,7 +16,7 @@ Oxford数据集小白菜也一直在用，之所以在实际中验证一些检�
 
 在Oxford里，`all_souls_000013.jpg`作为query（见[all_souls_1_query.txt](http://www.robots.ox.ac.uk/~vgg/data/oxbuildings/gt_files_170407.tgz)）时，包含相同建筑目标的`all_souls_000206.jpg`被当做跟query不相关的图片，放在了junk里（见all_souls_1_junk.txt）。`all_souls_000013.jpg`和`all_souls_000206.jpg`对应的图片分别为：
 
-![drawing](http://yongyuan.name/imgs/posts/all_souls_000013_all_souls_000206)
+![drawing](http://yongyuan.name/imgs/posts/all_souls_000013_all_souls_000206.jpg)
 
 从上面显示的图片可以看到，`all_souls_000206.jpg`跟`all_souls_000013.jpg`是相关的，它们包含了相同的建筑部分，其对应的匹配结果为：
 
