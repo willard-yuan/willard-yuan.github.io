@@ -5,7 +5,7 @@ categories: [计算机视觉]
 tags: CV
 ---
 
-Oxford Building dataset（后面简称为Oxford）从2007年发布，到2018年[Revisiting Oxford and Paris](http://cmp.felk.cvut.cz/~toliageo/p/RadenovicIscenToliasAvrithisChum_CVPR2018_Revisiting%20Oxford%20and%20Paris:%20Large-Scale%20Image%20Retrieval%20Benchmarking.pdf)重新整理发布为Revisiting Oxford Building dataset（后面简称为ROxford），整整十年，实例检索（instance retrieval）或物体检索（object retrieval）都跑在一个不是Ground Truth定义得不是很合理的数据上进行MAP（Mean Average Precision）评估，这期间，虽然有人意识到了Oxford数据集存在的问题，却一直等到10年后，才有人正式的对这个数据集GT定义的合理性给出正面的回应。
+Oxford Building dataset（后面简称为Oxford）从2007年发布，到2018年[Revisiting Oxford and Paris](http://cmp.felk.cvut.cz/~toliageo/p/RadenovicIscenToliasAvrithisChum_CVPR2018_Revisiting%20Oxford%20and%20Paris:%20Large-Scale%20Image%20Retrieval%20Benchmarking.pdf)重新整理发布为Revisiting Oxford Building dataset（后面简称为ROxford），整整十年，实例检索（instance retrieval）或物体检索（object retrieval）都跑在一个Ground Truth定义得不是很合理的数据上进行MAP（Mean Average Precision）评估，这期间，虽然有人意识到了Oxford数据集存在的问题，却一直等到10年后，才有人正式的对这个数据集GT定义的合理性给出正面的回应。
 
 Oxford数据集小白菜也一直在用，之所以在实际中验证一些检索算法指标的时候喜欢用这个数据集，是因为这个数据集对小白菜而言，有两个优点：
 
