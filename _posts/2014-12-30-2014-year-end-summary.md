@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 总结回顾：2014，三件小事
+title: 总结回顾：2014年，三件小事
 categories: [Life]
 tags: Life
 ---
