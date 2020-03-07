@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 总结回顾：2019年，十年岁月
+title: 总结回顾：2019年，十年
 categories: [Life]
 tags: Life
 ---
