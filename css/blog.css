@@ -551,11 +551,6 @@ img[alt=drawing] { width: 60%; }
   }
 }
 
-/*添加多说样式*/
-.duoshuo{
-  margin-top:5em;;
-}
-
 /**文章代码格式**/
 .post pre {
     display: block;
