@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 视频检索：Videntifier与NV Tree索引
+title: 视频检索：Videntifier与NV Tree
 categories: [Image Retrieval]
 tags: ANN
 ---
@@ -19,10 +19,12 @@ Videntifier目前服务的客户包括：facebook、instagram、interpol等，�
 
 几篇重要的论文：
 
-- Multimedia Identifier，Vid 申请的主要专利；
-- Eff2 Videntifier: Identifying Pirated Videos in Real-Time，Vid用的SIFT版本，Eff2特征介绍详见4；
-- Scalability of Local Image Descriptors: A Comparative Study，Eff2特征详细介绍，主要参考资料；
-- NV-Tree: An Efficient Disk-Based Index for Approximate Search in Very Large High-Dimensional Collections，NV-tree详细介绍，TPAMI 2009，主要参考资料.
+- [Multimedia Identifier](https://patentimages.storage.googleapis.com/9f/66/a8/380da611471bb3/US9047373.pdf)，Vid 申请的主要专利；
+- [Eff2 Videntifier: Identifying Pirated Videos in Real-Time](https://hal.inria.fr/inria-00175874/document)，Vid用的SIFT版本，Eff2特征介绍详见4；
+- [Scalability of Local Image Descriptors: A Comparative Study](https://hal.inria.fr/inria-00175234/document)，Eff2特征详细介绍，主要参考资料；
+- [NV-Tree: An Efficient Disk-Based Index for Approximate Search in Very Large High-Dimensional Collections](https://hal.inria.fr/hal-00794359/)，NV-tree详细介绍，TPAMI 2009，主要参考资料.
+
+下面对Videntifier技术分析，主要是对上面给出的公开资料的理解整理。
 
 ### 特征构成等介绍
 
@@ -63,10 +65,11 @@ NV-tree索引构建过程，主要包含两个步骤：Projecting和Segmenting�
 下图展示的是1个NV-tree和3个NV-tree的数据结构：如图所示，1个NV-tree分割策略为[3, 5]，最后会得到3*5=15个分割区，每一个分割区以B+tree的方式组织描述子，并包含固定数目描述子的唯一标识符。
 
 ![drawing](http://yongyuan.name/imgs/posts/nv-tree-1-indexer.png)
-1个NV-tree (PvS 索引)
+<center>1个NV-tree (PvS 索引)</center>
+
 
 ![drawing](http://yongyuan.name/imgs/posts/nv-tree-3-indexer.png)
-3个NV-tree (PvS 索引)
+<center>3个NV-tree (PvS 索引)</center>
 
 ### Projecting过程
 
@@ -109,9 +112,9 @@ d(n_100, n_i) > c。
 
 对搜集的badcase准召测评：15个画中画的case，recall=100%，precision=100%。平均检索时间：
 
-| nr_points_queried | nr_frames_queried | time_fetch_points|time_init_matching|time_matching|
+|  | nr_points_queried | nr_frames_queried | time_fetch_points|time_init_matching|time_matching|
 |:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-| 平均 | 4213 | 50 | 1492ms | 22ms | 3673ms |
+| 平均 |  4213 | 50 | 1492ms | 22ms | 3673ms |
 
 
 ### 公开数据集
