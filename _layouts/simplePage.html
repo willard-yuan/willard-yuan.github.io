@@ -7,7 +7,7 @@
   <title>
     {{ page.title }}
     {% if page.category == 'blog' and page.url != '/blog/index.html' %}
-    - Yong Yuan
+    - Yong's Blog
     {% endif %}
   </title>
   <link rel="stylesheet" href="../css/site.css">
@@ -41,9 +41,9 @@
         <a href="/YongYuan_resume.pdf">简历</a>
         <!--<a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">出版</a>-->
         <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">博客</a>
-        <a href="/books/">书单</a>
+        <!--<a href="/books/">书单</a>-->
         <a href="/timeline/">时间线</a>
-        <a href="https://github.com/willard-yuan">Github</a>
+        <a href="https://github.com/willard-yuan">代码</a>
       </nav>
       {% elsif page.url == '/cn/project' %}
       <nav>
@@ -54,9 +54,9 @@
         <a href="/YongYuan_resume.pdf">简历</a>
         <!--<a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">出版</a>-->
         <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">博客</a>
-        <a href="/books/">书单</a>
+        <!--<a href="/books/">书单</a>-->
         <a href="/timeline/">时间线</a>
-        <a href="https://github.com/willard-yuan">Github</a>
+        <a href="https://github.com/willard-yuan">代码</a>
       </nav>
       {% else %}
       <nav>
@@ -67,9 +67,9 @@
         <a href="/YongYuan_resume.pdf">Resume</a>
         <!--<a class="{% if page.category == 'publication' %} selected {% endif %}" href="/publication/">Publication</a>-->
         <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
-        <a href="/books/">Book</a>
+        <!--<a href="/books/">Book</a>-->
         <a href="/timeline/">Times</a>
-        <a href="https://github.com/willard-yuan">Github</a>
+        <a href="https://github.com/willard-yuan">Code</a>
       </nav>
     {% endif %}
 
