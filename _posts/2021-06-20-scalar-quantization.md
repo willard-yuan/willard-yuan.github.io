@@ -21,7 +21,7 @@ Scalar Quantization标量量化，分为两个过程：
 
 为了更好的说明Scalar Quantization的原理，小白菜画了Scalar Quantization标量量化原理框图，如下图所示：
 
-![drawing](http://yongyuan.name/imgs/posts/scalar-quantization-encode-decode1.jpg)
+![](http://yongyuan.name/imgs/posts/scalar-quantization-encode-decode1.jpg)
 
 整个Scalar Quantization其实是很容易理解的，下面对训练、编码和解码做些说明。
 
