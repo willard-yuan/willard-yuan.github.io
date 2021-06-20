@@ -93,4 +93,4 @@ void decode_vector(const uint8_t* code, float* x) const final {
 
 针对小白菜Scalar Quantization，小白菜实现的编解码过程，同时提供了faiss实现的接口调用，也提供了自己实现的接口调用，具体可以阅读[int8_quan.cc](https://github.com/willard-yuan/cvtk/blob/master/scalar_quantization/scalar_quantization/int8_quan.cc)。
 
-另外，关于Faiss实现的decode接口，由于采用了多线程方式，在实际使用的时候，当请求解码的数据量不够大的时候，多线程的方式，性能反而下降，具体可以看这里提到的Issue [Scale quantization decodes does not fast](https://github.com/facebookresearch/faiss/issues/1530)。
+另外，关于Faiss实现的decode接口，由于采用了多线程方式，在实际使用的时候，当请求解码的数据量不够大的时候，多线程的方式，性能反而下降，具体可以看这里提到的Issue: [Scale quantization decodes does not fast](https://github.com/facebookresearch/faiss/issues/1530)。
