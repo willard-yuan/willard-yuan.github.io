@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Scalar Quantization标量量化与向量压缩
+title: Scalar Quantization标量量化
 categories: [向量检索]
 tags: ANN
 ---
@@ -13,13 +13,15 @@ tags: ANN
 - [十亿规模的深度描述子如何有效索引](http://yongyuan.name/blog/index-billion-deep-descriptors.html)
 - [基于内容的图像检索技术](http://yongyuan.name/blog/cbir-technique-summary.html)
 
+## 背景
+
 在工作中遇到这样一个场景：通过多模态学习到的64维video embedding，在搜索精排的时候，需要实时取到前K（K>=300）个结果对应的video embedding，由于模型比较大，这个video embedding，不支持实时计算，而是在视频上传的时候，就被计算好。工程架构对存储和读取性能是有要求的，即不能直接将这64维embedding直接写到kiwi（redis改造后的数据库）里面。
 
 这个问题，可以简化为：有没有一种量化方法，将一个d维float型向量，encode为一个d维int8型的向量，这个d维int8型的向量经过decode后，与原始向量的误差尽可能小？这样一来，存储空间降低为原来的1/4倍，并且读取int8的性能比float型会快很多。答案是肯定的，这也是本篇博文要介绍总结的Scalar Quantization。
 
-Scalar Quantization，即标量量化。关于Scalar Quantization，网上资料比较多（[梯子](https://www.google.com.hk/search?q=Scalar+Quantization&newwindow=1&safe=strict&biw=1389&bih=766&sxsrf=ALeKk01QFkem3Lrzgoe3vrfd5uyeVr2RPQ%3A1624178770171&ei=UgDPYOjkCMWXr7wP98CqkA0&oq=Scalar+Quantization&gs_lcp=Cgdnd3Mtd2l6EAMyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECdQ06k-WOSrPmDwrD5oAXACeACAAckBiAHJAZIBAzItMZgBAKABAaABAqoBB2d3cy13aXqwAQrAAQE&sclient=gws-wiz&ved=0ahUKEwjo1ZW16aXxAhXFy4sBHXegCtIQ4dUDCBI&uact=5)），但小白菜在查过很多资料后，发觉能把Scalar Quantization向量量化过程讲清楚，并且还能剖析faiss中实现的Scalar Quantization，几乎没有。
+Scalar Quantization，即标量量化。关于Scalar Quantization，网上资料比较多（[梯子](https://www.google.com.hk/search?q=Scalar+Quantization&newwindow=1&safe=strict&biw=1389&bih=766&sxsrf=ALeKk01QFkem3Lrzgoe3vrfd5uyeVr2RPQ%3A1624178770171&ei=UgDPYOjkCMWXr7wP98CqkA0&oq=Scalar+Quantization&gs_lcp=Cgdnd3Mtd2l6EAMyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECcyBwgjEOoCECdQ06k-WOSrPmDwrD5oAXACeACAAckBiAHJAZIBAzItMZgBAKABAaABAqoBB2d3cy13aXqwAQrAAQE&sclient=gws-wiz&ved=0ahUKEwjo1ZW16aXxAhXFy4sBHXegCtIQ4dUDCBI&uact=5)），但小白菜在查过很多资料后，发觉能把Scalar Quantization向量量化过程讲清楚，并且还能剖析faiss中实现的Scalar Quantization，几乎没有。为了方便后面的同学理解，小白菜结合自己对Scalar Quantization原理与实现，做了整理。
 
-## Scalar Quantization
+## Scalar Quantization原理
 
 Scalar Quantization标量量化，分为两个过程：
 
@@ -101,4 +103,4 @@ void decode_vector(const uint8_t* code, float* x) const final {
 
 针对小白菜Scalar Quantization，小白菜实现的编解码过程，同时提供了faiss实现的接口调用，也提供了自己实现的接口调用，具体可以阅读[int8_quan.cc](https://github.com/willard-yuan/cvtk/blob/master/scalar_quantization/scalar_quantization/int8_quan.cc)。
 
-另外，关于Faiss实现的decode接口，由于采用了多线程方式，在实际使用的时候，当请求解码的数据量不够大的时候，多线程的方式，性能反而下降，具体可以看这里提到的Issue: [Scale quantization decodes does not fast](https://github.com/facebookresearch/faiss/issues/1530)。
+另外，关于Faiss实现的decode接口，由于采用了多线程方式，在实际使用的时候，**当请求解码的数据量不够大的时候，多线程的方式，性能反而下降**，具体可以看这里提到的Issue: [**Scale quantization decodes does not fast**](https://github.com/facebookresearch/faiss/issues/1530)。
