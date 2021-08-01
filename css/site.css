@@ -35,7 +35,7 @@ p {
     /*使左右两边对齐*/
     text-align:justify;
     -webkit-text-align-last:justify;/*chrome 20+*/
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     }
 
 table {
