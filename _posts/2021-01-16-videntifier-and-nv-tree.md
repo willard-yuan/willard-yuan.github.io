@@ -5,7 +5,7 @@ categories: [Image Retrieval]
 tags: ANN
 ---
 
-在[视频多帧排序](https://yongyuan.name/blog/multi-frames-ranking-problem.html)里，大白菜有提到过Videntifier这家做图像、视频检索的公司，在这篇博文里，详细介绍下这家公司以及该公司的主要的检索技术。
+在[视频多帧排序](https://yongyuan.name/blog/multi-frames-ranking-problem.html)里，大白菜有提到过Videntifier这家做图像、视频检索的公司，在这篇博文里，详细介绍下这家公司以及该公司的主要检索技术。
 
 ## Videntifier概况
 
@@ -14,17 +14,17 @@ tags: ANN
 - 视觉指纹技术：对图片、视频文件在解码的时候，提取局部特征，得到一组由72个数字组成的序列（每个指纹最终由6字节表示）。对于视频，会经过scene等方式过滤掉重复、相似的局部特征，从而在视频上，能极大的降低局部特征的数量；
 - 数据库技术：NV-tree数据库（受专利保护），是一种非常高效近似最近邻查找技术，其查找时间复杂度与数据量大小无关，可以近似认为是常数复杂度，并且是一种针对磁盘数据结构设计的高维向量索引技术；
 
-Videntifier目前服务的客户包括：facebook、instagram、interpol等，主要提供对违法视频、图片文件的自动监测、屏蔽和过滤，对视频、图片等网站提供视频版权保护。
+Videntifier目前服务的客户包括facebook、instagram、interpol等，主要提供对违法视频、图片文件的自动监测、屏蔽和过滤，对视频、图片等网站提供视频版权保护。
 
 
 ## 技术分析
 
-几篇重要的论文：
+Videntifier几篇重要论文包括：
 
+- [NV-Tree: An Efficient Disk-Based Index for Approximate Search in Very Large High-Dimensional Collections](https://hal.inria.fr/hal-00794359/)，NV-tree详细介绍，TPAMI 2009，主要参考资料；
 - [Multimedia Identifier](https://patentimages.storage.googleapis.com/9f/66/a8/380da611471bb3/US9047373.pdf)，Vid 申请的主要专利；
 - [Eff2 Videntifier: Identifying Pirated Videos in Real-Time](https://hal.inria.fr/inria-00175874/document)，Vid用的SIFT版本，Eff2特征介绍详见4；
 - [Scalability of Local Image Descriptors: A Comparative Study](https://hal.inria.fr/inria-00175234/document)，Eff2特征详细介绍，主要参考资料；
-- [NV-Tree: An Efficient Disk-Based Index for Approximate Search in Very Large High-Dimensional Collections](https://hal.inria.fr/hal-00794359/)，NV-tree详细介绍，TPAMI 2009，主要参考资料.
 
 下面对Videntifier技术分析，主要是对上面给出的公开资料的理解整理。
 
@@ -35,24 +35,22 @@ Videntifier使用的局部特征是Eff^2（Effectiveness和Efficiency的合并�
 - 具有更少的描述子，描述子的维度可以是36、72和128；
 - 在大部分情况下，虽然autopano-sift比Lowe的SIFT数量少，但是效果要比Lowe的SIFT好；
 
-Videntifier在使用autopano-sift的时候，为什么使用72维的原因：autopano-sift在36-72维之间的时候，生成的SIFT的质量差异比较明显，而在72-128维之间，SIFT的质量并没有很大的提升，所以最终采用了72维的描述子。同时为了限制SIFT的数量，octave并没有进行上采样。
+Videntifier在使用autopano-sift的时候，使用的是72维SIFT特征。为什么是72维？原因：autopano-sift在36-72维之间的时候，生成的SIFT的质量差异比较明显，而在72-128维之间，SIFT的质量并没有很大的提升，所以最终采用了72维的描述子。同时为了限制SIFT的数量，octave并没有进行上采样。
 
-Videntifier局部特征提取工具，实际给出的desc是80维特征，而且特征出现负数（SIFT统计的是梯度信息，不会出现负数，为啥？）。videntifier提取的局部特征信息：
+Videntifier局部特征提取工具，实际给出的desc是80维特征，而且特征出现负数。我们知道，SIFT统计的是梯度信息，不会出现负数，这里大白菜没看明白为啥（有知道的欢迎告知😀）。videntifier提取的局部特征信息：
 
 - 前8维：scene id, x, y, sift octave, scale, movement x?, movement y?, xx?；
 - 后72维：描述子；
 
 ### 关键点检测优化
 
-为了降低计算量，videntifier在Octave没有做上采样，会降低对极度缩放形变的鲁棒性，videntifier对其进行了改进：
-
--  在同一个Octave内，随着scale的增加，增加更强的gamma校正（说人话：模糊得更大的图像，会加更强的gamma校正），gamma参数2 − (0.87)^n；
+为了降低计算量，videntifier在Octave没有做上采样，会降低对极度缩放形变的鲁棒性，videntifier对其进行了改进：**在同一个Octave内，随着scale的增加，增加更强的gamma校正（说人话：模糊得更大的图像，会加更强的gamma校正）**，gamma参数2 − (0.87)^n。
 
 ![drawing](http://yongyuan.name/imgs/posts/sift-octave.jpg)
 
 ### 描述子优化
 
-过滤了“line”, "bright spots" (such as spotlights and raindrops) 类型的descriptor。
+过滤了“line”, "bright spots" (such as spotlights and raindrops) 类型的descriptor。(这部分大白菜没太看明白，有看过的欢迎探讨)
 
 ## 索引建库
 
@@ -75,10 +73,7 @@ NV-tree索引构建过程，主要包含两个步骤：Projecting和Segmenting�
 
 ### Projecting过程
 
-Projecting的直线默认可以是随机生成的，这种方式最好是最简单并且是数据无关的。不过为了提高检索的质量，可以采用数据依赖的直线生成方式，比如PCA，在每个线段内，计算PCA，选择方差最大的特征向量作为投影的线条，当然这种方式计算量很大。所以实际在操作的时候，使用faster Approximate PCA ，即：在索引创建之前，预先生成一个大的随机线条池，放在内存中，池子中的线条满足：
-
-- 各向同性；
-- 两两之间准正交；
+Projecting的直线默认可以是随机生成的，这种方式最好是最简单并且是数据无关的。不过为了提高检索的质量，可以采用数据依赖的直线生成方式，比如PCA，在每个线段内，计算PCA，选择方差最大的特征向量作为投影的线条，当然这种方式计算量很大。所以实际在操作的时候，使用faster Approximate PCA ，即：在索引创建之前，预先生成一个大的随机线条池，放在内存中，池子中的线条满足：**1）各向同性；2）两两之间准正交**。
 
 ![drawing](http://yongyuan.name/imgs/posts/nv-project.png)
 
