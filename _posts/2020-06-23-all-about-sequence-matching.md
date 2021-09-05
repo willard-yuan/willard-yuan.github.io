@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 机器视觉：all about sequence matching
+title: 机器视觉：All about Sequence Matching
 categories: [技术分享]
 tags: 计算机视觉
 ---
