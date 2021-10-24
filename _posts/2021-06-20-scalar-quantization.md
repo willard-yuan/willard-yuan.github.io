@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Scalar Quantization标量量化
+title: 量化索引：Scalar Quantization标量量化
 categories: [向量检索]
 tags: ANN
 ---
