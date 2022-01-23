@@ -23,7 +23,7 @@ Scalar Quantization，即标量量化。关于Scalar Quantization，网上资料
 
 ## Scalar Quantization原理
 
-Scalar Quantization标量量化，分为两个过程：
+Scalar Quantization标量量化，分为3个过程：
 
 - training过程，主要是训练encode过程，需要的一些参数，这些的参数，主要是每1维对应的最大值、最小值；
 - encode过程，将float向量量化为int8向量（int8是其中一种数据压缩形式，还有4比特之类的，这里主要以8比特说明原理）；
