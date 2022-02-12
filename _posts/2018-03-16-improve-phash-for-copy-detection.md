@@ -73,15 +73,15 @@ static inline int pHash(const cv::Mat& im, uint64 &hash, int cons) {
     if (im.empty()) {
         return 0;
     }
-    
+
     cv::Mat dct;
     imgDct(im, dct);
-    
+
     double dIdex[64];
     double mean = 0.0;
     uint64_t hashValue = 0;
     uint32_t flag = 0;
-    
+
     int k = 0;
     for (int i = 1+cons; i < 9+cons; ++i) {
         for (int j = 1+cons; j < 9+cons; ++j) {
@@ -90,7 +90,7 @@ static inline int pHash(const cv::Mat& im, uint64 &hash, int cons) {
         }
     }
     mean /= 64;
-    
+
     for (int i = 0; i < 32; ++i) {
         if (dIdex[i] > mean) {
             flag = 1;
@@ -98,7 +98,7 @@ static inline int pHash(const cv::Mat& im, uint64 &hash, int cons) {
             hashValue |= flag;
         }
     }
-    
+
     hashValue <<= 32;
     for (int i = 32; i < 64; ++i) {
         if (dIdex[i] > mean) {
@@ -107,7 +107,7 @@ static inline int pHash(const cv::Mat& im, uint64 &hash, int cons) {
             hashValue |= flag;
         }
     }
-    
+
     hash = hashValue;
     return 1;
 }
