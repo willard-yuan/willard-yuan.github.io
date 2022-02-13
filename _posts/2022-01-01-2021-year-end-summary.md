@@ -5,7 +5,7 @@ categories: [Life]
 tags: 年终总结
 ---
 
-又是一年，仿佛过了某个鞍点后，人生越过越快。想想，记一记一年的主要流水账，其实也挺好的，至少隔个五年、十年后，还能把那些年的经历，串成一根主线，知道它们是怎么关联起来的。正如乔布斯说的：
+又是一年，仿佛过了某个[鞍点](https://zh.wikipedia.org/wiki/%E9%9E%8D%E9%BB%9E)后，人生越过越快。想想，记一记一年的主要流水账，其实也挺好的，至少隔个五年、十年后，还能把那些年的经历，串成一根主线，知道它们是怎么关联起来的。正如乔布斯说的：
 
 > You can’t connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future. You have to trust in something – your gut, destiny, life, karma, whatever.
 
