@@ -9,6 +9,13 @@ tags: 年终总结
 
 > You can’t connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future. You have to trust in something – your gut, destiny, life, karma, whatever.
 
+- [2019年，十年](https://yongyuan.name/blog/year-end-summary.html)
+- [2018年，云深不知处](http://yongyuan.name/blog/2018-year-end-summary.html)
+- [2017年，毕业一周年](http://yongyuan.name/blog/2017-year-end-summary.html)
+- [2016年，归零清空](http://yongyuan.name/blog/2016-year-end-summary.html)
+- [2015年，忙碌的一年](http://yongyuan.name/blog/2015-year-end-summary.html)
+- [2014年，三件小事](http://yongyuan.name/blog/2014-year-end-summary.html)
+
 ## 工作
 
 从20年到21年，2年的时间，不论是工作所在的部门、公司还是整个行业，个人真是经历了很多的巨变。用个不恰当的比喻，上了罪船，茫茫大海，只能跟着船一起沉浮飘荡。
@@ -28,7 +35,7 @@ tags: 年终总结
 - 编码、架构与系统的稳定性、时延等，系统工程能力，有了比较大的提升。放在此时，如果说对外需要提供一个接口服务，从数据、算法、模型、部署提供稳定的接口服务，自己单独一人还是可以做下来的；
 - Let's make it happen，给一点星星之火，就成燎原之势。无论技术怎么艰难，只要环境差得没跑路，还是可以继续铁着头，让它发生，努力获取好的结果；
 
-有时候，我常会记起《邓小平时代》，改革开放总设计师邓公在江西的日子。
+有时候，我常会记起[《邓小平时代》](https://book.douban.com/subject/20424526/)，改革开放总设计师邓公在江西的日子。
 
 ## 工作上的认知收获
 
@@ -59,12 +66,12 @@ tags: 年终总结
 ## 读书
 21年，在微信读书上显示读完了14本书，读完印象比较深且值得推荐的书：
 
-- 《一生的旅程：迪士尼CEO自述》，一本可以在职业生涯中，放在案头，隔一段时间反复阅读的好书。对职业生涯的成长、管理与人生体验，都非常的有帮助。
-- 《半小时漫画经济学系列》，将经济学以通俗易懂的漫画形式道来，获益良多。
-- 《半小时漫画世界史》，同上。
+- [《一生的旅程：迪士尼CEO自述》](https://book.douban.com/subject/35009826/)，一本可以在职业生涯中，放在案头，隔一段时间反复阅读的好书。对职业生涯的成长、管理与人生体验，都非常的有帮助。
+- [《半小时漫画经济学系列》](https://book.douban.com/subject/34821264/)，将经济学以通俗易懂的漫画形式道来，获益良多。
+- [《半小时漫画世界史》](https://book.douban.com/subject/35455510/)，同上。
 - 《罗织经》，来俊臣写的，请君入瓮。
-- 《股票魔法师II：像冠军一样思考和交易》，不断学习，反复实践，从交易中反思总结出适合自己交易风格与纪律。
-- 《炒股的智慧》，理财的都应该读读。
+- [《股票魔法师II：像冠军一样思考和交易》](https://book.douban.com/subject/30179602/)，不断学习，反复实践，从交易中反思总结出适合自己交易风格与纪律。
+- [《炒股的智慧》](https://book.douban.com/subject/30482551/)，理财的都应该读读。
 
 还有一些其他书，有时候读得比较乱且杂，甚至不完整。不过整体而言，在选书上，我对书的评分是有要求的，通常8分才入坑，光阴有限，与好书为伍。
 
