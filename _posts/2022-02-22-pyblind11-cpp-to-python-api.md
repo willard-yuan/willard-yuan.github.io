@@ -5,7 +5,7 @@ categories: [Cpp]
 tags: Cpp
 ---
 
-利用业余兴趣与时间开发的[CVTK](https://yongyuan.name/cvtk/#/)项目，除了继续完善和添加算法到[CVTK](https://yongyuan.name/cvtk/#/)外，还希望能够提供Python API，便于Python调用。在为[CVTK](https://yongyuan.name/cvtk/#/)添加Python API支持的过程中，调研了下C++/Python绑定库的情况。目前支持C++/Python绑定库，比较主流的有四大流行库，分别是：
+兴趣与业余时间开发的[CVTK](https://yongyuan.name/cvtk/#/)项目，除了继续完善和添加算法到[CVTK](https://yongyuan.name/cvtk/#/)外，还计划提供Python API，便于Python调用。在为[CVTK](https://yongyuan.name/cvtk/#/)添加Python API支持的过程中，调研了下C++/Python绑定库的情况。目前支持C++/Python绑定库，比较主流的有四大流行库，分别是：
 
 - [Pybind11](https://pybind11.readthedocs.io/en/stable/)
 - [Boost.Python](https://www.boost.org/doc/libs/1_70_0/libs/python/doc/html/index.html)
