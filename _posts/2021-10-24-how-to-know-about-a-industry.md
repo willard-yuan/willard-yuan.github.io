@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 如何了解一个新行业
+title: 知行笔记：如何了解一个新行业
 categories: [读书笔记]
 tags: 读书笔记
 ---

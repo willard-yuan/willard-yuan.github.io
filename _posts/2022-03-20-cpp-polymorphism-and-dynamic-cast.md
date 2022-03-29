@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 继承、dynamic_cast、纯虚函数、protected，一场多态之旅
+title: C++漫谈：继承、dynamic_cast、纯虚函数、protected，一场多态之旅
 categories: [Cpp]
 tags: Cpp
 ---
@@ -74,6 +74,10 @@ bool BaseRemoteInfer::Run(NNContext* context, std::vector<NNResult>* score) cons
   return true;
 }
 ```
+
+### shared_ptr传引用or传值
+
+在上面代码SetClient函数中，我们在使用shared_ptr作为传递参数的类型时，使用的是传引用方式，并且由于传递的参数，在函数内部不会改变，为了保持良好的习惯，对传递参数类型限定了const。在使用shared_ptr传递参数时，到时是传引用好，还是传值好？这是一个好问题，stackoverflow上有人对这个问题做了解释，可以详细阅读[Should we pass a shared_ptr by reference or by value?](https://stackoverflow.com/questions/3310737/should-we-pass-a-shared-ptr-by-reference-or-by-value)。
 
 ### 纯虚函数、protected
 

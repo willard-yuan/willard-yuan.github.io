@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 从std::move到移动构造函数
+title: C++漫谈：从std::move到移动构造函数
 categories: [Cpp]
 tags: Cpp
 ---
