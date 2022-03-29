@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 编码训练：Django开发简易博客(二)
+title: Python漫谈：Django开发简易博客(二)
 categories: [Django]
-tags: Django
+tags: Python,Django
 ---
 
 ## admin连结并激活

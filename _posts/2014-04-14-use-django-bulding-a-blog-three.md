@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 编码训练：Django开发简易博客(三)
+title: Python漫谈：Django开发简易博客(三)
 categories: [Django]
-tags: Django
+tags: Python,Django
 ---
 
 要去掉TemplateDoesNotExist错误，得做三件事，第一件创建下面目录：

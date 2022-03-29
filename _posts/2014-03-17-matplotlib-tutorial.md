@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 编码训练：Matplotlib指南
+title: Python漫谈：Matplotlib指南
 categories: [Python]
 tags: Python
 ---

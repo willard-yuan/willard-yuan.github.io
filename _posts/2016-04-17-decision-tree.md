@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 数据分类：决策树
+title: 机器学习：决策树
 categories: [机器学习]
 tags: 决策树
 ---

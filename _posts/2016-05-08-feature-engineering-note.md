@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 数据分类：特征处理
+title: 机器学习：特征处理
 categories: [数据挖掘]
 tags: 数据挖掘
 ---

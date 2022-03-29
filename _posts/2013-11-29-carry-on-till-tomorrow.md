@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 广陵绝艺：Carry on Till Tomorrow
+title: 艺术欣赏：Carry on Till Tomorrow
 categories: [Life]
 tags: 生活
 ---

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 编码训练：Django开发简易博客(四)
+title: Python漫谈：Django开发简易博客(四)
 categories: [Django]
-tags: Django
+tags: Python,Django
 ---
 
 这次重新做一个比较强大点的blog系统，前面三节就当是练手。这次的博客系统主要参考[Django Web 开发实战](http://django-web-app-book.wanqingwong.com/djblog/03.1.html)。

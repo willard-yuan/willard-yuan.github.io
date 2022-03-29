@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 编码训练：Python title()中文标题支持
+title: Python漫谈：Python title()中文标题支持
 categories: [Python]
 tags: Python
 ---

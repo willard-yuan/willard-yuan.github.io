@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 数据分类浅谈：随机森林
+title: 机器学习：随机森林
 categories: [数据挖掘]
 tags: 机器学习
 ---
