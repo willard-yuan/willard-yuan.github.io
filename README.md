@@ -8,10 +8,9 @@
 
 ### 已完成功能
 
-1. 调用豆瓣api显示书单列表
-2. ~~在线简历~~（未在我的个人博客上展示，因为我有pdf的版本，为避免两处都要维护，所以弃用，如果需要，可以在导航栏上添加[resume](https://github.com/willard-yuan/willard-yuan.github.io/tree/master/resume)）
-3. 添加latex公式支持([效果见博文](http://yongyuan.name/blog/decision-tree.html))
-4. 添加个人时间线([timeline](http://yongyuan.name/timeline/))
+1. ~~在线简历~~（未在我的个人博客上展示，因为我有pdf的版本，为避免两处都要维护，所以弃用，如果需要，可以在导航栏上添加[resume](https://github.com/willard-yuan/willard-yuan.github.io/tree/master/resume)）
+2. 添加latex公式支持([效果见博文](http://yongyuan.name/blog/decision-tree.html))
+3. 添加个人时间线([timeline](http://yongyuan.name/timeline/))
 
 ### 安装步骤
 
@@ -24,3 +23,10 @@
 ### 致谢
 
 感谢[Sébastien Saunier](https://raw.github.com/ssaunier/ssaunier.github.io/)和[marcgg](http://marcgg.com/)，如果你觉得本主题有改进的地方，欢迎开[issues](https://github.com/willard-yuan/willard-yuan.github.io/issues)或者提交你的PR。
+
+若在使用过程中出现任何问题，请在赞赏留言中留下您的微信，收到消息后我会尽快修复。
+
+
+<div align="left">
+  <img width="20%" alt="A small reward is highly appreciated! (#^.^#) Thank you~" src="images/payimg/weipayimg.jpg">
+</div>
