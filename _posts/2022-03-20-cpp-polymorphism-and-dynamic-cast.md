@@ -143,3 +143,50 @@ ds_nn_infer_ = std::make_shared<DSNNRemoteInfer>();
 status = ds_nn_infer_->SetClient(exp_client_);
 succ = dynamic_cast<BaseRemoteInfer *>(ds_nn_infer_.get())->Run(ctr, &score);
 ```
+
+在实际使用时，如果不需要使用`dynamic_cast`，则尽量少用。比如上面做举的例子，完全可以将`run()`定义为基类的普通成员函数或者基类的虚函数。下面的例子可以示意说明：
+
+```cpp
+#include <iostream>
+
+class BaseClass
+{
+public:
+    ~BaseClass() {};
+    virtual void Print() {
+        std::cout << "BaseClass Print Function Called..." << std::endl;
+    }
+};
+
+class DerivedClass:public BaseClass
+{
+public:
+    ~DerivedClass() {};
+    /*void Print() {
+        std::cout << "DerivedClass Print Function Called..." << std::endl;
+    }*/
+};
+
+int main(int argc, const char * argv[]) {
+    
+    std::shared_ptr<DerivedClass> ptr_derived_class = nullptr;
+    ptr_derived_class = std::make_shared<DerivedClass>();
+    ptr_derived_class->Print();
+    ptr_derived_class->BaseClass::Print();
+    return 0;
+}
+```
+
+如果注释掉子类中`Print()`函数，则输出的结果为：
+
+```
+BaseClass Print Function Called...
+BaseClass Print Function Called...
+```
+
+如果保留子类中`Print()`函数，即子类进行重载，输出结果则为：
+
+```
+DerivedClass Print Function Called...
+BaseClass Print Function Called...
+```
