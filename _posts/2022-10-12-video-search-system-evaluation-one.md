@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 搜索系统：视频搜索离线指标与在线指标
-categories: [搜索系统]
+categories: [信息检索]
 tags: 搜索系统
 ---
 
