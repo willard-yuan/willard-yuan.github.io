@@ -17,8 +17,8 @@ SIGIR 2022 [Clustering based Behavior Sampling with Long Sequential Data for CTR
 
 User Behavior Clustering Sampling (UBCS)解决上述两个问题的思路：
 
-- 建模一种同时考虑相关性（行为序列与target item的相关性）、又考虑时间信息的行为序列采样模块（Behavior Sampling module）；
-- 将行为序列item进行小数量级别的聚类，即Item Clustering module；
+- 建模一种同时考虑相关性（行为序列与target item的相关性）、又考虑时间信息的行为序列采样模块（<font color='red'>Behavior Sampling module</font>）；
+- 将行为序列item进行小数量级别的聚类，即<font color='red'>Item Clustering module</font>；
 
 对于行为序列中，包含噪声，怎么处理，总体的原则是：对于每一个target CTR prediction，从用户行为序列中，挑选出那些与target CTR prediction最相关的那些样本出来。
 
@@ -35,7 +35,7 @@ User Behavior Clustering Sampling (UBCS)解决上述两个问题的思路：
 
 用户行为长序列中的每个item和candidate item分别计算相关性分：
 
-![drawing](http://yongyuan.name/imgs/posts/ubcs_2.png)
+<img src="http://yongyuan.name/imgs/posts/ubcs_2.png" width = "200" height = "50" alt="ubcs_2" align=center />
 
 其中，e_i是行为序列embedding，e_t是target item embedding。
   
@@ -52,16 +52,17 @@ User Behavior Clustering Sampling (UBCS)解决上述两个问题的思路：
  
 ## CTR Prediction Module
 
+ctr预估，二分类，交叉熵，直接看公式，没啥可解释的：
+
 ![drawing](http://yongyuan.name/imgs/posts/ubcs_5.png)
 
-这个模块，在训练的时候，通过构造自监督信号来进行对比学习，进行模型的预训练。为啥要进行训练？
+在这个模块，在训练的时候，通过构造自监督信号来进行对比学习，进行模型的预训练。**为啥要进行训练**？
 
 作者的解释：长序列用户行为建模，输入的用户行为特征序列过长，使得原有的监督学习label变得相对稀疏，从而使模型难以获得足够的训练信号。
 
 ![drawing](http://yongyuan.name/imgs/posts/ubcs_6.png)
 
-构造的自监督信号：锁定user_id、target item，label则也固定了，在采用的时候，采样出两个子序列p和q。
-p的正负样本，分别为：
+构造的自监督信号：锁定user_id、target item，label则也固定了，在采用的时候，采样出两个子序列p和q。p的正负样本，分别为：
 
  - 正样本为q；
  - 负样本为q帽子，q帽子是从一个batch里面随机负采样来源不同user的item构成的子序列；
@@ -72,11 +73,11 @@ p的正负样本，分别为：
 
 ## Item Clustering Module
 
-item clustering module要解决的问题：由于用户行为序列很长，U个用户，M个target，计算下面内积的复杂度O(UMT)。
+item clustering module要解决的问题：由于用户行为序列很长，U个用户，M个target，计算下面内积的复杂度O(UMT)。有没有办法把M压下去，让C << M？
 
-![drawing](http://yongyuan.name/imgs/posts/ubcs_8.png)
+<img src="http://yongyuan.name/imgs/posts/ubcs_8.png" width = "200" height = "50" alt="ubcs_2" align=center />
 
-有没有办法把M压下去，让C << M？可以借助聚类的方式，先聚类，然后计算每个用户的行为序列中的item与聚类中心的距离，在训练的时候，查表即可实现加速。整个加速过程，跟[PQ](https://yongyuan.name/blog/vector-ann-search.html)极为相似。
+item clustering module，给出的方式是，可以借助聚类的方式，先聚类，然后计算每个用户的行为序列中的item与聚类中心的距离，在训练的时候，查表即可实现加速。整个加速过程，跟[PQ](https://yongyuan.name/blog/vector-ann-search.html)极为相似。
 
 - 在每一轮训练之前，先用target item的embedding，训练聚类C；
 - 计算用户行为序列与C之间的距离；
