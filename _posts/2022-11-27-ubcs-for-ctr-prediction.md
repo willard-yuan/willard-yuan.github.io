@@ -6,7 +6,7 @@ tags: 搜推系统
 ---
 
 
-对[Clustering based Behavior Sampling with Long Sequential Data for CTR Prediction](https://dl.acm.org/doi/10.1145/3477495.3531829)阅读时的笔记。
+SIGIR 2022 [Clustering based Behavior Sampling with Long Sequential Data for CTR Prediction](https://dl.acm.org/doi/10.1145/3477495.3531829) paper reading分享时记录的笔记。
 
 ## 背景
 
@@ -22,7 +22,7 @@ User Behavior Clustering Sampling (UBCS)解决上述两个问题的思路：
 
 对于行为序列中，包含噪声，怎么处理，总体的原则是：对于每一个target CTR prediction，从用户行为序列中，挑选出那些与target CTR prediction最相关的那些样本出来。
 
-## 模型整体框图
+## 整体框图
 
 ![drawing](http://yongyuan.name/imgs/posts/ubcs_1.png)
 
@@ -76,7 +76,7 @@ item clustering module要解决的问题：由于用户行为序列很长，U个
 
 ![drawing](http://yongyuan.name/imgs/posts/ubcs_8.png)
 
-有没有办法把M压下去，让C << M？可以借助聚类的方式，先聚类，然后计算每个用户的行为序列中的item与聚类中心的距离，在训练的时候，查表即可实现加速。整个加速过程，跟PQ极为相似。
+有没有办法把M压下去，让C << M？可以借助聚类的方式，先聚类，然后计算每个用户的行为序列中的item与聚类中心的距离，在训练的时候，查表即可实现加速。整个加速过程，跟[PQ](https://yongyuan.name/blog/vector-ann-search.html)极为相似。
 
 - 在每一轮训练之前，先用target item的embedding，训练聚类C；
 - 计算用户行为序列与C之间的距离；
