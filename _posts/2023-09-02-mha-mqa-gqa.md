@@ -2,10 +2,10 @@
 layout: post
 title: 论文阅读：MHA、MQA、GQA的差异与共性
 categories: [信息检索]
-tags: 机器学习基础
+tags: 机器学习
 ---
 
-### MHA、MQA、GQA差异
+## MHA、MQA、GQA差异
 
 ![](http://yongyuan.name/imgs/posts/mha_mqa_gqa.png)
 
@@ -17,28 +17,28 @@ MQA：Multi-Query Attention，让 Q 仍然保持原来的头数，但 K 和 V �
 
 GQA：Grouped-Query Attention，是 MHA 和 MQA 的折衷方案，既不想损失性能太多，又想获得 MQA 带来的推理加速好处。具体思想是，不是所有 Q 头共享一组 KV，而是分组一定头数 Q 共享一组 KV，比如上面图片就是两组 Q 共享一组 KV。
 
-### MHA、MQA、GQA共性
+## MHA、MQA、GQA共性
 
 实际上，MHA、MQA可以看做是GQA两个特例版本：
+
 - MQA对应GQA-1，即只有一个分组，对应一个K和V；
 - MHA对应GQA-H，对应H个head，对应H个K和V；
 
-### 怎么从MHA模型得到MQA和GQA？
+## 从MHA模型得到MQA和GQA
+
+- 从MHA得到MQA：将MHA中H个head的的K和V，分别做mean pooling后得到一个K和V，用得到的K和V继续训练；
+- 从MHA得到GQA：将MHA中H个head的的K和V，分别做mean pooling得到H个K和V，用得到的K和V继续训练；
 
 ![](http://yongyuan.name/imgs/posts/kv_mean_pooling.png)
 
-- 从MHA得到MQA：将MHA中H个head的的K和V，分别做mean pooling后得到一个K和V，用得到的K和V继续训练。
-- 从MHA得到GQA：将MHA中H个head的的K和V，分别做mean pooling后，得到H个K和V，用得到的K和V继续训练。
 
-
-### MHA、MQA、GQA效果
+## MHA、MQA、GQA效果
 
 在LLAMA2中，在不同的数据数据集上对比的效果（注意：为了维持参数量一致，对于MQA、GQA的FFN layer的维度，会有一定的拓宽）：
 
 ![](http://yongyuan.name/imgs/posts/mha_mqa_cqa_performance.png)
 
-### 参考
-
+## 参考
 
 - MHA: [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf)
 - MQA：[Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/pdf/1911.02150.pdf)
