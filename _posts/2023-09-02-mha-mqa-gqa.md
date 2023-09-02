@@ -5,15 +5,9 @@ categories: [信息检索]
 tags: 机器学习基础
 ---
 
-MHA: [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf)
-
-MQA：[Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/pdf/1911.02150.pdf)
-
-GQA: [Training Generalized Multi-Query Transformer Models fromMulti-Head Checkpoints](https://arxiv.org/pdf/2305.13245.pdf)   
-
 ### MHA、MQA、GQA差异
 
-![drawing](http://yongyuan.name/imgs/posts/mha_mqa_gqa.png)
+![](http://yongyuan.name/imgs/posts/mha_mqa_gqa.png)
 
 MHA：Multi-Head Attention，QKV 三部分有相同数量的头，且一一对应。每次做 Attention，head1 的 QKV 就做好自己运算就可以，输出时各个头加起来就行。
 
@@ -31,7 +25,7 @@ GQA：Grouped-Query Attention，是 MHA 和 MQA 的折衷方案，既不想损�
 
 ### 怎么从MHA模型得到MQA和GQA？
 
-![drawing](http://yongyuan.name/imgs/posts/kv_mean_pooling.png)
+![](http://yongyuan.name/imgs/posts/kv_mean_pooling.png)
 
 - 从MHA得到MQA：将MHA中H个head的的K和V，分别做mean pooling后得到一个K和V，用得到的K和V继续训练。
 - 从MHA得到GQA：将MHA中H个head的的K和V，分别做mean pooling后，得到H个K和V，用得到的K和V继续训练。
@@ -41,7 +35,14 @@ GQA：Grouped-Query Attention，是 MHA 和 MQA 的折衷方案，既不想损�
 
 在LLAMA2中，在不同的数据数据集上对比的效果（注意：为了维持参数量一致，对于MQA、GQA的FFN layer的维度，会有一定的拓宽）：
 
-![drawing](http://yongyuan.name/imgs/posts/mha_mqa_cqa_performance.png)
+![](http://yongyuan.name/imgs/posts/mha_mqa_cqa_performance.png)
+
+### 参考
+
+
+- MHA: [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf)
+- MQA：[Fast Transformer Decoding: One Write-Head is All You Need](https://arxiv.org/pdf/1911.02150.pdf)
+- GQA: [Training Generalized Multi-Query Transformer Models fromMulti-Head Checkpoints](https://arxiv.org/pdf/2305.13245.pdf)  
 
 
 
