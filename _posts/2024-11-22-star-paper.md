@@ -34,7 +34,7 @@ comment: **这篇论文，提供了一个将语义与协同信息融合起来的
 两阶段方法，方法全局概览:
 
 - 检索
-- 
+
 ![](http://yongyuan.name/imgs/posts/star_4.png)
 通过上图得到检索结果。
 
