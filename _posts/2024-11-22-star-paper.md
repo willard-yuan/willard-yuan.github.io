@@ -14,13 +14,14 @@ LLM最新进展为推荐系统任务提供了有前途的新方法。**当前最
 
 comment: **这篇论文，提供了一个将语义与协同信息融合起来的视角，这是这篇论文提供的最大的启发性视角**。
 
-● 提供了一种普适推荐场景下，快速搞一个基于llm推荐的基线。在此基础上，特定业务场景，还是需要针对性改进。
-● 模型还是需要微调的，不能应该微调成本高、工程复杂就放弃。
+- 提供了一种普适推荐场景下，快速搞一个基于llm推荐的基线。在此基础上，特定业务场景，还是需要针对性改进。
+- 模型还是需要微调的，不能应该微调成本高、工程复杂就放弃。
 
 在LLM里面，考虑user-item interactions交互行为，真的非常非常重要！实验观察到的现象：
-● Beauty Hits@10： +23.8%
-● Toys and Games：+37.5% 
-● Sports and Outdoors ：-1.8%
+
+- Beauty Hits@10： +23.8%
+- Toys and Games：+37.5% 
+- Sports and Outdoors ：-1.8%
 
 ![](http://yongyuan.name/imgs/posts/star_2.png)
 
@@ -32,10 +33,13 @@ comment: **这篇论文，提供了一个将语义与协同信息融合起来的
 
 两阶段方法，方法全局概览:
 
-● 检索
+- 检索
+- 
 ![](http://yongyuan.name/imgs/posts/star_4.png)
 通过上图得到检索结果。
-● 排序
+
+- 排序
+
 ![](http://yongyuan.name/imgs/posts/star_5.png)
 对检索结果，通过LLMRank排序。
 
@@ -45,8 +49,8 @@ comment: **这篇论文，提供了一个将语义与协同信息融合起来的
 
 同时会考虑：
 
-● 时间因子：用户与item交互时间越近的，越重要；
-● 打分因子：用户与item交互打分，越大越重要；
+- 时间因子：用户与item交互时间越近的，越重要；
+- 打分因子：用户与item交互打分，越大越重要；
 
 **怎么计算语义信息矩阵、CI信息矩阵？**
 
@@ -54,7 +58,7 @@ comment: **这篇论文，提供了一个将语义与协同信息融合起来的
 
 ![](http://yongyuan.name/imgs/posts/star_6.png)
 
-● llm embedding: 使用的是google自己内部的Geckotext-embedding-004
+- llm embedding: 使用的是google自己内部的Geckotext-embedding-004
 
 ![](http://yongyuan.name/imgs/posts/star_7.png)
 
@@ -93,9 +97,11 @@ a=0和a=1，有消融实验结论，没有贴具体数据。
 候选长度、交互序列的长度，对结果的影响：
 
 ![](http://yongyuan.name/imgs/posts/star_rank_3.png)
-rank里面加入一些交互行为的影响：感觉差异不大
+rank里面加入一些交互行为的影响：
 
 ![](http://yongyuan.name/imgs/posts/star_rank_4.png)
+
+感觉差异不大。
 
 不同模型对结果的影响：
 
