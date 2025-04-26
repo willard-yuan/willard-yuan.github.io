@@ -1,16 +1,10 @@
 ### 关于
 
-这是我的个人主页所用的模板，该主题是[Sébastien Saunier](https://raw.github.com/ssaunier/ssaunier.github.io/)在[marcgg](http://marcgg.com/)的基础上改写的。我fork过来后，也稍微做了些修改，如果你觉得不错，可以直接从我这里fork过去，fork过去后还请你把涉及到我个人的一些信息、文章、图片删掉，谢谢。
+这是我的个人主页所用的模板，该主题是[Sébastien Saunier](https://raw.github.com/ssaunier/ssaunier.github.io/)在[marcgg](http://marcgg.com/)的基础上改写的。我fork过来后，也稍微做了些修改，如果你觉得不错，可以直接从我这里fork过去，fork过去后还请你把涉及到我个人的一些信息、文章、图片删掉。
 
 ### 主题预览
 
 [YongYuan's Homepage](http://yongyuan.name)。
-
-### 已完成功能
-
-1. ~~在线简历~~（未在我的个人博客上展示，因为我有pdf的版本，为避免两处都要维护，所以弃用，如果需要，可以在导航栏上添加[resume](https://github.com/willard-yuan/willard-yuan.github.io/tree/master/resume)）
-2. 添加latex公式支持([效果见博文](http://yongyuan.name/blog/decision-tree.html))
-3. 添加个人时间线([timeline](http://yongyuan.name/timeline/))
 
 ### 安装步骤
 
