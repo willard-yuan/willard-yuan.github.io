@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 论文阅读：A Simple Training-free Approach for Recommendations using Large Language Models
+title: 推荐论文: A Simple Training-free Approach for Recommendations using LLM
 categories: [推荐系统]
-tags: 机器学习
+tags: 推荐系统
 ---
 
 
