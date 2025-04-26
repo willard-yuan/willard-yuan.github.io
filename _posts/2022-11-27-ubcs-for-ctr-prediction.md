@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 论文阅读：点击率预估之长序列建模Clustering based Behavior Sampling
-categories: [信息检索]
-tags: 搜推系统
+title: 点击率预估之长序列建模Clustering based Behavior Sampling
+categories: [推荐系统]
+tags: 推荐系统
 ---
 
 
