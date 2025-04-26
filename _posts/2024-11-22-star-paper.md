@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 推荐论文：A Simple Training-free Approach for Recommendations using LLM
+title: LLM推荐系统 A Simple Training-free Approach for Recommendations using LLM
 categories: [推荐系统]
 tags: 推荐系统
 ---
