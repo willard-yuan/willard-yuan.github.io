@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 论文阅读：MHA、MQA、GQA的差异与共性
+title: MHA、MQA、GQA的差异与共性
 categories: [信息检索]
 tags: 机器学习
 ---
