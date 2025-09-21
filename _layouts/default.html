@@ -13,8 +13,11 @@
   <link rel="stylesheet" href="../css/site.css">
   <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
   <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-  {% if page.description %}<meta name="description" content="{{page.description}}" />{% endif %}
+  {% if page.description %}<meta name="description" content="{{page.description}}" />{% else %}<meta name="description" content="{{site.description}}" />{% endif %}
   <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="Latest 10 blog posts (atom)" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 
   {% if page.url == '/index.html' %}
     <link rel="alternate" hreflang="en" href="/" />
