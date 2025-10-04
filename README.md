@@ -4,7 +4,7 @@
 
 ### 主题预览
 
-[YongYuan's Homepage](http://yongyuan.name)。
+<a href="https://yongyuan.name/" rel="dofollow"><strong>YongYuan's Homepage</strong></a>
 
 ### 安装步骤
 
