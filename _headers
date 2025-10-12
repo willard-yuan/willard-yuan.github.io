@@ -1,0 +1,21 @@
+/*
+  X-Robots-Tag: index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/_draft/*
+  X-Robots-Tag: noindex, nofollow
+
+/resume/*
+  X-Robots-Tag: noindex, nofollow
+
+/timeline/assets/*
+  X-Robots-Tag: noindex, nofollow
+
+/timeline/audio/*
+  X-Robots-Tag: noindex, nofollow
+
+/timeline/inc/*
+  X-Robots-Tag: noindex, nofollow

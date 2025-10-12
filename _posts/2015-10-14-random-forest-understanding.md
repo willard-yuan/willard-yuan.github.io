@@ -43,7 +43,9 @@ $${h(x,\beta_k), k = 1,...}$$
 ## 随机森林分类例子
 
 在了解了随机森林的特性后，我们在[安德森鸢尾花卉数据集](https://zh.wikipedia.org/wiki/%E5%AE%89%E5%BE%B7%E6%A3%AE%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%8D%89%E6%95%B0%E6%8D%AE%E9%9B%86)上用随机森林对其做一个分类的小实验。安德森鸢尾花卉数据集的说明见上面给出的链接，其中每一类有50个样本，共3类。首先，我们对数据集进行划分，训练集每一类中抽取36个样本，将这36*3个样本保存在[train.csv](https://github.com/willard-yuan/machine-learning-notebook/blob/master/01--Random%20Forest/train.csv)中，剩下的样本作为测试集保存在[test.csv](https://github.com/willard-yuan/machine-learning-notebook/blob/master/01--Random%20Forest/test.csv)。下面是用scikit-learn中的random forest做的分类代码：
-{% gist c827db48b9c414716b90 %}
+
+<script src="https://gist.github.com/willard-yuan/c827db48b9c414716b90.js"></script>
+
 或者到这里nbviewer上查看[Random Forest.ipynb](http://nbviewer.ipython.org/gist/willard-yuan/c827db48b9c414716b90)
 
 可以看到，在这个数据集上，随机森林对类别的预测表现非常的出色。

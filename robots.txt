@@ -1,1 +1,13 @@
 User-agent: *
+Allow: /
+Disallow: /_draft/
+Disallow: /resume/
+Disallow: /timeline/assets/
+Disallow: /timeline/audio/
+Disallow: /timeline/inc/
+
+# Sitemap location
+Sitemap: https://yongyuan.name/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 1
