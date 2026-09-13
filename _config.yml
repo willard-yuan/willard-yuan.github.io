@@ -25,6 +25,11 @@ syntax_highlighter: rouge
 #  coderay:
 #  coderay_line_numbers:  nil
 
+# Files that should not be published (source docs only)
+exclude:
+  - stemx/stemx-terms-of-service.md
+  - stemx/stemx-privacy-policy.md
+
 # White-listed plugins
 plugins:
   - jekyll-sitemap

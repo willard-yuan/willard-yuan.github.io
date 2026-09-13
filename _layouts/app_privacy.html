@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="{{ page.lang | default: 'zh-CN' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }}</title>
+  <title>{{ page.title | escape }}</title>
+  {% if page.alt_url and page.alt_lang %}
+  <link rel="alternate" hreflang="{{ page.alt_lang }}" href="{{ site.url }}{{ page.alt_url }}" />
+  {% endif %}
   <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
   <style>
     :root {
@@ -28,6 +31,28 @@
       max-width: 680px;
       margin: 40px auto;
       padding: 20px;
+    }
+
+    .lang-switch {
+      text-align: right;
+      margin-bottom: -24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lang-switch a {
+      display: inline-block;
+      font-size: 13px;
+      color: var(--accent-color);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid rgba(0, 122, 255, 0.35);
+      border-radius: 999px;
+      background: var(--card-bg);
+    }
+
+    .lang-switch a:hover {
+      background: rgba(0, 122, 255, 0.08);
     }
 
     .app-header {
@@ -122,8 +147,14 @@
 <body>
 
   <div class="container">
+    {% if page.alt_url and page.alt_label %}
+    <div class="lang-switch">
+      <a href="{{ page.alt_url }}" hreflang="{{ page.alt_lang | default: 'en' }}">{{ page.alt_label }}</a>
+    </div>
+    {% endif %}
+
     <div class="app-header">
-      <img src="{{ page.app_icon }}" alt="{{ page.app_name }}" class="app-icon">
+      <img src="{{ page.app_icon }}" alt="{{ page.app_name | escape }}" class="app-icon">
       <h2 class="app-name">{{ page.app_name }}</h2>
     </div>
 
